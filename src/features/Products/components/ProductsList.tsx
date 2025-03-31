@@ -11,15 +11,15 @@ import { useFiltersStore } from "../store/filtersStore";
 const ProductsList = ({ category }: { category?: number }) => {
   const { sort, gridType } = useCatalogStore();
   const { page, per_page } = usePaginationStore();
-  const { priceRange, clearFilters } = useFiltersStore();
+  const { priceRange } = useFiltersStore();
 
   const { data, isPending, isPlaceholderData } = useQuery({
     ...getProductsQueryOptions({
       page,
       per_page,
       category,
-      min: priceRange?.min,
-      max: priceRange?.max,
+      min_price: priceRange?.min,
+      max_price: priceRange?.max,
       order: sort.type,
       orderby: sort.field,
     }),

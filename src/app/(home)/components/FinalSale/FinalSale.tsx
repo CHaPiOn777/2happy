@@ -33,7 +33,7 @@ const FinalSale = async () => {
             <h2 className="text-h2">
               FINAL SALE <br />/
             </h2>
-            <div className="flex flex-col gap-6 mb-10">
+            <div className="flex flex-col gap-6 mb-[96px]">
               <Link
                 className="link-hover"
                 href={paths.catalog.final_sale.getHref()}

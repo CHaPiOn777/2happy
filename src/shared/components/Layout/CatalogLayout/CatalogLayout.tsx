@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import Features from "./components/Features/Features";
-import Notifications from "./components/Notifications/Notifications";
+import Instagram from "./components/Instagram/Instagram";
 
 const CatalogLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {children}
       <Features />
-      <Notifications />
+      <Instagram />
     </>
   );
 };

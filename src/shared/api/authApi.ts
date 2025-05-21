@@ -5,7 +5,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { formattedApiInstance } from "./formattedApiInstance";
-import { AuthResponse, UserData } from "@/shared/types/api";
+import { AuthResponse, GoogleAuthResponse, UserData } from "@/shared/types/api";
 import { z } from "zod";
 import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
@@ -13,6 +13,7 @@ import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
 import { getQueryClient } from "./queryClient";
 import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
+import { env } from "@/config/env";
 
 export const getUserURL = "/wp/v2/users/me";
 
@@ -168,4 +169,38 @@ export const useGetToken = () => {
   };
 
   return getToken;
+};
+
+const googleLoginUserURL = `${env.CUSTOM_API}/google-login`;
+
+const googleLoginUser = (accessToken: string): Promise<GoogleAuthResponse> => {
+  return formattedApiInstance.post<
+    unknown,
+    GoogleAuthResponse,
+    { access_token: string }
+  >(googleLoginUserURL, {
+    access_token: accessToken,
+  });
+};
+
+export const useGoogleLogin = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}) => {
+  const queryClient = useQueryClient();
+  const setAccessToken = useAuthStore((state) => state.setUserToken);
+  return useMutation({
+    mutationFn: googleLoginUser,
+    onSuccess: ({ token }) => {
+      Cookies.set("access_token", token, { expires: 5 });
+      setAccessToken(token);
+      queryClient.invalidateQueries(getUserQueryOptions());
+      queryClient.invalidateQueries(getCartQueryOptions());
+      onSuccess?.();
+    },
+    onError: onError,
+  });
 };

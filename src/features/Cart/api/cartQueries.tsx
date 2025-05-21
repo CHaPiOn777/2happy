@@ -9,6 +9,8 @@ import {
 
 import Cookies from "js-cookie";
 import { CartResponse } from "../types";
+import { AxiosResponse } from "axios";
+import { useEffect } from "react";
 const getCartURL = `${env.WOOCOMMERCE_STORE_API}/cart`;
 
 export const fetchNonce = async (): Promise<string> => {
@@ -25,8 +27,19 @@ export const fetchNonce = async (): Promise<string> => {
   return nonce;
 };
 
-const getCart = (): Promise<CartResponse> => {
-  return formattedApiInstance.get<unknown, CartResponse>(getCartURL);
+const getCart = async (): Promise<{
+  data: CartResponse;
+  headers: Record<string, unknown>;
+}> => {
+  const res = await defaultApiInstance.get<
+    unknown,
+    AxiosResponse<CartResponse>
+  >(getCartURL);
+
+  return {
+    data: res.data,
+    headers: res.headers,
+  };
 };
 
 export const getCartQueryOptions = () =>
@@ -36,9 +49,19 @@ export const getCartQueryOptions = () =>
   });
 
 export const useCart = () => {
-  return useQuery({
+  const { data, isSuccess, ...other } = useQuery({
     ...getCartQueryOptions(),
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      const nonce = data.headers["nonce"] as string;
+
+      Cookies.set("nonce", nonce);
+    }
+  }, [isSuccess]);
+
+  return { data: data?.data, isSuccess, ...other };
 };
 
 export const useSuspenseCart = () => {

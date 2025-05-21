@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
   async rewrites() {
     const rewrites = [
       {
+        source: "/api/auth/:path*",
+        destination: "/api/auth/:path*", // оставить внутри Next.js
+      },
+    ];
+
+    const fallback = [
+      {
         source: "/api/:path*",
         destination: `${env.API_URL}/:path*`,
       },
@@ -27,7 +34,7 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: rewrites,
       afterFiles: [],
-      fallback: [],
+      fallback: fallback,
     };
   },
 };

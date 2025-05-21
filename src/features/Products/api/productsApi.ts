@@ -58,7 +58,9 @@ const productsQueryKey = (params: getProductsListParameters) => {
   return queryKey;
 };
 
-export const getProductsQueryOptions = (params: getProductsListParameters) => {
+export const getInfiniteProductsQueryOptions = (
+  params: getProductsListParameters
+) => {
   return infiniteQueryOptions<
     WooResponse<ProductServer[]>,
     Error,
@@ -81,6 +83,13 @@ export const getProductsQueryOptions = (params: getProductsListParameters) => {
 
       return hasNextPage ? newPage : null;
     },
+  });
+};
+
+export const getProductsQueryOptions = (params: getProductsListParameters) => {
+  return queryOptions({
+    queryKey: productsQueryKey(params),
+    queryFn: (meta) => getProductsList({ ...params }, { signal: meta.signal }),
   });
 };
 

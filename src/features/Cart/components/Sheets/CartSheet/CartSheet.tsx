@@ -19,7 +19,7 @@ import CartSheetLoader from "./CartSheetLoader";
 const CartSheet = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { data, isPending } = useCart();
+  const { data, isLoading } = useCart();
 
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
@@ -50,11 +50,11 @@ const CartSheet = ({ children }: { children: ReactNode }) => {
           <SheetClose className="top-6 right-10" />
         </SheetHeader>
 
-        {isPending && <CartSheetLoader />}
-        {!isPending && data?.items_count ? (
+        {isLoading && <CartSheetLoader />}
+        {!isLoading && data?.items_count ? (
           <CartSheetContent cartData={data} setOpen={setOpen} />
         ) : null}
-        {!isPending && !data?.items_count ? (
+        {!isLoading && !data?.items_count ? (
           <CartSheetEmpty setOpen={setOpen} />
         ) : null}
       </SheetContent>

@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useCatalogStore } from "../store/catalogStore";
-import { getProductsQueryOptions } from "../api/productsApi";
+import { getInfiniteProductsQueryOptions } from "../api/productsApi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useFiltersStore } from "../store/filtersStore";
-import { usePaginationStore } from "../store/paginationStore";
 
 export const useProductsList = ({
   category,
@@ -23,7 +22,7 @@ export const useProductsList = ({
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    ...getProductsQueryOptions({
+    ...getInfiniteProductsQueryOptions({
       per_page: 12,
       category,
       tag,

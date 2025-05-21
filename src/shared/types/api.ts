@@ -13,6 +13,13 @@ export type AuthResponse = {
   token: string;
 };
 
+export type GoogleAuthResponse = {
+  token: string;
+  user_email: string;
+  user_nicename: string;
+  user_display_name: string;
+};
+
 export type WoocommerceAddress = {
   first_name: string;
   last_name: string;
@@ -55,6 +62,7 @@ export type UserData = {
   meta: {
     birth_date: string;
     phone_number: string;
+    auth_provider: string;
   };
   multiple_addresses: UserAddress[];
   is_super_admin: boolean;

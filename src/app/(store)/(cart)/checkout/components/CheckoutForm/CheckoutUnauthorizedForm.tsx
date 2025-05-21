@@ -1,5 +1,6 @@
 "use client";
 
+import GoogleLoginButton from "@/features/Auth/components/GoogleLoginButton";
 import { useUser } from "@/shared/api/authApi";
 import AppleIcon from "@/shared/components/icons/Social/AppleIcon";
 import GoogleIcon from "@/shared/components/icons/Social/GoogleIcon";
@@ -91,14 +92,11 @@ const CheckoutUnauthorizedForm = ({
             }}
           />
           <div className="flex flex-col gap-4 max-w-[448px] w-full">
-            <Button variant="secondary" size="normal" className="w-full">
-              <GoogleIcon />
-              Войти через Google
-            </Button>
-            <Button variant="secondary" size="normal" className="w-full">
+            <GoogleLoginButton callbackUrl="/checkout" />
+            {/* <Button variant="secondary" size="normal" className="w-full">
               <AppleIcon />
               Войти через Apple
-            </Button>
+            </Button> */}
           </div>
         </div>
         <Separator className="my-10" />

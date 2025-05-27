@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 import { parseJwt } from "../utils/parseJWT";
 
 export const formattedApiInstance: AxiosInstance = axios.create({
-  baseURL: `${env.API_URL}`,
+  baseURL: `${env.APP_URL}/api`,
   timeout: 50000,
   headers: {
     "Content-Type": "application/json",

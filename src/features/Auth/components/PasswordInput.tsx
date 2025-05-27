@@ -10,17 +10,18 @@ import {
   FormItem,
   FormMessage,
 } from "@/shared/components/UI/Form";
-import { Input } from "@/shared/components/UI/Input";
+import { Input, InputProps } from "@/shared/components/UI/Input";
 
 const PasswordInput = <T extends FieldValues>({
   control,
   name,
   placeholder = "Пароль",
+  ...props
 }: {
   control: Control<T>;
   name: Path<T>;
   placeholder?: string;
-}) => {
+} & InputProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const type = showPassword ? "text" : "password";
@@ -36,6 +37,7 @@ const PasswordInput = <T extends FieldValues>({
             <Input
               type={type}
               placeholder={placeholder}
+              autoComplete="off"
               hasError={!!fieldState.error}
               endIcon={
                 <button
@@ -55,6 +57,7 @@ const PasswordInput = <T extends FieldValues>({
                 </button>
               }
               {...field}
+              {...props}
             />
           </FormControl>
           <FormMessage />

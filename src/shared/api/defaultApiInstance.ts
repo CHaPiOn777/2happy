@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { parseJwt } from "../utils/parseJWT";
 
 export const defaultApiInstance: AxiosInstance = axios.create({
-  baseURL: `${env.APP_URL}/api`,
+  baseURL: `${env.API_URL}`,
   timeout: 50000,
 
   headers: {

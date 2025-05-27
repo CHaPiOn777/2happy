@@ -73,6 +73,13 @@ export type CreateOrderPayload = {
   set_paid: boolean;
 };
 
+export type RefundOrderPayload = {
+  amount: string;
+  reason: string;
+  api_refund: boolean;
+  line_items: { id: number; quantity: number }[];
+};
+
 type MetaData = {
   id: number;
   key: string;

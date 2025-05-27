@@ -6,7 +6,8 @@ import UserIcon from "@/shared/components/icons/UserIcon";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
 import AuthModal from "@/features/Auth/components/AuthModal";
 
-import { useLogout, useUser } from "@/shared/api/authApi";
+import { useUser } from "@/shared/api/authApi";
+import { useLogout } from "../hooks/useLogout";
 import { paths } from "@/config/paths";
 import { useEffect, useState } from "react";
 import {

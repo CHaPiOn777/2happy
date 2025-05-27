@@ -11,9 +11,7 @@ const CheckoutPage = () => {
       </div>
       <div className="grid grid-cols-[1fr_288px] gap-x-12">
         <CheckoutForm />
-        <Suspense fallback={"...Загрузка"}>
-          <CheckoutSide />
-        </Suspense>
+        <CheckoutSide />
       </div>
     </Container>
   );

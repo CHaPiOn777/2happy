@@ -37,6 +37,7 @@ const CartInfo = ({ cartData }: { cartData: CartResponse }) => {
         </div>
 
         <NavigateToCartButton
+          cartData={cartData}
           buttonProps={{ disabled: !cartData.items_count }}
         />
       </div>

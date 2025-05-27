@@ -8,16 +8,56 @@ import {
 import { Button } from "@/shared/components/UI/Button";
 import { Separator } from "@/shared/components/UI/Separator";
 import Link from "next/link";
-import { useId } from "react";
 import OrderProductCard from "./OrderProductCard";
 import { OrderResponse } from "../types";
 import { differenceInDays, format } from "date-fns";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
+import { useMutation } from "@tanstack/react-query";
+import { getProductVariationsList } from "@/features/Products/api/productsApi";
+import { repeatOrder } from "../utils/repeatOrder";
+import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
+import { useRouter } from "next/navigation";
+import { paths } from "@/config/paths";
+import LoaderIcon from "@/shared/components/icons/LoaderIcon";
+import RefundButton from "./RefundButton";
+import { HELP_TABS } from "@/features/User/utils/isValidHelpTab";
+import StyledTooltip from "@/shared/components/UI/StyledTooltip";
+import { useState } from "react";
+import SuccessRefundDialog from "./SuccessRefundDialog";
 
 const OrderCard = ({ order }: { order: OrderResponse }) => {
-  const isReturnDisabled =
-    !!order.date_paid &&
-    differenceInDays(new Date(), new Date(order.date_paid)) > 20;
+  const router = useRouter();
+  const orderIds = order.line_items.map((item) => item.variation_id);
+
+  const [successRefund, setSuccessRefund] = useState<boolean>(false);
+
+  const { setCheckoutItems } = useCheckoutStore();
+
+  const getReturnDisabled = () => {
+    switch (true) {
+      case order.status === "refunded":
+        return "Вы уже оформили возврат.";
+      case !!order.date_paid &&
+        differenceInDays(new Date(), new Date(order.date_paid)) > 20:
+        return "Срок оформления возврата истек.";
+      default:
+        break;
+    }
+  };
+
+  const { mutate: getVariations, isPending } = useMutation({
+    mutationFn: () => getProductVariationsList({ ids: orderIds }),
+    onSuccess: (orderProducts) => {
+      const checkoutItems = repeatOrder(order, orderProducts ?? []);
+      setCheckoutItems(checkoutItems);
+      router.push(paths.checkout.getHref());
+    },
+  });
+
+  const handleRepeatOrder = () => {
+    getVariations();
+  };
+
   return (
     <article>
       <AccordionItem
@@ -51,14 +91,38 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
           <div className="flex justify-between gap-4">
             <div className="flex flex-col gap-14 max-w-[488px] w-full">
               <div className="w-full flex flex-col gap-6">
-                <Button className="w-full">Повторить заказ</Button>
                 <Button
                   className="w-full"
-                  variant="secondary"
-                  disabled={isReturnDisabled}
+                  onClick={handleRepeatOrder}
+                  disabled={isPending}
                 >
-                  Оформить возврат
+                  {isPending && <LoaderIcon className="animate-spin" />}
+                  Повторить заказ
                 </Button>
+                <RefundButton
+                  order={order}
+                  onSuccess={() => {
+                    setSuccessRefund(true);
+                  }}
+                >
+                  <div
+                    data-tooltip-id="refund"
+                    data-tooltip-content={getReturnDisabled()}
+                  >
+                    <Button
+                      className="w-full"
+                      variant="secondary"
+                      disabled={!!getReturnDisabled()}
+                    >
+                      Оформить возврат
+                    </Button>
+                    <StyledTooltip place="top" id="refund" />
+                  </div>
+                </RefundButton>
+                <SuccessRefundDialog
+                  open={successRefund}
+                  setOpen={setSuccessRefund}
+                />
               </div>
               <div className="flex gap-2 p-4 bg-order-card-help text-description">
                 <InfoBoldIcon className="shrink-0" />
@@ -67,8 +131,11 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
                     <p className="text-gray-dark">
                       Оформить возврат можно в течение 14 дней с момента
                       получения заказа. Подробнее об условиях — в разделе{" "}
-                      <Link className="text-main" href="/">
-                        Условия возвррата / обмена.
+                      <Link
+                        className="text-main"
+                        href={paths.help.getHref({ tab: HELP_TABS.REFUNDS })}
+                      >
+                        Условия возврата / обмена.
                       </Link>
                     </p>
                   </div>
@@ -76,10 +143,14 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
                     <span className="text-gray-dark">
                       Возникли вопросы по заказу? Свяжитесь с нами
                     </span>
-                    <div className="flex items-center gap-2">
+                    <a
+                      target="_blank"
+                      href="https://wa.me/77021657378"
+                      className="inline-flex items-center gap-2 link-hover"
+                    >
                       <WhatsAppBoldIcon className="text-main" />
-                      <span className="text-button-xs"> +7 777 555 77 77</span>
-                    </div>
+                      <span className="text-button-xs">+7 (702) 165–73–78</span>
+                    </a>
                   </div>
                 </div>
               </div>

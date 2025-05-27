@@ -13,10 +13,9 @@ import {
   useChangePassword,
 } from "../api/updateUserApi";
 import { notify } from "@/shared/lib/notify";
+import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 
 const UserChangePasswordForm = () => {
-  const { data } = useUser();
-
   const form = useForm<ChangePasswordInput>({
     resolver: zodResolver(changePasswordSchema),
     mode: "onChange",
@@ -29,9 +28,11 @@ const UserChangePasswordForm = () => {
 
   const getToken = useGetToken();
 
-  const { mutate: changePassword } = useChangePassword({
+  const { mutate: changePassword, isPending } = useChangePassword({
     onSuccess: (_, variables) => {
       getToken(variables.data.newPassword);
+      notify({ message: "Пароль успешно изменен", variant: "success" });
+      form.reset();
     },
     onError: (err) => {
       console.log(err);
@@ -39,7 +40,6 @@ const UserChangePasswordForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(data: ChangePasswordInput) {
     if (!data) return;
 
@@ -67,11 +67,11 @@ const UserChangePasswordForm = () => {
           />
         </div>
         <Button
-          // disabled={isPending || !form.formState.isDirty}
+          disabled={isPending || !form.formState.isDirty}
           type="submit"
           className="w-full"
         >
-          {/* {isPending && <LoaderIcon className="animate-spin" />} */}
+          {isPending && <LoaderIcon className="animate-spin" />}
           Сохранить
         </Button>
       </form>

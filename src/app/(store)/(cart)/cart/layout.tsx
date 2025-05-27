@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import CartSimilarProducts from "./cart/components/CartSimilarProducts";
+import CartSimilarProducts from "./components/CartSimilarProducts";
 
 const CartLayout = ({ children }: { children: ReactNode }) => {
   return (

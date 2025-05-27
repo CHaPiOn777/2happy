@@ -13,7 +13,8 @@ import Image from "next/image";
 import Container from "@/shared/components/UI/Container";
 import { Button } from "@/shared/components/UI/Button";
 import LogoutIcon from "@/shared/components/icons/LogoutIcon";
-import { useLogout, useUser } from "@/shared/api/authApi";
+import { useUser } from "@/shared/api/authApi";
+import { useLogout } from "@/features/User/hooks/useLogout";
 
 const AccountBreadcrumbs = () => {
   const { data } = useUser();

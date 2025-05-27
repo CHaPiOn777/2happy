@@ -11,6 +11,8 @@ import StyledTooltip from "../../UI/StyledTooltip";
 import CartSheet from "@/features/Cart/components/Sheets/CartSheet/CartSheet";
 import CartIcon from "../../icons/CartIcon";
 import UserAccount from "@/features/User/components/UserAccount";
+import MainLoader from "./components/MainLoader";
+import CookieDialog from "./components/CookieDialog/CookieDialog";
 
 export const MainLayout = ({ children }: { children: ReactNode }) => {
   const queryClient = getQueryClient();
@@ -33,7 +35,7 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
     })
   );
   return (
-    <Suspense fallback={"...Loading"}>
+    <Suspense fallback={<MainLoader />}>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Header
           buttonsSlot={
@@ -58,6 +60,7 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
         />
         <main className="flex-1 mt-[var(--header-height)]">{children}</main>
         <Footer />
+        <CookieDialog />
       </HydrationBoundary>
     </Suspense>
   );

@@ -153,6 +153,40 @@ export const getProductVariationsQueryOptions = (id: number) => {
   });
 };
 
+type getProductVariationsListParams = {
+  ids: number[];
+};
+
+const getProductVariationsListURL = `${env.CUSTOM_API}/variations`;
+
+export const getProductVariationsList = async (
+  params: getProductVariationsListParams
+): Promise<ProductVariation[]> => {
+  const getProductVariationsListURLWithParams = createURLWithParams(
+    getProductVariationsListURL,
+    params
+  );
+
+  const response = await formattedApiInstance.get<unknown, ProductVariation[]>(
+    getProductVariationsListURLWithParams
+  );
+
+  return response;
+};
+
+const productVariationsListQueryKey = ({
+  ids,
+}: getProductVariationsListParams) => ["variations", ...ids];
+
+export const getProductVariationsListQueryOptions = (
+  params: getProductVariationsListParams
+) => {
+  return queryOptions({
+    queryKey: productVariationsListQueryKey(params),
+    queryFn: (meta) => getProductVariationsList(params),
+  });
+};
+
 type getRelatedProductsParameters = {
   product_ids?: number[];
   per_page?: number;

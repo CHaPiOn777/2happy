@@ -9,7 +9,7 @@ const OrderProductCard = ({ product }: { product: OrderProductItem }) => {
 
   return (
     <article className="flex gap-12 justify-between items-center py-8 pr-4 border-b border-b-gray last:border-b-0">
-      <div className="flex gap-6">
+      <div className="flex gap-6 items-center">
         <ImageWithLoader
           src={product.image.src}
           wrapperClassName="w-[96px] h-[128]"

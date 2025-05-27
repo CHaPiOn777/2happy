@@ -3,10 +3,13 @@ import { Button, ButtonProps } from "@/shared/components/UI/Button";
 import { useNavigateCheckout } from "../hooks/useNavigateCheckout";
 import { useUser } from "@/shared/api/authApi";
 import Link from "next/link";
+import { CartResponse } from "../types";
 
 const NavigateToCartButton = ({
+  cartData,
   buttonProps,
 }: {
+  cartData: CartResponse;
   buttonProps?: ButtonProps & { text?: string };
 }) => {
   const { data: user } = useUser();
@@ -14,6 +17,7 @@ const NavigateToCartButton = ({
   const buttonDisabled = buttonProps?.disabled;
 
   const { link, handleClick } = useNavigateCheckout({
+    cartData,
     disabled: buttonDisabled,
   });
 

@@ -2,16 +2,15 @@ import * as React from "react";
 
 import { cn } from "@/shared/utils/cn";
 
-const Input = React.forwardRef<
-  HTMLInputElement,
-  React.ComponentProps<"input"> & {
-    title?: string;
-    wrapperClassName?: string;
-    startIcon?: React.ReactNode;
-    endIcon?: React.ReactNode;
-    hasError?: boolean;
-  }
->(
+export type InputProps = React.ComponentProps<"input"> & {
+  title?: string;
+  wrapperClassName?: string;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  hasError?: boolean;
+};
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,

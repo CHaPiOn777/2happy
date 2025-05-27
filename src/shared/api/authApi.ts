@@ -139,24 +139,6 @@ const registerUser = (data: RegisterInput): Promise<AuthResponse> => {
   return formattedApiInstance.post("/custom/v1/register", data);
 };
 
-export const useLogout = () => {
-  const queryClient = getQueryClient();
-  const { clearUserToken } = useAuthStore();
-
-  const router = useRouter();
-
-  const handleLogout = () => {
-    Cookies.remove("access_token");
-    clearUserToken();
-    queryClient.removeQueries(getCartQueryOptions());
-    queryClient.removeQueries(getUserQueryOptions());
-
-    router.push(paths.home.getHref());
-  };
-
-  return { handleLogout };
-};
-
 export const useGetToken = () => {
   const { data: user } = useUser();
 

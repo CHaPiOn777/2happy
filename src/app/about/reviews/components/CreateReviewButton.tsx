@@ -1,6 +1,9 @@
 "use client";
 
-import { useCreateComment } from "@/features/Reviews/api/reviewsMutationsApi";
+import {
+  useCreateComment,
+  useUploadMedia,
+} from "@/features/Reviews/api/reviewsMutationsApi";
 import CreateReviewDialog from "@/features/Reviews/components/CreateReview/CreateReviewDialog";
 import { CreateReviewFormInput } from "@/features/Reviews/components/CreateReview/CreateReviewForm";
 import { useUser } from "@/shared/api/authApi";
@@ -20,23 +23,24 @@ const CreateReviewButton = () => {
     [user]
   );
 
-  const onSubmit = (data: CreateReviewFormInput) => {
-    const formData = new FormData();
+  const onSubmit = async (data: CreateReviewFormInput) => {
+    const address =
+      user?.multiple_addresses.find((item) => item.isDefaultShipping) ||
+      user?.multiple_addresses[0];
 
-    formData.append("post", String(1));
+    try {
+      const formData = new FormData();
+      formData.append("post", String(1));
+      formData.append("content", data.message);
+      formData.append("author_name", data.name);
+      formData.append("author_email", user?.email ?? "");
+      formData.append("city", address?.city ?? "");
+      formData.append("country", address?.country ?? "");
 
-    formData.append("content", data.message);
-    formData.append("author_name", data.name);
-    formData.append("author_email", user?.email ?? "");
-
-    formData.append("city", "Москва");
-    formData.append("country", "Россия");
-
-    data.images?.forEach((file, i) => {
-      formData.append(`files[${i}]`, file);
-    });
-
-    createComment(formData);
+      createComment(formData);
+    } catch (error) {
+      console.error("Ошибка при отправке отзыва:", error);
+    }
   };
   return (
     <CreateReviewDialog

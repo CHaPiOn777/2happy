@@ -15,7 +15,7 @@ module.exports = {
       screens: {
         sm: "320px",
         md: "640px",
-        lg: "960px",
+        lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
       },
@@ -60,8 +60,11 @@ module.exports = {
       },
       blur: {
         xs: "2px",
+        lg: "16px",
       },
       backgroundImage: {
+        "cookie-gradient":
+          "linear-gradient(360deg, #111112 0%, rgba(17, 17, 18, 0.5) 210.44%)",
         "choose-gradient":
           "linear-gradient(180deg, rgba(17, 17, 18, 0) 0%, #111112 72.14%)",
         "partnership-banner":

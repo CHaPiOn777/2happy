@@ -66,6 +66,7 @@ const CartSheetContent = ({
       </div>
       <div className="flex flex-col gap-4">
         <NavigateToCartButton
+          cartData={cartData}
           buttonProps={{
             text: "Оформить заказ",
             size: "large",

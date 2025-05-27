@@ -10,9 +10,10 @@ import {
   SelectItem,
   SelectTriggerPlain,
 } from "@/shared/components/UI/Select";
-import { useRef, useState } from "react";
-import useObserver, { useIntersection } from "@/shared/hooks/useObserver";
+import { useState } from "react";
+import { useIntersection } from "@/shared/hooks/useObserver";
 import { getWordForm } from "@/shared/utils";
+import FiltersIcon from "@/shared/components/icons/FiltersIcon";
 
 const ReviewsSelect = ({
   sort,
@@ -25,6 +26,7 @@ const ReviewsSelect = ({
   return (
     <Select defaultValue={defaultValue} onValueChange={onChange}>
       <SelectTriggerPlain className="text-button-xs">
+        <FiltersIcon />
         Сортировать по
       </SelectTriggerPlain>
       <SelectContent align="end">

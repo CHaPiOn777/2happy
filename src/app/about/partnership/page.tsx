@@ -6,8 +6,12 @@ import LoyalSection from "./components/LoyalSection";
 import InstagramSection from "./components/InstagramSection";
 import ContactUsSection from "./components/ContactUsSection";
 import WhyChooseUsSection from "./components/WhyChooseUsSection";
+import { sleep } from "@/sleep";
 
-const PartnershipPage = () => {
+const PartnershipPage = async () => {
+  if (process.env.NODE_ENV === "production") {
+    await sleep(35000);
+  }
   return (
     <>
       <Main />

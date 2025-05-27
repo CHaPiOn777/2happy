@@ -9,8 +9,12 @@ import StatisticSection from "./components/StatisticSection";
 import HistorySection from "./components/HistorySection";
 import ReviewsSection from "./components/ReviewsSection";
 import WhatsAppButton from "@/shared/components/Layout/MainLayout/components/WhatsAppButton";
+import { sleep } from "@/sleep";
 
-const AboutPage = () => {
+const AboutPage = async () => {
+  if (process.env.NODE_ENV === "production") {
+    await sleep(35000);
+  }
   return (
     <>
       <Main />

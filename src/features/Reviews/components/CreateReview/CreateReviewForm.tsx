@@ -142,13 +142,13 @@ const CreateReviewForm = ({
               >
                 Отправить
               </Button>
-              <Button
+              {/* <Button
                 size="large"
                 className="w-full"
                 onClick={() => setStep("images")}
               >
-                Дополнить
-              </Button>
+                Закрыть
+              </Button> */}
             </div>
           )}
 

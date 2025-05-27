@@ -13,13 +13,13 @@ import CheckoutAuthorizedForm from "./CheckoutAuthorizedForm";
 import { useUser } from "@/shared/api/authApi";
 import CheckoutFormWithAddress from "./CheckoutFormWithAddress";
 import { CheckoutFormInput } from "./types";
-import { useCart } from "@/features/Cart/api/cartQueries";
 import { useCreateOrder } from "@/features/Orders/api/ordersApi";
 import { useCreateUserAddress } from "@/features/Addresses/api/addressApi";
 import { useDeleteCart } from "@/features/Cart/api/cartMutations";
 import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
+import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
 
 const CheckoutForm = () => {
   const [step, setStep] = useState<"contacts" | "payment">("contacts");
@@ -27,7 +27,8 @@ const CheckoutForm = () => {
   const router = useRouter();
 
   const { data: user } = useUser();
-  const { data: cart } = useCart();
+
+  const { checkoutItems } = useCheckoutStore();
 
   const [contacts, setContacts] = useState<CheckoutFormInput | null>(null);
   const [payment, setPayment] = useState<string>("");
@@ -83,8 +84,8 @@ const CheckoutForm = () => {
   const handleSubmit = () => {
     if (!contacts) return;
 
-    const cartItems =
-      cart?.items.map((item) => ({
+    const line_items =
+      checkoutItems?.map((item) => ({
         product_id: item.id,
         quantity: item.quantity,
       })) ?? [];
@@ -125,7 +126,7 @@ const CheckoutForm = () => {
           postcode: contacts?.postalCode,
           country: contacts?.country,
         },
-        line_items: cartItems,
+        line_items: line_items,
         set_paid: true,
         payment_method: "robokassa",
         payment_method_title: "Банковская карта (Robokassa)",

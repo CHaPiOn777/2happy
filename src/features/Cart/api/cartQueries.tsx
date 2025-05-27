@@ -25,8 +25,17 @@ export const fetchNonce = async (): Promise<string> => {
   return nonce;
 };
 
-const getCart = (): Promise<CartResponse> => {
-  return formattedApiInstance.get<unknown, CartResponse>(getCartURL);
+const getCart = async (): Promise<CartResponse> => {
+  const response = await defaultApiInstance.get(getCartURL);
+
+  const nonce = response.headers["nonce"];
+
+  console.log(nonce);
+  if (nonce) {
+    Cookies.set("nonce", nonce);
+  }
+
+  return response.data;
 };
 
 export const getCartQueryOptions = () =>
@@ -37,12 +46,6 @@ export const getCartQueryOptions = () =>
 
 export const useCart = () => {
   return useQuery({
-    ...getCartQueryOptions(),
-  });
-};
-
-export const useSuspenseCart = () => {
-  return useSuspenseQuery({
     ...getCartQueryOptions(),
   });
 };

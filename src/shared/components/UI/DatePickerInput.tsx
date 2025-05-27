@@ -26,7 +26,10 @@ const DatePickerInput = ({
     <Popover>
       <PopoverTrigger asChild>
         <div className="flex items-center py-2 px-5 justify-center items-start rounded-xs w-full border border-main h-[56px]">
-          <button className="flex w-full flex-col justify-center items-start ">
+          <button
+            className="flex w-full flex-col justify-center items-start "
+            type="button"
+          >
             <span className="text-title text-gray-middle">{title}</span>
             {value ? (
               format(value, "dd/MM/yy")
@@ -46,7 +49,7 @@ const DatePickerInput = ({
           disabled={disabled}
           captionLayout="dropdown"
           startMonth={new Date(1900, 11)}
-          endMonth={new Date()}
+          endMonth={new Date(2014, 11)}
           autoFocus
         />
       </PopoverContent>

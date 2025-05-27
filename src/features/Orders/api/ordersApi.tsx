@@ -2,7 +2,11 @@ import { env } from "@/config/env";
 import { formattedApiInstance } from "@/shared/api/formattedApiInstance";
 import { WooResponse } from "@/shared/types/api";
 import { createURLWithParams } from "@/shared/utils";
-import { CreateOrderPayload, OrderResponse } from "../types";
+import {
+  CreateOrderPayload,
+  OrderResponse,
+  RefundOrderPayload,
+} from "../types";
 import {
   InfiniteData,
   infiniteQueryOptions,
@@ -117,10 +121,7 @@ export const getOrderQueryOptions = (id: number) => {
   });
 };
 
-export const useGetOrder = ({
-  id,
-  ...options
-}: { id: number } & QueryOptions) => {
+export const useGetOrder = ({ id }: { id: number } & QueryOptions) => {
   return useQuery({ ...getOrderQueryOptions(id) });
 };
 
@@ -148,6 +149,74 @@ export const useCreateOrder = ({
     onSuccess: (res, variables, context) => {
       queryClient.invalidateQueries(getOrdersQueryOptions({}));
       onSuccess?.(res, variables, context);
+    },
+    onError: (err, variables, context) => {
+      onError?.(err, variables, context);
+    },
+    ...options,
+  });
+};
+
+const createOrderRefundURL = `${env.WOOCOMMERCE_API}/orders/{id}/refunds`;
+
+export const createRefundOrder = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: RefundOrderPayload;
+}): Promise<OrderResponse> => {
+  return formattedApiInstance.post<unknown, OrderResponse>(
+    createOrderRefundURL.replace("{id}", `${id}`),
+    data
+  );
+};
+
+export const useCreateRefundOrder = ({
+  onSuccess,
+  onError,
+  ...options
+}: UseMutationOptions<
+  OrderResponse,
+  unknown,
+  { data: RefundOrderPayload },
+  unknown
+>) => {
+  const queryClient = getQueryClient();
+  return useMutation({
+    mutationFn: createRefundOrder,
+    onSuccess: (res, variables, context) => {
+      const orderId = variables.id;
+
+      console.log(getOrdersQueryOptions({}).queryKey, orderId);
+
+      onSuccess?.(res, variables, context);
+
+      queryClient.setQueriesData<InfiniteData<OrderResponse[]> | undefined>(
+        { queryKey: getOrdersQueryOptions({}).queryKey },
+        (oldData: InfiniteData<OrderResponse[]> | undefined) => {
+          console.log(!oldData);
+          if (!oldData) return oldData;
+
+          console.log(!oldData);
+
+          const newData = {
+            ...oldData,
+            pages: oldData.pages.map((page) =>
+              page.map((order) =>
+                order.id === orderId
+                  ? { ...order, status: "refunded" }
+                  : { ...order }
+              )
+            ),
+          };
+
+          console.log(newData);
+
+          return newData;
+        }
+      );
+      console.log("после setQueries");
     },
     onError: (err, variables, context) => {
       onError?.(err, variables, context);

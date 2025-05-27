@@ -1,7 +1,7 @@
 import {
   PaymentRadioGroup,
   PaymentRadioGroupItem,
-} from "@/features/Orders/components/PaymentRadio/PaymentRadioButtons";
+} from "@/features/Checkout/components/PaymentRadio/PaymentRadioButtons";
 import CardIcon from "@/shared/components/icons/Payment/CardIcon";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
 import Image from "next/image";

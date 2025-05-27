@@ -10,6 +10,7 @@ import { Button } from "@/shared/components/UI/Button";
 import { IconButton } from "@/shared/components/UI/IconButton";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import BuyInstantButton from "@/features/Products/components/BuyInstantButton";
 
 const ProductSectionButtons = ({
   variation,
@@ -72,9 +73,7 @@ const ProductSectionButtons = ({
         >
           Добавить в корзину
         </AddToCartButton>
-        <Button className="w-1/2" variant="secondary" disabled={disabled}>
-          Купить
-        </Button>
+        <BuyInstantButton variation={variation} />
       </div>
       <IconButton
         className="[&_svg]:fill-transparent"

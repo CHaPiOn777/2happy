@@ -36,7 +36,11 @@ const OrderProductDialog = ({
   )?.display_value;
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-      <DialogTrigger onClick={() => setOpen(true)} asChild>
+      <DialogTrigger
+        className="cursor-pointer"
+        onClick={() => setOpen(true)}
+        asChild
+      >
         {children}
       </DialogTrigger>
       <DialogContent className="w-full max-w-[1224px] p-20">
@@ -62,24 +66,28 @@ const OrderProductDialog = ({
               setImages={setImages}
               className="basis-auto"
               renderButtons={(variation, disabled) => (
-                <div className="flex gap-2">
-                  <AddToCartButton
-                    className="w-full"
-                    variationId={variation?.id ?? 0}
-                    quantity={1}
-                    disabled={disabled}
-                  >
-                    Добавить в корзину
-                  </AddToCartButton>
-                  <IconButton
-                    variant="secondary"
-                    className="border border-black [&_svg]:fill-transparent"
-                    size="normal"
-                    disabled={disabled}
-                  >
-                    <HeartIcon className="stroke-black" />
-                  </IconButton>
-                </div>
+                <>
+                  {variation?.stock_status === "outofstock" ? null : (
+                    <div className="flex gap-2">
+                      <AddToCartButton
+                        className="w-full"
+                        variationId={variation?.id ?? 0}
+                        quantity={1}
+                        disabled={disabled}
+                      >
+                        Добавить в корзину
+                      </AddToCartButton>
+                      <IconButton
+                        variant="secondary"
+                        className="border border-black [&_svg]:fill-transparent"
+                        size="normal"
+                        disabled={disabled}
+                      >
+                        <HeartIcon className="stroke-black" />
+                      </IconButton>
+                    </div>
+                  )}
+                </>
               )}
             />
           </Suspense>

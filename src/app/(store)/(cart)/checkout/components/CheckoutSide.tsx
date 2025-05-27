@@ -1,17 +1,34 @@
 "use client";
 
 import { paths } from "@/config/paths";
-import { useSuspenseCart } from "@/features/Cart/api/cartQueries";
-import CartSmallCard from "@/features/Cart/components/Cards/CartSmallCard";
-import { getCartInfo } from "@/features/Cart/utils/getCartInfo";
+import CheckoutCard from "@/features/Checkout/components/CheckoutCard";
+import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
+import { calculateTotals } from "@/features/Checkout/utils/calculateTotals";
 import EditIcon from "@/shared/components/icons/EditIcon";
 import { IconButton } from "@/shared/components/UI/IconButton";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const CheckoutSide = () => {
-  const { data: cartData } = useSuspenseCart();
-  const { totalPriceWithoutSale, totalDiscount, totalPrice, currencySymbol } =
-    getCartInfo(cartData);
+  const firstRenderRef = useRef<boolean>(true);
+
+  const {
+    checkoutItems,
+    itemsCount,
+    currencySymbol,
+    isEditable,
+    clearCheckoutItems,
+  } = useCheckoutStore();
+
+  const { totalRegular, totalDiscount, totalFinal } =
+    calculateTotals(checkoutItems);
+
+  useEffect(() => {
+    return () => {
+      if (firstRenderRef.current) firstRenderRef.current = false;
+      else clearCheckoutItems();
+    };
+  }, []);
 
   return (
     <aside className="flex flex-col gap-6">
@@ -21,7 +38,7 @@ const CheckoutSide = () => {
           <div className="flex justify-between py-3 border-b border-gray-light">
             <span>Товары:</span>
             <span>
-              {totalPriceWithoutSale} {currencySymbol}
+              {totalRegular} {currencySymbol}
             </span>
           </div>
           <div className="flex justify-between py-3 border-b border-gray-light">
@@ -34,7 +51,7 @@ const CheckoutSide = () => {
         <div className="flex items-center justify-between text-h5 h-12">
           <span>Итого:</span>
           <span>
-            {totalPrice} {currencySymbol}
+            {totalFinal} {currencySymbol}
           </span>
         </div>
       </div>
@@ -51,23 +68,23 @@ const CheckoutSide = () => {
         <div className="flex justify-between">
           <h5 className="text-h5">
             Корзина{" "}
-            <span className="text-body2 text-gray-middle">
-              ({cartData.items_count})
-            </span>
+            <span className="text-body2 text-gray-middle">({itemsCount})</span>
           </h5>
-          <Link href={paths.cart.getHref()}>
-            <IconButton
-              variant="secondary"
-              size="extraSmall"
-              className="p-1 [&_svg]:size-6"
-            >
-              <EditIcon />
-            </IconButton>
-          </Link>
+          {isEditable && (
+            <Link href={paths.cart.getHref()}>
+              <IconButton
+                variant="secondary"
+                size="extraSmall"
+                className="p-1 [&_svg]:size-6"
+              >
+                <EditIcon />
+              </IconButton>
+            </Link>
+          )}
         </div>
         <div className="flex flex-col gap-8">
-          {cartData.items.map((item) => (
-            <CartSmallCard key={item.id} cartItem={item} />
+          {checkoutItems.map((item) => (
+            <CheckoutCard key={item.id} checkoutItem={item} />
           ))}
         </div>
       </div>

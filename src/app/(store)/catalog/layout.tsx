@@ -1,5 +1,5 @@
 import Container from "@/shared/components/UI/Container";
-import CatalogHeader from "../../(store)/components/CatalogHeader";
+import CatalogHeader from "../components/MainCatalog/CatalogHeader";
 
 export const metadata = {
   title: "2HAPPY",

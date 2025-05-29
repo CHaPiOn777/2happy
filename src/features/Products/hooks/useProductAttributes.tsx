@@ -24,7 +24,7 @@ export const useProductAttributes = ({
   defaultSize?: string | null;
 
   handleChange?: TProductAttributesHandler;
-  setImages: (images: Image[]) => void;
+  setImages?: (images: Image[]) => void;
 }) => {
   const { size: productDefaultSize, color: productDefaultColor } =
     getAttributesByProductPrice(data, variations);
@@ -56,7 +56,7 @@ export const useProductAttributes = ({
     const variationImages = newVariation?.id
       ? imagesMap.get(newVariation?.id)
       : [];
-    if (variationImages?.length) setImages(variationImages);
+    if (variationImages?.length && setImages) setImages(variationImages);
 
     const availableSizesForColor = colorToSizeMap.get(newColor);
     if (availableSizesForColor && !availableSizesForColor.includes(size)) {
@@ -86,7 +86,7 @@ export const useProductAttributes = ({
       setVariation(variation);
 
       const variationImages = variation?.id ? imagesMap.get(variation?.id) : [];
-      if (variationImages?.length) setImages(variationImages);
+      if (variationImages?.length && setImages) setImages(variationImages);
     }
   }, [data, variations]);
 

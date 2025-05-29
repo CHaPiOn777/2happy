@@ -1,14 +1,16 @@
 import { ButtonLoader } from "@/shared/components/UI/Button";
-import {
-  IconButton,
-  IconButtonLoader,
-} from "@/shared/components/UI/IconButton";
+import { IconButtonLoader } from "@/shared/components/UI/IconButton";
 import { Separator } from "@/shared/components/UI/Separator";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
+import { cn } from "@/shared/utils";
+import { ComponentPropsWithoutRef } from "react";
 
-const ProductInfoLoader = () => {
+const ProductInfoLoader = ({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"div">) => {
   return (
-    <div className="flex flex-col gap-2 justify-between flex-1 basis-[49%]">
+    <div className={cn("flex flex-col gap-8 justify-between", className)}>
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">

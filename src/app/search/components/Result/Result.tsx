@@ -1,6 +1,5 @@
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
-import FashionCard from "@/features/Products/components/Cards/FashionCard";
 
 const Result = () => {
   return (
@@ -18,7 +17,7 @@ const Result = () => {
             категориями, которые вам интересны.
           </div>
           <ul className="grid grid-cols-4 grid-rows-[552px] gap-x-6">
-            <li>
+            {/* <li>
               <FashionCard
                 title="Спорт шик"
                 href="/"
@@ -45,7 +44,7 @@ const Result = () => {
                 href="/"
                 src="/images/Home/Fashion/fashion-1.jpg"
               />
-            </li>
+            </li> */}
           </ul>
         </div>
       </Container>

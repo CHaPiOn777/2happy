@@ -62,9 +62,12 @@ const CartItemChangeDialog = ({
           <Suspense fallback={<ProductSliderLoader />}>
             <ProductSlider id={productId} images={images} />
           </Suspense>
-          <Suspense fallback={<ProductInfoLoader />}>
+          <Suspense
+            fallback={<ProductInfoLoader className="flex-1 basis-[49%]" />}
+          >
             <ProductInfo
               id={productId}
+              className="flex-1 basis-[49%]"
               defaultColor={cartItemColor}
               defaultSize={cartItemSize}
               setImages={setImages}

@@ -1,13 +1,13 @@
 "use client";
 
 import { useGetProductId } from "@/features/Products/hooks/useGetProductId";
-import { useGetProductById } from "@/features/Products/hooks/useGetProductById ";
+import { useGetProductById } from "@/features/Products/hooks/useGetProductById";
 import { useQuery } from "@tanstack/react-query";
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import ProductsScrollableSection from "@/features/Products/components/ProductsScrollableSection";
 
 const AdditionSection = () => {
-  const { id } = useGetProductId();
+  const { id } = useGetProductId("productId");
 
   const { data: product } = useGetProductById(id);
 

@@ -1,19 +1,18 @@
 "use client";
 
 import { cn } from "@/shared/utils/cn";
-import { useProductsList } from "../hooks/useProductsList";
 
-import { ProductCardLoader } from "./Cards/ProductServerCard";
-import ProductServerCard from "./Cards/ProductServerCard";
+import { ProductCardLoader } from "../Cards/ProductServerCard";
 import { RefObject, useRef } from "react";
 import useObserver from "@/shared/hooks/useObserver";
+import { useCollectionsList } from "../../hooks/useCollectionsList";
+import CollectionCard, { CollectionCardLoader } from "../Cards/CollectionCard";
 
-const ProductsList = ({
+const CollectionsList = ({
   scrollToRef,
   category,
-  tag,
 }: {
-  scrollToRef: RefObject<HTMLDivElement | null>;
+  scrollToRef?: RefObject<HTMLDivElement | null>;
   category?: number;
   tag?: number;
 }) => {
@@ -24,9 +23,8 @@ const ProductsList = ({
     isPlaceholderData,
     fetchNextPage,
     isFetchingNextPage,
-  } = useProductsList({
+  } = useCollectionsList({
     category,
-    tag,
   });
 
   const observerRef = useRef<HTMLDivElement>(null);
@@ -56,22 +54,22 @@ const ProductsList = ({
         className={cn(
           "grid gap-x-6 gap-y-10 grid-flow-row",
           gridType === "small"
-            ? "grid-cols-4 auto-rows-[552px] min-h-[552px]"
+            ? "grid-cols-4 auto-rows-[456px] min-h-[552px]"
             : "grid-cols-2 auto-rows-[928px] min-h-[928px]",
           isPlaceholderData && "blur-sm pointer-events-none"
         )}
       >
         {isPending && (
           <>
-            <ProductCardLoader />
-            <ProductCardLoader />
-            <ProductCardLoader />
-            <ProductCardLoader />
+            <CollectionCardLoader />
+            <CollectionCardLoader />
+            <CollectionCardLoader />
+            <CollectionCardLoader />
           </>
         )}
 
         {data?.items.map((product) => (
-          <ProductServerCard key={product.id} product={product} />
+          <CollectionCard key={product.id} product={product} />
         ))}
       </div>
 
@@ -90,4 +88,4 @@ const ProductsList = ({
   );
 };
 
-export default ProductsList;
+export default CollectionsList;

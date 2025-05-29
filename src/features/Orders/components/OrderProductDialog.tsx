@@ -58,7 +58,7 @@ const OrderProductDialog = ({
               images={images}
             />
           </Suspense>
-          <Suspense fallback={<ProductInfoLoader />}>
+          <Suspense fallback={<ProductInfoLoader className="basis-auto" />}>
             <ProductInfo
               id={productId}
               defaultColor={orderItemColor}

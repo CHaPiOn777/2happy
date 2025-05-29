@@ -16,7 +16,7 @@ const ProductSection = () => {
   const params = useSearchParams();
   const setSearchParams = useQueryParams();
 
-  const { id } = useGetProductId();
+  const { id } = useGetProductId("productId");
 
   const { images, setImages } = useProductStore();
 
@@ -26,9 +26,12 @@ const ProductSection = () => {
         <Suspense fallback={<ProductSliderLoader />}>
           <ProductSlider id={id} images={images} />
         </Suspense>
-        <Suspense fallback={<ProductInfoLoader />}>
+        <Suspense
+          fallback={<ProductInfoLoader className="flex-1 basis-[49%]" />}
+        >
           <ProductInfo
             id={id}
+            className="flex-1 basis-[49%]"
             defaultColor={params.get("color")}
             defaultSize={params.get("size")}
             handleChange={({ type, value }) => {

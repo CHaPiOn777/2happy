@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { parseJwt } from "../utils/parseJWT";
 
 export const defaultApiInstance: AxiosInstance = axios.create({
-  baseURL: `${env.APP_URL}/api`,
+  baseURL: `${env.API_URL}`,
   timeout: 50000,
 
   headers: {
@@ -42,6 +42,8 @@ export const responseErrorInterceptor = (error: AxiosError) => {
   if (error.message === "canceled") return;
 
   if (error.response) {
+    console.error("URL - ", error.config?.baseURL);
+    console.error("URL - ", error.response.config?.baseURL);
     console.error(
       'Ответ сервера - "Ошибка":',
       error.response.status,

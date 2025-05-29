@@ -1,9 +1,9 @@
 import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/utils";
 import Link from "next/link";
 
-const FashionCard = ({
+const CollectionCard = ({
   title,
   src,
   href,
@@ -33,4 +33,4 @@ const FashionCard = ({
   );
 };
 
-export default FashionCard;
+export default CollectionCard;

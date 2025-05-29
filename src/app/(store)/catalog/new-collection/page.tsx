@@ -1,10 +1,10 @@
 import FiltersList from "@/features/Products/components/Filters/FiltersList";
-import Catalog from "../../../(store)/components/Catalog";
+import Catalog from "../../components/MainCatalog/Catalog";
 import { tagIds } from "@/features/Categories/consts/consts";
 import { Suspense } from "react";
 import CategorySliderLoader from "@/features/Categories/components/CategorySlider/CategorySliderLoader";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import CategoriesWithTag from "../../../(store)/components/CategoriesWithTag";
+import CategoriesWithTag from "../../components/MainCatalog/CategoriesWithTag";
 import { getQueryClient } from "@/shared/api/queryClient";
 import { getCategoriesWithTagQueryOptions } from "@/features/Categories/api/categoriesApi";
 

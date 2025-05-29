@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 
 import Container from "@/shared/components/UI/Container";
 
-import { fetchNonce } from "@/features/Cart/api/cartQueries";
-import { mainLinks, subLinks } from "./consts/consts";
+import { mainLinks } from "./consts/consts";
 
 import NavLink from "@/shared/components/UI/NavLink";
 import CategorySheet from "@/features/Categories/components/CategorySheet/CategorySheet";
@@ -23,10 +22,6 @@ const Header = ({ buttonsSlot }: { buttonsSlot: ReactNode }) => {
   const upperHeaderRef = useRef<HTMLDivElement>(null);
 
   useObserver(upperHeaderRef, (entry) => setIsSticky(!entry.isIntersecting));
-
-  useEffect(() => {
-    fetchNonce();
-  }, []);
 
   return (
     <>

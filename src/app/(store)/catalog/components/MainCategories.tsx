@@ -40,6 +40,13 @@ const MainCategories = () => {
       </li>
       <li>
         <CategoryButton
+          href={paths.catalog.collections.getHref("Готовые образы")}
+        >
+          Коллекции
+        </CategoryButton>
+      </li>
+      <li>
+        <CategoryButton
           className="text-red"
           href={paths.catalog.final_sale.getHref()}
         >

@@ -13,7 +13,7 @@ import AccordionAboutItem from "./AccordionItems/AccordionAboutItem";
 import AccordionWithRichText from "./AccordionItems/AccordionWithRichText";
 
 const DescriptionTab = () => {
-  const { id } = useGetProductId();
+  const { id } = useGetProductId("productId");
   const { data } = useSuspenseQuery(getProductByIdQueryOptions(id));
   return (
     <div className="flex h-full">

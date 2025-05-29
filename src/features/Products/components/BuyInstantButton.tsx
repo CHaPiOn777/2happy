@@ -23,7 +23,6 @@ const BuyInstantButton = ({
 
   const handleClick = () => {
     const checkoutItem = variationToCheckoutItem(variation);
-    console.log(checkoutItem);
     setCheckoutItems([checkoutItem]);
     setIsEditable(false);
 

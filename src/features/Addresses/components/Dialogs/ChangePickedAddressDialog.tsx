@@ -86,7 +86,6 @@ const ChangePickedAddressDialog = ({
                     key={address.id}
                     id={`${address.id}`}
                     value={`${address.id}`}
-                    onClick={() => console.log(address)}
                     rightSlot={
                       <div className="flex gap-4">
                         <UpdateAddressDialog title="Адрес" address={address}>

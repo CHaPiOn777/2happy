@@ -163,7 +163,7 @@ export type ProductServer = {
   attributes: ProductAttribute[];
   default_attributes: unknown[];
   variations: unknown[];
-  grouped_products: unknown[];
+  grouped_products: number[];
   menu_order: number;
   meta_data: ProductMeta;
   _links: Links;

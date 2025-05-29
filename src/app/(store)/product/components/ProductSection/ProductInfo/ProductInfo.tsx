@@ -32,13 +32,18 @@ import {
   getVariationsImages,
 } from "@/features/Products/utils";
 import { getVariation } from "@/features/Products/utils/getVariation";
-import { ProductVariation } from "@/features/Products/types";
+import { ProductServer, ProductVariation } from "@/features/Products/types";
+
+const defaultRenderName = (product: ProductServer) => (
+  <h2 className="text-h4">{product?.name}</h2>
+);
 
 const ProductInfo = ({
   id,
   defaultSize,
   defaultColor,
   handleChange,
+  renderName = defaultRenderName,
   renderButtons,
   setImages,
   className,
@@ -48,14 +53,15 @@ const ProductInfo = ({
   defaultColor?: string | null;
   className?: string;
   handleChange?: TProductAttributesHandler;
+  renderName?: (product: ProductServer) => ReactNode;
   renderButtons?: (
     variation: ProductVariation | null,
     disabled: boolean
   ) => ReactNode;
-  setImages: (images: Image[]) => void;
+  setImages?: (images: Image[]) => void;
 }) => {
   const { data: product } = useGetProductByIdSuspense(id, (data) => {
-    setImages(data.images);
+    if (setImages) setImages(data.images);
   });
   const { data: variations, isLoading: isLoadingVariation } =
     useGetProductVariations(id, (data) => {
@@ -66,7 +72,7 @@ const ProductInfo = ({
       setVariation(variation);
 
       const variationImages = variation?.id ? imagesMap.get(variation?.id) : [];
-      if (variationImages?.length) setImages(variationImages);
+      if (variationImages?.length && setImages) setImages(variationImages);
     });
 
   const { colors: defaultColors, sizes: defaultSizes } = getProductAttributes(
@@ -105,16 +111,11 @@ const ProductInfo = ({
     : false;
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-2 justify-between flex-1 basis-[49%]",
-        className
-      )}
-    >
-      <div className="flex flex-col gap-8 mb-20">
+    <div className={cn("flex flex-col gap-2 justify-between", className)}>
+      <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-h4">{product?.name}</h2>
+            {renderName(product)}
             <CopyButton
               copyText={`${env.APP_URL}${paths.product.getHref(
                 product.id,
@@ -188,7 +189,9 @@ const ProductInfo = ({
           isLoading={isLoadingVariation}
         />
       </div>
-      {renderButtons ? renderButtons(variation, isLoadingVariation) : null}
+      {renderButtons
+        ? renderButtons(variation, isLoadingVariation || !variation)
+        : null}
     </div>
   );
 };

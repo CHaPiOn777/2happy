@@ -52,7 +52,5 @@ export const repeatOrder = (
     });
   }
 
-  console.log(checkoutItems);
-
   return checkoutItems;
 };

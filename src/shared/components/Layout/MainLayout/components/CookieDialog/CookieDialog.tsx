@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 
 const CookieDialog = () => {
   const [isAccepted, setIsAccepted] = useLocalStorage("cookie-policy", false);
-  const [isLoaded, setIsLoaded] = useState(false); // ⬅️ добавляем
+  const [isLoaded, setIsLoaded] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -27,22 +27,17 @@ const CookieDialog = () => {
     setOpen(false);
   };
 
-  // Ожидаем, пока useLocalStorage подгрузит значение
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  // Открываем баннер при смене роута, только когда localStorage загружен
   useEffect(() => {
     if (!isLoaded) return;
-
-    console.log(isAccepted);
 
     if (!isAccepted) setOpen(true);
     else setOpen(false);
   }, [pathname, isAccepted, isLoaded]);
 
-  // Если еще не загрузили данные — не рендерим баннер вообще
   if (!isLoaded) return null;
 
   return (

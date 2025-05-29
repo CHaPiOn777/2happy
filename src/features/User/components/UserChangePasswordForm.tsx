@@ -35,7 +35,6 @@ const UserChangePasswordForm = () => {
       form.reset();
     },
     onError: (err) => {
-      console.log(err);
       notify({ variant: "error", message: err.response?.data.message ?? "" });
     },
   });

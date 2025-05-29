@@ -188,35 +188,30 @@ export const useCreateRefundOrder = ({
     onSuccess: (res, variables, context) => {
       const orderId = variables.id;
 
-      console.log(getOrdersQueryOptions({}).queryKey, orderId);
-
       onSuccess?.(res, variables, context);
 
-      queryClient.setQueriesData<InfiniteData<OrderResponse[]> | undefined>(
+      queryClient.setQueriesData<
+        InfiniteData<WooResponse<OrderResponse[]>> | undefined
+      >(
         { queryKey: getOrdersQueryOptions({}).queryKey },
-        (oldData: InfiniteData<OrderResponse[]> | undefined) => {
-          console.log(!oldData);
+        (oldData: InfiniteData<WooResponse<OrderResponse[]>> | undefined) => {
           if (!oldData) return oldData;
 
-          console.log(!oldData);
-
-          const newData = {
+          const newData: InfiniteData<WooResponse<OrderResponse[]>> = {
             ...oldData,
-            pages: oldData.pages.map((page) =>
-              page.map((order) =>
+            pages: oldData.pages.map((page) => ({
+              ...page,
+              items: page.items.map((order) =>
                 order.id === orderId
                   ? { ...order, status: "refunded" }
                   : { ...order }
-              )
-            ),
+              ),
+            })),
           };
-
-          console.log(newData);
 
           return newData;
         }
       );
-      console.log("после setQueries");
     },
     onError: (err, variables, context) => {
       onError?.(err, variables, context);

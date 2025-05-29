@@ -13,6 +13,7 @@ export type getProductsListParameters = {
   page?: number;
   per_page?: number;
   category?: number;
+  type?: string;
   tag?: number;
   min_price?: number;
   max_price?: number;

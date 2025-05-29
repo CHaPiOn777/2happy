@@ -14,6 +14,7 @@ import { OrderResponse } from "../types";
 import { useCreateRefundOrder } from "../api/ordersApi";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { useState } from "react";
+import { notify } from "@/shared/lib/notify";
 
 const RefundButton = ({
   order,
@@ -27,6 +28,13 @@ const RefundButton = ({
     onSuccess: () => {
       setOpen(false);
       onSuccess?.();
+    },
+    onError: () => {
+      notify({
+        message:
+          "Произошла непредвиденная ошибка, свяжитесь с нашим менеджером",
+        variant: "error",
+      });
     },
   });
 

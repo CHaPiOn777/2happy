@@ -10,6 +10,7 @@ const EXCLUDE_PATHS = [
   paths.catalog.bestsellers.getHref(),
   paths.catalog.final_sale.getHref(),
   paths.catalog.new_collection.getHref(),
+  paths.catalog.collections.getHref(),
 ];
 
 const CategorySheetTrigger = ({

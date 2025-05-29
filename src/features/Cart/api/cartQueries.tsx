@@ -30,7 +30,6 @@ const getCart = async (): Promise<CartResponse> => {
 
   const nonce = response.headers["nonce"];
 
-  console.log(nonce);
   if (nonce) {
     Cookies.set("nonce", nonce);
   }

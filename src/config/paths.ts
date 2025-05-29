@@ -25,6 +25,20 @@ export const paths = {
       },
     },
 
+    collections: {
+      getHref: (name?: string) => {
+        const query = buildQuery({ name });
+        return `${paths.catalog.getHref()}/collections${query}`;
+      },
+
+      category: {
+        getHref: (id: number, slug: string, name: string, subTo?: number) => {
+          const query = buildQuery({ name, subTo });
+          return `${paths.catalog.collections.getHref()}/${slug}_${id}${query}`;
+        },
+      },
+    },
+
     new_collection: {
       getHref: (name?: string) => {
         const query = buildQuery({ name });
@@ -52,6 +66,15 @@ export const paths = {
     getHref: (id: number, slug: string, params?: Record<string, unknown>) => {
       const decodedSlug = decodeURIComponent(slug);
       const productUrl = `/product/${encodeURIComponent(decodedSlug)}_${id}`;
+
+      return createURLWithParams(productUrl, params);
+    },
+  },
+
+  collection: {
+    getHref: (id: number, slug: string, params?: Record<string, unknown>) => {
+      const decodedSlug = decodeURIComponent(slug);
+      const productUrl = `/collection/${encodeURIComponent(decodedSlug)}_${id}`;
 
       return createURLWithParams(productUrl, params);
     },

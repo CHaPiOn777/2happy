@@ -10,7 +10,7 @@ import { paths } from "@/config/paths";
 
 const CartBreadcrumbs = () => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="border-b-0">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>

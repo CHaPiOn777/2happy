@@ -9,13 +9,19 @@ const FinalSaleList = () => {
   const { data } = useSuspenseQuery(
     getProductsQueryOptions({
       tag: tagIds["final_sale"],
+      exclude_type: "grouped",
       per_page: 3,
     })
   );
+
   return (
     <>
       {data.items.map((product) => (
-        <ProductServerCard key={product.id} product={product} />
+        <ProductServerCard
+          key={product.id}
+          product={product}
+          className="first:hidden lg:first:block"
+        />
       ))}
     </>
   );

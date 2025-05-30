@@ -9,20 +9,8 @@ import {
   BreadcrumbSeparator,
 } from "@/shared/components/UI/Breadcrumb";
 import { paths } from "@/config/paths";
-import { useSearchParams } from "next/navigation";
-import {
-  HELP_TABS,
-  HELP_TABS_NAMES,
-  isValidHelpTab,
-} from "@/features/User/utils/isValidHelpTab";
 
-const HelpBreadcrumbs = () => {
-  const params = useSearchParams();
-
-  const tab = params.get("tab");
-
-  const validTab = isValidHelpTab(tab) ? tab : HELP_TABS.REFUNDS;
-
+const PolicyBreadcrumbs = () => {
   return (
     <Breadcrumbs className="bg-main border-b-0">
       <BreadcrumbList>
@@ -40,4 +28,4 @@ const HelpBreadcrumbs = () => {
   );
 };
 
-export default HelpBreadcrumbs;
+export default PolicyBreadcrumbs;

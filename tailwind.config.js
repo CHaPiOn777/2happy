@@ -22,20 +22,25 @@ module.exports = {
       gridTemplateColumns: {
         cartCard: "minmax(60px, 120px) 152px minmax(60px, 120px) 80px",
         addition:
-          "minmax(296px, 496px) minmax(286px, 150px) minmax(286px, 150px)",
+          "80px minmax(280px, 496px) minmax(180px, 286px) minmax(180px, 286px)",
+        "addition-lg": "minmax(250px, 392px) 80px minmax(270px,440px)",
+        "collections-lg":
+          "minmax(200px, 288px) minmax(200px, 280px) minmax(250px, 344px)",
+        "instagram-lg":
+          "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
         aboutProducts:
           "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(150px, 184px) minmax(150px, 184px)",
       },
       gridTemplateRows: {
         addition: "408px 232px",
+        "addition-lg": "repeat(2, 640px)",
+        "collections-lg": "272px 174px 226px 40px",
+        "instagram-lg": "288px 288px 312px",
         aboutProducts: "264px 104px 280px",
       },
       cursor: {
         default: "url('/icons/system/cursor-arrow.svg') 2 2, default",
         pointer: "url('/icons/system/cursor-pointer.svg') 2 2, default",
-      },
-      margin: {
-        section: "136px",
       },
       zIndex: {
         "behind-header": "50",
@@ -309,12 +314,22 @@ module.exports = {
           fontWeight: "700",
           fontSize: "96px",
           lineHeight: "104px",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "72px",
+            lineHeight: "72px",
+          },
         },
         ".text-h2": {
           fontSize: "48px",
           lineHeight: "56px",
           fontWeight: "700",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "40px",
+            lineHeight: "48px",
+          },
         },
         ".text-h2Akira": {
           fontFamily: "var(--font-akira)",
@@ -333,12 +348,22 @@ module.exports = {
           fontWeight: "800",
           fontSize: "112px",
           lineHeight: "120px",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "72px",
+            lineHeight: "72px",
+          },
         },
         ".text-h4": {
           fontSize: "24px",
           lineHeight: "32px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "18px",
+            lineHeight: "26px",
+          },
         },
         ".text-h5": {
           fontSize: "16px",
@@ -487,6 +512,32 @@ module.exports = {
         },
 
         // Other
+
+        ".my-section": {
+          marginTop: "136px",
+          marginBottom: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginTop: "96px",
+            marginBottom: "96px",
+          },
+        },
+
+        ".mt-section": {
+          marginTop: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginTop: "96px",
+          },
+        },
+
+        ".mb-section": {
+          marginBottom: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginBottom: "96px",
+          },
+        },
 
         ".header-hover": {
           borderBottom: 0,

@@ -12,7 +12,11 @@ const NewCollection = async () => {
   const queryClient = getQueryClient();
 
   queryClient.prefetchQuery(
-    getProductsQueryOptions({ tag: tagIds["new"], per_page: 9 })
+    getProductsQueryOptions({
+      tag: tagIds["new"],
+      exclude_type: "grouped",
+      per_page: 9,
+    })
   );
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

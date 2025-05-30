@@ -1,12 +1,8 @@
 import { useEffect } from "react";
 import { useCatalogStore } from "../store/catalogStore";
-import {
-  getProductsInfiniteQueryOptions,
-  getProductsQueryOptions,
-} from "../api/productsApi";
+import { getProductsInfiniteQueryOptions } from "../api/productsApi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useFiltersStore } from "../store/filtersStore";
-import { usePaginationStore } from "../store/paginationStore";
 
 export const useProductsList = ({
   category,
@@ -30,6 +26,7 @@ export const useProductsList = ({
       per_page: 12,
       category,
       tag,
+      exclude_type: "grouped",
       color: colors.map((item) => item.id),
       size: sizes.map((item) => item.id),
       min_price: priceRange?.min,

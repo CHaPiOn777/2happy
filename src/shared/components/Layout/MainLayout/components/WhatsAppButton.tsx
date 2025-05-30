@@ -3,7 +3,7 @@ import { IconButton } from "@/shared/components/UI/IconButton";
 
 const WhatsAppButton = () => {
   return (
-    <div className="fixed right-[224px] bottom-[88px]">
+    <div className="fixed xl:right-[220px] lg:right-[180px] right-[28px] bottom-[88px] z-over-header">
       <IconButton
         className="rounded-full w-[72px] h-[72px] overflow-hidden"
         asChild

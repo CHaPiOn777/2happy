@@ -7,6 +7,7 @@ import Container from "@/shared/components/UI/Container";
 import VisaIcon from "@/shared/components/icons/Payment/VisaIcon";
 import { mainBlocks, socialIcons } from "./consts/consts";
 import AccountList from "./components/AccountList";
+import FooterMain from "./components/FooterMain";
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
       <Container className="flex-col">
         {/* Footer Header */}
 
-        <div className="w-full flex justify-between items-center pb-12 pt-16 border-b-[1px] border-white">
+        <div className="w-full flex justify-between items-center pb-12 pt-20 lg:pt-16">
           <Link href="/">
             <Image
               src="/images/2happy-white-logo.png"
@@ -23,7 +24,7 @@ const Footer = () => {
               alt="footer_logo"
             />
           </Link>
-          <ul className="flex gap-4">
+          <ul className="gap-4 hidden lg:flex">
             {/* Порядок элементов в массиве не изменяется, поэтому можно использовать index, как ключ */}
             {socialIcons.map((icon, index) => (
               <li
@@ -38,66 +39,26 @@ const Footer = () => {
 
         {/* Footer Main */}
 
-        <ul className="flex gap-12 py-12 border-b-[1px] border-white">
-          <AccountList />
-          {/* Footer Links */}
-          {mainBlocks.map((item) => (
-            <li key={item.title} className="basis-full">
-              <h4 className="text-h4 text-white pb-4">{item.title}</h4>
-              <ul className="space-y-2 text-white-secondary">
-                {item.links.map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      className="text-button-xs link-hover"
-                      href={link.href}
-                    >
-                      {link.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+        <FooterMain />
 
-          {/* Footer Contacts */}
-
-          <li className="basis-full">
-            <h4 className="text-h4 text-white pb-4">Контакты</h4>
-            <ul className="space-y-2 text-button-xs text-white-secondary">
-              <li>
-                <a
-                  className="text-button-xs link-hover"
-                  href="tel:+77021657378"
+        <div>
+          <ul className="flex gap-4 lg:hidden">
+            {/* Порядок элементов в массиве не изменяется, поэтому можно использовать index, как ключ */}
+            {socialIcons.map((icon, index) => (
+              <li
+                key={index}
+                className=" hover:icon-glass-hover transition-colors"
+              >
+                <Link
+                  className="inline-flex items-center justify-center w-[48px] h-[48px]"
+                  href={icon.href}
                 >
-                  +7-702-165-73-78
-                </a>
+                  {icon.element}
+                </Link>
               </li>
-              <li>
-                <a
-                  className="text-button-xs link-hover"
-                  href="mailto:2happykz@mail.ru"
-                >
-                  2happykz@mail.ru
-                </a>
-              </li>
-              <li>
-                <span>Самал 1, дом 31, Алматы</span>
-              </li>
-              <li>
-                <span>Пн-Вс 10.00 - 20.00</span>
-              </li>
-              <li>
-                <a
-                  className="text-button-xs link-hover"
-                  target="_blank"
-                  href="https://yandex.ru/maps/-/CHC56AzE"
-                >
-                  Посмотреть на карте
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+            ))}
+          </ul>
+        </div>
 
         {/* Footer Bottom */}
 

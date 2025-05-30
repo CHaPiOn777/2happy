@@ -6,17 +6,24 @@ import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
 import { ProductCardLoader } from "./Cards/ProductServerCard";
 import { ProductServer } from "../types";
 import { cn } from "@/shared/utils";
+import { ReactNode } from "react";
+
+const defaultRenderCard = (product: ProductServer) => (
+  <ProductServerCard key={product.id} product={product} />
+);
 
 const ProductsScrollableSection = ({
   title,
   data,
   isLoading,
   className,
+  renderCard = defaultRenderCard,
 }: {
   title: string;
   data: ProductServer[] | undefined;
   isLoading?: boolean;
   className?: string;
+  renderCard?: (product: ProductServer) => ReactNode;
 }) => {
   if (!isLoading && (!data || !data.length)) return null;
 
@@ -35,7 +42,7 @@ const ProductsScrollableSection = ({
               </>
             )}
             {data?.map((product) => (
-              <ProductServerCard key={product.id} product={product} />
+              <>{renderCard(product)}</>
             ))}
           </div>
           <ScrollBar orientation="horizontal" />

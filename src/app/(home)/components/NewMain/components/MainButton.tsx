@@ -9,8 +9,6 @@ import Link from "next/link";
 const MainButton = () => {
   const isTablet = useMediaCustom("lg");
 
-  console.log(isTablet);
-
   return (
     <Button className="w-full" size={isTablet ? "normal" : "large"} asChild>
       <Link href={paths.catalog.getHref()}>

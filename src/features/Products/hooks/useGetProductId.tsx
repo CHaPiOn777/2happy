@@ -15,8 +15,6 @@ export const useGetProductId = (name: string) => {
 
   const raw = params[name];
 
-  console.log(params[name]);
-
   if (typeof raw !== "string") {
     throw new Error(
       `Ожидался string в параметре "${name}", но получено: ${typeof raw}`

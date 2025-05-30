@@ -18,6 +18,7 @@ const FinalSale = async () => {
   queryClient.prefetchQuery(
     getProductsQueryOptions({
       tag: tagIds["final_sale"],
+      exclude_type: "grouped",
       per_page: 3,
     })
   );
@@ -25,11 +26,11 @@ const FinalSale = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Section>
-        <Container className="grid grid-cols-4 grid-rows-[544px] gap-x-6 my-section">
+        <Container className="flex h-[544px] gap-6 my-section">
           <Suspense fallback={<FinalSaleListLoader />}>
             <FinalSaleList />
           </Suspense>
-          <div className="flex flex-col justify-between">
+          <div className="w-full flex flex-col justify-between ">
             <h2 className="text-h2">
               FINAL SALE <br />/
             </h2>

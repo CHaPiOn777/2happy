@@ -4,7 +4,7 @@ import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
-import { MouseEvent } from "react";
+import { ComponentPropsWithoutRef, MouseEvent } from "react";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import ColorSquare from "../Colors/ColorSquare";
 import { paths } from "@/config/paths";
@@ -16,7 +16,11 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
 
-const ProductServerCard = ({ product }: { product: ProductServer }) => {
+const ProductServerCard = ({
+  product,
+  className,
+  ...props
+}: { product: ProductServer } & ComponentPropsWithoutRef<"article">) => {
   const queryClient = useQueryClient();
   const [_, setRecentProducts] = useLocalStorage<number[]>(
     "recentProducts",
@@ -40,7 +44,10 @@ const ProductServerCard = ({ product }: { product: ProductServer }) => {
   };
 
   return (
-    <article className="group/product w-full h-full">
+    <article
+      className={cn("group/product w-full h-full", className)}
+      {...props}
+    >
       <Link
         onClick={handleLinkClick}
         href={paths.product.getHref(product.id, product.name)}

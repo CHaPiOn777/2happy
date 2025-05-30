@@ -14,6 +14,7 @@ export type getProductsListParameters = {
   per_page?: number;
   category?: number;
   type?: string;
+  exclude_type?: string;
   tag?: number;
   min_price?: number;
   max_price?: number;

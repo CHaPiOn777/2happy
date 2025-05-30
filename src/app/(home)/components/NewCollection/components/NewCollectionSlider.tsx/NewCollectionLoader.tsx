@@ -11,7 +11,7 @@ const NewCollectionLoader = () => {
         <CustomSlide />
       </div>
       <ProductCardLoader className={SIZES_TW.small} />
-      <ProductCardLoader className={SIZES_TW.medium} />
+      <ProductCardLoader className={`hidden lg:flex ${SIZES_TW.medium}`} />
     </div>
   );
 };

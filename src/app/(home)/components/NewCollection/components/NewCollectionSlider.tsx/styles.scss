@@ -1,3 +1,5 @@
+@use "media.scss" as *;
+
 .new-collection-slider {
   &.swiper {
     padding-bottom: 55px;
@@ -6,5 +8,10 @@
   & .custom-slide {
     width: 288px;
     height: 280px;
+
+    @media (max-width: $media-lg) {
+      width: 232px;
+      height: 280px;
+    }
   }
 }

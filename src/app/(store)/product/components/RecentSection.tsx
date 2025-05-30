@@ -13,7 +13,9 @@ const RecentSection = () => {
   const filteredRecentProducts = recentProducts.filter((id) => id != productId);
 
   const { data, isFetching } = useQuery({
-    ...getProductsQueryOptions({ include: filteredRecentProducts }),
+    ...getProductsQueryOptions({
+      include: filteredRecentProducts,
+    }),
     enabled: !!filteredRecentProducts.length,
   });
   return (

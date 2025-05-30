@@ -12,7 +12,10 @@ const AdditionSection = () => {
   const { data: product } = useGetProductById(id);
 
   const { data, isLoading } = useQuery({
-    ...getProductsQueryOptions({ include: product?.cross_sell_ids }),
+    ...getProductsQueryOptions({
+      include: product?.cross_sell_ids,
+      exclude_type: "grouped",
+    }),
     enabled: !!product?.cross_sell_ids.length,
   });
 

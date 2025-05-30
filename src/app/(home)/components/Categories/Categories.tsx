@@ -12,9 +12,9 @@ import CategoryLink from "@/features/Categories/components/CategoryLink";
 const Categories = () => {
   return (
     <Section className="border-b-[1px] border-b-main">
-      <Container className="justify-between gap-6 my-section">
-        <div className="flex flex-col justify-between basis-[392px]">
-          <h2 className="text-h2">
+      <Container className="justify-between gap-[176px] my-section">
+        <div className="flex flex-col justify-between w-full lg:basis-[392px]">
+          <h2 className="text-h2 mt-12 lg:mt-0">
             Категории <br /> /
           </h2>
           <div className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]">
@@ -42,7 +42,7 @@ const Categories = () => {
             </div>
           </div>
         </div>
-        <div className="basis-[600px] flex flex-col">
+        <div className="w-full lg:basis-[600px] flex flex-col">
           {CATEGORIES.map((category) => (
             <Button
               key={category.name}

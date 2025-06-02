@@ -17,14 +17,17 @@ const CollectionsCategoryBreadcrumbs = () => {
   const name = searchParams.get("name");
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink
+            className="text-white"
             href={paths.catalog.collections.getHref("Готовые образы")}
           >
             Готовые образы

@@ -8,6 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  TSheetTrigger,
 } from "@/shared/components/UI/Sheet";
 import { ReactNode, useState } from "react";
 import CartSheetEmpty from "./CartSheetEmpty";
@@ -16,20 +17,21 @@ import { useCart } from "../../../api/cartQueries";
 import { getWordForm } from "@/shared/utils/getWordForm";
 import CartSheetLoader from "./CartSheetLoader";
 
-const CartSheet = ({ children }: { children: ReactNode }) => {
+const CartSheet = ({
+  children,
+  triggerProps,
+}: {
+  children: ReactNode;
+  triggerProps?: TSheetTrigger;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { data, isPending } = useCart();
+  const { data, isLoading } = useCart();
 
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
-      <SheetTrigger className="relative">
+      <SheetTrigger className="relative" {...triggerProps}>
         {children}
-        {data?.items_count ? (
-          <span className="absolute size-4 -top-1 -right-1 bg-red rounded-full text-white text-[12px]">
-            {data?.items_count}
-          </span>
-        ) : null}
       </SheetTrigger>
       <SheetContent
         className="w-full h-full flex flex-col z-over-header max-w-[680px] p-10 pt-14"
@@ -50,11 +52,11 @@ const CartSheet = ({ children }: { children: ReactNode }) => {
           <SheetClose className="top-6 right-10" />
         </SheetHeader>
 
-        {isPending && <CartSheetLoader />}
-        {!isPending && data?.items_count ? (
+        {isLoading && <CartSheetLoader />}
+        {!isLoading && data?.items_count ? (
           <CartSheetContent cartData={data} setOpen={setOpen} />
         ) : null}
-        {!isPending && !data?.items_count ? (
+        {!isLoading && !data?.items_count ? (
           <CartSheetEmpty setOpen={setOpen} />
         ) : null}
       </SheetContent>

@@ -25,15 +25,22 @@ const AuthModal = ({
   defaultTab = "login",
   buttonSlot,
   triggerProps,
+  onSuccess,
 }: {
   children: ReactNode;
   defaultTab?: "login" | "register";
   buttonSlot?: ReactNode;
   triggerProps?: ComponentPropsWithoutRef<typeof DialogTrigger>;
+  onSuccess?: () => void;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const closeDialog = () => setOpen(false);
+  const handleOnSuccess = () => {
+    setOpen(false);
+
+    onSuccess?.();
+  };
+
   return (
     <Dialog
       open={open}
@@ -64,10 +71,10 @@ const AuthModal = ({
                 </TabsTrigger>
               </TabsList>
               <TabsContent className="w-full mt-8 ring-0" value="login">
-                <LoginForm onSuccess={closeDialog} />
+                <LoginForm onSuccess={handleOnSuccess} />
               </TabsContent>
               <TabsContent className="w-full mt-8 ring-0" value="register">
-                <RegisterForm onSuccess={closeDialog} />
+                <RegisterForm onSuccess={handleOnSuccess} />
               </TabsContent>
             </Tabs>
             {buttonSlot}

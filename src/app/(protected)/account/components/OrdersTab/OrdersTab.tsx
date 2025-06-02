@@ -9,7 +9,6 @@ const OrdersTab = () => {
       <Tabs className="w-full space-y-6" defaultValue="orders">
         <TabsList>
           <TabsTrigger value="orders">Мои заказы</TabsTrigger>
-          <TabsTrigger value="refunds">Возвраты</TabsTrigger>
         </TabsList>
         <p className="text-body2 text-gray-middle">
           Здесь вы можете отследить заказ, оформить возврат и просмотреть

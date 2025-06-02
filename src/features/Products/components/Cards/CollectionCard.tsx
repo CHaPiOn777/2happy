@@ -10,17 +10,29 @@ import { getProductCardInfo } from "../../utils/getProductCardInfo";
 
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
+import { getQueryClient } from "@/shared/api/queryClient";
+import { getProductByIdQueryOptions } from "../../api/productsApi";
 
 const CollectionCard = ({ product }: { product: ProductServer }) => {
+  const queryClient = getQueryClient();
+
   const { image } = getProductCardInfo(product);
 
   const handleFavoriteClick = (e: MouseEvent<SVGSVGElement>) => {
     e.preventDefault();
   };
 
+  const handleLinkClick = () => {
+    queryClient.setQueryData(
+      getProductByIdQueryOptions(product.id).queryKey,
+      product
+    );
+  };
+
   return (
     <article className="group/product w-full h-full">
       <Link
+        onClick={handleLinkClick}
         href={paths.collection.getHref(product.id, product.name)}
         className="flex flex-col h-full gap-4"
       >

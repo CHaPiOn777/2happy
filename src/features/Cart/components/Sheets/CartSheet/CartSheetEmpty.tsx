@@ -1,4 +1,5 @@
 import { paths } from "@/config/paths";
+import AuthModal from "@/features/Auth/components/AuthModal";
 import { useUser } from "@/shared/api/authApi";
 import { Button } from "@/shared/components/UI/Button";
 import Link from "next/link";
@@ -28,9 +29,11 @@ const CartSheetEmpty = ({
           <Link href={paths.catalog.getHref()}>Продолжить покупки</Link>
         </Button>
         {!data && (
-          <Button variant="tertiary" size="large" className="w-full">
-            Войти
-          </Button>
+          <AuthModal triggerProps={{ asChild: true }}>
+            <Button variant="tertiary" size="large" className="w-full">
+              Войти
+            </Button>
+          </AuthModal>
         )}
       </div>
     </div>

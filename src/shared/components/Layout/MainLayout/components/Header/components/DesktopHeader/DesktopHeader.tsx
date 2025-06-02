@@ -5,7 +5,7 @@ import UpperHeader from "./UpperHeader";
 import Link from "next/link";
 import Image from "next/image";
 import CategorySheet from "@/features/Categories/components/CategorySheet/CategorySheet";
-import { mainLinks } from "../consts/consts";
+import { mainLinks } from "../../consts/consts";
 import NavLink from "@/shared/components/UI/NavLink";
 import useObserver from "@/shared/hooks/useObserver";
 import { ReactNode, useRef, useState } from "react";
@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategoriesQueryOptions } from "@/features/Categories/api/categoriesApi";
 import { categoryIds } from "@/features/Categories/consts/consts";
 
-const DesktopHeader = ({ buttonsSlot }: { buttonsSlot: ReactNode }) => {
+const DesktopHeader = ({ rightSlot }: { rightSlot?: ReactNode }) => {
   const [isSticky, setIsSticky] = useState(false);
   const upperHeaderRef = useRef<HTMLDivElement>(null);
 
@@ -40,12 +40,12 @@ const DesktopHeader = ({ buttonsSlot }: { buttonsSlot: ReactNode }) => {
   return (
     <>
       {/* Это подложка под sticky header, чтобы при скролле была тень и border, но скрывались под CategorySheet */}
-      <div className="fixed h-[calc(var(--sticky-header-height)+1px)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main"></div>
+      <div className="fixed h-[calc(var(--sticky-header-height)+1px)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block" />
       {/* Это подложка под большой header, чтобы была тень и border, но скрывались под CategorySheet */}
-      <div className="absolute h-[var(--full-header-height)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main"></div>
+      <div className="absolute h-[var(--full-header-height)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block" />
 
-      <UpperHeader ref={upperHeaderRef} />
-      <header className="sticky top-0 min-h-[80px] bg-white z-header">
+      <UpperHeader ref={upperHeaderRef} className="hidden lg:block" />
+      <header className="sticky top-0 min-h-[80px] bg-white z-header hidden lg:block">
         <Container className="items-center">
           <Link href="/">
             <Image
@@ -70,7 +70,7 @@ const DesktopHeader = ({ buttonsSlot }: { buttonsSlot: ReactNode }) => {
           </nav>
           <div className="flex gap-10">
             {/* <SearchSheet /> */}
-            {buttonsSlot}
+            {rightSlot}
           </div>
         </Container>
       </header>

@@ -342,6 +342,11 @@ module.exports = {
           lineHeight: "40px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "24px",
+            lineHeight: "32px",
+          },
         },
         ".text-h3Akira": {
           fontFamily: "var(--font-akira)",

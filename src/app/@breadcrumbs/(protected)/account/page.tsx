@@ -14,7 +14,7 @@ import Container from "@/shared/components/UI/Container";
 import { Button } from "@/shared/components/UI/Button";
 import LogoutIcon from "@/shared/components/icons/LogoutIcon";
 import { useUser } from "@/shared/api/authApi";
-import { useLogout } from "@/features/User/hooks/useLogout";
+import { useLogout } from "@/features/Auth/hooks/useLogout";
 
 const AccountBreadcrumbs = () => {
   const { data } = useUser();

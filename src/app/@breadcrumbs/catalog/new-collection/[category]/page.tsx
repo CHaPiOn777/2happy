@@ -22,10 +22,12 @@ const NewCollectionCategoryBreadcrumbs = () => {
   const { data: parentCategory, isFetching } = useCategory(Number(parentId));
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

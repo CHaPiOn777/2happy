@@ -1,7 +1,6 @@
 import { paths } from "@/config/paths";
 import AuthModal from "@/features/Auth/components/AuthModal";
 import AuthorizedView from "@/features/Auth/components/AuthorizedView";
-import { useUser } from "@/shared/api/authApi";
 import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
@@ -9,9 +8,6 @@ import Section from "@/shared/components/UI/Section";
 import Link from "next/link";
 
 const LoginSuggest = () => {
-  const { data: user } = useUser();
-
-  if (user) return null;
   return (
     <Section>
       <Container className="my-section justify-between">

@@ -10,9 +10,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/UI/DropdownMenu";
-import HelpDialog from "../../HelpDialog/HelpDialog";
+import HelpDialog from "../../../HelpDialog/HelpDialog";
+import { cn } from "@/shared/utils";
 
-const UpperHeader = ({ ref }: { ref: RefObject<HTMLDivElement | null> }) => {
+const UpperHeader = ({
+  ref,
+  className,
+}: {
+  ref: RefObject<HTMLDivElement | null>;
+  className?: string;
+}) => {
   const { state: open, setFastState, setDelayedState } = useDelayedState(false);
 
   const onMouseEnter = () => {
@@ -26,7 +33,10 @@ const UpperHeader = ({ ref }: { ref: RefObject<HTMLDivElement | null> }) => {
   return (
     <div
       ref={ref}
-      className="min-h-[56px] border-b-[1px] border-main z-header bg-white "
+      className={cn(
+        "flex items-center min-h-[56px] border-b-[1px] border-main z-header bg-white",
+        className
+      )}
     >
       <Container className="h-full items-center justify-end gap-5">
         <DropdownMenu open={open} onOpenChange={(open) => setFastState(open)}>

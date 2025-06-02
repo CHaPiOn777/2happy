@@ -10,10 +10,12 @@ import { paths } from "@/config/paths";
 
 const CartBreadcrumbs = () => {
   return (
-    <Breadcrumbs className="border-b-0">
+    <Breadcrumbs className="border-b-0 bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

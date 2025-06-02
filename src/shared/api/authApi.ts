@@ -10,9 +10,6 @@ import { z } from "zod";
 import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
-import { getQueryClient } from "./queryClient";
-import { useRouter } from "next/navigation";
-import { paths } from "@/config/paths";
 
 export const getUserURL = "/wp/v2/users/me";
 

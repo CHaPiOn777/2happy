@@ -21,20 +21,23 @@ const ProductBreadcrumbs = () => {
   const collectionCategory = data?.categories[data?.categories.length - 1];
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.catalog.getHref()}>
+          <BreadcrumbLink className="text-white" href={paths.catalog.getHref()}>
             Каталог
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink
+            className="text-white"
             href={paths.catalog.collections.getHref("Готовые образы")}
           >
             Готовые образы
@@ -51,6 +54,7 @@ const ProductBreadcrumbs = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink
+                className="text-white"
                 href={paths.catalog.collections.category.getHref(
                   collectionCategory.id,
                   collectionCategory.slug,

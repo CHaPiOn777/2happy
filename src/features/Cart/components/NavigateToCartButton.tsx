@@ -4,6 +4,7 @@ import { useNavigateCheckout } from "../hooks/useNavigateCheckout";
 import { useUser } from "@/shared/api/authApi";
 import Link from "next/link";
 import { CartResponse } from "../types";
+import { useRouter } from "next/navigation";
 
 const NavigateToCartButton = ({
   cartData,
@@ -13,6 +14,8 @@ const NavigateToCartButton = ({
   buttonProps?: ButtonProps & { text?: string };
 }) => {
   const { data: user } = useUser();
+
+  const router = useRouter();
 
   const buttonDisabled = buttonProps?.disabled;
 
@@ -42,6 +45,10 @@ const NavigateToCartButton = ({
       ) : (
         <AuthModal
           triggerProps={{ asChild: true, disabled: !!user || buttonDisabled }}
+          onSuccess={() => {
+            handleClick();
+            router.push(link);
+          }}
           buttonSlot={
             <Button
               className="w-full"

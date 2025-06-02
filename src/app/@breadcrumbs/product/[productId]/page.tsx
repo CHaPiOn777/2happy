@@ -23,14 +23,16 @@ const ProductBreadcrumbs = () => {
   const sortedBreadcrumbs = sortCategories(data?.categories);
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.catalog.getHref()}>
+          <BreadcrumbLink className="text-white" href={paths.catalog.getHref()}>
             Каталог
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -49,6 +51,7 @@ const ProductBreadcrumbs = () => {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink
+                    className="text-white"
                     href={paths.catalog.category.getHref(
                       item.id,
                       item.slug,

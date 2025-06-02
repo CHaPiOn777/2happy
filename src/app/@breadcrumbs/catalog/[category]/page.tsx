@@ -22,14 +22,16 @@ const CatalogBreadcrumbs = () => {
   const { data: parentCategory, isFetching } = useCategory(Number(parentId));
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.catalog.getHref()}>
+          <BreadcrumbLink className="text-white" href={paths.catalog.getHref()}>
             Каталог
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -46,6 +48,7 @@ const CatalogBreadcrumbs = () => {
           <>
             <BreadcrumbItem>
               <BreadcrumbLink
+                className="text-white"
                 href={paths.catalog.category.getHref(
                   parentCategory.id,
                   parentCategory.slug,

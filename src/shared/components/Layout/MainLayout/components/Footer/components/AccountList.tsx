@@ -5,7 +5,7 @@ import { paths } from "@/config/paths";
 import AuthModal from "@/features/Auth/components/AuthModal";
 import Link from "next/link";
 import { ACCOUNT_TABS } from "@/features/User/utils/isValidTab";
-import { useLogout } from "@/features/User/hooks/useLogout";
+import { useLogout } from "@/features/Auth/hooks/useLogout";
 
 const AccountList = () => {
   const user = useUser();

@@ -1,7 +1,6 @@
 import Container from "@/shared/components/UI/Container";
 import CheckoutForm from "./components/CheckoutForm/CheckoutForm";
 import CheckoutSide from "./components/CheckoutSide";
-import { Suspense } from "react";
 
 const CheckoutPage = () => {
   return (

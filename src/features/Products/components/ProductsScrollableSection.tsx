@@ -6,10 +6,10 @@ import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
 import { ProductCardLoader } from "./Cards/ProductServerCard";
 import { ProductServer } from "../types";
 import { cn } from "@/shared/utils";
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 
 const defaultRenderCard = (product: ProductServer) => (
-  <ProductServerCard key={product.id} product={product} />
+  <ProductServerCard product={product} />
 );
 
 const ProductsScrollableSection = ({
@@ -42,7 +42,7 @@ const ProductsScrollableSection = ({
               </>
             )}
             {data?.map((product) => (
-              <>{renderCard(product)}</>
+              <Fragment key={product.id}>{renderCard(product)}</Fragment>
             ))}
           </div>
           <ScrollBar orientation="horizontal" />

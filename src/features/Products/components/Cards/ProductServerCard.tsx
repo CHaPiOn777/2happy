@@ -143,7 +143,11 @@ const ProductServerCard = ({
                 </div>
               </div>
             )}
-            <div className="absolute flex w-full gap-2 opacity-100 group-hover/product:opacity-0 transition-opacity">
+            <div
+              className={`absolute flex w-full gap-2 opacity-100 transition-opacity ${
+                showAttributes && "group-hover/product:opacity-0"
+              }`}
+            >
               {product.on_sale ? (
                 <>
                   <span className={"text-gray-middle line-through"}>

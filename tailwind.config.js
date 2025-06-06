@@ -320,8 +320,8 @@ module.exports = {
           lineHeight: "104px",
 
           [`@media (max-width: ${theme("screens.lg")})`]: {
-            fontSize: "72px",
-            lineHeight: "72px",
+            fontSize: "62px",
+            lineHeight: "62px",
           },
         },
         ".text-h2": {

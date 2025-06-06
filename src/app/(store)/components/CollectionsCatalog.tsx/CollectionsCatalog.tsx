@@ -3,6 +3,7 @@
 import CollectionsList from "@/features/Products/components/Lists/CollectionsList";
 import CollectionsCatalogControls from "./CollectionsCatalogControls";
 import { ReactNode } from "react";
+import Container from "@/shared/components/UI/Container";
 
 const CollectionsCatalog = ({
   category,
@@ -13,13 +14,13 @@ const CollectionsCatalog = ({
   filtersListSlot?: ReactNode;
 }) => {
   return (
-    <div className="flex flex-col gap-10">
+    <Container className="flex-col gap-10">
       <div className="flex flex-col gap-6">
         <CollectionsCatalogControls />
         {filtersListSlot}
         <CollectionsList category={category} />
       </div>
-    </div>
+    </Container>
   );
 };
 

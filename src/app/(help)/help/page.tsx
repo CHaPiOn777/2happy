@@ -32,9 +32,10 @@ const HelpPage = () => {
     <div>
       <div className="relative h-[480px] bg-help-gradient">
         <Image
-          className="object-cover object-[50%,25%] -z-10 -scale-x-100"
+          className="object-cover object-[50%,70%] -z-10"
           fill
           src="/images/Help/banner.jpg"
+          quality={90}
           alt="help-banner"
         />
         <Container className="h-full items-center">

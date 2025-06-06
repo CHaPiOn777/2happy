@@ -118,7 +118,7 @@ const SearchSheet = ({ children }: { children: ReactNode }) => {
                   </div>
                 )}
                 {products?.items && !isLoadingProducts && (
-                  <ul className="grid grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-6">
+                  <ul className="grid grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-6 overflow-x-hidden">
                     {products?.items.map((product) => (
                       <li
                         key={product.id}

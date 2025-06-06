@@ -26,13 +26,10 @@ const CatalogPage = async ({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="flex flex-col gap-12">
-        <Container>
-          <div className="w-full">
-            <Suspense fallback={<CategorySliderLoader itemsCount={5} />}>
-              <CatalogCategories parent={+parentId} activeSlug={slug} />
-            </Suspense>
-          </div>
-        </Container>
+        <Suspense fallback={<CategorySliderLoader itemsCount={5} />}>
+          <CatalogCategories parent={+parentId} activeSlug={slug} />
+        </Suspense>
+
         <Catalog category={+id} filtersListSlot={<FiltersList />} />
       </div>
     </HydrationBoundary>

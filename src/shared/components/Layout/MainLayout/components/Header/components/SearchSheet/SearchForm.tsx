@@ -50,7 +50,10 @@ const SearchForm = ({
                     placeholder="Поиск"
                     className="w-full"
                     endIcon={
-                      <CloseIcon onClick={() => form.setValue("search", "")} />
+                      <CloseIcon
+                        onClick={() => form.setValue("search", "")}
+                        className="cursor-pointer"
+                      />
                     }
                     {...field}
                   />

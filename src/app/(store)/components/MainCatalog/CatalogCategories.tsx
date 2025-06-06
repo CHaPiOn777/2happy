@@ -5,6 +5,8 @@ import { getCategoriesQueryOptions } from "@/features/Categories/api/categoriesA
 import { CategorySlider } from "@/features/Categories/components/CategorySlider/CategorySlider";
 import { Category } from "@/features/Categories/types";
 import Container from "@/shared/components/UI/Container";
+import { useScrollDirection } from "@/shared/hooks/useScrollDirection";
+import { cn } from "@/shared/utils";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 const CatalogCategories = ({
@@ -14,6 +16,8 @@ const CatalogCategories = ({
   parent: number;
   activeSlug?: string;
 }) => {
+  const show = useScrollDirection({ delayScroll: 600 });
+
   const { data } = useSuspenseQuery(getCategoriesQueryOptions({ parent }));
 
   const filteredData = data?.items.filter((item) => item.name != "Коллекции");
@@ -36,11 +40,22 @@ const CatalogCategories = ({
 
   if (data.items.length)
     return (
-      <CategorySlider
-        categories={filteredData}
-        activeSlug={activeSlug}
-        getHref={getHref}
-      />
+      <div
+        className={cn(
+          "sticky top-[80px] z-behind-header w-full bg-white transition-all duration-500",
+          show ? "translate-y-0" : "-translate-y-[150px]"
+        )}
+      >
+        <Container className="py-3">
+          <div className="w-full">
+            <CategorySlider
+              categories={filteredData}
+              activeSlug={activeSlug}
+              getHref={getHref}
+            />
+          </div>
+        </Container>
+      </div>
     );
 
   return null;

@@ -37,7 +37,6 @@ const ProductSlider = ({
   const { data } = useSuspenseQuery(getProductByIdQueryOptions(id));
 
   const chip = getProductChip(data);
-
   return (
     <div
       className={cn(
@@ -91,14 +90,15 @@ const ProductSlider = ({
       </Swiper>
 
       <Swiper
-        allowTouchMove={false}
+        direction="horizontal"
+        touchStartPreventDefault={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Thumbs]}
         spaceBetween={24}
         breakpoints={{
-          320: { slidesPerView: 2, allowTouchMove: true }, // для мобильных
-          640: { slidesPerView: 2, allowTouchMove: true }, // для планшетов
-          1024: { slidesPerView: 1 }, // для десктопа
+          320: { slidesPerView: 2, allowTouchMove: true },
+          640: { slidesPerView: 2, allowTouchMove: true },
+          1024: { slidesPerView: 1, allowTouchMove: false },
         }}
       >
         {images.map((image, index) => (

@@ -5,11 +5,14 @@ import { useUser } from "@/shared/api/authApi";
 import Link from "next/link";
 import { CartResponse } from "../types";
 import { useRouter } from "next/navigation";
+import { cn } from "@/shared/utils";
 
 const NavigateToCartButton = ({
+  className,
   cartData,
   buttonProps,
 }: {
+  className?: string;
   cartData: CartResponse;
   buttonProps?: ButtonProps & { text?: string };
 }) => {
@@ -30,7 +33,7 @@ const NavigateToCartButton = ({
         <Link
           onClick={handleClick}
           href={link}
-          className={`${buttonDisabled && "pointer-events-none"}`}
+          className={cn(buttonDisabled && "pointer-events-none", className)}
         >
           <Button
             variant="primary"

@@ -1,13 +1,36 @@
+import { getQueryClient } from "@/shared/api/queryClient";
 import Notifications from "./components/Notifications/Notifications";
+import NotFound from "./components/NotFound/NotFound";
+import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Result from "./components/Result/Result";
+import { notFound } from "next/navigation";
 
-const SearchPage = () => {
-  // Здесь будет запрос
+export const revalidate = 360;
+
+const SearchPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ search: string }>;
+}) => {
+  const { search } = await searchParams;
+
+  if (!search) notFound();
+
+  const queryClient = getQueryClient();
+
+  queryClient.prefetchQuery(
+    getProductsQueryOptions({
+      per_page: 4,
+      type: "grouped",
+      order: "desc",
+      orderby: "popularity",
+    })
+  );
   return (
-    <>
-      <Result />
-      <Notifications />
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Result search={search} />
+    </HydrationBoundary>
   );
 };
 

@@ -28,9 +28,9 @@ const CartList = () => {
         </span>
       </div>
       <div className="flex flex-col">
-        <div className="grid grid-cols-[520px_1fr] gap-x-12 py-3 text-body2 text-gray-middle border-b border-gray">
-          <div>Товар</div>
-          <div className="grid justify-items-center items-center grid-cols-cartCard justify-between">
+        <div className="grid grid-cols-[520px_1fr] gap-x-12 pb-3 lg:py-3 text-body2 text-gray-middle border-b border-gray">
+          <div className="hidden lg:block">Товар</div>
+          <div className="justify-items-center items-center grid-cols-cartCard justify-between hidden lg:grid">
             <div>Цена</div>
             <div>Количество</div>
             <div>Сумма</div>

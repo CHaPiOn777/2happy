@@ -48,7 +48,7 @@ const MenuSheetContent = ({
 
   return (
     <SheetContent
-      className="flex flex-col gap-6 max-w-[800px] w-full z-over-header"
+      className="flex flex-col gap-6 max-w-[800px] w-full z-over-header pr-2"
       overlayClassName="z-over-header"
       side="left"
     >
@@ -66,9 +66,10 @@ const MenuSheetContent = ({
           )}
         </SheetDescription>
       </SheetHeader>
-      <ScrollArea type="always">
-        {tab === "all" && (
-          <div className="space-y-6 mr-2">
+
+      {tab === "all" && (
+        <ScrollArea type="always">
+          <div className="space-y-6 mr-6">
             <ul className="space-y-4">
               <li>
                 <button
@@ -119,15 +120,15 @@ const MenuSheetContent = ({
               </li>
             </ul>
           </div>
-        )}
-        {tab != "all" && (
-          <MobileCategories
-            tab={tab}
-            handleChangeTab={handleChangeTab}
-            handleCloseSheet={() => setOpen(false)}
-          />
-        )}
-      </ScrollArea>
+        </ScrollArea>
+      )}
+      {tab != "all" && (
+        <MobileCategories
+          tab={tab}
+          handleChangeTab={handleChangeTab}
+          handleCloseSheet={() => setOpen(false)}
+        />
+      )}
     </SheetContent>
   );
 };

@@ -8,23 +8,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/components/UI/Dialog";
-import { ComponentPropsWithoutRef, ReactNode, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
 import CreateReviewForm, { CreateReviewFormInput } from "./CreateReviewForm";
 
 const CreateReviewDialog = ({
+  open,
+  setOpen,
   defaultValues,
   children,
   onSubmit,
   isPending,
   triggerProps,
 }: {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   defaultValues: Partial<CreateReviewFormInput>;
   children: ReactNode;
   onSubmit: (data: CreateReviewFormInput) => void;
   isPending: boolean;
   triggerProps?: ComponentPropsWithoutRef<typeof DialogTrigger>;
 }) => {
-  const [open, setOpen] = useState<boolean>(false);
   return (
     <Dialog
       open={open}

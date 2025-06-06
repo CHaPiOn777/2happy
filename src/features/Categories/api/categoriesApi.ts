@@ -10,6 +10,8 @@ import { createURLWithParams } from "@/shared/utils/createURLWithParams";
 export type getCategoriesListParameters = {
   parent?: number;
   per_page?: number;
+  order?: string;
+  orderby?: string;
 };
 
 export const getCategoriesListURL = `${env.WOOCOMMERCE_API}/products/categories`;

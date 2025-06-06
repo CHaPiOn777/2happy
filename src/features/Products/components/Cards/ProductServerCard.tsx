@@ -15,12 +15,17 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
+import { Separator } from "@/shared/components/UI/Separator";
 
 const ProductServerCard = ({
   product,
   className,
+  showAttributes = true,
   ...props
-}: { product: ProductServer } & ComponentPropsWithoutRef<"article">) => {
+}: {
+  product: ProductServer;
+  showAttributes?: boolean;
+} & ComponentPropsWithoutRef<"article">) => {
   const queryClient = useQueryClient();
   const [_, setRecentProducts] = useLocalStorage<number[]>(
     "recentProducts",
@@ -78,21 +83,66 @@ const ProductServerCard = ({
         </div>
         <div>
           <h5 className="text-h5 mb-2 h-[48px] line-clamp-2">{product.name}</h5>
-          <div className="w-full relative h-6">
-            <div className="absolute w-full flex items-center justify-between gap-2 opacity-0 group-hover/product:opacity-100 transition-opacity">
-              <div className="flex gap-2">
-                {colors.map((color: string) => (
-                  <ColorSquare key={color} color={color} />
-                ))}
+          <div className="flex justify-between w-full lg:hidden">
+            {showAttributes && (
+              <div className="w-full flex items-center gap-2">
+                <div className="flex gap-2">
+                  {colors.map((color: string) => (
+                    <ColorSquare key={color} color={color} />
+                  ))}
+                </div>
+                <Separator
+                  className="h-4 bg-gray-light"
+                  orientation="vertical"
+                />
+                <div className="flex gap-2 text-gray-middle">
+                  {sizes.map((size: string) => (
+                    <span
+                      key={size}
+                      className="text-description whitespace-nowrap"
+                    >
+                      {size}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="flex gap-2 text-gray-middle">
-                {sizes.map((size: string) => (
-                  <span key={size} className="text-body2">
-                    {size}
+            )}
+
+            <div
+              className={cn(
+                "flex w-full gap-2",
+                showAttributes && "justify-end"
+              )}
+            >
+              {product.on_sale ? (
+                <>
+                  <span className={"text-gray-middle line-through"}>
+                    {product.regular_price} &#8376;
                   </span>
-                ))}
-              </div>
+                  <span className="text-red">{product.sale_price} &#8376;</span>
+                </>
+              ) : (
+                <span className="text-gray-dark">{product.price} &#8376;</span>
+              )}
             </div>
+          </div>
+          <div className="w-full relative h-6 hidden lg:block">
+            {showAttributes && (
+              <div className="absolute w-full flex items-center justify-between gap-2 opacity-0 group-hover/product:opacity-100 transition-opacity">
+                <div className="flex gap-2">
+                  {colors.map((color: string) => (
+                    <ColorSquare key={color} color={color} />
+                  ))}
+                </div>
+                <div className="flex gap-2 text-gray-middle">
+                  {sizes.map((size: string) => (
+                    <span key={size} className="text-body2">
+                      {size}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="absolute flex w-full gap-2 opacity-100 group-hover/product:opacity-0 transition-opacity">
               {product.on_sale ? (
                 <>

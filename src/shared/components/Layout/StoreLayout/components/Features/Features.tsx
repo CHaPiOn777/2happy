@@ -35,8 +35,12 @@ const Features = () => {
               className="flex flex-col items-center gap-6 flex-1 pt-8 px-7 pb-10 rounded-xs shadow-feature bg-white/10"
             >
               {feature.icon}
-              <h5 className="text-h5 text-white">{feature.title}</h5>
-              <span className="text-white">{feature.text}</span>
+              <h5 className="text-h5 text-white text-center">
+                {feature.title}
+              </h5>
+              <span className="text-white-secondary text-center">
+                {feature.text}
+              </span>
             </li>
           ))}
         </ul>

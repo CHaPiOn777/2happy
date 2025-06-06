@@ -10,14 +10,18 @@ import { paths } from "@/config/paths";
 
 const CartBreadcrumbs = () => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            Главная
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.about.getHref()}>О нас</BreadcrumbLink>
+          <BreadcrumbLink className="text-white" href={paths.about.getHref()}>
+            О нас
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

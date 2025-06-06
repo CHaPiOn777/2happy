@@ -57,7 +57,7 @@ const UserAccount = ({
         onMouseLeave={onMouseLeave}
       >
         <DropdownMenu open={open} onOpenChange={(open) => setFastState(open)}>
-          <DropdownMenuTrigger>{authTrigger}</DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild>{authTrigger}</DropdownMenuTrigger>
           <DropdownMenuContent
             className="min-w-[272px]"
             align="end"

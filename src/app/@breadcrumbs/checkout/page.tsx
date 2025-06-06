@@ -18,7 +18,7 @@ const CheckoutBreadcrumbs = () => {
         <Button
           size="large"
           variant="secondary"
-          className="text-white border-white border-b-0 border-t-0"
+          className="text-white border-white border-b-0 border-t-0 hidden lg:inline-flex"
           asChild
         >
           <Link href={paths.checkout.getHref()}>Продолжить покупки</Link>

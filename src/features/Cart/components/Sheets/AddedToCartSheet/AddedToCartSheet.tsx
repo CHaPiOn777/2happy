@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -15,6 +17,7 @@ import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon"
 import { Separator } from "@/shared/components/UI/Separator";
 import { CartItemResponse } from "@/features/Cart/types";
 import { paths } from "@/config/paths";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const AddedToCartSheet = ({
   cartItem,
@@ -24,30 +27,35 @@ const AddedToCartSheet = ({
   cartItem: CartItemResponse;
   renderRelatedProducts: () => ReactNode;
 } & TSheetProps) => {
+  const isTablet = useMediaCustom("lg");
+
   return (
     <Sheet {...sheetProps}>
       <SheetContent
-        className="flex flex-col items gap-12 w-full max-w-[680px] p-10 pt-16 z-over-header overflow-y-scroll"
+        className="flex flex-col items gap-12 w-full max-w-[480px] lg:max-w-[680px] p-8 pt-14 lg:p-10 lg:pt-16 z-over-header overflow-x-hidden overflow-y-scroll"
         overlayClassName="z-over-header"
       >
         <SheetHeader>
-          <SheetTitle className="text-h3">Товар добавлен в корзину</SheetTitle>
-          <SheetClose className="top-10 right-10" />
+          <SheetTitle className="text-h4 lg:text-h3">
+            Товар добавлен в корзину
+          </SheetTitle>
+          <SheetClose className=" top-4 right-8 lg:top-10 lg:right-10" />
         </SheetHeader>
         <div>
           <CartInfoCard cartItem={cartItem} />
         </div>
-        <Button variant="secondary" size="large" className="w-full" asChild>
+        <Button
+          variant="secondary"
+          size={isTablet ? "medium" : "large"}
+          className="w-full"
+          asChild
+        >
           <Link href={paths.cart.getHref()}>
             Перейти в корзину <ArrowUpRightIcon />
           </Link>
         </Button>
-        <Separator />
-        <div className="flex flex-col gap-12">
-          <h3 className="text-h3">Похожие товары /</h3>
-
-          {renderRelatedProducts()}
-        </div>
+        {!isTablet && <Separator />}
+        {renderRelatedProducts()}
       </SheetContent>
     </Sheet>
   );

@@ -34,6 +34,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       >
         <div className="flex items-center gap-2">
+          {startIcon}
           <div className="flex flex-col w-full">
             <span className="text-title text-gray-middle">{title}</span>
             <input

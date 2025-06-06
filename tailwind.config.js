@@ -46,6 +46,10 @@ module.exports = {
         "behind-header": "50",
         "behind-header-2": "60",
         header: "100",
+        110: "110",
+        120: "120",
+        130: "130",
+        140: "140",
         "over-header": "150",
       },
       boxShadow: {
@@ -327,8 +331,8 @@ module.exports = {
           textTransform: "uppercase",
 
           [`@media (max-width: ${theme("screens.lg")})`]: {
-            fontSize: "40px",
-            lineHeight: "48px",
+            fontSize: "32px",
+            lineHeight: "40px",
           },
         },
         ".text-h2Akira": {
@@ -366,8 +370,8 @@ module.exports = {
           textTransform: "uppercase",
 
           [`@media (max-width: ${theme("screens.lg")})`]: {
-            fontSize: "18px",
-            lineHeight: "26px",
+            fontSize: "20px",
+            lineHeight: "28px",
           },
         },
         ".text-h5": {

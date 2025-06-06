@@ -20,8 +20,9 @@ import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
+import { cn } from "@/shared/utils";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ className }: { className?: string }) => {
   const [step, setStep] = useState<"contacts" | "payment">("contacts");
 
   const router = useRouter();
@@ -135,7 +136,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className={cn("flex flex-col gap-12", className)}>
       <AuthorizedView condition={false}>
         {step === "contacts" && (
           <div className="flex flex-col gap-4">

@@ -9,6 +9,7 @@ import {
   categorySlugs,
 } from "@/features/Categories/consts/consts";
 import Link from "next/link";
+import ImageWithTitleCard from "@/features/Products/components/Cards/ImageWithTitleCard";
 
 const Collections = () => {
   const everyDayLink = paths.catalog.collections.category.getHref(
@@ -39,7 +40,7 @@ const Collections = () => {
           Готовые образы <br /> /
         </h2>
         <div className="grid h-full grid-cols-collections-lg lg:grid-cols-4 grid-rows-collections-lg lg:grid-rows-[repeat(7,80px)] gap-6">
-          <CollectionCard
+          <ImageWithTitleCard
             className="row-span-2 lg:row-span-5"
             title="На каждый день"
             href={everyDayLink}
@@ -61,14 +62,13 @@ const Collections = () => {
               </Link>
             </Button>
           </div>
-          <CollectionCard
+          <ImageWithTitleCard
             className="row-span-4 lg:row-span-7"
             title="Спорт шик"
             href={sportLink}
             src="/images/Home/Fashion/fashion-3.jpg"
           />
-
-          <CollectionCard
+          <ImageWithTitleCard
             className="col-start-2 lg:col-start-auto row-start-2 row-end-4 lg:row-span-6"
             title="Особенный вечер"
             href={eveningLink}

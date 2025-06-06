@@ -10,6 +10,7 @@ interface ICategoryLinkProps
   name: string;
   category: TCategories;
   parent?: TCategories;
+  parentId?: number;
 }
 
 const CategoryLink = ({
@@ -17,14 +18,15 @@ const CategoryLink = ({
   name,
   category,
   parent,
+  parentId,
   ...props
 }: ICategoryLinkProps) => {
-  const parentId = parent && categoryIds[parent];
+  const parentIdCalculated = parent && categoryIds[parent];
   const link = paths.catalog.category.getHref(
     categoryIds[category],
     categorySlugs[category],
     name,
-    parentId
+    parentId ?? parentIdCalculated
   );
 
   return (

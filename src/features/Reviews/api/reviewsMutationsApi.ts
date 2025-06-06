@@ -40,8 +40,11 @@ export const createComment = async (data: FormData): Promise<{ bo: true }> => {
   return response;
 };
 
-export const useCreateComment = () => {
+export const useCreateComment = ({ onSuccess }: { onSuccess?: () => void }) => {
   return useMutation({
     mutationFn: createComment,
+    onSuccess: () => {
+      onSuccess?.();
+    },
   });
 };

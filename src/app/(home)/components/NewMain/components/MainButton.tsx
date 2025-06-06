@@ -3,11 +3,16 @@
 import { paths } from "@/config/paths";
 import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 import { Button } from "@/shared/components/UI/Button";
+import { useHasMounted } from "@/shared/hooks/useHasMounted";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import Link from "next/link";
 
 const MainButton = () => {
   const isTablet = useMediaCustom("lg");
+
+  const hasMounted = useHasMounted();
+
+  if (!hasMounted) return null;
 
   return (
     <Button className="w-full" size={isTablet ? "normal" : "large"} asChild>

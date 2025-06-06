@@ -56,6 +56,25 @@ export const categorySlugs: Record<TCategories, string> = {
   skirts: "skirts",
 };
 
+export const categoryNames: Record<TCategories, string> = {
+  final_sale: "Final sale",
+  collections: "Коллекции",
+  specialEvening: "special-evening",
+  sportCollection: "sport-collection",
+  everyDayCollection: "every-day-collection",
+  new: "Новинки",
+  bestsellers: "Бестселлеры",
+  accessories: "Аксессуары",
+  clothes: "Одежда",
+  outerwear: "Верхняя одежда",
+  dresses: "dresses",
+  costumes: "costumes",
+  trousers: "trousers",
+  shirts: "shirts",
+  sweatshirtsAndBomberJackets: "sweatshirts-bomber-jackets",
+  skirts: "skirts",
+};
+
 export const tagIds: Record<TTags, number> = {
   final_sale: 59,
   bestsellers: 58,

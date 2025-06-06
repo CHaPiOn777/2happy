@@ -23,6 +23,7 @@ export type getProductsListParameters = {
   color?: number[];
   size?: number[];
   include?: number[];
+  search?: string;
 };
 
 const getProductsListURL = `${env.WOOCOMMERCE_API}/products`;

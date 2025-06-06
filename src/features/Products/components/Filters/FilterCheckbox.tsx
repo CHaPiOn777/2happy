@@ -6,8 +6,10 @@ const FilterCheckbox = ({
 }: { text: string } & TCheckboxProps) => {
   return (
     <div className="flex items-center gap-2.5">
-      <Checkbox className="w-6 h-6" {...props} />
-      <label>{text}</label>
+      <Checkbox id={text} className="w-6 h-6" {...props} />
+      <label htmlFor={text} className="w-full">
+        {text}
+      </label>
     </div>
   );
 };

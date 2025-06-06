@@ -131,7 +131,6 @@ export const paths = {
   },
 
   search: {
-    getHref: (searchPath: string) =>
-      `/search${buildQuery({ name: searchPath })}`,
+    getHref: (search: string) => `/search${buildQuery({ search })}`,
   },
 } as const;

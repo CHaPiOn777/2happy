@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/components/UI/Dialog";
+import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
 import {
   Table,
   TableBody,
@@ -63,44 +64,55 @@ const SizesTableDialog = ({ trigger }: { trigger: ReactNode }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="w-full max-w-[1168px]">
+      <DialogContent className="w-full max-w-[928px] max-h-[80vh] lg:mx-0 lg:max-w-[1168px]">
         <DialogHeader>
           <DialogTitle className="text-h4">Таблица размеров</DialogTitle>
           <DialogDescription hidden>Таблица размеров</DialogDescription>
         </DialogHeader>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Int</TableHead>
-              <TableHead>Rus</TableHead>
-              <TableHead>Eur</TableHead>
-              <TableHead>
-                Обхват груди <br />
-                (См)
-              </TableHead>
-              <TableHead>
-                Обхват талии <br />
-                (См)
-              </TableHead>
-              <TableHead>
-                Обхват бедер <br />
-                (См)
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sizes.map((size) => (
-              <TableRow key={size.int}>
-                <TableCell>{size.int}</TableCell>
-                <TableCell>{size.rus}</TableCell>
-                <TableCell>{size.eur}</TableCell>
-                <TableCell>{size.chest}</TableCell>
-                <TableCell>{size.waist}</TableCell>
-                <TableCell>{size.hips}</TableCell>
+        <ScrollArea type="auto">
+          <Table>
+            <colgroup>
+              <col className="min-w-[100px]" />
+              <col className="min-w-[100px]" />
+              <col className="min-w-[100px]" />
+              <col className="min-w-[100px]" />
+              <col className="min-w-[100px]" />
+              <col className="min-w-[100px]" />
+            </colgroup>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Int</TableHead>
+                <TableHead>Rus</TableHead>
+                <TableHead>Eur</TableHead>
+                <TableHead>
+                  Обхват груди <br />
+                  (См)
+                </TableHead>
+                <TableHead>
+                  Обхват талии <br />
+                  (См)
+                </TableHead>
+                <TableHead>
+                  Обхват бедер <br />
+                  (См)
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {sizes.map((size) => (
+                <TableRow key={size.int}>
+                  <TableCell className="min-w-[100px]">{size.int}</TableCell>
+                  <TableCell>{size.rus}</TableCell>
+                  <TableCell>{size.eur}</TableCell>
+                  <TableCell>{size.chest}</TableCell>
+                  <TableCell>{size.waist}</TableCell>
+                  <TableCell>{size.hips}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

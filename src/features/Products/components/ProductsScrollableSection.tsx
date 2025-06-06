@@ -29,7 +29,12 @@ const ProductsScrollableSection = ({
 
   return (
     <Section className="block">
-      <Container className={cn("flex flex-col gap-16 my-section", className)}>
+      <Container
+        className={cn(
+          "flex flex-col gap-12 lg:gap-16 my-20 lg:my-section",
+          className
+        )}
+      >
         <h2 className="text-h2">{title}</h2>
         <ScrollArea>
           <div className="grid grid-flow-col auto-cols-[288px] gap-6 h-[552px] mb-6">

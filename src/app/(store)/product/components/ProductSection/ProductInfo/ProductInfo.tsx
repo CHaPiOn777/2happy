@@ -111,7 +111,7 @@ const ProductInfo = ({
     : false;
 
   return (
-    <div className={cn("flex flex-col gap-2 justify-between", className)}>
+    <div className={cn("flex flex-col gap-8 justify-between", className)}>
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-4">

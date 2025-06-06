@@ -34,10 +34,10 @@ const CartSheet = ({
         {children}
       </SheetTrigger>
       <SheetContent
-        className="w-full h-full flex flex-col z-over-header max-w-[680px] p-10 pt-14"
+        className="w-full h-full flex flex-col z-over-header max-w-[480px] lg:max-w-[680px] p-10 pt-14"
         overlayClassName="z-over-header"
       >
-        <SheetHeader className="flex flex-col gap-4 mb-4">
+        <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
           <SheetTitle>Корзина</SheetTitle>
           {data?.items_count ? (
             <SheetDescription>

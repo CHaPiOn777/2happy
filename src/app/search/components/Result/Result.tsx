@@ -1,54 +1,55 @@
-import Container from "@/shared/components/UI/Container";
-import Section from "@/shared/components/UI/Section";
+"use client";
 
-const Result = () => {
+import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
+import ProductServerCard, {
+  ProductCardLoader,
+} from "@/features/Products/components/Cards/ProductServerCard";
+import Container from "@/shared/components/UI/Container";
+import { useQuery } from "@tanstack/react-query";
+import NotFound from "../NotFound/NotFound";
+import { JSX, ReactNode } from "react";
+import { ProductServer } from "@/features/Products/types";
+import CollectionCard from "@/features/Products/components/Cards/CollectionCard";
+
+const PRODUCT_CARDS: Record<
+  "variable" | "grouped",
+  (product: ProductServer) => JSX.Element
+> = {
+  variable: (product: ProductServer) => <ProductServerCard product={product} />,
+  grouped: (product: ProductServer) => <CollectionCard product={product} />,
+};
+
+const Result = ({ search }: { search: string }) => {
+  const { data: products, isLoading } = useQuery(
+    getProductsQueryOptions({
+      search,
+      per_page: 12,
+    })
+  );
+
+  if (!isLoading && !products?.items.length)
+    return <NotFound search={search} />;
+
   return (
-    <Section className="border-b-[1px] border-main">
-      <Container className="flex-col mt-14 mb-[136px]">
-        <h2 className="text-h3 mb-4">Результаты поиска</h2>
-        <div className="flex flex-col gap-6">
-          <div className="text-body2">
-            Мы не нашли ничего по запросу:
-            <span className="text-h5"> Какой то запрос</span>
-          </div>
-          <div className="text-body2">
-            По вашему запросу ничего не найдено. Обратите внимание на новые
-            подборки и рекомендации или посмотрите разделы с брендами и
-            категориями, которые вам интересны.
-          </div>
-          <ul className="grid grid-cols-4 grid-rows-[552px] gap-x-6">
-            {/* <li>
-              <FashionCard
-                title="Спорт шик"
-                href="/"
-                src="/images/Home/Fashion/fashion-1.jpg"
-              />
-            </li>
-            <li>
-              <FashionCard
-                title="Спорт шик"
-                href="/"
-                src="/images/Home/Fashion/fashion-1.jpg"
-              />
-            </li>
-            <li>
-              <FashionCard
-                title="Спорт шик"
-                href="/"
-                src="/images/Home/Fashion/fashion-1.jpg"
-              />
-            </li>
-            <li>
-              <FashionCard
-                title="Спорт шик"
-                href="/"
-                src="/images/Home/Fashion/fashion-1.jpg"
-              />
-            </li> */}
-          </ul>
+    <Container className="my-section">
+      {isLoading && (
+        <div className="w-full grid grid-cols-4 grid-rows-[552px] gap-x-6">
+          <ProductCardLoader />
+          <ProductCardLoader />
+          <ProductCardLoader />
+          <ProductCardLoader />
         </div>
-      </Container>
-    </Section>
+      )}
+      {products?.items && !isLoading && (
+        <ul className="w-full grid grid-cols-3 lg:grid-cols-4 grid-flow-row auto-rows-[552px] gap-x-6">
+          {products.items.map((product) => (
+            <li key={product.id}>
+              {PRODUCT_CARDS[product.type as "variable" | "grouped"](product)}
+            </li>
+          ))}
+        </ul>
+      )}
+    </Container>
   );
 };
 

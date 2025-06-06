@@ -94,11 +94,21 @@ const ProductSlider = ({
         allowTouchMove={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Thumbs]}
+        spaceBetween={24}
+        breakpoints={{
+          320: { slidesPerView: 2, allowTouchMove: true }, // для мобильных
+          640: { slidesPerView: 2, allowTouchMove: true }, // для планшетов
+          1024: { slidesPerView: 1 }, // для десктопа
+        }}
       >
         {images.map((image, index) => (
           <SwiperSlide key={image.id}>
             <ImageGallery images={images} initialSlide={index}>
-              <ImageWithZoom src={image.src} alt={image.alt} />
+              <ImageWithZoom
+                isDefaultTouchDevice={false}
+                src={image.src}
+                alt={image.alt}
+              />
             </ImageGallery>
           </SwiperSlide>
         ))}

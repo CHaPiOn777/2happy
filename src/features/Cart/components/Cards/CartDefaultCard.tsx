@@ -18,6 +18,7 @@ import { paths } from "@/config/paths";
 import { ReactNode } from "react";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { useChangeQuantity } from "../../hooks/useChangeQuantity";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const CartDefaultCard = ({
   cartItem,
@@ -46,6 +47,8 @@ const CartDefaultCard = ({
     isInStock,
   } = getCartItemInfo(cartItem);
 
+  const isTablet = useMediaCustom("lg");
+
   const { mutate: deleteCartItem, isPending } = useDeleteCartItem({});
 
   const {
@@ -72,44 +75,72 @@ const CartDefaultCard = ({
   return (
     <article
       className={cn(
-        "w-full py-8 border-b border-gray",
+        "w-full py-6 lg:py-8 border-b border-gray last:border-b-0 lg:last:border-b",
         isPending && "opacity-50 pointer-events-none"
       )}
     >
-      <div className="grid grid-cols-[520px_1fr] gap-x-12">
+      <div className="grid grid-cols-[minmax(480px,520px)_1fr] gap-x-12">
         <div className="flex gap-6">
           <ImageWithLoader
-            wrapperClassName="w-[120px] shrink-0"
+            wrapperClassName="w-[146px] h-[216px] lg:w-[120px] lg:h-[176px] shrink-0"
             src={image.src}
             alt={image.alt}
           />
-          <div className="flex flex-col gap-6">
-            <Link href={productLink}>
-              <h5 className="text-h5">{name}</h5>
-            </Link>
-            <div className="flex gap-4 text-body-2">
-              <span>Артикул:</span>
-              <span>{sku}</span>
+          <div className="flex flex-col justify-between">
+            <div className="flex flex-col gap-3 lg:gap-6">
+              <Link href={productLink}>
+                <h5 className="text-h5">{name}</h5>
+              </Link>
+              <div className="flex gap-4 text-body-2">
+                <span>Артикул:</span>
+                <span>{sku}</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-4">
+                  <span>Размер</span>
+                  <Separator className="h-4/6" orientation="vertical" />
+                  <span className="text-gray-middle text-body2">{size}</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span>Цвет</span>
+                  <Separator className="h-4/6" orientation="vertical" />
+                  <span className="text-gray-middle text-description">
+                    {color}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-4">
-                <span>Размер</span>
-                <Separator className="h-4/6" orientation="vertical" />
-                <span className="text-gray-middle text-body2">{size}</span>
+            <div className="gap-2 h-min flex lg:hidden">
+              <IconButton
+                variant="secondary"
+                className="border border-main"
+                size={isTablet ? "medium" : "small"}
+                disabled={isDecreaseDisabled(cartItem)}
+                onClick={() => handleDecreaseQuantity(cartItem)}
+              >
+                <MinusIcon />
+              </IconButton>
+              <div className="flex justify-center w-20 lg:w-14 p-3 lg:p-2 bg-gray-light">
+                <span className="text-body2">{quantity}</span>
               </div>
-              <div className="flex items-center gap-4">
-                <span>Цвет</span>
-                <Separator className="h-4/6" orientation="vertical" />
-                <span className="text-gray-middle text-description">
-                  {color}
-                </span>
-              </div>
+              <IconButton
+                variant="secondary"
+                className="border border-main"
+                size={isTablet ? "medium" : "small"}
+                disabled={isIncreaseDisabled(cartItem)}
+                onClick={() => handleIncreaseQuantity(cartItem)}
+              >
+                <PlusIcon />
+              </IconButton>
             </div>
           </div>
         </div>
         <div className="flex flex-col justify-between">
-          <div className="grid grid-cols-cartCard justify-between w-full h-min items-start">
-            <div className="flex flex-col gap-2 items-center">
+          <div className="grid grid-cols-2 gap-x-4 lg:grid-cols-cartCard justify-between w-full h-min items-start">
+            <div className="flex flex-col gap-2 items-center justify-self-start lg:justify-self-center">
+              <span className="inline-block lg:hidden text-gray-middle text-table-header w-full">
+                Цена
+              </span>
               <span className={cn(isOnSale && "line-through text-gray-middle")}>
                 {regularPrice} {currencySymbol}
               </span>
@@ -126,7 +157,7 @@ const CartDefaultCard = ({
             </div>
             {isInStock ? (
               <>
-                <div className="flex gap-2 h-min">
+                <div className="gap-2 h-min hidden lg:flex">
                   <IconButton
                     variant="secondary"
                     className="border border-main"
@@ -149,7 +180,10 @@ const CartDefaultCard = ({
                     <PlusIcon />
                   </IconButton>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex flex-col gap-2 justify-center justify-self-end lg:justify-self-center">
+                  <span className="inline-block lg:hidden text-gray-middle text-table-header w-full">
+                    Сумма
+                  </span>
                   <span>
                     {sumPrice} {currencySymbol}
                   </span>
@@ -162,7 +196,7 @@ const CartDefaultCard = ({
                 </Chip>
               </div>
             )}
-            <div className="flex justify-center">
+            <div className="justify-center hidden lg:flex">
               <button
                 onClick={() => {
                   deleteCartItem({ key });

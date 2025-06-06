@@ -13,10 +13,11 @@ import { Input } from "@/shared/components/UI/Input";
 import { Textarea } from "@/shared/components/UI/Textarea";
 import { cn } from "@/shared/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ComponentPropsWithoutRef, useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import CreateReviewFormImages from "./CreateReviewFormImages";
+import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 
 export const createReviewFormSchema = z.object({
   name: z
@@ -140,15 +141,9 @@ const CreateReviewForm = ({
                 }
                 type="submit"
               >
+                {isPending && <LoaderIcon className="animate-spin" />}
                 Отправить
               </Button>
-              {/* <Button
-                size="large"
-                className="w-full"
-                onClick={() => setStep("images")}
-              >
-                Закрыть
-              </Button> */}
             </div>
           )}
 

@@ -2,15 +2,19 @@
 
 import { cn } from "@/shared/utils/cn";
 import Image, { ImageProps } from "next/image";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const ImageWithLoader = ({
   wrapperClassName,
   className,
   src,
   alt,
+  ref,
   ...props
-}: { wrapperClassName?: string } & ImageProps) => {
+}: {
+  wrapperClassName?: string;
+  ref?: RefObject<HTMLImageElement | null>;
+} & ImageProps) => {
   const [imageSrc, setImageSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,6 +38,7 @@ const ImageWithLoader = ({
       </div>
       <Image
         fill
+        ref={ref}
         src={imageSrc}
         sizes="100%"
         className={cn("object-cover object-top", className)}

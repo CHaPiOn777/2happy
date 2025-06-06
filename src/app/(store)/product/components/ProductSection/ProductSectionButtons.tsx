@@ -11,6 +11,7 @@ import { IconButton } from "@/shared/components/UI/IconButton";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import BuyInstantButton from "@/features/Products/components/BuyInstantButton";
+import ProductSectionRelatedProducts from "./ProductSectionRelatedProducts";
 
 const ProductSectionButtons = ({
   variation,
@@ -89,13 +90,7 @@ const ProductSectionButtons = ({
           open={sheetOpen}
           onOpenChange={(open) => setSheetOpen(open)}
           renderRelatedProducts={() => (
-            <ul className="grid grid-cols-3 auto-rows-[376px] gap-x-6 gap-y-6">
-              {data?.map((product) => (
-                <li key={product.id}>
-                  <ProductServerCard product={product} />
-                </li>
-              ))}
-            </ul>
+            <ProductSectionRelatedProducts products={data} />
           )}
         />
       )}

@@ -26,6 +26,7 @@ import {
 } from "../../store/filtersStore";
 import { useProductsColors, useProductsSizes } from "../../api/filtersApi";
 import { sortSizes } from "../../utils/sortSizes";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
   const {
@@ -38,6 +39,8 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
     clearFilters,
   } = useFiltersStore();
   const { data: sizesData } = useProductsSizes();
+
+  const isTablet = useMediaCustom("lg");
 
   const sizesValue = sortSizes<{ id: number; name: string }>(
     sizesData?.items.map((item) => ({
@@ -134,12 +137,16 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
           <Button
             className="w-full"
             variant="secondary"
-            size="large"
+            size={isTablet ? "medium" : "large"}
             onClick={handleClear}
           >
             Очистить
           </Button>
-          <Button className="w-full" size="large" onClick={handleSubmit}>
+          <Button
+            className="w-full"
+            size={isTablet ? "medium" : "large"}
+            onClick={handleSubmit}
+          >
             Применить
           </Button>
         </SheetFooter>

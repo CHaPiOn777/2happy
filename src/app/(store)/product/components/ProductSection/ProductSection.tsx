@@ -21,10 +21,14 @@ const ProductSection = () => {
   const { images, setImages } = useProductStore();
 
   return (
-    <div className="border-b border-main">
-      <Container className="my-section flex gap-12">
+    <div className="lg:border-b lg:border-main">
+      <Container className="mt-20 lg:my-section flex flex-col lg:flex-row gap-12">
         <Suspense fallback={<ProductSliderLoader />}>
-          <ProductSlider id={id} images={images} />
+          <ProductSlider
+            className="basis-auto h-[584px] lg:basis-[51%] lg:h-[624px]"
+            id={id}
+            images={images}
+          />
         </Suspense>
         <Suspense
           fallback={<ProductInfoLoader className="flex-1 basis-[49%]" />}

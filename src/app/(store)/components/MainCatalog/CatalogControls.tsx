@@ -73,7 +73,7 @@ const CatalogControls = () => {
           }
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 hidden lg:flex">
         <GridSmallIcon
           className={cn(
             "cursor-pointer [&_*]:cursor-pointer hover:fill-main hover:stroke-transparent",

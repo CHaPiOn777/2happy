@@ -9,12 +9,18 @@ import { CreateReviewFormInput } from "@/features/Reviews/components/CreateRevie
 import { useUser } from "@/shared/api/authApi";
 import { Button } from "@/shared/components/UI/Button";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const CreateReviewButton = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
   const { data: user } = useUser();
 
-  const { mutate: createComment } = useCreateComment();
+  const { mutate: createComment, isPending } = useCreateComment({
+    onSuccess: () => {
+      setOpen(false);
+    },
+  });
 
   const defaultValues: Partial<CreateReviewFormInput> = useMemo(
     () => ({
@@ -44,9 +50,11 @@ const CreateReviewButton = () => {
   };
   return (
     <CreateReviewDialog
+      open={open}
+      setOpen={setOpen}
       defaultValues={defaultValues}
       onSubmit={onSubmit}
-      isPending={false}
+      isPending={isPending}
       triggerProps={{ disabled: !user }}
     >
       <div

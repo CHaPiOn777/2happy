@@ -82,6 +82,8 @@ const CheckoutForm = ({ className }: { className?: string }) => {
 
   const userHasAddresses = !!user?.multiple_addresses.length;
 
+  console.log(contacts);
+
   const handleSubmit = () => {
     if (!contacts) return;
 

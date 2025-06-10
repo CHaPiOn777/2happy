@@ -43,7 +43,7 @@ const AddAddressDialog = ({
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="w-full max-w-[1224px] p-20">
+      <DialogContent className="w-full max-w-[720px] lg:max-w-[1224px] px-14 py-8 pt-12 lg:px-20 lg:py-20 lg:pt-20">
         <DialogHeader className="sr-only">
           <DialogTitle className="sr-only">
             Добавьте новый адрес для доставки

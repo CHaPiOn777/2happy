@@ -101,6 +101,7 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
                 </Button>
                 <RefundButton
                   order={order}
+                  disabled={!!getReturnDisabled()}
                   onSuccess={() => {
                     setSuccessRefund(true);
                   }}

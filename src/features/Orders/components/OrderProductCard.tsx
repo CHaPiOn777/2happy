@@ -12,7 +12,7 @@ const OrderProductCard = ({ product }: { product: OrderProductItem }) => {
       <div className="flex gap-6 items-center">
         <ImageWithLoader
           src={product.image.src}
-          wrapperClassName="w-[96px] h-[128]"
+          wrapperClassName="w-[96px] h-[128px]"
           alt=""
         />
         <div className="flex flex-col gap-4">
@@ -27,7 +27,7 @@ const OrderProductCard = ({ product }: { product: OrderProductItem }) => {
             <div className="flex items-center gap-4">
               <span>Размер</span>
               <Separator className="h-4/6" orientation="vertical" />
-              <span className="text-gray-middle text-body2">
+              <span className="text-gray-middle text-body2 whitespace-nowrap">
                 {size?.display_value}
               </span>
             </div>

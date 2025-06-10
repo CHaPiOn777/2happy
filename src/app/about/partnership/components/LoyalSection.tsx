@@ -4,6 +4,7 @@ import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
+import LoyalButton from "./LoyalSection/LoyalButton";
 
 const LoyalSection = () => {
   return (
@@ -17,15 +18,15 @@ const LoyalSection = () => {
             Работайте с клиентами и получайте вознаграждение за покупки
           </p>
         </div>
-        <div className="flex gap-16">
-          <div className="w-full max-w-[496px] space-y-6">
-            <p>
+        <div className="flex gap-6 lg:gap-16">
+          <div className="flex flex-col gap-6 w-full max-w-[384px] lg:max-w-[496px]">
+            <p className="hidden lg:block">
               Мы рады предложить стилистам возможность принять участие
               в партнёрской программе 2НАРРУ, в рамках которой вы сможете
               работать со своими клиентами и получать вознаграждение
               за совершённые ими покупки в наших магазинах
             </p>
-            <div className="relative w-full h-[624px]">
+            <div className="relative w-full h-full lg:h-[624px]">
               <Image
                 fill
                 className="object-cover -scale-x-100"
@@ -34,7 +35,13 @@ const LoyalSection = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-20 justify-end w-full">
+          <div className="flex flex-col gap-12 lg:gap-20 justify-end w-full">
+            <p className="block lg:hidden">
+              Мы рады предложить стилистам возможность принять участие
+              в партнёрской программе 2НАРРУ, в рамках которой вы сможете
+              работать со своими клиентами и получать вознаграждение
+              за совершённые ими покупки в наших магазинах
+            </p>
             <div className="space-y-6">
               <h5 className="text-h5">Как это работает?</h5>
               <ul className="flex flex-col gap-4 text-placeholder text-gray-dark">
@@ -70,11 +77,7 @@ const LoyalSection = () => {
                 </li>
               </ul>
             </div>
-            <Button className="w-full" size="large" asChild>
-              <a target="_blank" href="https://wa.me/77021657378">
-                Стать стилистом <ArrowUpRightIcon />
-              </a>
-            </Button>
+            <LoyalButton />
           </div>
         </div>
       </Container>

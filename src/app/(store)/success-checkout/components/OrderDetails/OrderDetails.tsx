@@ -23,7 +23,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
   return (
     <Section className="border-b border-main">
       <Container className="flex-col gap-20 mb-section">
-        <div className="flex flex-col gap-10 w-full">
+        <div className="flex flex-col gap-6 lg:gap-8 lg:gap-10 w-full">
           <TabTitle titleClass="text-h3 uppercase ">
             1. Детализация заказа
           </TabTitle>
@@ -56,7 +56,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col w-[320px] shrink-0 gap-4 border border-main rounded-xs py-7 px-6">
+              <div className="flex flex-col w-[320px] shrink-0 gap-4 border border-main rounded-xs py-6 lg:py-7 px-10 lg:px-6">
                 <h5 className="text-h5">Сумма заказа</h5>
                 <div className="flex flex-col text-gray-dark text-body2">
                   <div className="flex justify-between py-3 border-b border-gray-light">
@@ -90,7 +90,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
               {order?.shipping.phone}
             </span>
             <span>{order?.shipping.address_1}</span>
-            <span>{order?.shipping.country}</span>
+            {order?.shipping.country && <span>{order?.shipping.country}</span>}
             <span>{order?.shipping.city}</span>
           </div>
         </div>

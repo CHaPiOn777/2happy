@@ -14,19 +14,20 @@ const ContactUsSection = () => {
     <Section className="my-section">
       <Container>
         <ImageWithLoader
-          wrapperClassName="w-[416px] h-[504px] absolute top-0 right-0"
+          wrapperClassName="w-[356px] lg:w-[416px] h-[440px] lg:h-[504px] absolute top-0 right-6"
           className="object-[50%_50%] -scale-x-100"
           src="/images/Account/contact-us.jpg"
           alt="contact-us"
         />
         <div className="w-full">
-          <div>
-            <div className="flex flex-col justify-center gap-8 max-w-[624px] ml-[104px] my-[88px]">
-              <h3 className="text-h3">Объединим идеи и стиль</h3>
-              <div className="ml-[104px]">
-                <p className="text-h5">
+          <div className="flex justify-between gap-[60px]">
+            <div className="flex flex-col justify-center gap-8 max-w-[624px] ml-0 lg:ml-[60px] xl:ml-[104px] mb-[112px] mt-[56px] lg:mb-[88px] lg:mt-[88px]">
+              <h3 className="text-h2 lg:text-h3">Объединим идеи и стиль</h3>
+              <div className="ml-16 lg:ml-[104px]">
+                <p className="text-body2 lg:text-h5">
                   Если вы хотите стать частью нашей истории — напишите нам.
-                  Обсудим идеи и создадим <br /> что-то особенное вместе!
+                  Обсудим идеи и создадим <br className="hidden lg:block" />{" "}
+                  что-то особенное вместе!
                 </p>
                 <Button className="w-full mt-14" size="medium" asChild>
                   <a
@@ -40,8 +41,9 @@ const ContactUsSection = () => {
                 </Button>
               </div>
             </div>
+            <div className="w-[356px] lg:w-[416px] shrink-0" />
           </div>
-          <div className="flex flex-col gap-10 py-10 px-20 bg-black text-white">
+          <div className="flex flex-col gap-10 py-10 px-8 lg:px-20 bg-black text-white">
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
             <ul className="flex justify-between">
               <li className="flex items-center gap-4">

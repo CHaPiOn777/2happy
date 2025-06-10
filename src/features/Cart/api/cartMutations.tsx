@@ -280,7 +280,7 @@ export const useDeleteCart = ({
       const newNonce = res.headers["nonce"];
 
       if (newNonce != oldNonce) Cookies.set("nonce", newNonce);
-      queryClient.removeQueries(getCartQueryOptions());
+      queryClient.invalidateQueries(getCartQueryOptions());
       onSuccess?.(res.data);
     },
     onError,

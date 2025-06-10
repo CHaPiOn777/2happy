@@ -7,24 +7,11 @@ import {
   BreadcrumbSeparator,
 } from "@/shared/components/UI/Breadcrumb";
 import { paths } from "@/config/paths";
-import { Button } from "@/shared/components/UI/Button";
-import Link from "next/link";
+import ContinueButton from "./components/ContinueButton";
 
 const CheckoutBreadcrumbs = () => {
   return (
-    <Breadcrumbs
-      className="bg-main border-b-0"
-      rightSlot={
-        <Button
-          size="large"
-          variant="secondary"
-          className="text-white border-white border-b-0 border-t-0 hidden lg:inline-flex"
-          asChild
-        >
-          <Link href={paths.checkout.getHref()}>Продолжить покупки</Link>
-        </Button>
-      }
-    >
+    <Breadcrumbs className="bg-main border-b-0" rightSlot={<ContinueButton />}>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink className="text-white" href={paths.home.getHref()}>

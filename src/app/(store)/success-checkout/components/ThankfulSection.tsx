@@ -12,30 +12,33 @@ const ThankfulSection = () => {
     <Section className="flex flex-col">
       <Container className="flex flex-col my-section">
         <ImageWithLoader
-          wrapperClassName="absolute top-0 right-0 z-10 w-[600px] h-[496px]"
+          wrapperClassName="absolute top-0 right-0 z-10 w-[560px] h-[464px] lg:w-[600px] lg:h-[496px]"
           src="/images/Success-checkout/thanks.jpg"
           alt="thanks-image"
         />
-        <div className="relative z-20 pt-8 pb-24 flex flex-col gap-8 items-center">
+        <div className="relative z-20 pt-8 pb-24 flex flex-col gap-8 lg:items-center">
           <h1 className="text-h1 uppercase">Спасибо за покупку!</h1>
-          <p className="text-h5 max-w-[366px] w-full">
+          <p className="text-h5 max-w-[366px] w-full ml-[160px] lg:ml-0">
             Ваш заказ успешно оплачен. <br /> Наш менеджер скоро свяжется с вами
             для обсуждения деталей доставки.
           </p>
         </div>
         <div className="flex flex-col gap-8 bg-main py-10 px-20 text-white">
-          <div className="flex flex-col gap-10 max-w-[420px] w-full">
-            <p>
-              Подтверждение заказа уже в пути на Вашу почту. Отслеживайте статус
-              и управляйте покупками в 
-              <Link href="/" className="link-hover">
-                личном кабинете
-              </Link>
-            </p>
-            <p>
-              Если у вас возникли какие — либо вопросы, вы можете позвонить
-              нам или написать:
-            </p>
+          <div className="relative pb-20   lg:pb-0 flex justify-between gap-[105px]">
+            <div className=" flex flex-col gap-10 max-w-[420px] w-full">
+              <p>
+                Подтверждение заказа уже в пути на Вашу почту. Отслеживайте
+                статус и управляйте покупками в 
+                <Link href="/" className="link-hover">
+                  личном кабинете
+                </Link>
+              </p>
+              <p className="absolute bottom-0 lg:relative">
+                Если у вас возникли какие — либо вопросы, вы можете позвонить
+                нам или написать:
+              </p>
+            </div>
+            <div className="w-[400px] shrink-0" />
           </div>
           <div className="w-full">
             <ul className="flex justify-between">

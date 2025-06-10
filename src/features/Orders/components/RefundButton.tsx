@@ -61,9 +61,18 @@ const RefundButton = ({
     });
   };
 
+  console.log(props.disabled);
+
   return (
     <AlertDialog open={open}>
-      <AlertDialogTrigger onClick={() => setOpen(true)} {...props} asChild>
+      <AlertDialogTrigger
+        onClick={() => {
+          if (props.disabled) return;
+          setOpen(true);
+        }}
+        {...props}
+        asChild
+      >
         {children}
       </AlertDialogTrigger>
       <AlertDialogContent>

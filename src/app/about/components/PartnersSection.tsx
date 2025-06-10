@@ -15,14 +15,14 @@ const PartnersSection = () => {
     <Section className="my-section">
       <Container>
         <ImageWithLoader
-          wrapperClassName="w-[416px] h-[504px] absolute top-0 right-0"
+          wrapperClassName="w-[356px] lg:w-[416px] h-[440px] lg:h-[504px] absolute top-0 right-6"
           className="object-[50%_50%] -scale-x-100"
           src="/images/Account/contact-us.jpg"
           alt="contact-us"
         />
         <div className="w-full">
-          <div>
-            <div className="flex flex-col justify-center gap-8 max-w-[624px] ml-[104px] my-[88px]">
+          <div className="flex gap-[60px] lg:gap-18 xl:gap-20">
+            <div className="flex flex-col justify-center gap-8 max-w-[624px] lg:ml-[52px] xl:ml-[104px] mt-[56px] lg:mt-[88px] mb-[88px]">
               <h3 className="text-h3">Хочешь стать частью 2HAPPY?</h3>
               <div className="ml-[104px]">
                 <p className="text-h5">
@@ -38,8 +38,9 @@ const PartnersSection = () => {
                 </Button>
               </div>
             </div>
+            <div className="w-[356px] lg:w-[416px] shrink-0" />
           </div>
-          <div className="flex flex-col gap-10 py-10 px-20 bg-black text-white">
+          <div className="flex flex-col gap-10 py-10 px-8 lg:px-20 bg-black text-white">
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
             <ul className="flex justify-between">
               <li className="flex items-center gap-4">

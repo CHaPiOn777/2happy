@@ -10,8 +10,8 @@ const ProductsSection = () => {
   return (
     <Section className="my-section">
       <Container>
-        <div className="grid grid-cols-aboutProducts grid-rows-aboutProducts gap-x-6">
-          <div className="relative row-span-3">
+        <div className="grid grid-cols-aboutProductsLg lg:grid-cols-aboutProducts grid-rows-aboutProductsLg lg:grid-rows-aboutProducts gap-6">
+          <div className="relative col-span-2 lg:col-span-1 lg:row-span-3">
             <Image
               fill
               className="object-cover"
@@ -19,7 +19,7 @@ const ProductsSection = () => {
               alt="product-1"
             />
           </div>
-          <div className="relative row-span-3">
+          <div className="relative lg:row-span-3">
             <Image
               fill
               className="object-cover"
@@ -27,7 +27,7 @@ const ProductsSection = () => {
               alt="product-1"
             />
           </div>
-          <div className="relative row-span-3">
+          <div className="relative col-span-2 lg:col-span-1 lg:row-span-3">
             <Image
               fill
               className="object-cover"
@@ -35,7 +35,7 @@ const ProductsSection = () => {
               alt="product-2"
             />
           </div>
-          <div className="relative">
+          <div className="relative row-span-2  lg:row-span-1">
             <Image
               fill
               className="object-cover"

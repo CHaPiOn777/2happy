@@ -10,7 +10,7 @@ import { paths } from "@/config/paths";
 
 const CartBreadcrumbs = () => {
   return (
-    <Breadcrumbs className="h-[80px] bg-main">
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink className="text-white" href={paths.home.getHref()}>

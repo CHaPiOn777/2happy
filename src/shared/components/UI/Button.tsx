@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/shared/utils/cn";
 import { Skeleton } from "./Skeleton";
-import LoaderIcon from "../icons/LoaderIcon";
+import { GlobalMediaKeys } from "@/shared/styles/globalStyles";
 
 const buttonVariantsAndSizes = {
   variants: {
@@ -67,11 +67,14 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  mediaVariants?: Record<GlobalMediaKeys, NonNullable<TButtonVariant>>;
+  mediaSizes?: Record<GlobalMediaKeys, NonNullable<TButtonSizes>>;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

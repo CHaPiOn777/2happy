@@ -53,7 +53,7 @@ const ChangePickedAddressDialog = ({
   return (
     <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[1224px] w-full flex flex-col gap-10 p-20">
+      <DialogContent className="max-w-[720px] max-h-[90vh] lg:max-w-[1224px] w-full flex flex-col gap-10 py-20 px-14 lg:px-20">
         <div className="flex flex-col gap-6">
           <DialogHeader className="sr-only">
             <DialogTitle className="sr-only">
@@ -86,8 +86,13 @@ const ChangePickedAddressDialog = ({
                     key={address.id}
                     id={`${address.id}`}
                     value={`${address.id}`}
+                    leftSlot={
+                      <h5 className="text-body1 max-w-[180px] w-full">
+                        {address.firstName} {address.lastName}
+                      </h5>
+                    }
                     rightSlot={
-                      <div className="flex gap-4">
+                      <div className="flex gap-4 flex-col lg:flex-row">
                         <UpdateAddressDialog title="Адрес" address={address}>
                           <Button variant="secondary" size="small">
                             Редактировать
@@ -103,18 +108,19 @@ const ChangePickedAddressDialog = ({
                           }}
                           isLoading={isPending}
                         >
-                          <Button disabled={isPending} size={"small"}>
+                          <Button
+                            className="w-full lg:w-min"
+                            disabled={isPending}
+                            size={"small"}
+                          >
                             Удалить
                           </Button>
                         </DeleteAddressDialog>
                       </div>
                     }
                   >
-                    <div className="flex items-center gap-6">
-                      <h5 className="text-body1 max-w-[180px] w-full">
-                        {address.firstName} {address.lastName}
-                      </h5>
-                      <div className="flex flex-col gap-2">
+                    <div className="flex items-start lg:items-center gap-6 flex-col lg:flex-row">
+                      <div className="flex flex-col gap-2 text-gray-dark">
                         <span>{address.address}</span>
                         <span>{address.country}</span>
                         <span>{address.city}</span>

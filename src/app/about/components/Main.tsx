@@ -4,14 +4,14 @@ import Image from "next/image";
 
 const Main = () => {
   return (
-    <Section className="pt-12 pb-20 border-b border-main h-[865px] bg-about-main-gradient">
+    <Section className="pt-12 pb-20 border-b border-main h-[480px] xl:h-[865px] lg:h-[760px] bg-about-main-gradient">
       <Image
         fill
         className="object-cover -z-10"
         src="/images/About/Main/bg.png"
         alt="main-image"
       />
-      <Container className="flex-col gap-6 items-center justify-center h-full">
+      <Container className="flex-col gap-6 items-center justify-end lg:justify-center h-full">
         <div>
           <h1 className="text-h3Akira text-white mb-10">2HAPPY</h1>
           <div className="flex gap-8">

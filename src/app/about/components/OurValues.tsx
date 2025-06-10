@@ -11,9 +11,11 @@ const OurValues = () => {
       <Container className="flex-col gap-16 my-section">
         <div className="flex flex-col gap-8 w-full">
           <h2 className="text-h2 text-end w-full">наши ценности /</h2>
-          <p className="text-h4 ml-[184px]">Что мы ставим в приоритет</p>
+          <p className="text-h4 ml-[136px] lg:ml-[184px]">
+            Что мы ставим в приоритет
+          </p>
         </div>
-        <div className="flex gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="w-full flex flex-col items-center gap-6 bg-white p-4 shadow-value">
             <InspirationIcon />
             <span className="text-body1 text-center">

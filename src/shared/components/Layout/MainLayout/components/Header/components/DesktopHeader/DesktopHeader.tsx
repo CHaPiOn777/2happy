@@ -17,7 +17,11 @@ const DesktopHeader = ({ rightSlot }: { rightSlot?: ReactNode }) => {
   const [isSticky, setIsSticky] = useState(false);
   const upperHeaderRef = useRef<HTMLDivElement>(null);
 
-  useObserver(upperHeaderRef, (entry) => setIsSticky(!entry.isIntersecting));
+  useObserver(
+    upperHeaderRef,
+    () => setIsSticky(false),
+    () => setIsSticky(true)
+  );
 
   useQuery(
     getCategoriesQueryOptions({ parent: categoryIds["clothes"], per_page: 20 })

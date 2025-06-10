@@ -29,7 +29,21 @@ module.exports = {
         "instagram-lg":
           "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
         aboutProducts:
-          "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(150px, 184px) minmax(150px, 184px)",
+          "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(130px, 184px) minmax(130px, 184px)",
+        aboutProductsLg:
+          "minmax(150px, 212px) minmax(130px, 184px) 80px minmax(330px, 416px)",
+        aboutHistory: "minmax(400px,728px) minmax(200px,472px)",
+        aboutReviews:
+          "minmax(300px, 424px) minmax(300px, 424px) minmax(100px, 128px)",
+        aboutReviewsLg: "minmax(300px, 424px) 72px minmax(300px, 424px)",
+        partnersChoose:
+          "minmax(250px, 348px) minmax(20px, 132px) minmax(130px, 216px) minmax(20px, 132px) minmax(250px, 348px)",
+        partnersChooseLg:
+          "minmax(250px, 296px) 0px minmax(130px, 296px) 0px minmax(250px, 296px)",
+        partnersSuggestFirst:
+          "minmax(220px, 288px) minmax(220px, 288px) minmax(50px, 128px) minmax(200px, 264px) minmax(120px, 184px)",
+        partnersSuggestSecond:
+          "minmax(220px, 296px) minmax(50px, 128px) minmax(212px, 280px) minmax(300px, 448px)",
       },
       gridTemplateRows: {
         addition: "408px 232px",
@@ -37,6 +51,9 @@ module.exports = {
         "collections-lg": "272px 174px 226px 40px",
         "instagram-lg": "288px 288px 312px",
         aboutProducts: "264px 104px 280px",
+        aboutProductsLg: "640px 264px 94px",
+        aboutReviews: "repeat(4, 120px)",
+        aboutReviewsLg: "repeat(2, 272px)",
       },
       cursor: {
         default: "url('/icons/system/cursor-arrow.svg') 2 2, default",

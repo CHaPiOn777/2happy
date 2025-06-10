@@ -15,7 +15,7 @@ const SuggestSection = () => {
       <Container className="flex-col gap-16 my-section">
         <h2 className="text-h2">Что мы предлагаем / </h2>
         <div className="flex flex-col gap-6">
-          <div className="grid grid-cols-[288px_288px_128px_264px_184px] grid-rows-[176px_176px] gap-6">
+          <div className="grid grid-cols-partnersSuggestFirst grid-rows-[176px_176px] gap-6">
             <div className="relative row-span-2">
               <Image
                 fill
@@ -24,11 +24,13 @@ const SuggestSection = () => {
                 alt="suggest-1"
               />
             </div>
-            <div className="flex flex-col items-end gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
-              <HangerIcon />
-              <p className="text-h5 w-full ">
-                Совместные <br /> коллекции и капсулы
-              </p>
+            <div className="flex gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
+              <div className="flex items-end text-h5 w-full cursor-pointer">
+                <span>
+                  Совместные <br /> коллекции и капсулы
+                </span>
+              </div>
+              <HangerIcon className="shrink-0 " />
             </div>
             <div className="relative">
               <Image
@@ -49,18 +51,18 @@ const SuggestSection = () => {
             </div>
             <div className="flex flex-col items-end gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
               <WriteIcon />
-              <p className="text-h5 w-full ">
+              <p className="text-h5 w-full cursor-pointer">
                 Франшиза <br /> бренда 2HAPPY
               </p>
             </div>
             <div className="col-span-2 flex flex-col items-end gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
               <StarIcon />
-              <p className="text-h5 w-full ">
-                Франшиза <br /> бренда 2HAPPY
+              <p className="text-h5 w-full cursor-pointer">
+                Партнёрские проекты <br /> и спецмероприятия
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-[296px_128px_280px_448px] grid-rows-[176px_176px] gap-6">
+          <div className="grid grid-cols-partnersSuggestSecond grid-rows-[176px_176px] gap-6">
             <div className="relative w-full h-[80px] self-center">
               <Image
                 fill
@@ -87,13 +89,13 @@ const SuggestSection = () => {
             </div>
             <div className=" flex flex-col items-end gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
               <SewIcon />
-              <p className="text-h5 w-full ">
+              <p className="text-h5 w-full cursor-pointer">
                 Корпоративные заказы <br /> и кастомизация
               </p>
             </div>
             <div className="col-span-2 flex flex-col items-end gap-4 border border-main rounded-xs p-8 bg-white transition-colors hover:bg-gray-light cursor-pointer">
-              <PhotoIcon />
-              <p className="text-h5 w-full ">
+              <PhotoIcon className="shrink-0" />
+              <p className="text-h5 w-full cursor-pointer">
                 Коллаборации <br /> с инфлюенсерами и амбассадорами
               </p>
             </div>

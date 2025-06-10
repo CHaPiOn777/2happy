@@ -1,5 +1,5 @@
 import WhatsAppButton from "@/shared/components/Layout/MainLayout/components/WhatsAppButton";
-import Main from "./components/Main";
+import Main from "./components/Main/Main";
 import SuggestSection from "./components/SuggestSection";
 import DividerSection from "./components/DividerSection";
 import LoyalSection from "./components/LoyalSection";
@@ -9,9 +9,6 @@ import WhyChooseUsSection from "./components/WhyChooseUsSection";
 import { sleep } from "@/sleep";
 
 const PartnershipPage = async () => {
-  if (process.env.NODE_ENV === "production") {
-    await sleep(35000);
-  }
   return (
     <>
       <Main />

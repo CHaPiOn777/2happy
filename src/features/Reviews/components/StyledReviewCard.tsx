@@ -9,7 +9,7 @@ const StyledReviewCard = ({
   return (
     <article
       className={cn(
-        "flex flex-col justify-between min-h-[272px] w-full p-6 border border-main rounded-xs",
+        "flex flex-col justify-between w-full p-6 border border-main rounded-xs",
         className
       )}
       {...props}

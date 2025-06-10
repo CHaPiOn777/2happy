@@ -13,7 +13,7 @@ const WhyChooseUsSection = () => {
         <h2 className="text-h2 text-white text-center">
           Почему выбирают нас:{" "}
         </h2>
-        <ul className="grid grid-cols-[348px_132px_216px_132px_348px] grid-rows-[192px_192px] gap-6">
+        <ul className="grid grid-cols-partnersChooseLg lg:grid-cols-partnersChoose grid-rows-[192px_192px] gap-6">
           <li className="relative col-span-2 flex flex-col items-center justify-end gap-6 flex-1 pt-8 px-7 pb-10 bg-black rounded-xs shadow-feature gradient-border">
             <div className="absolute w-full h-full top-0 z-10 bg-choose-gradient" />
             <Image
@@ -47,7 +47,8 @@ const WhyChooseUsSection = () => {
           <li className="flex col-span-2 flex-col items-center gap-6 flex-1 pt-8 px-7 pb-10 rounded-xs shadow-feature bg-white/10">
             <HandIcon />
             <p className=" text-white-secondary text-center">
-              Уникальный стиль и внимательное <br /> отношение к деталям
+              Уникальный стиль и внимательное <br className="hidden lg:block" />{" "}
+              отношение к деталям
             </p>
           </li>
           <li className="relative col-span-2 flex flex-col items-center justify-end gap-6 flex-1 pt-8 px-7 pb-10 bg-black rounded-xs shadow-feature gradient-border">

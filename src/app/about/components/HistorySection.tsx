@@ -1,4 +1,5 @@
 import Container from "@/shared/components/UI/Container";
+import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
 
@@ -10,7 +11,7 @@ const HistorySection = () => {
           <h2 className="text-h2">история бренда /</h2>
           <p className="text-h4 w-full text-end">с чего все начиналось</p>
         </div>
-        <div className="grid grid-cols-[728px_472px] gap-x-6">
+        <div className="grid grid-cols-aboutHistory gap-x-6">
           <div className="flex flex-col gap-6">
             <div className="relative w-full h-[456px]">
               <Image
@@ -20,31 +21,45 @@ const HistorySection = () => {
                 alt="history-1"
               />
             </div>
-            <div className="flex gap-6">
-              <div className="flex flex-col justify-between">
-                <div className="space-y-4 text-gray-dark">
-                  <p>
+            <div className="flex flex-col gap-6 lg:gap-0">
+              <div>
+                <div className="flex flex-col items-end space-y-12 text-gray-dark block lg:hidden">
+                  <p className="w-full">
                     С первых дней мы знали, что не хотим быть просто ещё одной
                     маркой одежды. Мы хотели говорить с женщинами на одном
                     языке — языке свободы, уверенности и уличной эстетики.
                   </p>
-                  <p>
+                  <p className="w-full max-w-[304px]">
                     Начав с небольшой коллекции, которую сами же фотографировали
                     и продвигали через Instagram, мы быстро поняли: это нужно
                     не только нам.
                   </p>
                 </div>
-                <div className="flex gap-5 ml-16">
-                  <span className="h-full w-[1px] bg-gray-dark" />
-                  <p className="text-gray-dark">
-                    «Сейчас нас выбирают те, кто ценит <br /> силу в деталях
-                    и эстетику <br /> в каждом движении».
-                  </p>
-                </div>
               </div>
-              <div className="relative w-[312px] h-[480px] shrink-0">
-                <Image
-                  fill
+              <div className="flex gap-6">
+                <div className="flex flex-col justify-end lg:justify-between">
+                  <div className="space-y-4 text-gray-dark hidden lg:block">
+                    <p>
+                      С первых дней мы знали, что не хотим быть просто ещё одной
+                      маркой одежды. Мы хотели говорить с женщинами на одном
+                      языке — языке свободы, уверенности и уличной эстетики.
+                    </p>
+                    <p>
+                      Начав с небольшой коллекции, которую
+                      сами же фотографировали и продвигали через Instagram,
+                      мы быстро поняли: это нужно не только нам.
+                    </p>
+                  </div>
+                  <div className="flex gap-5 lg:ml-16">
+                    <span className="h-full w-[1px] bg-gray-dark" />
+                    <p className="text-gray-dark">
+                      «Сейчас нас выбирают те, кто ценит <br /> силу в деталях
+                      и эстетику <br /> в каждом движении».
+                    </p>
+                  </div>
+                </div>
+                <ImageWithLoader
+                  wrapperClassName="w-[304px] h-[440px] lg:h-[480px] shrink-0"
                   className="object-cover"
                   src="/images/About/History/2.jpg"
                   alt="history-2"
@@ -52,7 +67,7 @@ const HistorySection = () => {
               </div>
             </div>
           </div>
-          <div className="relative flex flex-col gap-6 mt-6">
+          <div className="relative flex flex-col gap-6 lg:mt-6">
             <p>
               Идея создать 2НАРРУ родилась не случайно в 2010 году — из личной
               потребности в одежде, которая отражает характер,

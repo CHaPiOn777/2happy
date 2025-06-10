@@ -10,34 +10,39 @@ import Link from "next/link";
 const ReviewsSection = () => {
   return (
     <Section>
-      <Container className="my-section">
-        <div className="flex gap-6 w-full">
-          <div className="flex flex-col max-w-[624px] w-full items-end gap-20">
-            <div className="w-full space-y-8">
-              <h2 className="text-h2">Ваши отзывы /</h2>
-              <p className="text-h5 ml-20">
-                — это часть нашей истории, которую мы <br />
-                создаём вместе с вами
-              </p>
-            </div>
-            <StyledReviewCard className="w-[424px]" />
-            <Button asChild>
-              <Link href={paths.about.reviews.getHref()}>
-                Смотреть все отзывы <ArrowUpRightIcon />
-              </Link>
-            </Button>
-          </div>
-          <div className="grid grid-cols-[424px_128px] grid-rows-[272px_272px] gap-6 mt-16">
-            <StyledReviewCard className="col-span-2" />
-            <StyledReviewCard />
-            <div className="relative">
-              <Image
-                fill
-                className="object-cover"
-                src="/images/About/2happy-black.png"
-                alt="2happy-logo"
-              />
-            </div>
+      <Container className="flex-col gap-12 lg:gap-0 my-section">
+        <div className="w-full space-y-8 lg:translate-y-16">
+          <h2 className="text-h2">Ваши отзывы /</h2>
+          <p className="text-h5 ml-20">
+            — это часть нашей истории, которую мы <br />
+            создаём вместе с вами
+          </p>
+        </div>
+        <div className="grid grid-cols-aboutReviewsLg lg:grid-cols-aboutReviews grid-rows-aboutReviewsLg lg:grid-rows-aboutReviews justify-end gap-6 lg:ml-20">
+          <StyledReviewCard className="lg:row-start-2 lg:row-end-4" />
+          <Button
+            asChild
+            className="row-end-5 justify-self-end self-end hidden lg:inline-flex"
+          >
+            <Link href={paths.about.reviews.getHref()}>
+              Смотреть все отзывы <ArrowUpRightIcon />
+            </Link>
+          </Button>
+          <StyledReviewCard className="lg:col-start-2 col-span-2 lg:row-span-2" />
+          <StyledReviewCard className="col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-3 lg:row-end-5" />
+          <div className="relative lg:col-start-3 lg:row-start-3 lg:row-end-5">
+            <Image
+              fill
+              className="object-cover block lg:hidden"
+              src="/images/2happy-logo-black.jpg"
+              alt="2happy-logo"
+            />
+            <Image
+              fill
+              className="object-cover hidden lg:block"
+              src="/images/About/2happy-black.png"
+              alt="2happy-logo"
+            />
           </div>
         </div>
       </Container>

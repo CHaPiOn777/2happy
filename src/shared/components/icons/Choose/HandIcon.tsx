@@ -9,7 +9,7 @@ const HandIcon = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
       height="49"
       viewBox="0 0 49 49"
       className={cn(
-        "stroke-white transition-[fill,stroke,transform]",
+        "stroke-white transition-[fill,stroke,transform] shrink-0",
         className
       )}
       {...props}

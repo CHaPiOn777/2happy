@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const StatisticSection = () => {
   return (
-    <Section className="h-[912px] bg-banner">
+    <Section className="h-[520px] xl:h-[912px] lg:h-[720px] bg-banner">
       <Image
         fill
         className="object-cover -z-10 -scale-x-100 object-[50%_20%]"
@@ -14,7 +14,7 @@ const StatisticSection = () => {
       <Container className="my-section items-end">
         <div className="flex justify-between w-full">
           <div className="flex flex-col h-full items-center gap-6 text-white">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-2">
               <span className="text-h2">15</span>
               <span className="text-h4">лет</span>
             </div>
@@ -23,7 +23,7 @@ const StatisticSection = () => {
             </p>
           </div>
           <div className="flex flex-col h-full items-center gap-6 text-white">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-2">
               <span className="text-h2">100 000 +</span>
               <span className="text-h4">Клиенток</span>
             </div>
@@ -32,7 +32,7 @@ const StatisticSection = () => {
             </p>
           </div>
           <div className="flex flex-col h-full items-center gap-6 text-white">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-2">
               <span className="text-h2">200 +</span>
               <span className="text-h4">коллекций</span>
             </div>

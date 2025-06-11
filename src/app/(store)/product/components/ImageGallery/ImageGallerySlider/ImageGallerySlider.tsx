@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./styles.scss";
+import ZoomedImage from "./ZoomedImage";
 
 const ImageGallerySlider = ({
   openWide,
@@ -39,8 +40,13 @@ const ImageGallerySlider = ({
   });
   return (
     <div className="w-full h-full flex justify-center">
-      <div className="relative h-full w-full margin-x-auto max-w-[688px]">
-        <div
+      <div
+        className={cn(
+          "relative h-full w-full margin-x-auto max-w-[644px] transition-[max-width] duration-300",
+          openWide && "w-auto max-w-full"
+        )}
+      >
+        {/* <div
           className={cn(
             "absolute w-full h-full transition-opacity opacity-0 pointer-events-none z-50",
             openWide && "opacity-100 pointer-events-auto"
@@ -52,12 +58,13 @@ const ImageGallerySlider = ({
             className="object-cover"
             alt={`scaled-${activeImage.alt}`}
           />
-        </div>
+        </div> */}
         <Swiper
           className="gallery-slider"
           modules={[Navigation]}
           navigation={navigation.current}
           centeredSlides={true}
+          allowTouchMove={false}
           initialSlide={initialSlide}
           onSlideChange={(swiper) => {
             setActiveImage(images[swiper.activeIndex]);
@@ -66,15 +73,23 @@ const ImageGallerySlider = ({
         >
           {images.map((image) => (
             <SwiperSlide key={image.id}>
-              <ImageWithLoader src={image.src} alt={image.alt} />
+              {openWide ? (
+                <ZoomedImage src={image.src} alt={image.alt} />
+              ) : (
+                <ImageWithLoader
+                  className="object-center"
+                  src={image.src}
+                  alt={image.alt}
+                />
+              )}
             </SwiperSlide>
           ))}
 
-          <SliderProgress className="absolute bottom-0" />
+          <SliderProgress className="absolute left-0 bottom-0" />
         </Swiper>
         <IconButton
           ref={prevRef}
-          className="absolute top-1/2 -translate-y-1/2 left-0 z-10 disabled:bg-transparent"
+          className="absolute top-1/2 -translate-y-1/2 -left-[72px] z-10 disabled:bg-transparent"
           variant="secondary"
           size="large"
         >
@@ -82,7 +97,7 @@ const ImageGallerySlider = ({
         </IconButton>
         <IconButton
           ref={nextRef}
-          className="absolute top-1/2 -translate-y-1/2 right-0 z-10 disabled:bg-transparent"
+          className="absolute top-1/2 -translate-y-1/2 -right-[72px] z-10 disabled:bg-transparent"
           variant="secondary"
           size="large"
         >

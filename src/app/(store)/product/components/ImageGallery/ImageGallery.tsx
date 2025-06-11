@@ -24,7 +24,11 @@ const ImageGallery = ({
 }) => {
   const [openWide, setOpenWide] = useState(false);
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) setOpenWide(false);
+      }}
+    >
       <DialogTrigger className="w-full h-full">{children}</DialogTrigger>
       <DialogContent className="w-screen max-w-screen h-screen" hideClose>
         <Container className="relative flex-col gap-4 h-full">

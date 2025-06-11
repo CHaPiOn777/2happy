@@ -16,7 +16,7 @@ const ImageWithLoader = ({
   ref?: RefObject<HTMLImageElement | null>;
 } & ImageProps) => {
   const [imageSrc, setImageSrc] = useState(src);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLoad = () => {
     setIsLoading(false);

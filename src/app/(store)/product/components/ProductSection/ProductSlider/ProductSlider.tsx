@@ -16,13 +16,13 @@ import ImageGallery from "../../ImageGallery/ImageGallery";
 import { getProductChip } from "@/features/Products/utils/getProductChip";
 import { Image as ImageType } from "@/shared/types/api";
 import { Chip } from "@/shared/components/UI/Chip";
+import { cn } from "@/shared/utils";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./styles.scss";
-import { cn } from "@/shared/utils";
 
 const ProductSlider = ({
   id,

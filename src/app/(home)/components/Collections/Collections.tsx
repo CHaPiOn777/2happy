@@ -2,7 +2,6 @@ import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon"
 import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
-import CollectionCard from "./components/CollectionCard";
 import { paths } from "@/config/paths";
 import {
   categoryIds,
@@ -10,6 +9,9 @@ import {
 } from "@/features/Categories/consts/consts";
 import Link from "next/link";
 import ImageWithTitleCard from "@/features/Products/components/Cards/ImageWithTitleCard";
+
+import * as motion from "motion/react-client";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const Collections = () => {
   const everyDayLink = paths.catalog.collections.category.getHref(
@@ -36,10 +38,33 @@ const Collections = () => {
   return (
     <Section className="my-section">
       <Container className="flex-col gap-12 lg:gap-16">
-        <h2 className="text-h2">
+        <AnimatedInView
+          as="h2"
+          viewport={{ once: true, amount: "all" }}
+          animations={{
+            default: {
+              initial: { opacity: 0, translateX: 400 },
+              whileInView: { opacity: 1, translateX: 0 },
+              transition: { duration: 0.6, type: "tween" },
+            },
+          }}
+          className="text-h2 w-min whitespace-nowrap"
+        >
           Готовые образы <br /> /
-        </h2>
-        <div className="grid h-full grid-cols-collections-lg lg:grid-cols-4 grid-rows-collections-lg lg:grid-rows-[repeat(7,80px)] gap-6">
+        </AnimatedInView>
+
+        <AnimatedInView
+          as="div"
+          viewport={{ once: true, amount: 0.3 }}
+          animations={{
+            default: {
+              initial: { opacity: 0, translateY: 150 },
+              whileInView: { opacity: 1, translateY: 0 },
+              transition: { duration: 0.6, type: "tween" },
+            },
+          }}
+          className="grid h-full grid-cols-collections-lg lg:grid-cols-4 grid-rows-collections-lg lg:grid-rows-[repeat(7,80px)] gap-6"
+        >
           <ImageWithTitleCard
             className="row-span-2 lg:row-span-5"
             title="На каждый день"
@@ -74,7 +99,7 @@ const Collections = () => {
             href={eveningLink}
             src="/images/Home/Fashion/fashion-4.jpg"
           />
-        </div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

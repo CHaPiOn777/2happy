@@ -13,6 +13,8 @@ import {
 import HelpDialog from "../../../HelpDialog/HelpDialog";
 import { cn } from "@/shared/utils";
 
+import { motion } from "motion/react";
+
 const UpperHeader = ({
   ref,
   className,
@@ -31,7 +33,10 @@ const UpperHeader = ({
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
       ref={ref}
       className={cn(
         "flex items-center min-h-[56px] border-b-[1px] border-main z-header bg-white",
@@ -73,7 +78,7 @@ const UpperHeader = ({
           Контакты
         </Link>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 

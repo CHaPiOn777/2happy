@@ -9,15 +9,30 @@ import Link from "next/link";
 import { CATEGORIES } from "./consts";
 import CategoryLink from "@/features/Categories/components/CategoryLink";
 
+import * as motion from "motion/react-client";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+
 const Categories = () => {
   return (
     <Section className="border-b-[1px] border-b-main">
       <Container className="justify-between gap-[176px] my-section">
         <div className="flex flex-col justify-between w-full lg:basis-[392px]">
-          <h2 className="text-h2 mt-12 lg:mt-0">
+          <motion.h2
+            initial={{ opacity: 0, translateY: -150 }}
+            whileInView={{ opacity: 1, translateY: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "tween" }}
+            className="text-h2 mt-12 lg:mt-0"
+          >
             Категории <br /> /
-          </h2>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]">
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, translateY: 150 }}
+            whileInView={{ opacity: 1, translateY: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "tween" }}
+            className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]"
+          >
             <Link
               href={paths.catalog.getHref()}
               className="link-hover col-span-2 text-button-medium"
@@ -40,9 +55,27 @@ const Categories = () => {
                 alt="category-image"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
-        <div className="w-full lg:basis-[600px] flex flex-col">
+
+        <AnimatedInView
+          as="div"
+          animations={{
+            lg: {
+              initial: { opacity: 0, translateX: 100 },
+              whileInView: { opacity: 1, translateX: 0 },
+              transition: { duration: 0.6, type: "tween" },
+              viewport: { once: true, amount: 0.3 },
+            },
+            default: {
+              initial: { opacity: 0, translateX: 100 },
+              whileInView: { opacity: 1, translateX: 0 },
+              transition: { duration: 0.6, type: "tween" },
+              viewport: { once: true, amount: 0.8 },
+            },
+          }}
+          className="w-full lg:basis-[600px] flex flex-col"
+        >
           {CATEGORIES.map((category) => (
             <Button
               key={category.name}
@@ -60,7 +93,7 @@ const Categories = () => {
               </CategoryLink>
             </Button>
           ))}
-        </div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

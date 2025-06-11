@@ -12,10 +12,13 @@ import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import { tagIds } from "@/features/Categories/consts/consts";
 import CustomSlide from "./CustomSlide";
 
+import { motion } from "motion/react";
+
 import "swiper/css";
 import "swiper/css/navigation";
 
 import "./styles.scss";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewCollectionSlider = () => {
   const { data } = useSuspenseQuery(
@@ -33,7 +36,19 @@ const NewCollectionSlider = () => {
   ];
 
   return (
-    <div className="overflow-hidden pb-4">
+    <AnimatedInView
+      as="div"
+      viewport={{ once: true, amount: 0.4 }}
+      fallbackClassName="opacity-0"
+      animations={{
+        default: {
+          transition: { duration: 0.7, type: "tween" },
+          initial: { opacity: 0 },
+          whileInView: { opacity: 1 },
+        },
+      }}
+      className="overflow-hidden pb-4"
+    >
       <Swiper
         modules={[Navigation]}
         className="new-collection-slider relative"
@@ -70,7 +85,7 @@ const NewCollectionSlider = () => {
           </SliderButton>
         </div>
       </Swiper>
-    </div>
+    </AnimatedInView>
   );
 };
 

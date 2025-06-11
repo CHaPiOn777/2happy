@@ -5,6 +5,8 @@ import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import ProductServerCard from "@/features/Products/components/Cards/ProductServerCard";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { motion } from "motion/react";
+
 const FinalSaleList = () => {
   const { data } = useSuspenseQuery(
     getProductsQueryOptions({
@@ -17,11 +19,16 @@ const FinalSaleList = () => {
   return (
     <>
       {data.items.map((product) => (
-        <ProductServerCard
+        <motion.div
           key={product.id}
-          product={product}
-          className="first:hidden lg:first:block"
-        />
+          transition={{ duration: 0.6, type: "tween" }}
+          initial={{ opacity: 0, translateY: 200 }}
+          whileInView={{ opacity: 1, translateY: 0 }}
+          viewport={{ once: true }}
+          className="w-full first:hidden lg:first:block"
+        >
+          <ProductServerCard product={product} />
+        </motion.div>
       ))}
     </>
   );

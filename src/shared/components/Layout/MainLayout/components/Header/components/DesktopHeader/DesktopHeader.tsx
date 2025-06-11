@@ -13,6 +13,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategoriesQueryOptions } from "@/features/Categories/api/categoriesApi";
 import { categoryIds } from "@/features/Categories/consts/consts";
 
+import { motion } from "motion/react";
+
 const DesktopHeader = ({ rightSlot }: { rightSlot?: ReactNode }) => {
   const [isSticky, setIsSticky] = useState(false);
   const upperHeaderRef = useRef<HTMLDivElement>(null);
@@ -44,12 +46,27 @@ const DesktopHeader = ({ rightSlot }: { rightSlot?: ReactNode }) => {
   return (
     <>
       {/* Это подложка под sticky header, чтобы при скролле была тень и border, но скрывались под CategorySheet */}
-      <div className="fixed h-[calc(var(--sticky-header-height)+1px)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block" />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="fixed h-[calc(var(--sticky-header-height)+1px)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block"
+      />
       {/* Это подложка под большой header, чтобы была тень и border, но скрывались под CategorySheet */}
-      <div className="absolute h-[var(--full-header-height)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block" />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="absolute h-[var(--full-header-height)] left-0 top-0 w-full z-[49] shadow-header border-b-[1px] border-main hidden lg:block"
+      />
 
       <UpperHeader ref={upperHeaderRef} className="hidden lg:block" />
-      <header className="sticky top-0 min-h-[80px] bg-white z-header hidden lg:block">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="sticky top-0 min-h-[80px] bg-white z-header hidden lg:block"
+      >
         <Container className="items-center">
           <Link href="/">
             <Image
@@ -77,7 +94,7 @@ const DesktopHeader = ({ rightSlot }: { rightSlot?: ReactNode }) => {
             {rightSlot}
           </div>
         </Container>
-      </header>
+      </motion.div>
     </>
   );
 };

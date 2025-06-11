@@ -12,6 +12,9 @@ import FinalSaleListLoader from "./components/FinalSaleListLoader";
 import Link from "next/link";
 import { paths } from "@/config/paths";
 
+import * as motion from "motion/react-client";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+
 const FinalSale = async () => {
   const queryClient = getQueryClient();
 
@@ -30,7 +33,19 @@ const FinalSale = async () => {
           <Suspense fallback={<FinalSaleListLoader />}>
             <FinalSaleList />
           </Suspense>
-          <div className="w-full flex flex-col justify-between ">
+
+          <AnimatedInView
+            as="div"
+            viewport={{ once: true, amount: "all" }}
+            animations={{
+              default: {
+                initial: { opacity: 0, translateY: -200 },
+                whileInView: { opacity: 1, translateY: 0 },
+                transition: { duration: 0.6, type: "tween" },
+              },
+            }}
+            className="w-full flex flex-col justify-between "
+          >
             <h2 className="text-h2">
               FINAL SALE <br />/
             </h2>
@@ -51,7 +66,7 @@ const FinalSale = async () => {
                 />
               </div>
             </div>
-          </div>
+          </AnimatedInView>
         </Container>
       </Section>
     </HydrationBoundary>

@@ -62,6 +62,10 @@ export const paths = {
     },
   },
 
+  favorite: {
+    getHref: () => "/favorite",
+  },
+
   product: {
     getHref: (id: number, slug: string, params?: Record<string, unknown>) => {
       const decodedSlug = decodeURIComponent(slug);

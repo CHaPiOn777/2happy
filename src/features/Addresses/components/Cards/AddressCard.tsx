@@ -21,7 +21,7 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
     },
   });
   return (
-    <div className="flex flex-col gap-4 border border-main p-6">
+    <div className="flex flex-col gap-8 lg:gap-4 border border-gray-middle p-6">
       <div className="flex flex-col gap-6">
         <div className="flex justify-between">
           <h5 className="text-h5">
@@ -40,7 +40,9 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
       </div>
       <div className="flex justify-end gap-6">
         <UpdateAddressDialog title="Адрес" address={address}>
-          <Button variant="secondary">Редактировать</Button>
+          <Button variant="secondary" className="w-full lg:w-max">
+            Редактировать
+          </Button>
         </UpdateAddressDialog>
         <DeleteAddressDialog
           open={open}
@@ -48,9 +50,11 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
           onApply={() => {
             mutate({ id: address.id, user_id: user?.id ?? 0 });
           }}
-          isLoading={isPending}
+          isPending={isPending}
         >
-          <Button disabled={isPending}>Удалить</Button>
+          <Button disabled={isPending} className="w-full lg:w-max">
+            Удалить
+          </Button>
         </DeleteAddressDialog>
       </div>
     </div>

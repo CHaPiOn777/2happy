@@ -15,7 +15,7 @@ const chipVariants = cva(`flex rounded-xs text-white whitespace-nowrap w-min`, {
     size: {
       normal: "text-button-small p-2",
       medium: "text-button-xs p-3",
-      small: "text-button-xs py-1 px-2",
+      small: "text-description lg:text-button-xs lg:py-1 px-2",
     },
   },
   defaultVariants: {

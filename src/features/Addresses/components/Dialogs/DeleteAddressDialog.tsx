@@ -1,14 +1,16 @@
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
-import { Button } from "@/shared/components/UI/Button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/shared/components/UI/Dialog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/shared/components/UI/AlertDialog";
+import { AlertDialogTriggerProps } from "@radix-ui/react-alert-dialog";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 const DeleteAddressDialog = ({
@@ -16,36 +18,50 @@ const DeleteAddressDialog = ({
   open,
   setOpen,
   onApply,
-  isLoading,
+  isPending,
+  ...props
 }: {
   children: ReactNode;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   onApply: () => void;
-  isLoading: boolean;
-}) => {
+  isPending: boolean;
+} & AlertDialogTriggerProps) => {
   return (
-    <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="px-14 pt-4 pb-10">
-        <DialogHeader>
-          <DialogTitle className="sr-only">Удалить адрес</DialogTitle>
-          <DialogDescription className="text-body2 pt-2">
+    <AlertDialog open={open}>
+      <AlertDialogTrigger
+        onClick={() => {
+          if (props.disabled) return;
+          setOpen(true);
+        }}
+        {...props}
+        asChild
+      >
+        {children}
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="sr-only">
+            Подтверждение возврата
+          </AlertDialogTitle>
+          <AlertDialogDescription>
             Вы действительно хотите удалить этот адрес?
-          </DialogDescription>
-          <DialogClose className="top-4 right-4" />
-        </DialogHeader>
-        <div className="flex justify-end gap-6">
-          <Button variant="secondary" size="medium" disabled={isLoading}>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel
+            disabled={isPending}
+            onClick={() => setOpen(false)}
+          >
             Отменить
-          </Button>
-          <Button size="medium" onClick={onApply} disabled={isLoading}>
-            {isLoading && <LoaderIcon className="animate-spin" />}
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={onApply} disabled={isPending}>
+            {isPending && <LoaderIcon className="animate-spin" />}
             Удалить
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

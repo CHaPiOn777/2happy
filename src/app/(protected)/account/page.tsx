@@ -43,7 +43,7 @@ const AccountPage = () => {
             Мои заказы
           </PageTabsTrigger>
         </PageTabsList>
-        <Container className="w-full my-section">
+        <div className="my-[80px] xl:my-section">
           <PageTabsContent className="w-full" value={ACCOUNT_TABS.PROFILE}>
             {!isLoading && data ? <ProfileTab /> : <ProfileTabLoader />}
           </PageTabsContent>
@@ -53,7 +53,7 @@ const AccountPage = () => {
           <PageTabsContent className="w-full" value={ACCOUNT_TABS.ORDERS}>
             {!isLoading && data ? <OrdersTab /> : "Загрузка..."}
           </PageTabsContent>
-        </Container>
+        </div>
       </PageTabs>
     </div>
   );

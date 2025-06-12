@@ -16,6 +16,8 @@ import SearchIcon from "@/shared/components/icons/SearchIcon";
 import "./style.css";
 import NewCartIcon from "@/shared/components/icons/NewCartIcon";
 import UserMobileButton from "@/features/User/components/UserMobileButton";
+import FavoriteSheet from "@/features/Favorite/components/FavoriteSheet";
+import HeartIcon from "@/shared/components/icons/HeartIcon";
 
 const Header = () => {
   return (
@@ -28,6 +30,11 @@ const Header = () => {
         }
         rightSlot={
           <div className="flex gap-4">
+            <FavoriteSheet triggerProps={{ asChild: true }}>
+              <IconButton variant="secondary" size="medium">
+                <HeartIcon />
+              </IconButton>
+            </FavoriteSheet>
             <CartSheet triggerProps={{ asChild: true }}>
               <IconButton variant="secondary" size="medium">
                 <NewCartIcon className="fill-main" />
@@ -47,6 +54,12 @@ const Header = () => {
                 Поиск
               </div>
             </SearchSheet>
+            <FavoriteSheet>
+              <div data-tooltip-id="favorite" data-tooltip-content="Избранное">
+                <HeartIcon className="hover:fill-main" />
+                <StyledTooltip id="favorite" />
+              </div>
+            </FavoriteSheet>
             <CartSheet>
               <div data-tooltip-id="cart" data-tooltip-content="Корзина">
                 <CartIcon className="hover:fill-main" />

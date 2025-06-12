@@ -1,0 +1,131 @@
+"use client";
+
+import MinusIcon from "@/shared/components/icons/MinusIcon";
+import PlusIcon from "@/shared/components/icons/PlusIcon";
+import TrashIcon from "@/shared/components/icons/TrashIcon";
+import {
+  IconButton,
+  IconButtonLoader,
+} from "@/shared/components/UI/IconButton";
+import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
+import { Separator } from "@/shared/components/UI/Separator";
+import StyledTooltip from "@/shared/components/UI/StyledTooltip";
+import { cn } from "@/shared/utils/cn";
+import { ComponentPropsWithoutRef } from "react";
+import { Chip } from "@/shared/components/UI/Chip";
+import { Skeleton } from "@/shared/components/UI/Skeleton";
+import AddToCartIcon from "@/shared/components/icons/AddToCartIcon";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
+
+const FavoriteSheetCard = ({
+  className,
+  ...props
+}: {} & ComponentPropsWithoutRef<"article">) => {
+  const isTablet = useMediaCustom("lg");
+  return (
+    <article
+      className={cn(
+        "w-full flex gap-6 h-[144px] lg:h-[248px] pb-4 lg:pb-8 border-b border-gray last:border-b-0",
+        className
+      )}
+      {...props}
+    >
+      <ImageWithLoader
+        wrapperClassName="w-[92px] h-[128px] lg:h-auto lg:w-[148px] shrink-0"
+        src={"/images/Home/Main/slider-1.jpg"}
+        alt={"test"}
+      />
+      <div className="flex flex-col gap-4 lg:gap-6 w-full">
+        <div className="flex flex-col gap-2 lg:gap-4">
+          <div className="flex gap-6">
+            <h5 className="text-button-xs lg:text-h5">
+              Платье трикотажное с отделкой из сетки и принтом /
+            </h5>
+            <IconButton
+              className="border border-gray"
+              variant="secondary"
+              size={isTablet ? "extraSmall" : "small"}
+              data-tooltip-id="cart-add"
+              data-tooltip-content="Добавить в корзину"
+            >
+              <AddToCartIcon />
+              <StyledTooltip id="cart-add" />
+            </IconButton>
+          </div>
+          <div className="text-description lg:text-h5 flex items-center gap-2">
+            <span className={cn("line-through text-gray-middle")}>
+              85 500 ₸
+            </span>
+            <span>25 500 ₸</span>
+            <Chip variant="pink" size="small">
+              - {70} %
+            </Chip>
+          </div>
+          <div className="flex flex-row lg:flex-col gap-2 text-description lg:text-body2">
+            <div className="flex items-center gap-2 lg:gap-4">
+              <span>Размер</span>
+              <Separator className="h-4/6" orientation="vertical" />
+              <span className="text-gray-middle">S</span>
+            </div>
+            <div className="flex items-center gap-2 lg:gap-4">
+              <span>Цвет</span>
+              <Separator className="h-4/6" orientation="vertical" />
+              <span className="text-gray-middle">Черный</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-full flex  gap-4">
+          <div className="flex justify-between lg:justify-normal gap-2 w-full">
+            <div className="flex gap-2">
+              <IconButton
+                className="border border-gray"
+                variant="secondary"
+                size="extraSmall"
+              >
+                <MinusIcon />
+              </IconButton>
+              <div className="text-body2 py-1 px-8 bg-gray-light">1</div>
+              <IconButton
+                className="border border-gray "
+                variant="secondary"
+                size="extraSmall"
+              >
+                <PlusIcon />
+              </IconButton>
+            </div>
+            <button
+              data-tooltip-id="favorite-delete"
+              data-tooltip-content="Удалить товар"
+            >
+              <TrashIcon className="stroke-gray-middle hover:stroke-red" />
+              <StyledTooltip id="favorite-delete" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default FavoriteSheetCard;
+
+export const CartMediumCardLoader = () => {
+  return (
+    <div className="w-full flex gap-6 h-[248px] shrink-0 pb-8 border-b border-gray last:border-b-0">
+      <Skeleton className="w-[148px] shrink-0" />
+      <div className="w-full flex flex-col justify-between">
+        <div className="flex flex-col gap-4">
+          <Skeleton className="w-3/4 h-[24px]" />
+          <Skeleton className="w-[190px] h-[20px] mb-2" />
+          <Skeleton className="w-[130px] h-[18px]" />
+          <Skeleton className="w-[130px] h-[18px]" />
+        </div>
+        <div className="flex gap-2">
+          <IconButtonLoader size="extraSmall" />
+          <Skeleton className="w-[68px] h-[32px]" />
+          <IconButtonLoader size="extraSmall" />
+        </div>
+      </div>
+    </div>
+  );
+};

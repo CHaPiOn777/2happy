@@ -106,7 +106,7 @@ const ChangePickedAddressDialog = ({
                           onApply={() => {
                             mutate({ id: address.id, user_id: user?.id ?? 0 });
                           }}
-                          isLoading={isPending}
+                          isPending={isPending}
                         >
                           <Button
                             className="w-full lg:w-min"

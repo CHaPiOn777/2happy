@@ -13,7 +13,7 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  const zoomFactor = 1.1;
+  const zoomFactor = 1.2;
 
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
@@ -29,7 +29,6 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     y: { min: 0, max: 0 },
   });
 
-  // Загружаем изображение и определяем aspect ratio
   useEffect(() => {
     const img = new window.Image();
     img.src = src;
@@ -49,12 +48,8 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
       const containerWidth = rect.width;
       const containerHeight = rect.height;
 
-      console.log(containerWidth, containerHeight, naturalAspectRatio);
-
       const zoomedWidth = containerWidth * zoomFactor;
       const zoomedHeight = zoomedWidth * naturalAspectRatio;
-
-      console.log(zoomedWidth, zoomedHeight);
 
       const maxX = 0;
       const minX = Math.min(containerWidth - zoomedWidth, 0);
@@ -74,7 +69,6 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     }
   };
 
-  // Обновляем размеры при изменении aspectRatio
   useEffect(() => {
     if (!containerRef.current || naturalAspectRatio === null) return;
 
@@ -89,15 +83,15 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     return () => observer.disconnect();
   }, [naturalAspectRatio]);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const startDrag = (x: number, y: number) => {
     setDragging(true);
-    setStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+    setStart({ x: x - position.x, y: y - position.y });
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const updateDrag = (x: number, y: number) => {
     if (!dragging) return;
-    const newX = e.clientX - start.x;
-    const newY = e.clientY - start.y;
+    const newX = x - start.x;
+    const newY = y - start.y;
 
     setPosition({
       x: clamp(newX, limits.x.min, limits.x.max),
@@ -105,23 +99,53 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     });
   };
 
-  const handleMouseUp = () => {
+  const endDrag = () => {
     setDragging(false);
   };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    startDrag(e.clientX, e.clientY);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    updateDrag(e.clientX, e.clientY);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      startDrag(touch.clientX, touch.clientY);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      updateDrag(touch.clientX, touch.clientY);
+    }
+  };
+
+  const handleTouchEnd = () => endDrag();
+  const handleTouchCancel = () => endDrag();
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden cursor-grab"
+      className="relative w-full h-full overflow-hidden touch-none select-none"
       onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseUp={endDrag}
+      onMouseLeave={endDrag}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
       {naturalAspectRatio !== null && (
         <div
           ref={imageRef}
           onMouseDown={handleMouseDown}
-          className="absolute select-none pointer-events-auto cursor-grab"
+          onTouchStart={handleTouchStart}
+          className="absolute select-none pointer-events-auto touch-none"
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
             transition: dragging ? "none" : "transform 0.2s ease-out",

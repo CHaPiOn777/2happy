@@ -26,7 +26,7 @@ const MobileHeader = ({
           viewport: { once: true, amount: 0 },
         },
       }}
-      className="fixed flex items-center z-header w-full min-h-[80px] border-b border-b-main bg-white block lg:hidden"
+      className="fixed items-center z-header w-full min-h-[80px] border-b border-b-main bg-white flex lg:hidden"
     >
       <Container className="h-full justify-between items-center">
         <div className="flex items-center gap-4">

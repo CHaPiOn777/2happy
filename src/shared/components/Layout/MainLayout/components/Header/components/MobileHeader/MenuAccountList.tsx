@@ -26,7 +26,6 @@ const MenuAccountList = ({
             onClick={() => setOpen(false)}
           >
             <span className="text-body2 text-gray-dark">Профиль</span>
-            <ChevronDownIcon className="-rotate-90 fill-gray-dark" />
           </Link>
         </li>
         <li>
@@ -36,7 +35,6 @@ const MenuAccountList = ({
             onClick={() => setOpen(false)}
           >
             <span className="text-body2 text-gray-dark">Адресная книга</span>
-            <ChevronDownIcon className="-rotate-90 fill-gray-dark" />
           </Link>
         </li>
         <li>

@@ -2,7 +2,10 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ReviewCard, { ReviewCardLoader } from "./ReviewCard";
-import { getCommentsListQueryOptions } from "../api/reviewsApi";
+import {
+  getCommentsListInfiniteQueryOptions,
+  getCommentsListQueryOptions,
+} from "../api/reviewsApi";
 import { TSort } from "@/shared/types/other";
 import {
   Select,
@@ -43,7 +46,7 @@ const ReviewsList = () => {
 
   const { data, isPending, fetchNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      ...getCommentsListQueryOptions({
+      ...getCommentsListInfiniteQueryOptions({
         per_page: 12,
         order: sort.type,
         orderby: sort.field,

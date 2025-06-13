@@ -11,7 +11,6 @@ const CheckoutLayout = ({ children }: { children: ReactNode }) => {
   const { checkoutItems } = useCheckoutStore();
 
   useEffect(() => {
-    console.log(checkoutItems, checkoutItems.length);
     if (!checkoutItems.length) router.replace("/");
   }, []);
   return (

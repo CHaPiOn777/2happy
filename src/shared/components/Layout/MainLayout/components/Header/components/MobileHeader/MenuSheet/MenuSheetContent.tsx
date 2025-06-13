@@ -1,4 +1,4 @@
-import { TCategories } from "@/features/Categories/consts/consts";
+import { categoryIds, TCategories } from "@/features/Categories/consts/consts";
 import ChevronDownIcon from "@/shared/components/icons/Chevron/ChevronDownIcon";
 import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 import {
@@ -15,8 +15,10 @@ import { Separator } from "@/shared/components/UI/Separator";
 import MenuAccountList from "../MenuAccountList";
 import { paths } from "@/config/paths";
 import MobileCategories from "../MobileCategories";
+import { isCategory } from "@/features/Categories/utils/isCategory";
+import MenuHelp from "../MenuHelp";
 
-export type MenuTabs = "all" | "catalog" | TCategories;
+export type MenuTabs = "all" | "help" | "catalog" | TCategories;
 
 const MenuSheetContent = ({
   open,
@@ -98,14 +100,14 @@ const MenuSheetContent = ({
             <Separator />
             <ul className="space-y-2">
               <li>
-                <Link
-                  className="flex items-center justify-between py-3"
-                  href={paths.help.getHref()}
-                  onClick={() => setOpen(false)}
+                <div
+                  className="flex justify-between py-3  "
+                  role="button"
+                  onClick={() => handleChangeTab("help")}
                 >
                   <span className="text-body2 text-gray-dark">Помощь</span>
                   <ChevronDownIcon className="-rotate-90 fill-gray-dark" />
-                </Link>
+                </div>
               </li>
 
               <li>
@@ -115,14 +117,14 @@ const MenuSheetContent = ({
                   onClick={() => setOpen(false)}
                 >
                   <span className="text-body2 text-gray-dark">Контакты</span>
-                  <ChevronDownIcon className="-rotate-90 fill-gray-dark" />
                 </Link>
               </li>
             </ul>
           </div>
         </ScrollArea>
       )}
-      {tab != "all" && (
+      {tab === "help" && <MenuHelp handleCloseSheet={() => setOpen(false)} />}
+      {(tab === "catalog" || (tab && isCategory(tab))) && (
         <MobileCategories
           tab={tab}
           handleChangeTab={handleChangeTab}

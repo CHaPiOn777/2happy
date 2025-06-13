@@ -3,7 +3,6 @@ import { CheckoutItem } from "@/shared/types/other";
 export function calculateTotals(items: CheckoutItem[]) {
   return items.reduce(
     (acc, item) => {
-      console.log(acc);
       const regular =
         parseFloat(item.regularPrice.replace(/\s/g, "").replace(",", ".")) *
         item.quantity;

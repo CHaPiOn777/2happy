@@ -9,14 +9,17 @@ import StatisticSection from "./components/StatisticSection";
 import HistorySection from "./components/HistorySection";
 import ReviewsSection from "./components/ReviewsSection";
 import WhatsAppButton from "@/shared/components/Layout/MainLayout/components/WhatsAppButton";
-import { sleep } from "@/sleep";
+import { getQueryClient } from "@/shared/api/queryClient";
+import { getCommentsListQueryOptions } from "@/features/Reviews/api/reviewsApi";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 const AboutPage = async () => {
-  if (process.env.NODE_ENV === "production") {
-    await sleep(35000);
-  }
+  const queryClient = getQueryClient();
+
+  queryClient.prefetchQuery(getCommentsListQueryOptions({ per_page: 3 }));
+
   return (
-    <>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <Main />
       <AboutSection />
       <OurValues />
@@ -28,7 +31,7 @@ const AboutPage = async () => {
       <Instagram />
       <PartnersSection />
       <WhatsAppButton />
-    </>
+    </HydrationBoundary>
   );
 };
 

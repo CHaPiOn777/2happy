@@ -1,24 +1,24 @@
 "use client";
 
-import {
-  useCreateComment,
-  useUploadMedia,
-} from "@/features/Reviews/api/reviewsMutationsApi";
+import { useCreateComment } from "@/features/Reviews/api/reviewsMutationsApi";
 import CreateReviewDialog from "@/features/Reviews/components/CreateReview/CreateReviewDialog";
 import { CreateReviewFormInput } from "@/features/Reviews/components/CreateReview/CreateReviewForm";
 import { useUser } from "@/shared/api/authApi";
 import { Button } from "@/shared/components/UI/Button";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
 import { useMemo, useState } from "react";
+import SuccessReviewDialog from "./SuccessReviewDialog";
 
 const CreateReviewButton = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [openCreateForm, setOpenCreateForm] = useState<boolean>(false);
+  const [openSuccess, setOpenSuccess] = useState<boolean>(false);
 
   const { data: user } = useUser();
 
   const { mutate: createComment, isPending } = useCreateComment({
     onSuccess: () => {
-      setOpen(false);
+      setOpenCreateForm(false);
+      setOpenSuccess(true);
     },
   });
 
@@ -49,25 +49,28 @@ const CreateReviewButton = () => {
     }
   };
   return (
-    <CreateReviewDialog
-      open={open}
-      setOpen={setOpen}
-      defaultValues={defaultValues}
-      onSubmit={onSubmit}
-      isPending={isPending}
-      triggerProps={{ disabled: !user }}
-    >
-      <div
-        className="w-min"
-        data-tooltip-id="create-review"
-        data-tooltip-content="Авторизуйтесь, чтобы оставить отзыв"
+    <div>
+      <CreateReviewDialog
+        open={openCreateForm}
+        setOpen={setOpenCreateForm}
+        defaultValues={defaultValues}
+        onSubmit={onSubmit}
+        isPending={isPending}
+        triggerProps={{ disabled: !user }}
       >
-        <Button size="medium" disabled={!user}>
-          Написать отзыв
-        </Button>
-        {!user && <StyledTooltip id="create-review" />}
-      </div>
-    </CreateReviewDialog>
+        <div
+          className="w-min"
+          data-tooltip-id="create-review"
+          data-tooltip-content="Авторизуйтесь, чтобы оставить отзыв"
+        >
+          <Button size="medium" disabled={!user}>
+            Написать отзыв
+          </Button>
+          {!user && <StyledTooltip id="create-review" />}
+        </div>
+      </CreateReviewDialog>
+      <SuccessReviewDialog open={openSuccess} setOpen={setOpenSuccess} />
+    </div>
   );
 };
 

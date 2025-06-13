@@ -1,7 +1,11 @@
 import { formattedApiInstance } from "@/shared/api/formattedApiInstance";
 import { createURLWithParams } from "@/shared/utils";
 import { WPComment } from "../types";
-import { InfiniteData, infiniteQueryOptions } from "@tanstack/react-query";
+import {
+  InfiniteData,
+  infiniteQueryOptions,
+  queryOptions,
+} from "@tanstack/react-query";
 import { WooResponse } from "@/shared/types/api";
 
 export type getCommentsListParameters = {
@@ -43,6 +47,15 @@ const commentsQueryKey = (params: getCommentsListParameters) => {
 };
 
 export const getCommentsListQueryOptions = (
+  params: getCommentsListParameters
+) => {
+  return queryOptions({
+    queryKey: commentsQueryKey(params),
+    queryFn: (meta) => getCommentsList({ ...params }, { signal: meta.signal }),
+  });
+};
+
+export const getCommentsListInfiniteQueryOptions = (
   params: getCommentsListParameters
 ) => {
   return infiniteQueryOptions<

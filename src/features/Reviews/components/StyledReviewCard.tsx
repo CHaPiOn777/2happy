@@ -1,11 +1,19 @@
 import QuoteIcon from "@/shared/components/icons/QuoteIcon";
-import { cn } from "@/shared/utils";
+import { cn, sanitizeHtml } from "@/shared/utils";
 import { ComponentPropsWithoutRef } from "react";
+import { WPComment } from "../types";
+import { format } from "date-fns";
 
 const StyledReviewCard = ({
+  review,
   className,
   ...props
-}: ComponentPropsWithoutRef<"article">) => {
+}: { review: WPComment } & ComponentPropsWithoutRef<"article">) => {
+  const { safeHTML, parse } = sanitizeHtml(review.content.rendered);
+
+  const date = new Date(review.date);
+  const formatted = format(date, "dd/MM/yy");
+
   return (
     <article
       className={cn(
@@ -15,16 +23,21 @@ const StyledReviewCard = ({
       {...props}
     >
       <QuoteIcon />
-      <p className="text-gray-dark">
-        Обожаю стиль 2HAPPY! Ношу уже третью капсулу — всё сочетается, удобно
-        и выглядит дорого. Особенно понравилось качество трикотажа…
-      </p>
+      <div className="text-gray-dark line-clamp-4">
+        {safeHTML && parse(safeHTML)}
+      </div>
       <div className="flex justify-between items-end">
         <div className="flex flex-col">
-          <div>Инесса Г.</div>
-          <div className="text-gray-middle">Казахстан, Петропавловск</div>
+          <div>{review.author_name}</div>
+          {!review.meta.city && !review.meta.country ? (
+            <div className=" text-gray-middle">Город не указан</div>
+          ) : (
+            <div className=" text-gray-middle">
+              {review.meta.country}, {review.meta.city}
+            </div>
+          )}
         </div>
-        <span className="text-gray-middle">26/03/25</span>
+        <span className="text-gray-middle">{formatted}</span>
       </div>
     </article>
   );

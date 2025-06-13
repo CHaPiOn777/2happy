@@ -6,7 +6,7 @@ import { cn, sanitizeHtml } from "@/shared/utils";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 
 const ReviewCard = ({ review }: { review: WPComment }) => {
-  const date = new Date(review.date); // или передай свою дату
+  const date = new Date(review.date);
   const formatted = format(date, "dd/MM/yy");
 
   const { safeHTML, parse } = sanitizeHtml(review.content.rendered);
@@ -35,7 +35,7 @@ const ReviewCard = ({ review }: { review: WPComment }) => {
       </div>
       <div className="space-y-4">
         <div className="text-gray-dark">{safeHTML && parse(safeHTML)}</div>
-        <div className=" flex gap-4">
+        {/* <div className=" flex gap-4">
           {review.meta.images.map((item, index) => (
             <div key={index} className="relative w-[104px] h-[156px]">
               <Image
@@ -46,7 +46,7 @@ const ReviewCard = ({ review }: { review: WPComment }) => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </article>
   );

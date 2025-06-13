@@ -1,6 +1,7 @@
 import ChevronDownIcon from "@/shared/components/icons/Chevron/ChevronDownIcon";
 import { MenuTabs } from "./MenuSheet/MenuSheetContent";
 import MobileCategoriesList from "./MobileCategoriesList";
+import { isCategory } from "@/features/Categories/utils/isCategory";
 
 const MobileCategories = ({
   tab,
@@ -11,7 +12,7 @@ const MobileCategories = ({
   handleChangeTab: (newTab: MenuTabs) => void;
   handleCloseSheet: () => void;
 }) => {
-  if (tab != "catalog" && tab != "all")
+  if (isCategory(tab))
     return (
       <MobileCategoriesList tab={tab} handleCloseSheet={handleCloseSheet} />
     );

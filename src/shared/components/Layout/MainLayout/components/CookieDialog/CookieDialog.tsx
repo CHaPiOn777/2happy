@@ -53,7 +53,7 @@ const CookieDialog = () => {
             Политика использования Cookies
           </SheetDescription>
         </SheetHeader>
-        <Container className="justify-between items-center">
+        <Container className="justify-between gap-4 items-center">
           <p className="max-w-[500px] w-full text-white">
             Мы используем cookies для корректной работы сайта. Продолжая
             использовать сайт, вы соглашаетесь с их применением.

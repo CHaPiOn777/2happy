@@ -30,7 +30,7 @@ const HelpPage = () => {
 
   return (
     <div>
-      <div className="relative h-[480px] bg-help-gradient">
+      <div className="relative h-[320px] lg:h-[440px] xl:h-[480px] bg-help-gradient">
         <Image
           className="object-cover object-[50%,70%] -z-10"
           fill

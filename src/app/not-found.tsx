@@ -20,7 +20,7 @@ import {
 
 const NotFoundBreadcrumbs = () => {
   return (
-    <Breadcrumbs className="h-[80px] bg-main">
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
@@ -41,7 +41,7 @@ const NotFound = () => {
   return (
     <>
       <NotFoundBreadcrumbs />
-      <Section className="h-[800px]">
+      <Section className="h-[552px] lg:h-[720px] xl:h-[800px]">
         <Image
           className="object-cover"
           fill
@@ -49,14 +49,11 @@ const NotFound = () => {
           alt="not-found-image"
         />
         <Container>
-          <div className="flex flex-col items-center justify-center gap-16 ml-20">
+          <div className="flex flex-col items-center justify-center gap-16 ml-20 my-20 lg:my-0">
             <div className="flex flex-col items-center gap-12 ">
-              <Image
-                width={584}
-                height={240}
-                src="/images/NotFound/404.png"
-                alt="404"
-              />
+              <div className="relative w-[390px] h-[160px] lg:w-[584px] lg:h-[240px]">
+                <Image fill src="/images/NotFound/404.png" alt="404" />
+              </div>
               <div className="flex flex-col gap-6 items-center">
                 <h3 className="text-h3">Страница не найдена</h3>
                 <span className="text-body1 text-center">

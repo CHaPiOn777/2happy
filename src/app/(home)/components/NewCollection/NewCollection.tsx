@@ -31,13 +31,13 @@ const NewCollection = async () => {
             animations={{
               xl: {
                 transition: { duration: 0.6, type: "tween" },
-                initial: { opacity: 0, translateX: 100 },
-                whileInView: { opacity: 1, translateX: 0 },
+                initial: { opacity: 0, x: 100 },
+                whileInView: { opacity: 1, x: 0 },
               },
               default: {
                 transition: { duration: 0.6, type: "tween" },
-                initial: { opacity: 0, translateX: 200 },
-                whileInView: { opacity: 1, translateX: 0 },
+                initial: { opacity: 0, x: 200 },
+                whileInView: { opacity: 1, x: 0 },
               },
             }}
             className="text-h2 w-min whitespace-nowrap"

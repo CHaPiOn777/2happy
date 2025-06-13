@@ -9,8 +9,8 @@ const Instagram = () => {
     <Section className="relative bg-main">
       <Container className="flex-col gap-10 my-section">
         <motion.h2
-          initial={{ opacity: 0, translateY: -150 }}
-          whileInView={{ opacity: 1, translateY: 0 }}
+          initial={{ opacity: 0, y: -150 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, type: "tween" }}
           className="text-h2 text-white"
@@ -18,8 +18,8 @@ const Instagram = () => {
           #2happy <br />/
         </motion.h2>
         <motion.div
-          initial={{ opacity: 0, translateY: 150 }}
-          whileInView={{ opacity: 1, translateY: 0 }}
+          initial={{ opacity: 0, y: 150 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, type: "spring" }}
           className="grid grid-cols-instagram-lg lg:grid-cols-4 grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-6"

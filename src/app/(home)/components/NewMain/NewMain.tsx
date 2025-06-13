@@ -48,9 +48,9 @@ const NewMain = () => {
       <Container className="gap-6 items-center h-full">
         <motion.div
           transition={{ duration: 1, type: "spring" }}
-          initial={{ translateX: -1000 }}
+          initial={{ x: -1000 }}
           animate={{
-            translateX: 0,
+            x: 0,
           }}
           className="-mt-10 lg:-mt-24"
         >

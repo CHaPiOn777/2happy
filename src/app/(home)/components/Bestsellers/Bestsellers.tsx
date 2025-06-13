@@ -24,13 +24,13 @@ const Bestsellers = () => {
           viewport={{ once: true, amount: "all" }}
           animations={{
             lg: {
-              initial: { opacity: 0, translateX: 300 },
-              whileInView: { opacity: 1, translateX: 0 },
+              initial: { opacity: 0, x: 100 },
+              whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
             },
             default: {
-              initial: { opacity: 0, translateX: 500 },
-              whileInView: { opacity: 1, translateX: 0 },
+              initial: { opacity: 0, x: 500 },
+              whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
             },
           }}
@@ -44,8 +44,8 @@ const Bestsellers = () => {
             viewport={{ once: true, amount: 0.3 }}
             animations={{
               default: {
-                initial: { opacity: 0, translateY: 200 },
-                whileInView: { opacity: 1, translateY: 0 },
+                initial: { opacity: 0, y: 200 },
+                whileInView: { opacity: 1, y: 0 },
                 transition: { duration: 0.6, type: "tween" },
               },
             }}
@@ -64,13 +64,13 @@ const Bestsellers = () => {
               viewport={{ once: true, amount: "all" }}
               animations={{
                 xl: {
-                  initial: { opacity: 0, translateX: 150 },
-                  whileInView: { opacity: 1, translateX: 0 },
+                  initial: { opacity: 0, x: 150 },
+                  whileInView: { opacity: 1, x: 0 },
                   transition: { duration: 0.6, type: "tween" },
                 },
                 default: {
-                  initial: { opacity: 0, translateX: 300 },
-                  whileInView: { opacity: 1, translateX: 0 },
+                  initial: { opacity: 0, x: 300 },
+                  whileInView: { opacity: 1, x: 0 },
                   transition: { duration: 0.6, type: "tween" },
                 },
               }}
@@ -85,8 +85,8 @@ const Bestsellers = () => {
             viewport={{ once: true, amount: 0.4 }}
             animations={{
               default: {
-                initial: { opacity: 0, translateX: 300 },
-                whileInView: { opacity: 1, translateX: 0 },
+                initial: { opacity: 0, x: 300 },
+                whileInView: { opacity: 1, x: 0 },
                 transition: { duration: 0.6, type: "tween" },
               },
             }}

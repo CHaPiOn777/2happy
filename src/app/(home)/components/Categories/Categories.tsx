@@ -18,8 +18,8 @@ const Categories = () => {
       <Container className="justify-between gap-[176px] my-section">
         <div className="flex flex-col justify-between w-full lg:basis-[392px]">
           <motion.h2
-            initial={{ opacity: 0, translateY: -150 }}
-            whileInView={{ opacity: 1, translateY: 0 }}
+            initial={{ opacity: 0, y: -150 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "tween" }}
             className="text-h2 mt-12 lg:mt-0"
@@ -27,8 +27,8 @@ const Categories = () => {
             Категории <br /> /
           </motion.h2>
           <motion.div
-            initial={{ opacity: 0, translateY: 150 }}
-            whileInView={{ opacity: 1, translateY: 0 }}
+            initial={{ opacity: 0, y: 150 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "tween" }}
             className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]"
@@ -62,14 +62,14 @@ const Categories = () => {
           as="div"
           animations={{
             lg: {
-              initial: { opacity: 0, translateX: 100 },
-              whileInView: { opacity: 1, translateX: 0 },
+              initial: { opacity: 0, x: 100 },
+              whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
               viewport: { once: true, amount: 0.3 },
             },
             default: {
-              initial: { opacity: 0, translateX: 100 },
-              whileInView: { opacity: 1, translateX: 0 },
+              initial: { opacity: 0, x: 100 },
+              whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
               viewport: { once: true, amount: 0.8 },
             },

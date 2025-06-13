@@ -20,8 +20,8 @@ const MobileHeader = ({
       fallbackClassName="opacity-0"
       animations={{
         default: {
-          initial: { translateY: -50, opacity: 0 },
-          whileInView: { opacity: 1, translateY: 0 },
+          initial: { y: -50, opacity: 0 },
+          whileInView: { opacity: 1, y: 0 },
           transition: { duration: 0.6, type: "tween" },
           viewport: { once: true, amount: 0 },
         },

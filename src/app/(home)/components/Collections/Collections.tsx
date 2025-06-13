@@ -43,8 +43,8 @@ const Collections = () => {
           viewport={{ once: true, amount: "all" }}
           animations={{
             default: {
-              initial: { opacity: 0, translateX: 400 },
-              whileInView: { opacity: 1, translateX: 0 },
+              initial: { opacity: 0, x: 400 },
+              whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
             },
           }}
@@ -58,8 +58,8 @@ const Collections = () => {
           viewport={{ once: true, amount: 0.3 }}
           animations={{
             default: {
-              initial: { opacity: 0, translateY: 150 },
-              whileInView: { opacity: 1, translateY: 0 },
+              initial: { opacity: 0, y: 150 },
+              whileInView: { opacity: 1, y: 0 },
               transition: { duration: 0.6, type: "tween" },
             },
           }}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, MotionProps } from "framer-motion";
+// import { motion, MotionProps } from "framer-motion";
 import {
   ElementType,
   HTMLAttributes,
@@ -14,6 +14,8 @@ import clsx from "clsx";
 import { GlobalMedia, GlobalMediaKeys } from "@/shared/styles/globalStyles";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/shared/utils";
+
+import { motion, MotionProps } from "motion/react";
 
 const useMediaCustom = (key: GlobalMediaKeys) =>
   useMediaQuery(GlobalMedia[key]);

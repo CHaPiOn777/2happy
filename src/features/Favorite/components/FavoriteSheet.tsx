@@ -13,6 +13,8 @@ import {
 import { ReactNode, useState } from "react";
 import FavoriteSheetEmpty from "./FavoriteSheetEmpty";
 import FavoriteSheetContent from "./FavoriteSheetContent";
+import { useGetAllFavorite } from "../api/favoriteApi";
+import FavoriteSheetLoader from "./FavoriteSheetLoader";
 
 const FavoriteSheet = ({
   children,
@@ -23,7 +25,12 @@ const FavoriteSheet = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const isEmpty = false;
+  const { data: favorites, isLoading } = useGetAllFavorite();
+
+  const favoritesCount = favorites?.reduce(
+    (acc, item) => (acc += item.quantity),
+    0
+  );
 
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
@@ -36,15 +43,19 @@ const FavoriteSheet = ({
       >
         <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
           <SheetTitle>Избранное</SheetTitle>
-          <SheetDescription>Всего товаров: 2</SheetDescription>
+          {favoritesCount ? (
+            <SheetDescription>Всего товаров {favoritesCount}</SheetDescription>
+          ) : null}
           <SheetClose className="top-6 right-10" />
         </SheetHeader>
 
-        {isEmpty ? (
+        {isLoading && <FavoriteSheetLoader />}
+        {!isLoading && favorites?.length ? (
+          <FavoriteSheetContent favorites={favorites} setOpen={setOpen} />
+        ) : null}
+        {!isLoading && !favorites?.length ? (
           <FavoriteSheetEmpty setOpen={setOpen} />
-        ) : (
-          <FavoriteSheetContent setOpen={setOpen} />
-        )}
+        ) : null}
       </SheetContent>
     </Sheet>
   );

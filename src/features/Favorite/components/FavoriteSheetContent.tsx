@@ -6,10 +6,13 @@ import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { useUser } from "@/shared/api/authApi";
 import AuthModal from "@/features/Auth/components/AuthModal";
 import FavoriteSheetCard from "./Cards/FavoriteSheetCard";
+import { FavoriteProduct } from "../api/indexedApi";
 
 const FavoriteSheetContent = ({
+  favorites,
   setOpen,
 }: {
+  favorites: FavoriteProduct[];
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { data: user } = useUser();
@@ -19,20 +22,10 @@ const FavoriteSheetContent = ({
   return (
     <div className="flex flex-col justify-between gap-6 w-full h-full flex-1 overflow-hidden">
       <div className="flex flex-col flex-1 overflow-hidden">
-        <div className="flex flex-col gap-4 lg:gap-6 overflow-scroll max-h-[530px]">
-          <FavoriteSheetCard />
-          <FavoriteSheetCard />
-          <FavoriteSheetCard />
-          {/* {cartData.items.map((item) => (
-            <CartMediumCard
-              key={item.key}
-              cartItem={item}
-              className="flex-shrink-0"
-              onClick={() => {
-                setOpen(false);
-              }}
-            />
-          ))} */}
+        <div className="flex flex-col gap-4 lg:gap-6 overflow-scroll max-h-[532px]">
+          {favorites?.map((favorite) => (
+            <FavoriteSheetCard key={favorite.id} favorite={favorite} />
+          ))}
         </div>
       </div>
       <div className="flex flex-col gap-8">

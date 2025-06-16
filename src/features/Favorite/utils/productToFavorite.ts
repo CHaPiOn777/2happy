@@ -1,0 +1,23 @@
+import { ProductServer, ProductVariation } from "@/features/Products/types";
+import { FavoriteProduct } from "../api/indexedApi";
+
+export const createFavorite = (
+  product: ProductServer,
+  variation: ProductVariation
+): FavoriteProduct => {
+  return {
+    id: variation.id,
+    name: product.name,
+    on_sale: variation.on_sale,
+    variationId: variation.id,
+    price: variation.price,
+    attributes: variation.attributes,
+    tags: product.tags,
+    regular_price: variation.regular_price,
+    sale_price: variation.sale_price,
+    stock_status: variation.stock_status,
+    stock_quantity: variation.stock_quantity,
+    quantity: 1,
+    image: variation.image,
+  };
+};

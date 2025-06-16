@@ -41,6 +41,31 @@ export type UserAddress = {
   isDefaultBilling: boolean;
 };
 
+export type ProductTags = "new" | "bestseller" | "final-sale";
+
+export type ProductTag = {
+  id: number;
+  slug: ProductTags;
+  name: string;
+};
+
+export type ProductVariationAttribute = {
+  id: number;
+  name: string;
+  slug: string;
+  option: string;
+};
+
+export type ProductAttribute = {
+  id: number;
+  name: string;
+  slug: string;
+  position: number;
+  visible: boolean;
+  variation: boolean;
+  options: string[];
+};
+
 export type UserData = {
   id: number;
   name: string;

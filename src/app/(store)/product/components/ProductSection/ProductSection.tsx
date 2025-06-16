@@ -42,8 +42,9 @@ const ProductSection = () => {
               setSearchParams({ [type]: value });
             }}
             setImages={setImages}
-            renderButtons={(variation, disabled) => (
+            renderButtons={(product, variation, disabled) => (
               <ProductSectionButtons
+                product={product}
                 variation={variation}
                 disabled={disabled}
               />

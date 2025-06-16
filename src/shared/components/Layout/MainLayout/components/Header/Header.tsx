@@ -18,6 +18,7 @@ import NewCartIcon from "@/shared/components/icons/NewCartIcon";
 import UserMobileButton from "@/features/User/components/UserMobileButton";
 import FavoriteSheet from "@/features/Favorite/components/FavoriteSheet";
 import HeartIcon from "@/shared/components/icons/HeartIcon";
+import FavoriteItemsCount from "@/features/Favorite/components/FavoriteItemsCount";
 
 const Header = () => {
   return (
@@ -57,6 +58,7 @@ const Header = () => {
             <FavoriteSheet>
               <div data-tooltip-id="favorite" data-tooltip-content="Избранное">
                 <HeartIcon className="hover:fill-main" />
+                <FavoriteItemsCount />
                 <StyledTooltip id="favorite" />
               </div>
             </FavoriteSheet>

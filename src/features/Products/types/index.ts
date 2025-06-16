@@ -1,4 +1,12 @@
-import { Image, Links, ProductCategory, StockStatus } from "@/shared/types/api";
+import {
+  Image,
+  Links,
+  ProductAttribute,
+  ProductCategory,
+  ProductTag,
+  ProductVariationAttribute,
+  StockStatus,
+} from "@/shared/types/api";
 
 export interface Product {
   id: string;
@@ -20,31 +28,6 @@ export interface Product {
   isNew?: boolean;
   isBestseller?: boolean;
 }
-
-export type ProductAttribute = {
-  id: number;
-  name: string;
-  slug: string;
-  position: number;
-  visible: boolean;
-  variation: boolean;
-  options: string[];
-};
-
-export type ProductTags = "new" | "bestseller" | "final-sale";
-
-export type ProductTagEntity = {
-  id: number;
-  slug: ProductTags;
-  name: string;
-};
-
-type ProductVariationAttribute = {
-  id: number;
-  name: string;
-  slug: string;
-  option: string;
-};
 
 type MetaProductFeatures = {
   id: number;
@@ -158,7 +141,7 @@ export type ProductServer = {
   parent_id: number;
   purchase_note: string;
   categories: ProductCategory[];
-  tags: ProductTagEntity[];
+  tags: ProductTag[];
   images: Image[];
   attributes: ProductAttribute[];
   default_attributes: unknown[];

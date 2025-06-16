@@ -37,9 +37,10 @@ const CollectionProducts = ({
                 <h4 className="text-h4">{product.name}</h4>
               </Link>
             )}
-            renderButtons={(variation, disabled) => (
+            renderButtons={(product, variation, disabled) => (
               <div>
                 <ProductSectionButtons
+                  product={product}
                   variation={variation}
                   disabled={disabled}
                 />

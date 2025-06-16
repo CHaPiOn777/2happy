@@ -71,7 +71,7 @@ const CartItemChangeDialog = ({
               defaultColor={cartItemColor}
               defaultSize={cartItemSize}
               setImages={setImages}
-              renderButtons={(variation, disabled) => (
+              renderButtons={(_, variation, disabled) => (
                 <div className="flex gap-2">
                   <AddToCartButton
                     className="w-full"

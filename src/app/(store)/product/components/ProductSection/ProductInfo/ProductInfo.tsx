@@ -55,6 +55,7 @@ const ProductInfo = ({
   handleChange?: TProductAttributesHandler;
   renderName?: (product: ProductServer) => ReactNode;
   renderButtons?: (
+    product: ProductServer | null,
     variation: ProductVariation | null,
     disabled: boolean
   ) => ReactNode;
@@ -190,7 +191,7 @@ const ProductInfo = ({
         />
       </div>
       {renderButtons
-        ? renderButtons(variation, isLoadingVariation || !variation)
+        ? renderButtons(product, variation, isLoadingVariation || !variation)
         : null}
     </div>
   );

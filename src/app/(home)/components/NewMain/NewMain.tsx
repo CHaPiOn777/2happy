@@ -2,9 +2,8 @@ import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
 import MainButton from "./components/MainButton";
-
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+import { Button } from "@/shared/components/UI/Button";
 
 const NewMain = () => {
   return (
@@ -46,11 +45,16 @@ const NewMain = () => {
         />
       </AnimatedInView>
       <Container className="gap-6 items-center h-full">
-        <motion.div
-          transition={{ duration: 1, type: "spring" }}
-          initial={{ x: -1000 }}
-          animate={{
-            x: 0,
+        <AnimatedInView
+          as="div"
+          viewport={{ once: true }}
+          fallbackClassName="opacity-0"
+          animations={{
+            default: {
+              initial: { x: -1000 },
+              animate: { x: 0 },
+              transition: { duration: 1, type: "spring" },
+            },
           }}
           className="-mt-10 lg:-mt-24"
         >
@@ -64,7 +68,7 @@ const NewMain = () => {
               <MainButton />
             </div>
           </div>
-        </motion.div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

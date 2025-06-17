@@ -5,14 +5,14 @@ import { Button, ButtonLoader } from "@/shared/components/UI/Button";
 import { Chip } from "@/shared/components/UI/Chip";
 import { IconButton } from "@/shared/components/UI/IconButton";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
-import { FavoriteProduct } from "../../api/indexedApi";
+import { FavoriteProduct } from "../../types";
 import { getFavoriteItemInfo } from "../../utils/getFavoriteItemInfo";
 import { getFavoriteChip } from "../../utils/getFavoriteChip";
 import { useRemoveFromFavorite } from "../../api/favoriteApi";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { useAddToCart } from "@/features/Cart/api/cartMutations";
-import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { cn } from "@/shared/utils";
+import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity";
 
 const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
   const {
@@ -33,7 +33,7 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
 
   const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
 
-  const { mutate, isPending } = useAddToCart({
+  const { mutate: addToCart, isPending } = useAddToCart({
     onSuccess: () => {
       removeFromFavorite(id);
     },
@@ -41,8 +41,15 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
 
   const handleDelete = () => removeFromFavorite(id);
   const handleAddToCart = () => {
-    mutate({ quantity, id: variationId });
+    addToCart({ quantity, id: variationId });
   };
+
+  const {
+    handleDecreaseQuantity,
+    handleIncreaseQuantity,
+    isDecreaseDisabled,
+    isIncreaseDisabled,
+  } = useChangeFavoriteQuantity();
 
   return (
     <article className="flex gap-12 w-full py-8 border-b border-gray">
@@ -83,6 +90,8 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
                 className="border border-gray"
                 variant="secondary"
                 size="small"
+                onClick={() => handleDecreaseQuantity(favorite)}
+                disabled={isDecreaseDisabled(favorite)}
               >
                 <MinusIcon />
               </IconButton>
@@ -93,6 +102,8 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
                 className="border border-gray "
                 variant="secondary"
                 size="small"
+                onClick={() => handleIncreaseQuantity(favorite)}
+                disabled={isIncreaseDisabled(favorite)}
               >
                 <PlusIcon />
               </IconButton>

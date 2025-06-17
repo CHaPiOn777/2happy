@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useMemo } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/shared/utils";
 import { useGetAllFavorite } from "../api/favoriteApi";
 
@@ -9,12 +9,7 @@ const FavoriteItemsCount = ({
 }: ComponentPropsWithoutRef<"span">) => {
   const { data: favorites } = useGetAllFavorite();
 
-  const favoriteCount = useMemo(
-    () => favorites?.reduce((acc, item) => (acc += item.quantity), 0),
-    [favorites]
-  );
-
-  if (!favoriteCount) return null;
+  if (!favorites?.totalCount) return null;
 
   return (
     <span
@@ -23,7 +18,7 @@ const FavoriteItemsCount = ({
         className
       )}
     >
-      {favoriteCount}
+      {favorites.totalCount}
     </span>
   );
 };

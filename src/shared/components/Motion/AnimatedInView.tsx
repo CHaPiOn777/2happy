@@ -34,12 +34,12 @@ type AnimatedInViewProps<T extends ElementType> = {
   MotionProps;
 
 function useCurrentBreakpoint(): GlobalMediaKeys | "default" {
-  const isMobile = useMediaCustom("mobile");
+  const isMobile = useMediaCustom("small");
   const isMd = useMediaCustom("md");
   const isLg = useMediaCustom("lg");
   const isXl = useMediaCustom("xl");
 
-  if (isMobile) return "mobile";
+  if (isMobile) return "small";
   if (isMd) return "md";
   if (isLg) return "lg";
   if (isXl) return "xl";

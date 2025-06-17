@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 import ImageWithTitleCard from "@/features/Products/components/Cards/ImageWithTitleCard";
 
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const Collections = () => {

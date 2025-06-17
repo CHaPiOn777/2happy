@@ -15,7 +15,11 @@ const MainButton = () => {
   if (!hasMounted) return null;
 
   return (
-    <Button className="w-full" size={isTablet ? "normal" : "large"} asChild>
+    <Button
+      className="absolute bottom-0 left-0 md:relative w-full"
+      size={isTablet ? "normal" : "large"}
+      asChild
+    >
       <Link href={paths.catalog.getHref()}>
         Перейти в каталог <ArrowUpRightIcon />
       </Link>

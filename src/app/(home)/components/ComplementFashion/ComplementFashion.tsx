@@ -7,20 +7,19 @@ import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon"
 import Link from "next/link";
 import { paths } from "@/config/paths";
 
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const ComplementFashion = () => {
   return (
     <Section className="bg-main">
       <Container className="my-20">
-        <div className="grid grid-cols-addition-lg lg:grid-cols-addition grid-rows-addition-lg lg:grid-rows-addition gap-6 h-full overflow-hidden">
-          <div className="relative w-[80px] h-[640px] col-start-2 lg:col-start-auto row-start-2 lg:row-start-auto">
+        <div className="grid grid-cols-addition-md md:grid-cols-addition-lg lg:grid-cols-addition grid-rows-addition-md md:grid-rows-addition-lg lg:grid-rows-addition gap-6 h-full overflow-hidden">
+          <div className="relative h-[376px] md:h-[640px] col-start-2 lg:col-start-auto row-start-2 lg:row-start-auto">
             <Image
               src="/images/2happy-white-logo-90.png"
               alt="white-logo"
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </div>
 
@@ -66,6 +65,12 @@ const ComplementFashion = () => {
             as="div"
             viewport={{ once: true, amount: "all" }}
             animations={{
+              md: {
+                initial: { opacity: 0, y: 120 },
+                whileInView: { opacity: 1, y: 0 },
+                transition: { duration: 0.6, type: "tween", delay: 0.6 },
+                viewport: { once: true, amount: 0.2 },
+              },
               lg: {
                 initial: { opacity: 0, y: 150 },
                 whileInView: { opacity: 1, y: 0 },

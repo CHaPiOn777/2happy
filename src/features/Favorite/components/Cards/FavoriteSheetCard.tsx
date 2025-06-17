@@ -16,9 +16,11 @@ import { Chip } from "@/shared/components/UI/Chip";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import AddToCartIcon from "@/shared/components/icons/AddToCartIcon";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
-import { FavoriteProduct } from "../../api/indexedApi";
+import { FavoriteProduct } from "../../types";
 import { getFavoriteItemInfo } from "../../utils/getFavoriteItemInfo";
 import { useRemoveFromFavorite } from "../../api/favoriteApi";
+import { useAddToCart } from "@/features/Cart/api/cartMutations";
+import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity";
 
 const FavoriteSheetCard = ({
   favorite,
@@ -28,6 +30,7 @@ const FavoriteSheetCard = ({
   const {
     id,
     name,
+    variationId,
     isOnSale,
     regularPrice,
     salePrice,
@@ -44,6 +47,24 @@ const FavoriteSheetCard = ({
   const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
 
   const handleDelete = () => removeFromFavorite(id);
+
+  const { mutate, isPending } = useAddToCart({
+    onSuccess: () => {
+      removeFromFavorite(id);
+    },
+  });
+
+  const handleAddToCart = () => {
+    mutate({ quantity, id: variationId });
+  };
+
+  const {
+    handleDecreaseQuantity,
+    handleIncreaseQuantity,
+    isDecreaseDisabled,
+    isIncreaseDisabled,
+  } = useChangeFavoriteQuantity();
+
   return (
     <article
       className={cn(
@@ -63,11 +84,16 @@ const FavoriteSheetCard = ({
             <h5 className="text-button-xs lg:text-h5">{name}</h5>
             {isInStock && (
               <IconButton
-                className="border border-gray"
+                className={cn(
+                  "border border-gray",
+                  isPending && "animate-pulse duration-1000"
+                )}
                 variant="secondary"
                 size={isTablet ? "extraSmall" : "small"}
                 data-tooltip-id="cart-add"
                 data-tooltip-content="Добавить в корзину"
+                disabled={isPending}
+                onClick={handleAddToCart}
               >
                 <AddToCartIcon />
                 <StyledTooltip id="cart-add" />
@@ -110,6 +136,8 @@ const FavoriteSheetCard = ({
                   className="border border-gray"
                   variant="secondary"
                   size="extraSmall"
+                  onClick={() => handleDecreaseQuantity(favorite)}
+                  disabled={isDecreaseDisabled(favorite)}
                 >
                   <MinusIcon />
                 </IconButton>
@@ -120,6 +148,8 @@ const FavoriteSheetCard = ({
                   className="border border-gray "
                   variant="secondary"
                   size="extraSmall"
+                  onClick={() => handleIncreaseQuantity(favorite)}
+                  disabled={isIncreaseDisabled(favorite)}
                 >
                   <PlusIcon />
                 </IconButton>

@@ -59,6 +59,18 @@ type Dimensions = {
   height: string;
 };
 
+export type ProductDefaultVariation = {
+  id: number;
+  sale_price: string;
+  regular_price: string;
+  price: string;
+  on_sale: boolean;
+  attributes: ProductVariationAttribute[];
+  stock_status: StockStatus;
+  stock_quantity: number;
+  image: Image;
+};
+
 export type ProductVariation = {
   id: number;
   parent_id: number;
@@ -149,6 +161,7 @@ export type ProductServer = {
   grouped_products: number[];
   menu_order: number;
   meta_data: ProductMeta;
+  defaultVariation: ProductDefaultVariation | null;
   _links: Links;
 };
 

@@ -4,13 +4,13 @@ import {
   useGetAllFavorite,
   useRemoveFromFavorite,
 } from "../api/favoriteApi";
-import { FavoriteProduct } from "../api/indexedApi";
+import { FavoriteProduct } from "../types";
 
 export const useToggleFavorite = (favorite: FavoriteProduct | null) => {
   const { data: favorites } = useGetAllFavorite();
 
   const isFavorite = useMemo(
-    () => !!favorites?.find((item) => item.id === favorite?.id),
+    () => !!favorites?.data.find((item) => item.id === favorite?.id),
     [favorites, favorite]
   );
 
@@ -18,19 +18,9 @@ export const useToggleFavorite = (favorite: FavoriteProduct | null) => {
 
   const disabledTimerRef = useRef<NodeJS.Timeout>(null);
 
-  const { mutate: addToFavorite } = useAddToFavorite({
-    onError: () => {
-      console.log("ошибка при добавлении");
-      // setIsFavorite(false);
-    },
-  });
+  const { mutate: addToFavorite } = useAddToFavorite({});
 
-  const { mutate: removeFromFavorite } = useRemoveFromFavorite({
-    onError: () => {
-      console.log("ошибка при удалении");
-      // setIsFavorite(true);
-    },
-  });
+  const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
 
   const handleToggle = () => {
     if (!favorite || disabled) return;

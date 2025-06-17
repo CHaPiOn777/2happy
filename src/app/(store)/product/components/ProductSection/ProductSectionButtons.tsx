@@ -15,7 +15,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "@/features/Favorite/api/indexedApi";
-import { createFavorite } from "@/features/Favorite/utils/productToFavorite";
+import { createFavorite } from "@/features/Favorite/utils/createFavorite";
 import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
 import { cn } from "@/shared/utils";
 

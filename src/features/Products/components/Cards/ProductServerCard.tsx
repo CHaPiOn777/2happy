@@ -4,7 +4,7 @@ import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
-import { ComponentPropsWithoutRef, MouseEvent } from "react";
+import { ComponentPropsWithoutRef, useMemo } from "react";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import ColorSquare from "../Colors/ColorSquare";
 import { paths } from "@/config/paths";
@@ -16,6 +16,8 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
 import { Separator } from "@/shared/components/UI/Separator";
+import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
+import { createFavorite } from "@/features/Favorite/utils/createFavorite";
 
 const ProductServerCard = ({
   product,
@@ -33,6 +35,17 @@ const ProductServerCard = ({
   );
   const { colors, image, sizes, chip } = getProductCardInfo(product);
 
+  const favoriteProduct = useMemo(
+    () =>
+      product.defaultVariation
+        ? createFavorite(product, product.defaultVariation)
+        : null,
+    [product]
+  );
+
+  const { isFavorite, handleToggle } = useToggleFavorite(favoriteProduct);
+  const isFavoriteDisabled = !favoriteProduct;
+
   const handleLinkClick = () => {
     queryClient.setQueryData(
       getProductByIdQueryOptions(product.id).queryKey,
@@ -44,8 +57,9 @@ const ProductServerCard = ({
     ]);
   };
 
-  const handleFavoriteClick = (e: MouseEvent<SVGSVGElement>) => {
+  const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    handleToggle();
   };
 
   return (
@@ -71,7 +85,12 @@ const ProductServerCard = ({
           <HeartIcon
             role="button"
             onClick={handleFavoriteClick}
-            className="absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main"
+            className={cn(
+              "absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main",
+              isFavorite && "fill-main",
+              isFavoriteDisabled &&
+                "opacity-0 group-hover/product:opacity-60 hover:fill-transparent"
+            )}
           />
           {image && (
             <ImageWithLoader

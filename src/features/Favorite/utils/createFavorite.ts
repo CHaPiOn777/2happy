@@ -1,9 +1,13 @@
-import { ProductServer, ProductVariation } from "@/features/Products/types";
-import { FavoriteProduct } from "../api/indexedApi";
+import {
+  ProductDefaultVariation,
+  ProductServer,
+  ProductVariation,
+} from "@/features/Products/types";
+import { FavoriteProduct } from "../types";
 
 export const createFavorite = (
   product: ProductServer,
-  variation: ProductVariation
+  variation: ProductVariation | ProductDefaultVariation
 ): FavoriteProduct => {
   return {
     id: variation.id,

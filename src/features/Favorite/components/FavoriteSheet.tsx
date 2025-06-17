@@ -27,11 +27,6 @@ const FavoriteSheet = ({
 
   const { data: favorites, isLoading } = useGetAllFavorite();
 
-  const favoritesCount = favorites?.reduce(
-    (acc, item) => (acc += item.quantity),
-    0
-  );
-
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
       <SheetTrigger className="relative" {...triggerProps}>
@@ -43,17 +38,19 @@ const FavoriteSheet = ({
       >
         <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
           <SheetTitle>Избранное</SheetTitle>
-          {favoritesCount ? (
-            <SheetDescription>Всего товаров {favoritesCount}</SheetDescription>
+          {favorites?.totalCount ? (
+            <SheetDescription>
+              Всего товаров {favorites?.totalCount}
+            </SheetDescription>
           ) : null}
           <SheetClose className="top-6 right-10" />
         </SheetHeader>
 
         {isLoading && <FavoriteSheetLoader />}
-        {!isLoading && favorites?.length ? (
-          <FavoriteSheetContent favorites={favorites} setOpen={setOpen} />
+        {!isLoading && favorites?.data.length ? (
+          <FavoriteSheetContent favorites={favorites.data} setOpen={setOpen} />
         ) : null}
-        {!isLoading && !favorites?.length ? (
+        {!isLoading && !favorites?.data.length ? (
           <FavoriteSheetEmpty setOpen={setOpen} />
         ) : null}
       </SheetContent>

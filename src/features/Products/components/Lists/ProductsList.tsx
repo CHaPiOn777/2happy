@@ -54,9 +54,9 @@ const ProductsList = ({
       )}
       <div
         className={cn(
-          "grid gap-x-6 gap-y-10 grid-flow-row",
+          "grid gap-x-4 gap-y-4 md:gap-x-6 md:gap-y-10 grid-flow-row",
           gridType === "small"
-            ? "grid-cols-3 lg:grid-cols-4 auto-rows-[552px] min-h-[552px]"
+            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[510px] md:auto-rows-[552px] min-h-[510px] md:min-h-[552px]"
             : "grid-cols-2 auto-rows-[928px] min-h-[928px]",
           isPlaceholderData && "blur-sm pointer-events-none"
         )}

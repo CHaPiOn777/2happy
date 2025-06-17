@@ -22,7 +22,7 @@ const ProductSection = () => {
 
   return (
     <div className="lg:border-b lg:border-main">
-      <Container className="mt-20 lg:my-section flex flex-col lg:flex-row gap-12">
+      <Container className="mt-12 sm:mt-20 lg:my-section flex flex-col lg:flex-row gap-12">
         <Suspense fallback={<ProductSliderLoader />}>
           <ProductSlider
             className="basis-auto h-[584px] lg:basis-[51%] lg:h-[624px]"

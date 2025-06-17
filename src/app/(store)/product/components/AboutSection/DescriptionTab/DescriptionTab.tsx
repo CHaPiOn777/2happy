@@ -49,7 +49,7 @@ const DescriptionTab = () => {
         </Accordion>
       </div>
       <ImageWithLoader
-        wrapperClassName="w-[304px] h-[400px] ml-auto lg:w-auto lg:h-auto lg:flex-1 lg:top-[-68px] bg-white"
+        wrapperClassName="w-[304px] h-[400px] ml-auto lg:w-auto lg:h-auto lg:flex-1 lg:top-[-68px] bg-white hidden sm:block"
         className="lg:pl-12"
         src="/images/Home/Main/slider-1.jpg"
         alt="desc-image"

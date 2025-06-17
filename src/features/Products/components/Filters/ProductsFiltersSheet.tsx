@@ -88,7 +88,7 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
       <SheetTrigger>{trigger}</SheetTrigger>
       <SheetContent
         side="left"
-        className="w-full flex flex-col px-6 py-10 max-w-[496px] z-over-header"
+        className="w-full flex flex-col px-6 pr-4 py-10 max-w-[496px] z-over-header"
         overlayClassName="z-over-header"
       >
         <SheetHeader>
@@ -100,7 +100,7 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
             <CloseIcon />
           </SheetClose>
         </SheetHeader>
-        <div className="h-full overflow-x-hidden overflow-y-auto">
+        <div className="h-full overflow-x-hidden overflow-y-auto pr-2">
           <Accordion type="multiple" className="w-full flex flex-col">
             <CheckboxListFilter
               name="Цвет"
@@ -133,7 +133,7 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
             </AccordionItem>
           </Accordion>
         </div>
-        <SheetFooter className="flex">
+        <SheetFooter className="flex-col gap-2 sm:gap-0 sm:flex-row">
           <Button
             className="w-full"
             variant="secondary"

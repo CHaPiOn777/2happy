@@ -15,16 +15,16 @@ import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 const Categories = () => {
   return (
     <Section className="border-b-[1px] border-b-main">
-      <Container className="flex-col md:flex-row justify-between gap-8 md:gap-24 lg:gap-[176px] my-section">
+      <Container className="flex-col md:flex-row justify-between gap-8 md:gap-20 lg:gap-[176px] my-section">
         <div className="flex flex-col gap-8 md:gap-0 justify-between w-full lg:basis-[392px]">
           <motion.h2
             initial={{ opacity: 0, y: -150 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "tween" }}
-            className="text-h2 mt-12 lg:mt-0"
+            className="text-h2 sm:mt-12 lg:mt-0"
           >
-            Категории <br /> /
+            Категории <br className="hidden sm:block" /> /
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 150 }}
@@ -35,12 +35,12 @@ const Categories = () => {
           >
             <Link
               href={paths.catalog.getHref()}
-              className="link-hover col-start-2 md:col-span-2 text-button-medium"
+              className="link-hover col-start-2 md:col-span-2 text-button-small sm:text-button-medium"
             >
               Смотреть все <ArrowRightIcon />
             </Link>
             <div className="flex gap-6">
-              <div className="relative w-[152px] h-[100px] lg:w-[184px] lg:h-[128px]">
+              <div className="relative w-[136px] h-[96px] sm:w-[152px] sm:h-[100px] lg:w-[184px] lg:h-[128px]">
                 <Image
                   fill
                   src="/images/Home/Categories/category-1.jpg"
@@ -48,7 +48,7 @@ const Categories = () => {
                   alt="category-image"
                 />
               </div>
-              <div className="relative w-[152px] h-[100px] lg:w-[184px] lg:h-[128px]">
+              <div className="relative w-[136px] h-[96px] sm:w-[152px] sm:h-[100px] lg:w-[184px] lg:h-[128px]">
                 <Image
                   fill
                   className="object-cover object-center"
@@ -73,7 +73,7 @@ const Categories = () => {
               initial: { opacity: 0, x: 100 },
               whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
-              viewport: { once: true, amount: 0.8 },
+              viewport: { once: true, amount: 0.5 },
             },
           }}
           className="w-full lg:basis-[600px] flex flex-col"

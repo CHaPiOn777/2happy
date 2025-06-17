@@ -25,15 +25,22 @@ const Header = () => {
     <>
       <MobileHeader
         leftSlot={
-          <SearchSheet>
-            <SearchIcon className="group-hover:fill-gray-middle cursor-pointer" />
+          <SearchSheet
+            triggerProps={{
+              className:
+                "w-10 h-10 sm:w-auto sm:h-auto flex items-center justify-center",
+              asChild: false,
+            }}
+          >
+            <SearchIcon className="group-hover:fill-gray-middle cursor-pointer !size-6" />
           </SearchSheet>
         }
         rightSlot={
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4 justify-end">
             <FavoriteSheet triggerProps={{ asChild: true }}>
               <IconButton variant="secondary" size="medium">
                 <HeartIcon />
+                <FavoriteItemsCount className="top-2 right-1" />
               </IconButton>
             </FavoriteSheet>
             <CartSheet triggerProps={{ asChild: true }}>

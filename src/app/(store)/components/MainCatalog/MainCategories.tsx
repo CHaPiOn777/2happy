@@ -13,8 +13,10 @@ const MainCategories = () => {
   return (
     <div
       className={cn(
-        "sticky top-[80px] z-behind-header w-full bg-white transition-all duration-500",
-        show ? "translate-y-0" : "-translate-y-[150px]"
+        "sticky top-[56px] sm:top-[80px] z-behind-header w-full bg-white transition-all duration-700 sm:duration-500",
+        show
+          ? "translate-y-0"
+          : "-translate-y-[350px] sm:-translate-y-[200px] md:-translate-y-[150px]"
       )}
     >
       <Container className="py-3">

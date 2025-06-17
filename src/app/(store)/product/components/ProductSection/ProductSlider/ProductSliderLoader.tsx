@@ -12,7 +12,7 @@ const ProductSliderLoader = () => {
       </div>
 
       <Skeleton className="w-full h-[524px]" />
-      <Skeleton className="w-full h-[524px] block lg:hidden" />
+      <Skeleton className="w-full h-[524px] hidden sm:block lg:hidden" />
     </div>
   );
 };

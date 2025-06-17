@@ -12,7 +12,6 @@ import FinalSaleListLoader from "./components/FinalSaleListLoader";
 import Link from "next/link";
 import { paths } from "@/config/paths";
 
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const FinalSale = async () => {
@@ -26,10 +25,18 @@ const FinalSale = async () => {
     })
   );
 
+  queryClient.prefetchQuery(
+    getProductsQueryOptions({
+      tag: tagIds["final_sale"],
+      exclude_type: "grouped",
+      per_page: 9,
+    })
+  );
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Section>
-        <Container className="flex h-[544px] gap-6 my-section">
+        <Container className="flex flex-col-reverse md:grid md:grid-cols-[2fr_1fr] lg:grid-cols-[3fr_1fr] gap-6 my-section">
           <Suspense fallback={<FinalSaleListLoader />}>
             <FinalSaleList />
           </Suspense>
@@ -44,20 +51,29 @@ const FinalSale = async () => {
                 transition: { duration: 0.6, type: "tween" },
               },
             }}
-            className="w-full flex flex-col justify-between "
+            className="w-full flex md:flex-col justify-between "
           >
-            <h2 className="text-h2">
-              FINAL SALE <br />/
-            </h2>
-            <div className="flex flex-col gap-6 mb-[96px]">
+            <div className="flex flex-col justify-between">
+              <h2 className="text-h2">
+                FINAL SALE <br />/
+              </h2>
               <Link
-                className="link-hover"
+                className="link-hover inline-flex md:hidden"
+                href={paths.catalog.final_sale.getHref()}
+              >
+                Смотреть все <ArrowRightIcon />
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-6 md:mb-[96px]">
+              <Link
+                className="link-hover hidden md:inline-flex"
                 href={paths.catalog.final_sale.getHref()}
               >
                 Смотреть все <ArrowRightIcon />
               </Link>
 
-              <div className="relative h-[160px]">
+              <div className="relative w-[218px] md:w-full h-[270px] md:h-[160px]">
                 <Image
                   fill
                   className="object-cover object-top"

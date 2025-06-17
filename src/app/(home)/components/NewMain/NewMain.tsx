@@ -8,7 +8,7 @@ import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewMain = () => {
   return (
-    <Section className=" h-[480px] xl:h-[865px] lg:h-[760px]">
+    <Section className="h-[584px] md:h-[480px] xl:h-[865px] lg:h-[760px] mb-10 md:mb-0">
       <AnimatedInView
         as="div"
         viewport={{ once: true }}
@@ -34,9 +34,11 @@ const NewMain = () => {
       >
         <Image
           fill
-          className="object-cover"
+          className="object-cover object-[58%_50%] sm:object-[50%_50%]"
+          quality={90}
           src="/images/Home/Main/main.jpg"
           alt="main-image"
+          priority
         />
       </AnimatedInView>
       <Container className="gap-6 items-center h-full">
@@ -46,14 +48,15 @@ const NewMain = () => {
           animate={{
             x: 0,
           }}
-          className="-mt-10 lg:-mt-24"
+          className="w-full max-w-[264px] sm:max-w-max -mt-32 md:-mt-10 lg:-mt-24"
         >
-          <h1 className="text-h3Akira mb-8 lg:mb-10">2HAPPY</h1>
-          <div className="flex gap-4">
-            <span className="w-[64px] mt-4 h-[2px] bg-main" />
+          <h1 className="text-h3Akira mb-6 sm:mb-8 lg:mb-10">2HAPPY</h1>
+          <div className="flex gap-2 sm:gap-4">
+            <span className="w-[32px] shrink-0 sm:w-[64px] mt-2 sm:mt-4 h-[1px] sm:h-[2px] bg-main" />
             <div className="flex flex-col max-w-[440px] w-full">
               <span className="text-h4 mb-10 lg:mb-20">
-                Стильная и комфортная <br /> одежда на все случаи жизни!
+                Стильная и комфортная <br className="hidden sm:block" /> одежда
+                на все случаи жизни!
               </span>
               <MainButton />
             </div>

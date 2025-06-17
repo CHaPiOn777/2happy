@@ -1,39 +1,33 @@
 "use client";
 
 import { paths } from "@/config/paths";
-import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import ImageWithTitleCard from "@/features/Products/components/Cards/ImageWithTitleCard";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
-import { useQuery } from "@tanstack/react-query";
 
 const NotFound = ({ search }: { search: string }) => {
-  const { data: collections } = useQuery(
-    getProductsQueryOptions({
-      per_page: 4,
-      type: "grouped",
-      order: "desc",
-      orderby: "popularity",
-    })
-  );
-
   return (
     <Section className="border-b-[1px] border-main">
-      <Container className="flex-col gap-12 mt-14 mb-[136px]">
-        <div className="flex flex-col gap-6">
+      <Container className="flex-col gap-12 mt-12 mb-12 sm:mt-14 sm:mb-[136px]">
+        <div className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-h3">Результаты поиска</h2>
           <div className="text-body2">
-            Мы не нашли ничего по запросу:
+            Мы не нашли ничего по запросу:{" "}
             <span className="text-h5">{search}</span>
           </div>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="text-body2">
+          <div className="text-body2 hidden sm:block">
             По вашему запросу ничего не найдено. Обратите внимание на новые
             подборки и рекомендации или посмотрите разделы с брендами и
             категориями, которые вам интересны.
           </div>
-          <ul className="grid grid-cols-3 lg:grid-cols-4 grid-rows-[552px] gap-x-6">
+          <ul className="grid grid-cols-2 grid-rows-[376px_376px] sm:grid-cols-3 lg:grid-cols-4 grid-rows-[552px] gap-6">
+            <div className="text-description block sm:hidden">
+              По вашему запросу ничего не найдено. Обратите внимание на новые
+              подборки и рекомендации или посмотрите разделы с брендами и
+              категориями, которые вам интересны.
+            </div>
             <li>
               <ImageWithTitleCard
                 title="Новая коллекция"
@@ -55,9 +49,8 @@ const NotFound = ({ search }: { search: string }) => {
                 src="/images/Home/Fashion/fashion-3.jpg"
               />
             </li>
-            <li>
+            <li className="hidden lg:block">
               <ImageWithTitleCard
-                className="hidden lg:block"
                 title="Коллекции"
                 href={paths.catalog.collections.getHref()}
                 src="/images/Home/Fashion/fashion-3.jpg"

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { paths } from "@/config/paths";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 import BestsellersButton from "./components/BestsellersButton";
+import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 
 const Bestsellers = () => {
   return (
@@ -19,7 +20,7 @@ const Bestsellers = () => {
         alt="bestseller-background"
         src={"/images/Home/Bestsellers/bg.jpg"}
       />
-      <Container className="flex-col gap-12 my-20 lg:my-24">
+      <Container className="flex-col gap-8 sm:gap-12 my-12 sm:my-16 md:my-20 lg:my-24">
         <AnimatedInView
           as="h2"
           viewport={{ once: true, amount: "all" }}
@@ -35,16 +36,24 @@ const Bestsellers = () => {
               transition: { duration: 0.6, type: "tween" },
             },
             default: {
-              initial: { opacity: 0, x: 500 },
+              initial: { opacity: 0, x: 80 },
               whileInView: { opacity: 1, x: 0 },
               transition: { duration: 0.6, type: "tween" },
             },
           }}
           className="w-min whitespace-nowrap text-h2 text-white inline-block lg:hidden"
         >
-          Наши <br /> бестселлеры / 25
+          <span className="hidden md:inline-block">
+            Наши <br /> бестселлеры / 25
+          </span>
+          <Link
+            className="inline-block md:hidden"
+            href={paths.catalog.bestsellers.getHref()}
+          >
+            Наши <br /> бестселлеры / 25
+          </Link>
         </AnimatedInView>
-        <div className="grid grid-cols-2 grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-6">
+        <div className="grid grid-cols-2 grid-rows-[216px_104px] sm:grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-6">
           <AnimatedInView
             as="div"
             viewport={{ once: true, amount: 0.3 }}
@@ -101,7 +110,7 @@ const Bestsellers = () => {
                 transition: { duration: 0.6, type: "tween" },
               },
               default: {
-                initial: { opacity: 0, x: 300 },
+                initial: { opacity: 0, x: 100 },
                 whileInView: { opacity: 1, x: 0 },
                 transition: { duration: 0.6, type: "tween" },
               },
@@ -116,6 +125,29 @@ const Bestsellers = () => {
             />
           </AnimatedInView>
         </div>
+
+        <AnimatedInView
+          as="div"
+          viewport={{ once: true, amount: 0.4 }}
+          animations={{
+            default: {
+              initial: { opacity: 0, y: 50 },
+              whileInView: { opacity: 1, y: 0 },
+              transition: { duration: 0.6, type: "tween" },
+            },
+          }}
+        >
+          <Button
+            className="inline-flex w-full border-white text-white [&_svg]:fill-white sm:hidden"
+            variant={"secondary"}
+            size={"medium"}
+            asChild
+          >
+            <Link href={paths.catalog.bestsellers.getHref()}>
+              Смотреть все <ArrowUpRightIcon />
+            </Link>
+          </Button>
+        </AnimatedInView>
       </Container>
     </Section>
   );

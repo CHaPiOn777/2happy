@@ -18,6 +18,7 @@ import { cn } from "@/shared/utils/cn";
 import { Separator } from "@/shared/components/UI/Separator";
 import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
 import { createFavorite } from "@/features/Favorite/utils/createFavorite";
+import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
 
 const ProductServerCard = ({
   product,
@@ -35,16 +36,7 @@ const ProductServerCard = ({
   );
   const { colors, image, sizes, chip } = getProductCardInfo(product);
 
-  const favoriteProduct = useMemo(
-    () =>
-      product.defaultVariation
-        ? createFavorite(product, product.defaultVariation)
-        : null,
-    [product]
-  );
-
-  const { isFavorite, handleToggle } = useToggleFavorite(favoriteProduct);
-  const isFavoriteDisabled = !favoriteProduct;
+  const isFavoriteDisabled = !product.defaultVariation;
 
   const handleLinkClick = () => {
     queryClient.setQueryData(
@@ -57,14 +49,9 @@ const ProductServerCard = ({
     ]);
   };
 
-  const handleFavoriteClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    handleToggle();
-  };
-
   return (
     <article
-      className={cn("group/product w-full h-full", className)}
+      className={cn("group/product w-full h-full pb-4 md:pb-0", className)}
       {...props}
     >
       <Link
@@ -82,16 +69,26 @@ const ProductServerCard = ({
               {chip.text}
             </Chip>
           )}
-          <HeartIcon
-            role="button"
-            onClick={handleFavoriteClick}
-            className={cn(
-              "absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main",
-              isFavorite && "fill-main",
-              isFavoriteDisabled &&
-                "opacity-0 group-hover/product:opacity-60 hover:fill-transparent"
+          <ToggleFavorite
+            product={product}
+            variation={product.defaultVariation}
+          >
+            {(isFavorite, handleToggle) => (
+              <HeartIcon
+                role="button"
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                  handleToggle();
+                }}
+                className={cn(
+                  "absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main",
+                  isFavorite && "fill-main",
+                  isFavoriteDisabled &&
+                    "opacity-0 group-hover/product:opacity-60 hover:fill-transparent"
+                )}
+              />
             )}
-          />
+          </ToggleFavorite>
           {image && (
             <ImageWithLoader
               src={image.src}
@@ -101,19 +98,17 @@ const ProductServerCard = ({
           )}
         </div>
         <div>
-          <h5 className="text-h5 mb-2 h-[48px] line-clamp-2">{product.name}</h5>
-          <div className="flex justify-between w-full lg:hidden">
+          <h5 className="text-h5 mb-2 h-[44px] sm:h-[48px] line-clamp-2">
+            {product.name}
+          </h5>
+          <div className="flex flex-col-reverse gap-2 w-full lg:hidden">
             {showAttributes && (
-              <div className="w-full flex items-center gap-2">
+              <div className="w-full flex justify-between items-center gap-2">
                 <div className="flex gap-2">
                   {colors.map((color: string) => (
                     <ColorSquare key={color} color={color} />
                   ))}
                 </div>
-                <Separator
-                  className="h-4 bg-gray-light"
-                  orientation="vertical"
-                />
                 <div className="flex gap-2 text-gray-middle">
                   {sizes.map((size: string) => (
                     <span
@@ -130,7 +125,7 @@ const ProductServerCard = ({
             <div
               className={cn(
                 "flex w-full gap-2",
-                showAttributes && "justify-end"
+                showAttributes && "md:justify-end"
               )}
             >
               {product.on_sale ? (

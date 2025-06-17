@@ -28,7 +28,7 @@ const Features = () => {
   return (
     <Section className="bg-main">
       <Container className="my-section">
-        <ul className="flex w-full gap-6">
+        <ul className="flex flex-col md:flex-row w-full gap-6">
           {FEATURES.map((feature) => (
             <li
               key={feature.title}

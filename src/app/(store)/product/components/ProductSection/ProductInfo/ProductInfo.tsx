@@ -33,6 +33,8 @@ import {
 } from "@/features/Products/utils";
 import { getVariation } from "@/features/Products/utils/getVariation";
 import { ProductServer, ProductVariation } from "@/features/Products/types";
+import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
+import HeartIcon from "@/shared/components/icons/HeartIcon";
 
 const defaultRenderName = (product: ProductServer) => (
   <h2 className="text-h4">{product?.name}</h2>
@@ -113,19 +115,33 @@ const ProductInfo = ({
 
   return (
     <div className={cn("flex flex-col gap-8 justify-between", className)}>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4 sm:gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-4">
             {renderName(product)}
-            <CopyButton
-              copyText={`${env.APP_URL}${paths.product.getHref(
-                product.id,
-                product.slug
-              )}`}
-              tooltip="Поделиться"
-            >
-              <ShareIcon />
-            </CopyButton>
+            <div className="flex items-center gap-4">
+              <CopyButton
+                copyText={`${env.APP_URL}${paths.product.getHref(
+                  product.id,
+                  product.slug
+                )}`}
+                tooltip="Поделиться"
+              >
+                <ShareIcon />
+              </CopyButton>
+              <ToggleFavorite product={product} variation={variation}>
+                {(isFavorite, handleToggle) => (
+                  <button onClick={handleToggle}>
+                    <HeartIcon
+                      className={cn(
+                        "inline-flex sm:hidden",
+                        isFavorite && "fill-main"
+                      )}
+                    />
+                  </button>
+                )}
+              </ToggleFavorite>
+            </div>
           </div>
           <span className="text-gray-middle">Артикул: {product.sku}</span>
           <div className="flex flex-col gap-2">

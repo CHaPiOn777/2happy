@@ -54,9 +54,9 @@ const MenuSheetContent = ({
       overlayClassName="z-over-header"
       side="left"
     >
-      <SheetHeader className="flex gap-8">
+      <SheetHeader className="flex flex-col items-start gap-8">
         <SheetTitle className="sr-only">Меню</SheetTitle>
-        <SheetClose className="relative w-12 h-12 top-auto right-auto rounded-xs bg-main opacity-100 [&_svg]:fill-white" />
+        <SheetClose className="relative w-12 h-12 top-auto right-auto rounded-md bg-main opacity-100 [&_svg]:fill-white" />
         <SheetDescription className="text-body2 text-gray-dark">
           {tab != "all" ? (
             <button className="flex items-center gap-2" onClick={handleBack}>
@@ -71,7 +71,7 @@ const MenuSheetContent = ({
 
       {tab === "all" && (
         <ScrollArea type="always">
-          <div className="space-y-6 mr-6">
+          <div className="space-y-6 mr-4 sm:mr-6">
             <ul className="space-y-4">
               <li>
                 <button
@@ -101,7 +101,7 @@ const MenuSheetContent = ({
             <ul className="space-y-2">
               <li>
                 <div
-                  className="flex justify-between py-3  "
+                  className="flex justify-between py-3"
                   role="button"
                   onClick={() => handleChangeTab("help")}
                 >

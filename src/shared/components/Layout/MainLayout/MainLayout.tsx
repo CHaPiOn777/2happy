@@ -8,7 +8,7 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
     <Suspense fallback={<MainLoader />}>
       <Header />
-      <main className="flex-1 mt-[80px] lg:mt-[var(--header-height)]">
+      <main className="flex-1 mt-[56px] sm:mt-[80px] lg:mt-[var(--header-height)]">
         {children}
       </main>
       <Footer />

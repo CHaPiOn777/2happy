@@ -16,7 +16,7 @@ const StoreLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="my-section flex flex-col gap-16">
+    <div className="my-section flex flex-col gap-6 sm:gap-12 md:gap-16">
       <CatalogHeader defaultName="Женская одежда и аксессуары" />
       {children}
     </div>

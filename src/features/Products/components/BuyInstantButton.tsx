@@ -15,7 +15,12 @@ const BuyInstantButton = ({
 
   if (!variation) {
     return (
-      <Button className="w-1/2" variant="secondary" {...props} disabled>
+      <Button
+        className="w-full sm:w-1/2"
+        variant="secondary"
+        {...props}
+        disabled
+      >
         Купить
       </Button>
     );
@@ -31,7 +36,7 @@ const BuyInstantButton = ({
 
   return (
     <Button
-      className="w-1/2"
+      className="w-full sm:w-1/2"
       variant="secondary"
       onClick={(e) => {
         handleClick();

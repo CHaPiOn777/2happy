@@ -57,7 +57,7 @@ const CatalogControls = () => {
 
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex gap-4">
+      <div className="flex justify-between lg:justify-start w-full lg:w-max gap-4">
         <ProductsFiltersSheet
           trigger={
             <div className="text-button-xs link-hover">

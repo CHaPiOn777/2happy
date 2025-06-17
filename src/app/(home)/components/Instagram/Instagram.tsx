@@ -1,4 +1,6 @@
 import InstagramCard from "@/features/Products/components/Cards/InstagramCard";
+import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
+import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 
@@ -22,16 +24,16 @@ const Instagram = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, type: "spring" }}
-          className="grid grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-6"
+          className="grid grid-cols-2 sm:grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-[repeat(3,216px)] sm:grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-6"
         >
-          <div className="text-body1 text-white">
+          <div className="text-body2 sm:text-body1 text-white">
             Откройте для себя больше вдохновения и стильных идей в нашем
             Instagram @2happy_kz! Будьте в курсе новинок, акций и трендов
           </div>
           <InstagramCard href="/" src="/images/Home/Instagram/1.jpg" />
           <InstagramCard
             href="/"
-            className="md:pl-12 lg:pl-0 col-start-2 col-end-5 md:col-start-1 md:col-end-4 row-start-1 row-span-2 md:row-start-2 md:row-end-4 lg:row-span-2 lg:col-span-2"
+            className="md:pl-12 lg:pl-0 col-start-2 sm:col-end-5 md:col-start-1 md:col-end-4 row-start-1 sm:row-span-2 md:row-start-2 md:row-end-4 lg:row-span-2 lg:col-span-2"
             src="/images/Home/Instagram/2.jpg"
           />
           <InstagramCard
@@ -44,6 +46,16 @@ const Instagram = () => {
             href="/"
             src="/images/Home/Instagram/4.jpg"
           />
+          <Button
+            className="inline-flex text-white [&_svg]:fill-white self-end sm:hidden"
+            variant="tertiary"
+            size="small"
+            asChild
+          >
+            <a href="http://localhost:3000/">
+              Мы в Instagram <ArrowUpRightIcon />
+            </a>
+          </Button>
         </motion.div>
       </Container>
     </Section>

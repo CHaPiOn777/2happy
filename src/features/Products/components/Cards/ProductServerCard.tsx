@@ -50,7 +50,7 @@ const ProductServerCard = ({
 
   return (
     <article
-      className={cn("group/product w-full h-full", className)}
+      className={cn("group/product w-full h-full pb-4 md:pb-0", className)}
       {...props}
     >
       <Link
@@ -82,19 +82,17 @@ const ProductServerCard = ({
           )}
         </div>
         <div>
-          <h5 className="text-h5 mb-2 h-[48px] line-clamp-2">{product.name}</h5>
-          <div className="flex justify-between w-full lg:hidden">
+          <h5 className="text-h5 mb-2 h-[44px] sm:h-[48px] line-clamp-2">
+            {product.name}
+          </h5>
+          <div className="flex flex-col-reverse gap-2 w-full lg:hidden">
             {showAttributes && (
-              <div className="w-full flex items-center gap-2">
+              <div className="w-full flex justify-between items-center gap-2">
                 <div className="flex gap-2">
                   {colors.map((color: string) => (
                     <ColorSquare key={color} color={color} />
                   ))}
                 </div>
-                <Separator
-                  className="h-4 bg-gray-light"
-                  orientation="vertical"
-                />
                 <div className="flex gap-2 text-gray-middle">
                   {sizes.map((size: string) => (
                     <span
@@ -111,7 +109,7 @@ const ProductServerCard = ({
             <div
               className={cn(
                 "flex w-full gap-2",
-                showAttributes && "justify-end"
+                showAttributes && "md:justify-end"
               )}
             >
               {product.on_sale ? (

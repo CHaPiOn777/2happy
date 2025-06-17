@@ -19,6 +19,9 @@ module.exports = {
         xl: "1280px",
         "2xl": "1536px",
       },
+      padding: {
+        "safe-top": "env(safe-area-inset-top)",
+      },
       gridTemplateColumns: {
         cartCard: "minmax(60px, 120px) 152px minmax(60px, 120px) 80px",
         addition:
@@ -27,6 +30,8 @@ module.exports = {
         "addition-md": "minmax(150px, 276px) 40px minmax(230px,340px)",
         "collections-lg":
           "minmax(200px, 288px) minmax(200px, 280px) minmax(250px, 344px)",
+        "collections-md":
+          "minmax(100px, 288px) minmax(40px, 80px) minmax(140px, 288px)",
         "instagram-lg":
           "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
         "instagram-md":
@@ -53,6 +58,8 @@ module.exports = {
         "addition-lg": "repeat(2, 640px)",
         "addition-md": "480px 376px",
         "collections-lg": "272px 174px 226px 40px",
+        "collections-md": "440px 136px 272px 304px",
+        "collections-sm": "288px 64px 200px 152px",
         "instagram-lg": "288px 288px 312px",
         "instagram-md": "168px 240px 288px",
         aboutProducts: "264px 104px 280px",
@@ -325,6 +332,10 @@ module.exports = {
             fontSize: "48px",
             lineHeight: "56px",
           },
+          // [`@media (max-width: ${theme("screens.sm")})`]: {
+          //   fontSize: "40px",
+          //   lineHeight: "48px",
+          // },
         },
 
         ".text-h1-table": {
@@ -345,6 +356,10 @@ module.exports = {
             fontSize: "62px",
             lineHeight: "62px",
           },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "40px",
+            lineHeight: "48px",
+          },
         },
         ".text-h2": {
           fontSize: "48px",
@@ -355,6 +370,10 @@ module.exports = {
           [`@media (max-width: ${theme("screens.lg")})`]: {
             fontSize: "32px",
             lineHeight: "40px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "24px",
+            lineHeight: "32px",
           },
         },
         ".text-h2Akira": {
@@ -373,6 +392,11 @@ module.exports = {
             fontSize: "24px",
             lineHeight: "32px",
           },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "18px",
+            lineHeight: "28px",
+          },
         },
         ".text-h3Akira": {
           fontFamily: "var(--font-akira)",
@@ -383,6 +407,11 @@ module.exports = {
           [`@media (max-width: ${theme("screens.lg")})`]: {
             fontSize: "72px",
             lineHeight: "72px",
+          },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "40px",
+            lineHeight: "48px",
           },
         },
         ".text-h4": {
@@ -395,12 +424,22 @@ module.exports = {
             fontSize: "20px",
             lineHeight: "28px",
           },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "16px",
+            lineHeight: "24px",
+          },
         },
         ".text-h5": {
           fontSize: "16px",
           lineHeight: "24px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "14px",
+            lineHeight: "24px",
+          },
         },
         ".text-h5-italic": {
           fontSize: "18px",
@@ -552,6 +591,14 @@ module.exports = {
             marginTop: "96px",
             marginBottom: "96px",
           },
+          [`@media (max-width: ${theme("screens.md")})`]: {
+            marginTop: "64px",
+            marginBottom: "64px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginTop: "48px",
+            marginBottom: "48px",
+          },
         },
 
         ".mt-section": {
@@ -560,6 +607,9 @@ module.exports = {
           [`@media (max-width: ${theme("screens.xl")})`]: {
             marginTop: "96px",
           },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginTop: "48px",
+          },
         },
 
         ".mb-section": {
@@ -567,6 +617,9 @@ module.exports = {
 
           [`@media (max-width: ${theme("screens.xl")})`]: {
             marginBottom: "96px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginBottom: "48px",
           },
         },
 

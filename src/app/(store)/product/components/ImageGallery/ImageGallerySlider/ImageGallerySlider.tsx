@@ -46,19 +46,6 @@ const ImageGallerySlider = ({
           openWide && "w-auto max-w-full"
         )}
       >
-        {/* <div
-          className={cn(
-            "absolute w-full h-full transition-opacity opacity-0 pointer-events-none z-50",
-            openWide && "opacity-100 pointer-events-auto"
-          )}
-        >
-          <ImageWithZoom
-            fill
-            src={activeImage.src}
-            className="object-cover"
-            alt={`scaled-${activeImage.alt}`}
-          />
-        </div> */}
         <Swiper
           className="gallery-slider"
           modules={[Navigation]}
@@ -69,6 +56,13 @@ const ImageGallerySlider = ({
           onSlideChange={(swiper) => {
             setActiveImage(images[swiper.activeIndex]);
           }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              allowTouchMove: openWide ? false : true,
+            },
+            480: { slidesPerView: 1 },
+          }}
           slidesPerView={1}
         >
           {images.map((image) => (
@@ -76,11 +70,7 @@ const ImageGallerySlider = ({
               {openWide ? (
                 <ZoomedImage src={image.src} alt={image.alt} />
               ) : (
-                <ImageWithLoader
-                  className="object-center"
-                  src={image.src}
-                  alt={image.alt}
-                />
+                <ImageWithLoader src={image.src} alt={image.alt} />
               )}
             </SwiperSlide>
           ))}
@@ -89,7 +79,7 @@ const ImageGallerySlider = ({
         </Swiper>
         <IconButton
           ref={prevRef}
-          className="absolute top-1/2 -translate-y-1/2 -left-[72px] z-10 disabled:bg-transparent"
+          className="absolute top-1/2 -translate-y-1/2 -left-[72px] z-10 disabled:bg-transparent hidden sm:inline-flex"
           variant="secondary"
           size="large"
         >
@@ -97,7 +87,7 @@ const ImageGallerySlider = ({
         </IconButton>
         <IconButton
           ref={nextRef}
-          className="absolute top-1/2 -translate-y-1/2 -right-[72px] z-10 disabled:bg-transparent"
+          className="absolute top-1/2 -translate-y-1/2 -right-[72px] z-10 disabled:bg-transparent hidden sm:inline-flex"
           variant="secondary"
           size="large"
         >

@@ -30,7 +30,10 @@ const ImageGallery = ({
       }}
     >
       <DialogTrigger className="w-full h-full">{children}</DialogTrigger>
-      <DialogContent className="w-screen max-w-screen h-screen" hideClose>
+      <DialogContent
+        className="w-screen max-w-screen h-screen p-0 py-8"
+        hideClose
+      >
         <Container className="relative flex-col gap-4 h-full">
           <DialogTitle className="sr-only">
             Галлерея изображений товара

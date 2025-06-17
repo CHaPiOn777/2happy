@@ -13,7 +13,7 @@ const Container = ({
   return (
     <div
       className={cn(
-        `relative w-full flex max-w-[1280px] mx-auto px-6`,
+        `relative w-full flex max-w-[1280px] mx-auto px-4 md:px-6`,
         className
       )}
     >

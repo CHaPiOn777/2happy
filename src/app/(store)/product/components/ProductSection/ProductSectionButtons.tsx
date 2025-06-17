@@ -11,13 +11,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import BuyInstantButton from "@/features/Products/components/BuyInstantButton";
 import ProductSectionRelatedProducts from "./ProductSectionRelatedProducts";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "@/features/Favorite/api/indexedApi";
 import { createFavorite } from "@/features/Favorite/utils/productToFavorite";
 import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
 import { cn } from "@/shared/utils";
+import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
 
 const ProductSectionButtons = ({
   product,
@@ -31,11 +28,6 @@ const ProductSectionButtons = ({
   const [sheetOpen, setSheetOpen] = useState<boolean>(false);
   const [cartItem, setCartItem] = useState<CartItemResponse | null>(null);
   const [shouldFetchRelated, setShouldFetchRelated] = useState<boolean>(false);
-
-  const favoriteItem =
-    product && variation && createFavorite(product, variation);
-
-  const { isFavorite, handleToggle } = useToggleFavorite(favoriteItem);
 
   const { data } = useQuery({
     ...getRelatedProductsQueryOptions({
@@ -64,25 +56,29 @@ const ProductSectionButtons = ({
             Узнать о поступлении
           </Button>
         </OutOfStockDialog>
-        <IconButton
-          className="[&_svg]:fill-transparent"
-          size="normal"
-          disabled={disabled}
-          onClick={handleToggle}
-        >
-          <HeartIcon
-            className={cn("stroke-white", isFavorite && "fill-white")}
-          />
-        </IconButton>
+        <ToggleFavorite product={product} variation={variation}>
+          {(isFavorite) => (
+            <IconButton
+              className={cn(
+                "[&_svg]:fill-transparent hidden sm:inline-flex",
+                isFavorite && "[&_svg]:fill-white"
+              )}
+              size="normal"
+              disabled={disabled}
+            >
+              <HeartIcon className="stroke-white" />
+            </IconButton>
+          )}
+        </ToggleFavorite>
       </div>
     );
   }
 
   return (
-    <div className="flex gap-2">
-      <div className="w-full flex gap-2">
+    <div className="flex sm:gap-2">
+      <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
         <AddToCartButton
-          className="w-1/2"
+          className="w-full sm:w-1/2"
           variationId={variation?.id ?? 0}
           disabled={disabled}
           onClick={onClick}
@@ -92,17 +88,20 @@ const ProductSectionButtons = ({
         </AddToCartButton>
         <BuyInstantButton variation={variation} />
       </div>
-      <IconButton
-        className={cn(
-          "[&_svg]:fill-transparent",
-          isFavorite && "[&_svg]:fill-white"
+      <ToggleFavorite product={product} variation={variation}>
+        {(isFavorite) => (
+          <IconButton
+            className={cn(
+              "[&_svg]:fill-transparent hidden sm:inline-flex",
+              isFavorite && "[&_svg]:fill-white"
+            )}
+            size="normal"
+            disabled={disabled}
+          >
+            <HeartIcon className="stroke-white" />
+          </IconButton>
         )}
-        size="normal"
-        onClick={handleToggle}
-        disabled={disabled}
-      >
-        <HeartIcon className="stroke-white" />
-      </IconButton>
+      </ToggleFavorite>
 
       {cartItem && (
         <AddedToCartSheet

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Image from "next/image";
@@ -23,6 +23,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./styles.scss";
+import { Progress } from "@/shared/components/UI/Progress";
 
 const ProductSlider = ({
   id,
@@ -36,11 +37,16 @@ const ProductSlider = ({
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const { data } = useSuspenseQuery(getProductByIdQueryOptions(id));
 
+  const [activeIndex, setActiveIndex] = useState(1);
+  const totalSlides = images.length;
+
+  const progressValue = (activeIndex / totalSlides) * 100;
+
   const chip = getProductChip(data);
   return (
     <div
       className={cn(
-        "product-slider relative h-[624px] flex gap-6 flex-1 basis-[51%] overflow-hidden",
+        "product-slider relative h-[624px] flex flex-col sm:flex-row gap-4 sm:gap-6 flex-1 basis-[51%] overflow-hidden",
         className
       )}
     >
@@ -93,11 +99,16 @@ const ProductSlider = ({
         direction="horizontal"
         touchStartPreventDefault={false}
         thumbs={{ swiper: thumbsSwiper }}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
         modules={[Thumbs]}
         spaceBetween={24}
         breakpoints={{
-          320: { slidesPerView: 2, allowTouchMove: true },
-          640: { slidesPerView: 2, allowTouchMove: true },
+          0: {
+            slidesPerView: 1,
+            allowTouchMove: true,
+          },
+          480: { slidesPerView: 2, allowTouchMove: true, spaceBetween: 16 },
+          768: { slidesPerView: 2, allowTouchMove: true },
           1024: { slidesPerView: 1, allowTouchMove: false },
         }}
       >
@@ -113,6 +124,10 @@ const ProductSlider = ({
           </SwiperSlide>
         ))}
       </Swiper>
+      <Progress
+        className="w-full block sm:hidden h-[2px]"
+        value={progressValue}
+      />
     </div>
   );
 };

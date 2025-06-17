@@ -18,8 +18,8 @@ const CatalogHeader = ({ defaultName }: { defaultName?: string }) => {
     };
   }, []);
   return (
-    <Container className="flex-col gap-16">
-      <div className="flex items-end gap-2">
+    <Container className="flex-col">
+      <div className="flex flex-col md:flex-row md:items-end gap-2">
         <h2 className="text-h2">{searchParams.get("name") ?? defaultName} /</h2>
         <span className="text-body2 mb-1 text-gray-middle">
           {totalItems} товаров

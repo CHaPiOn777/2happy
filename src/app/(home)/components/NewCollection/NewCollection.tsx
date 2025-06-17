@@ -9,6 +9,10 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import NewCollectionLoader from "./components/NewCollectionSlider/NewCollectionLoader";
 
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+import { Button } from "@/shared/components/UI/Button";
+import Link from "next/link";
+import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
+import { paths } from "@/config/paths";
 
 const NewCollection = async () => {
   const queryClient = getQueryClient();
@@ -23,7 +27,7 @@ const NewCollection = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Section>
-        <Container className="flex-col gap-16 my-section">
+        <Container className="flex-col gap-8 sm:gap-12 lg:gap-16 mb-12 sm:mb-section mt-section">
           <AnimatedInView
             as="h2"
             fallbackClassName="opacity-0"
@@ -36,7 +40,7 @@ const NewCollection = async () => {
               },
               default: {
                 transition: { duration: 0.6, type: "tween" },
-                initial: { opacity: 0, x: 200 },
+                initial: { opacity: 0, x: 80 },
                 whileInView: { opacity: 1, x: 0 },
               },
             }}
@@ -47,6 +51,29 @@ const NewCollection = async () => {
           <Suspense fallback={<NewCollectionLoader />}>
             <NewCollectionSlider />
           </Suspense>
+          <AnimatedInView
+            as="div"
+            viewport={{ once: true, amount: 0.4 }}
+            animations={{
+              default: {
+                initial: { opacity: 0, y: 50 },
+                whileInView: { opacity: 1, y: 0 },
+                transition: { duration: 0.6, type: "tween" },
+              },
+            }}
+            className="block sm:hidden"
+          >
+            <Button
+              className="w-full"
+              variant={"secondary"}
+              size={"medium"}
+              asChild
+            >
+              <Link href={paths.catalog.bestsellers.getHref()}>
+                Все новинки <ArrowUpRightIcon />
+              </Link>
+            </Button>
+          </AnimatedInView>
         </Container>
       </Section>
     </HydrationBoundary>

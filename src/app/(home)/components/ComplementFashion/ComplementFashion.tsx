@@ -2,18 +2,19 @@ import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
 import ItemCard from "@/features/Products/components/Cards/ItemCard";
-import { Button } from "@/shared/components/UI/Button";
-import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
-import Link from "next/link";
-import { paths } from "@/config/paths";
 
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+import ComplementFashionButton from "./components/ComplementFashionButton";
+import Link from "next/link";
+import { Button } from "@/shared/components/UI/Button";
+import { paths } from "@/config/paths";
+import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 
 const ComplementFashion = () => {
   return (
     <Section className="bg-main">
-      <Container className="my-20">
-        <div className="grid grid-cols-addition-md md:grid-cols-addition-lg lg:grid-cols-addition grid-rows-addition-md md:grid-rows-addition-lg lg:grid-rows-addition gap-6 h-full overflow-hidden">
+      <Container className="flex-col gap-8 my-12 sm:my-20">
+        <div className="grid grid-cols-addition-md md:grid-cols-addition-lg lg:grid-cols-addition grid-rows-addition-md md:grid-rows-addition-lg lg:grid-rows-addition gap-y-6 gap-x-4 sm:gap-x-6 h-full overflow-hidden">
           <div className="relative h-[376px] md:h-[640px] col-start-2 lg:col-start-auto row-start-2 lg:row-start-auto">
             <Image
               src="/images/2happy-white-logo-90.png"
@@ -44,7 +45,7 @@ const ComplementFashion = () => {
 
           <AnimatedInView
             as="div"
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
             animations={{
               default: {
                 initial: { opacity: 0, y: 150 },
@@ -52,7 +53,7 @@ const ComplementFashion = () => {
                 transition: { duration: 0.6, type: "tween", delay: 0.3 },
               },
             }}
-            className="col-start-3 lg:col-start-auto row-start-1 row-end-3 lg:row-span-2 mt-[104px] lg:mt-0"
+            className="col-start-3 lg:col-start-auto row-start-1 row-end-3 lg:row-span-2 mt-0 sm:mt-20 md:mt-[104px] lg:mt-0"
           >
             <ItemCard
               className="w-full h-full"
@@ -78,8 +79,8 @@ const ComplementFashion = () => {
                 viewport: { once: true, amount: 0.3 },
               },
               default: {
-                viewport: { once: true, amount: "all" },
-                initial: { opacity: 0, y: 150 },
+                viewport: { once: true, amount: 0.4 },
+                initial: { opacity: 0, y: 80 },
                 whileInView: { opacity: 1, y: 0 },
                 transition: { duration: 0.6, type: "tween", delay: 0.6 },
               },
@@ -93,18 +94,31 @@ const ComplementFashion = () => {
             />
           </AnimatedInView>
           <div className="flex flex-col justify-start items-start col-start-3 lg:col-start-4 row-start-1 lg:row-start-auto">
-            <Button
-              variant="tertiary"
-              className="lg:w-full text-white [&_svg]:fill-white"
-              asChild
-            >
-              <Link href={paths.catalog.getHref()}>
-                Перейти в каталог
-                <ArrowUpRightIcon />
-              </Link>
-            </Button>
+            <ComplementFashionButton />
           </div>
         </div>
+        <AnimatedInView
+          as="div"
+          viewport={{ once: true, amount: 0.4 }}
+          animations={{
+            default: {
+              initial: { opacity: 0, y: 50 },
+              whileInView: { opacity: 1, y: 0 },
+              transition: { duration: 0.6, type: "tween" },
+            },
+          }}
+        >
+          <Button
+            className="inline-flex w-full border-white text-white [&_svg]:fill-white sm:hidden"
+            variant={"secondary"}
+            size={"medium"}
+            asChild
+          >
+            <Link href={paths.catalog.collections.getHref()}>
+              Смотреть все <ArrowUpRightIcon />
+            </Link>
+          </Button>
+        </AnimatedInView>
       </Container>
     </Section>
   );

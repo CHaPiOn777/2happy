@@ -1,6 +1,5 @@
 import { ChipVariant } from "@/shared/components/UI/Chip";
-import { FavoriteProduct } from "../api/indexedApi";
-import { getProductSale } from "@/features/Products/utils";
+import { FavoriteProduct } from "../types";
 
 export const getFavoriteChip = (
   favorite: FavoriteProduct

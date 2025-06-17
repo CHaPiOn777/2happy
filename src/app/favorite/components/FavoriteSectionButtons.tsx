@@ -1,5 +1,5 @@
 import { useClearFavorites } from "@/features/Favorite/api/favoriteApi";
-import { FavoriteProduct } from "@/features/Favorite/api/indexedApi";
+import { FavoriteProduct } from "@/features/Favorite/types";
 import { Button } from "@/shared/components/UI/Button";
 
 const FavoriteSectionButtons = ({

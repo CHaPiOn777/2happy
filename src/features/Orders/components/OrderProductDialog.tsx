@@ -65,7 +65,7 @@ const OrderProductDialog = ({
               defaultSize={orderItemSize}
               setImages={setImages}
               className="basis-auto"
-              renderButtons={(variation, disabled) => (
+              renderButtons={(product, variation, disabled) => (
                 <>
                   {variation?.stock_status === "outofstock" ? null : (
                     <div className="flex gap-2">

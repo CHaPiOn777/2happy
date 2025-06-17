@@ -1,7 +1,7 @@
 "use client";
 
-import { FavoriteProduct } from "@/features/Favorite/api/indexedApi";
 import FavoriteCard from "@/features/Favorite/components/Cards/FavoriteCard";
+import { FavoriteProduct } from "@/features/Favorite/types";
 
 const FavoriteList = ({ favorites }: { favorites: FavoriteProduct[] }) => {
   return (

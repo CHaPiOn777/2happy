@@ -6,7 +6,7 @@ import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { useUser } from "@/shared/api/authApi";
 import AuthModal from "@/features/Auth/components/AuthModal";
 import FavoriteSheetCard from "./Cards/FavoriteSheetCard";
-import { FavoriteProduct } from "../api/indexedApi";
+import { FavoriteProduct } from "../types";
 
 const FavoriteSheetContent = ({
   favorites,

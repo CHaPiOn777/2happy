@@ -1,4 +1,4 @@
-import { FavoriteProduct } from "../api/indexedApi";
+import { FavoriteProduct } from "../types";
 
 export const getFavoriteItemInfo = (favoriteItem: FavoriteProduct) => {
   const size =

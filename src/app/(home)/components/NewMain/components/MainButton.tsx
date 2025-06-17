@@ -12,7 +12,18 @@ const MainButton = () => {
 
   const hasMounted = useHasMounted();
 
-  if (!hasMounted) return null;
+  if (!hasMounted)
+    return (
+      <Button
+        className="absolute -bottom-14 left-0 md:relative w-full"
+        size="large"
+        asChild
+      >
+        <Link href={paths.catalog.getHref()}>
+          Перейти в каталог <ArrowUpRightIcon />
+        </Link>
+      </Button>
+    );
 
   return (
     <Button

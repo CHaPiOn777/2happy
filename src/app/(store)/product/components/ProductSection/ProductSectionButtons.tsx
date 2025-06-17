@@ -11,8 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import BuyInstantButton from "@/features/Products/components/BuyInstantButton";
 import ProductSectionRelatedProducts from "./ProductSectionRelatedProducts";
-import { createFavorite } from "@/features/Favorite/utils/productToFavorite";
-import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
 import { cn } from "@/shared/utils";
 import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
 
@@ -57,13 +55,14 @@ const ProductSectionButtons = ({
           </Button>
         </OutOfStockDialog>
         <ToggleFavorite product={product} variation={variation}>
-          {(isFavorite) => (
+          {(isFavorite, handleToggle) => (
             <IconButton
               className={cn(
                 "[&_svg]:fill-transparent hidden sm:inline-flex",
                 isFavorite && "[&_svg]:fill-white"
               )}
               size="normal"
+              onClick={handleToggle}
               disabled={disabled}
             >
               <HeartIcon className="stroke-white" />

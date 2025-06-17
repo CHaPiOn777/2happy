@@ -40,6 +40,7 @@ const Header = () => {
             <FavoriteSheet triggerProps={{ asChild: true }}>
               <IconButton variant="secondary" size="medium">
                 <HeartIcon />
+                <FavoriteItemsCount className="top-2 right-1" />
               </IconButton>
             </FavoriteSheet>
             <CartSheet triggerProps={{ asChild: true }}>

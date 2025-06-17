@@ -4,7 +4,7 @@ import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
-import { ComponentPropsWithoutRef, MouseEvent } from "react";
+import { ComponentPropsWithoutRef, useMemo } from "react";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import ColorSquare from "../Colors/ColorSquare";
 import { paths } from "@/config/paths";
@@ -16,6 +16,9 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
 import { Separator } from "@/shared/components/UI/Separator";
+import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
+import { createFavorite } from "@/features/Favorite/utils/createFavorite";
+import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
 
 const ProductServerCard = ({
   product,
@@ -33,6 +36,8 @@ const ProductServerCard = ({
   );
   const { colors, image, sizes, chip } = getProductCardInfo(product);
 
+  const isFavoriteDisabled = !product.defaultVariation;
+
   const handleLinkClick = () => {
     queryClient.setQueryData(
       getProductByIdQueryOptions(product.id).queryKey,
@@ -42,10 +47,6 @@ const ProductServerCard = ({
       product.id,
       ...oldData.filter((item) => item != product.id).slice(0, 10),
     ]);
-  };
-
-  const handleFavoriteClick = (e: MouseEvent<SVGSVGElement>) => {
-    e.preventDefault();
   };
 
   return (
@@ -68,11 +69,26 @@ const ProductServerCard = ({
               {chip.text}
             </Chip>
           )}
-          <HeartIcon
-            role="button"
-            onClick={handleFavoriteClick}
-            className="absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main"
-          />
+          <ToggleFavorite
+            product={product}
+            variation={product.defaultVariation}
+          >
+            {(isFavorite, handleToggle) => (
+              <HeartIcon
+                role="button"
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                  handleToggle();
+                }}
+                className={cn(
+                  "absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main",
+                  isFavorite && "fill-main",
+                  isFavoriteDisabled &&
+                    "opacity-0 group-hover/product:opacity-60 hover:fill-transparent"
+                )}
+              />
+            )}
+          </ToggleFavorite>
           {image && (
             <ImageWithLoader
               src={image.src}

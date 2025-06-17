@@ -9,11 +9,8 @@ import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { motion } from "motion/react";
-import { useRef } from "react";
 
 const FinalSaleList = () => {
-  const viewportRef = useRef<HTMLDivElement>(null);
-
   const isMedium = useMediaCustom("md");
 
   const hasMounted = useHasMounted();
@@ -27,7 +24,7 @@ const FinalSaleList = () => {
   );
 
   return (
-    <ScrollArea viewportRef={viewportRef} type="always">
+    <ScrollArea type="always">
       <div className="grid grid-flow-col pb-8 md:pb-0 auto-cols-[218px] md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {data.items.map((product) => (
           <motion.div
@@ -43,8 +40,6 @@ const FinalSaleList = () => {
         ))}
       </div>
       <ScrollBar
-        viewportRef={viewportRef}
-        variant="progress"
         initialProgress={10}
         minTriggerPercent={10}
         orientation="horizontal"

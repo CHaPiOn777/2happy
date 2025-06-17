@@ -16,19 +16,19 @@ import FavoriteSectionButtons from "./FavoriteSectionButtons";
 const FavoriteSection = () => {
   const { data: favorites, isLoading } = useGetAllFavorite();
 
-  const favoriteCount = useMemo(
-    () => favorites?.reduce((acc, item) => (acc += item.quantity), 0),
-    [favorites]
-  );
+  // const favoriteCount = useMemo(
+  //   () => favorites?.reduce((acc, item) => (acc += item.quantity), 0),
+  //   [favorites]
+  // );
 
   return (
     <Section className="border-b border-main">
       <Container className="flex-col gap-12 lg:gap-16 my-20 lg:my-section">
         <div className="flex flex-col gap-4">
           <h2 className="text-h2">Избранное /</h2>
-          {!!favoriteCount && (
+          {!!favorites?.totalCount && (
             <div className="text-gray-middle">
-              Всего товаров: {favoriteCount}
+              Всего товаров: {favorites?.totalCount}
             </div>
           )}
         </div>
@@ -54,13 +54,13 @@ const FavoriteSection = () => {
               <FavoriteCardLoader />
             </>
           )}
-          {!isLoading && favorites?.length ? (
+          {!isLoading && favorites?.data.length ? (
             <>
-              <FavoriteList favorites={favorites} />
-              <FavoriteSectionButtons favorites={favorites} />
+              <FavoriteList favorites={favorites.data} />
+              <FavoriteSectionButtons favorites={favorites.data} />
             </>
           ) : null}
-          {!isLoading && !favorites?.length ? <FavoriteEmpty /> : null}
+          {!isLoading && !favorites?.data.length ? <FavoriteEmpty /> : null}
         </div>
       </Container>
     </Section>

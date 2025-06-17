@@ -1,25 +1,4 @@
-import {
-  Image,
-  ProductTag,
-  ProductVariationAttribute,
-  StockStatus,
-} from "@/shared/types/api";
-
-export interface FavoriteProduct {
-  id: number;
-  name: string;
-  on_sale: boolean;
-  variationId: number;
-  attributes: ProductVariationAttribute[];
-  stock_status: StockStatus;
-  stock_quantity: number | null;
-  tags: ProductTag[];
-  price: string;
-  regular_price: string;
-  sale_price: string;
-  quantity: number;
-  image: Image | null;
-}
+import { FavoriteProduct, FavoriteResponse } from "../types";
 
 export const openDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
@@ -65,19 +44,63 @@ export const removeFromFavorites = async (
   });
 };
 
-export const getAllFavorites = async (): Promise<FavoriteProduct[] | null> => {
+export type UpdateFavoriteByIdParams = {
+  id: number;
+  data: Partial<FavoriteProduct>;
+};
+
+export const updateFavoriteById = async (
+  { id, data }: UpdateFavoriteByIdParams,
+  signal?: AbortSignal
+): Promise<void> => {
+  const db = await openDB();
+  const tx = db.transaction("favorites", "readwrite");
+  const store = tx.objectStore("favorites");
+
+  const getRequest = store.get(id);
+
+  return new Promise<void>((resolve, reject) => {
+    getRequest.onsuccess = () => {
+      const item = getRequest.result as FavoriteProduct | undefined;
+
+      if (!item) {
+        reject(new Error(`Favorite item with id ${id} not found.`));
+        return;
+      }
+
+      const updatedItem: FavoriteProduct = {
+        ...item,
+        ...data,
+      };
+
+      const putRequest = store.put(updatedItem);
+
+      putRequest.onsuccess = () => resolve();
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+};
+
+export const getAllFavorites = async (): Promise<FavoriteResponse> => {
   const db = await openDB();
   const tx = db.transaction("favorites", "readonly");
   const store = tx.objectStore("favorites");
 
   return new Promise((resolve, reject) => {
     const request = store.getAll();
-    request.onsuccess = () =>
-      resolve(
-        request.result.length === 0
-          ? null
-          : (request.result as FavoriteProduct[])
+    request.onsuccess = () => {
+      const result = request.result as FavoriteProduct[];
+      const totalCount = result.reduce(
+        (acc, item) => (acc += item.quantity),
+        0
       );
+      resolve({
+        data: result,
+        totalCount,
+      });
+    };
     request.onerror = () => reject(request.error);
   });
 };

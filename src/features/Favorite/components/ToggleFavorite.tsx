@@ -1,7 +1,11 @@
-import { ProductServer, ProductVariation } from "@/features/Products/types";
+import {
+  ProductDefaultVariation,
+  ProductServer,
+  ProductVariation,
+} from "@/features/Products/types";
 import { Slot } from "@radix-ui/react-slot";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
-import { createFavorite } from "../utils/productToFavorite";
+import { createFavorite } from "../utils/createFavorite";
 import { useToggleFavorite } from "../hooks/useToggleFavorite";
 
 const ToggleFavorite = ({
@@ -13,7 +17,7 @@ const ToggleFavorite = ({
   ...props
 }: {
   product: ProductServer | null;
-  variation: ProductVariation | null;
+  variation: ProductVariation | ProductDefaultVariation | null;
   children: (isFavorite: boolean, handleToggle: () => void) => ReactNode;
   asChild?: boolean;
 } & Omit<ComponentPropsWithoutRef<"div">, "children">) => {
@@ -27,8 +31,6 @@ const ToggleFavorite = ({
     <Comp
       onClick={(e) => {
         onClick?.(e);
-
-        handleToggle();
       }}
       {...props}
     >

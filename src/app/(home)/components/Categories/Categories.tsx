@@ -15,8 +15,8 @@ import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 const Categories = () => {
   return (
     <Section className="border-b-[1px] border-b-main">
-      <Container className="justify-between gap-[176px] my-section">
-        <div className="flex flex-col justify-between w-full lg:basis-[392px]">
+      <Container className="flex-col md:flex-row justify-between gap-8 md:gap-24 lg:gap-[176px] my-section">
+        <div className="flex flex-col gap-8 md:gap-0 justify-between w-full lg:basis-[392px]">
           <motion.h2
             initial={{ opacity: 0, y: -150 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -31,29 +31,31 @@ const Categories = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "tween" }}
-            className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]"
+            className="flex flex-col items-end md:items-start gap-4"
           >
             <Link
               href={paths.catalog.getHref()}
-              className="link-hover col-span-2 text-button-medium"
+              className="link-hover col-start-2 md:col-span-2 text-button-medium"
             >
               Смотреть все <ArrowRightIcon />
             </Link>
-            <div className="relative">
-              <Image
-                fill
-                src="/images/Home/Categories/category-1.jpg"
-                className="object-cover object-top"
-                alt="category-image"
-              />
-            </div>
-            <div className="relative">
-              <Image
-                fill
-                className="object-cover object-center"
-                src="/images/2happy-logo-black.jpg"
-                alt="category-image"
-              />
+            <div className="flex gap-6">
+              <div className="relative w-[152px] h-[100px] lg:w-[184px] lg:h-[128px]">
+                <Image
+                  fill
+                  src="/images/Home/Categories/category-1.jpg"
+                  className="object-cover object-top"
+                  alt="category-image"
+                />
+              </div>
+              <div className="relative w-[152px] h-[100px] lg:w-[184px] lg:h-[128px]">
+                <Image
+                  fill
+                  className="object-cover object-center"
+                  src="/images/2happy-logo-black.jpg"
+                  alt="category-image"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

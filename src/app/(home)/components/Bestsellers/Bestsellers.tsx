@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { paths } from "@/config/paths";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+import BestsellersButton from "./components/BestsellersButton";
 
 const Bestsellers = () => {
   return (
@@ -23,6 +24,11 @@ const Bestsellers = () => {
           as="h2"
           viewport={{ once: true, amount: "all" }}
           animations={{
+            md: {
+              initial: { opacity: 0, x: 80 },
+              whileInView: { opacity: 1, x: 0 },
+              transition: { duration: 0.6, type: "tween" },
+            },
             lg: {
               initial: { opacity: 0, x: 100 },
               whileInView: { opacity: 1, x: 0 },
@@ -38,7 +44,7 @@ const Bestsellers = () => {
         >
           Наши <br /> бестселлеры / 25
         </AnimatedInView>
-        <div className="grid grid-cols-[304px_400px] grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-6">
+        <div className="grid grid-cols-2 grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-6">
           <AnimatedInView
             as="div"
             viewport={{ once: true, amount: 0.3 }}
@@ -64,7 +70,7 @@ const Bestsellers = () => {
               viewport={{ once: true, amount: "all" }}
               animations={{
                 xl: {
-                  initial: { opacity: 0, x: 150 },
+                  initial: { opacity: 0, x: 135 },
                   whileInView: { opacity: 1, x: 0 },
                   transition: { duration: 0.6, type: "tween" },
                 },
@@ -84,26 +90,27 @@ const Bestsellers = () => {
             as="div"
             viewport={{ once: true, amount: 0.4 }}
             animations={{
+              md: {
+                initial: { opacity: 0, y: 100 },
+                whileInView: { opacity: 1, y: 0 },
+                transition: { duration: 0.6, type: "tween" },
+              },
+              lg: {
+                initial: { opacity: 0, x: 200 },
+                whileInView: { opacity: 1, x: 0 },
+                transition: { duration: 0.6, type: "tween" },
+              },
               default: {
                 initial: { opacity: 0, x: 300 },
                 whileInView: { opacity: 1, x: 0 },
                 transition: { duration: 0.6, type: "tween" },
               },
             }}
-            className="flex flex-col gap-8"
+            className="relative flex flex-col gap-8"
           >
-            <Button
-              className="text-white [&_svg]:fill-white"
-              variant="tertiary"
-              size="medium"
-              asChild
-            >
-              <Link href={paths.catalog.bestsellers.getHref()}>
-                Смотреть все <ArrowRightIcon />
-              </Link>
-            </Button>
+            <BestsellersButton />
             <ItemCard
-              imageClassName="scale-x-[-1]"
+              imageClassName="scale-x-[-1] object-center"
               src="/images/Home/Bestsellers/card-2.jpg"
               href="/"
             />

@@ -13,8 +13,8 @@ module.exports = {
     },
     extend: {
       screens: {
-        sm: "320px",
-        md: "640px",
+        sm: "480px",
+        md: "768px",
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
@@ -24,10 +24,13 @@ module.exports = {
         addition:
           "80px minmax(280px, 496px) minmax(180px, 286px) minmax(180px, 286px)",
         "addition-lg": "minmax(250px, 392px) 80px minmax(270px,440px)",
+        "addition-md": "minmax(150px, 276px) 40px minmax(230px,340px)",
         "collections-lg":
           "minmax(200px, 288px) minmax(200px, 280px) minmax(250px, 344px)",
         "instagram-lg":
           "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
+        "instagram-md":
+          "minmax(150px, 240px) minmax(150px, 240px) 30px minmax(100px, 160px)",
         aboutProducts:
           "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(130px, 184px) minmax(130px, 184px)",
         aboutProductsLg:
@@ -48,8 +51,10 @@ module.exports = {
       gridTemplateRows: {
         addition: "408px 232px",
         "addition-lg": "repeat(2, 640px)",
+        "addition-md": "480px 376px",
         "collections-lg": "272px 174px 226px 40px",
         "instagram-lg": "288px 288px 312px",
+        "instagram-md": "168px 240px 288px",
         aboutProducts: "264px 104px 280px",
         aboutProductsLg: "640px 264px 94px",
         aboutReviews: "repeat(4, 120px)",

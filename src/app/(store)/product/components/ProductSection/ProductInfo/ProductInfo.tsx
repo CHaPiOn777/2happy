@@ -129,14 +129,15 @@ const ProductInfo = ({
               >
                 <ShareIcon />
               </CopyButton>
-              <ToggleFavorite product={product} variation={variation}>
+              <ToggleFavorite
+                product={product}
+                variation={variation}
+                className="absolute sm:relative top-4 right-8 sm:top-0 sm:right-0 z-10 w-10 h-10 bg-white justify-center items-center flex lg:hidden"
+              >
                 {(isFavorite, handleToggle) => (
                   <button onClick={handleToggle}>
                     <HeartIcon
-                      className={cn(
-                        "inline-flex sm:hidden",
-                        isFavorite && "fill-main"
-                      )}
+                      className={cn("inline-flex", isFavorite && "fill-main")}
                     />
                   </button>
                 )}

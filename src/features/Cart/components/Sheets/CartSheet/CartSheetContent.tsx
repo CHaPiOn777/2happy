@@ -22,7 +22,7 @@ const CartSheetContent = ({
   return (
     <div className="flex flex-col justify-between w-full h-full flex-1 overflow-hidden">
       <div className="flex flex-col flex-1 overflow-hidden">
-        <div className="flex flex-col gap-4 lg:gap-6 overflow-scroll">
+        <div className="flex flex-col gap-4 lg:gap-6 overflow-y-auto overflow-x-hidden">
           {cartData.items.map((item) => (
             <CartMediumCard
               key={item.key}

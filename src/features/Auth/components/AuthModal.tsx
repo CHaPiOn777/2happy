@@ -55,7 +55,10 @@ const AuthModal = ({
       >
         {children}
       </DialogTrigger>
-      <DialogContent className="px-8 gap-10" closeClassName="top-10 right-8">
+      <DialogContent
+        className="px-6 sm:px-8 gap-10"
+        closeClassName="top-10 right-8"
+      >
         <DialogHeader>
           <DialogTitle>Войдите или создайте аккаунт</DialogTitle>
         </DialogHeader>

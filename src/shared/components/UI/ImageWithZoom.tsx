@@ -53,36 +53,25 @@ const ImageWithZoom = ({
 
   return (
     <>
-      {isTouchDevice.current ? (
-        <QuickPinchZoom onUpdate={onUpdate}>
-          <ImageWithLoader
-            ref={imgRef}
-            className={cn("w-full h-full select-none", className)}
-            draggable={false}
-            {...props}
-          />
-        </QuickPinchZoom>
-      ) : (
-        <div
-          ref={containerRef}
-          className="zoom-container touch-none"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={resetZoom}
-        >
-          <ImageWithLoader
-            className={cn(
-              "transition-transform w-full h-auto select-none",
-              zoom.scale > 1 ? "cursor-zoom-out" : "cursor-zoom-in",
-              className
-            )}
-            style={{
-              transformOrigin: `${zoom.x} ${zoom.y}`,
-              transform: `scale(${zoom.scale})`,
-            }}
-            {...props}
-          />
-        </div>
-      )}
+      <div
+        ref={containerRef}
+        className="zoom-container touch-pan-y"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={resetZoom}
+      >
+        <ImageWithLoader
+          className={cn(
+            "transition-transform w-full h-auto select-none",
+            zoom.scale > 1 ? "cursor-zoom-out" : "cursor-zoom-in",
+            className
+          )}
+          style={{
+            transformOrigin: `${zoom.x} ${zoom.y}`,
+            transform: `scale(${zoom.scale})`,
+          }}
+          {...props}
+        />
+      </div>
     </>
   );
 };

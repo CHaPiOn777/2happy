@@ -1,6 +1,5 @@
 "use client";
 
-import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { MouseEvent } from "react";
@@ -37,11 +36,11 @@ const CollectionCard = ({ product }: { product: ProductServer }) => {
         className="flex flex-col h-full gap-4"
       >
         <div className="relative h-full">
-          <HeartIcon
+          {/* <HeartIcon
             role="button"
             onClick={handleFavoriteClick}
             className="absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main"
-          />
+          /> */}
           {image && (
             <ImageWithLoader
               src={image.src}

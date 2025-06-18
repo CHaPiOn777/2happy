@@ -1,6 +1,5 @@
 "use client";
 
-import FiltersIcon from "@/shared/components/icons/FiltersIcon";
 import GridBigIcon from "@/shared/components/icons/GridBigIcon";
 import GridSmallIcon from "@/shared/components/icons/GridSmallIcon";
 import {
@@ -9,7 +8,6 @@ import {
   SelectItem,
   SelectTriggerPlain,
 } from "@/shared/components/UI/Select";
-import ProductsFiltersSheet from "@/features/Products/components/Filters/ProductsFiltersSheet";
 import { useCatalogStore } from "@/features/Products/store/catalogStore";
 import { usePaginationStore } from "@/features/Products/store/paginationStore";
 import { cn } from "@/shared/utils/cn";
@@ -52,7 +50,7 @@ const CollectionsCatalogControls = () => {
 
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex gap-4">
+      <div className="flex gap-4 w-full justify-end lg:justify-start">
         <CatalogSelect
           sort={sort}
           onChange={(value) =>
@@ -60,7 +58,7 @@ const CollectionsCatalogControls = () => {
           }
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="items-center gap-2 hidden lg:flex">
         <GridSmallIcon
           className={cn(
             "cursor-pointer [&_*]:cursor-pointer hover:fill-main hover:stroke-transparent",

@@ -24,11 +24,15 @@ const Instagram = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, type: "spring" }}
-          className="grid grid-cols-2 sm:grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-[repeat(3,216px)] sm:grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-6"
+          className="grid grid-cols-2 sm:grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-[repeat(3,216px)] sm:grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-4 sm:gap-6"
         >
-          <div className="text-body2 sm:text-body1 text-white">
+          <div className="text-body2 sm:text-body1 text-white hidden md:block">
             Откройте для себя больше вдохновения и стильных идей в нашем
             Instagram @2happy_kz! Будьте в курсе новинок, акций и трендов
+          </div>
+          <div className="text-body2 sm:text-body1 text-white block md:hidden">
+            Откройте для себя больше вдохновения и стильных идей в нашем
+            Instagram @2happy_kz!
           </div>
           <InstagramCard href="/" src="/images/Home/Instagram/1.jpg" />
           <InstagramCard
@@ -47,7 +51,7 @@ const Instagram = () => {
             src="/images/Home/Instagram/4.jpg"
           />
           <Button
-            className="inline-flex text-white [&_svg]:fill-white self-end sm:hidden"
+            className="inline-flex text-white [&_svg]:fill-white mx-auto self-end sm:hidden px-3"
             variant="tertiary"
             size="small"
             asChild

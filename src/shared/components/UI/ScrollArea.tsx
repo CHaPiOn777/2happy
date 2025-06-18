@@ -8,8 +8,10 @@ import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
->(({ className, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> & {
+    orientation?: "vertical" | "horizontal";
+  }
+>(({ className, children, orientation = "vertical", ...props }, ref) => {
   const isMedium = useMediaCustom("md");
 
   const viewportRef = React.useRef<HTMLDivElement>(null);
@@ -27,8 +29,13 @@ const ScrollArea = React.forwardRef<
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar orientation="vertical" viewportRef={viewportRef} />
-      <ScrollBar orientation="horizontal" viewportRef={viewportRef} />
+      {orientation === "vertical" && (
+        <ScrollBar orientation="vertical" viewportRef={viewportRef} />
+      )}
+      {orientation === "horizontal" && (
+        <ScrollBar orientation="horizontal" viewportRef={viewportRef} />
+      )}
+
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   );
@@ -53,8 +60,8 @@ const ScrollBar = React.forwardRef<
       className,
       orientation = "vertical",
       viewportRef,
-      initialProgress,
-      minTriggerPercent,
+      initialProgress = 10,
+      minTriggerPercent = 10,
       ...props
     },
     ref

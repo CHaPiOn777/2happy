@@ -37,7 +37,7 @@ const CollectionsList = ({
 
   if (noResults) {
     return (
-      <div className="flex items-center justify-center w-full h-[552px]">
+      <div className="flex items-center justify-center w-full h-[440px] md:h-[456px]">
         <h2 className="text-h2">Ничего не найдено</h2>
       </div>
     );
@@ -54,7 +54,7 @@ const CollectionsList = ({
         className={cn(
           "grid gap-x-6 gap-y-10 grid-flow-row",
           gridType === "small"
-            ? "grid-cols-4 auto-rows-[456px] min-h-[552px]"
+            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[440px] md:auto-rows-[456px] min-h-[440px] md:min-h-[456px]"
             : "grid-cols-2 auto-rows-[928px] min-h-[928px]",
           isPlaceholderData && "blur-sm pointer-events-none"
         )}

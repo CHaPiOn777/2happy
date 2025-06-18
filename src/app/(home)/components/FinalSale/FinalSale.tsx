@@ -73,7 +73,7 @@ const FinalSale = async () => {
                 Смотреть все <ArrowRightIcon />
               </Link>
 
-              <div className="relative w-[218px] md:w-full h-[270px] md:h-[160px]">
+              <div className="relative w-[136px] h-[200px] sm:w-[218px] md:w-full sm:h-[270px] md:h-[160px]">
                 <Image
                   fill
                   className="object-cover object-top"

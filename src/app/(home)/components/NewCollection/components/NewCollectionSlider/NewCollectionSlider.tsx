@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { SIZES, SLIDES_SIZES } from "./consts";
+import { SIZES, SLIDES_SIZES } from "../../consts";
 import SliderButton from "@/shared/components/Slider/SliderButton";
 import ArrowRightIcon from "@/shared/components/icons/Arrows/ArrowRightIcon";
 import { ProductServer } from "@/features/Products/types";
@@ -12,13 +12,10 @@ import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import { tagIds } from "@/features/Categories/consts/consts";
 import CustomSlide from "./CustomSlide";
 
-import { motion } from "motion/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 
 import "./styles.scss";
-import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewCollectionSlider = () => {
   const { data } = useSuspenseQuery(
@@ -36,56 +33,42 @@ const NewCollectionSlider = () => {
   ];
 
   return (
-    <AnimatedInView
-      as="div"
-      viewport={{ once: true, amount: 0.4 }}
-      fallbackClassName="opacity-0"
-      animations={{
-        default: {
-          transition: { duration: 0.7, type: "tween" },
-          initial: { opacity: 0 },
-          whileInView: { opacity: 1 },
-        },
+    <Swiper
+      modules={[Navigation]}
+      className="new-collection-slider relative"
+      spaceBetween={24}
+      slidesPerView="auto"
+      onSwiper={(swiper) => {
+        swiper.wrapperEl.classList.add("swiper-wrapper");
+        swiper.wrapperEl.classList.remove("gap-6");
       }}
-      className="overflow-hidden pb-4"
+      wrapperClass="gap-6"
     >
-      <Swiper
-        modules={[Navigation]}
-        className="new-collection-slider relative"
-        spaceBetween={24}
-        slidesPerView="auto"
-        onSwiper={(swiper) => {
-          swiper.wrapperEl.classList.add("swiper-wrapper");
-          swiper.wrapperEl.classList.remove("gap-6");
-        }}
-        wrapperClass="gap-6"
-      >
-        {productsWithCustom.map((slide, index) => {
-          if (slide === "custom") {
-            return (
-              <SwiperSlide key="custom" className="custom-slide">
-                <CustomSlide />
-              </SwiperSlide>
-            );
-          } else {
-            const size = SLIDES_SIZES[index];
-            return (
-              <SwiperSlide key={slide.id} style={SIZES[size]}>
-                <ProductServerCard product={slide} />
-              </SwiperSlide>
-            );
-          }
-        })}
-        <div className="absolute flex gap-4 right-0 bottom-0">
-          <SliderButton slideType="prev" className="group">
-            <ArrowRightIcon className="w-[48px] h-[48px] rotate-180 fill-main group-disabled:fill-dark-disabled" />
-          </SliderButton>
-          <SliderButton slideType="next" className="group">
-            <ArrowRightIcon className="w-[48px] h-[48px] fill-main group-disabled:fill-dark-disabled" />
-          </SliderButton>
-        </div>
-      </Swiper>
-    </AnimatedInView>
+      {productsWithCustom.map((slide, index) => {
+        if (slide === "custom") {
+          return (
+            <SwiperSlide key="custom" className="custom-slide">
+              <CustomSlide />
+            </SwiperSlide>
+          );
+        } else {
+          const size = SLIDES_SIZES[index];
+          return (
+            <SwiperSlide key={slide.id} style={SIZES[size]}>
+              <ProductServerCard product={slide} />
+            </SwiperSlide>
+          );
+        }
+      })}
+      <div className="absolute flex gap-4 right-0 bottom-0">
+        <SliderButton slideType="prev" className="group">
+          <ArrowRightIcon className="w-[48px] h-[48px] rotate-180 fill-main group-disabled:fill-dark-disabled" />
+        </SliderButton>
+        <SliderButton slideType="next" className="group">
+          <ArrowRightIcon className="w-[48px] h-[48px] fill-main group-disabled:fill-dark-disabled" />
+        </SliderButton>
+      </div>
+    </Swiper>
   );
 };
 

@@ -8,11 +8,12 @@ import HeartIcon from "@/shared/components/icons/HeartIcon";
 import { Button } from "@/shared/components/UI/Button";
 import { IconButton } from "@/shared/components/UI/IconButton";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import BuyInstantButton from "@/features/Products/components/BuyInstantButton";
 import ProductSectionRelatedProducts from "./ProductSectionRelatedProducts";
 import { cn } from "@/shared/utils";
 import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
+import useObserver from "@/shared/hooks/useObserver";
 
 const ProductSectionButtons = ({
   product,
@@ -26,6 +27,23 @@ const ProductSectionButtons = ({
   const [sheetOpen, setSheetOpen] = useState<boolean>(false);
   const [cartItem, setCartItem] = useState<CartItemResponse | null>(null);
   const [shouldFetchRelated, setShouldFetchRelated] = useState<boolean>(false);
+
+  const [showButton, setShowButton] = useState<boolean>(false);
+  const observableRef = useRef<HTMLDivElement>(null);
+
+  console.log(showButton);
+
+  useObserver(
+    observableRef,
+    () => {
+      console.log("d");
+      setShowButton(false);
+    },
+    () => {
+      console.log("db");
+      setShowButton(true);
+    }
+  );
 
   const { data } = useQuery({
     ...getRelatedProductsQueryOptions({
@@ -74,45 +92,101 @@ const ProductSectionButtons = ({
   }
 
   return (
-    <div className="flex sm:gap-2">
-      <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
-        <AddToCartButton
-          className="w-full sm:w-1/2"
-          variationId={variation?.id ?? 0}
-          disabled={disabled}
-          onClick={onClick}
-          onSuccess={onAddItemSuccess}
-        >
-          Добавить в корзину
-        </AddToCartButton>
-        <BuyInstantButton variation={variation} />
-      </div>
-      <ToggleFavorite product={product} variation={variation}>
-        {(isFavorite) => (
-          <IconButton
-            className={cn(
-              "[&_svg]:fill-transparent hidden sm:inline-flex",
-              isFavorite && "[&_svg]:fill-white"
-            )}
-            size="normal"
+    <>
+      <div ref={observableRef} className="flex sm:gap-2">
+        <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
+          <AddToCartButton
+            className="w-full sm:w-1/2"
+            variationId={variation?.id ?? 0}
             disabled={disabled}
+            onClick={onClick}
+            onSuccess={onAddItemSuccess}
           >
-            <HeartIcon className="stroke-white" />
-          </IconButton>
-        )}
-      </ToggleFavorite>
-
-      {cartItem && (
-        <AddedToCartSheet
-          cartItem={cartItem}
-          open={sheetOpen}
-          onOpenChange={(open) => setSheetOpen(open)}
-          renderRelatedProducts={() => (
-            <ProductSectionRelatedProducts products={data} />
+            Добавить в корзину
+          </AddToCartButton>
+          <BuyInstantButton variation={variation} />
+        </div>
+        <ToggleFavorite
+          product={product}
+          variation={variation}
+          className="hidden lg:inline-flex"
+        >
+          {(isFavorite) => (
+            <IconButton
+              className={cn(
+                "[&_svg]:fill-transparent hidden sm:inline-flex",
+                isFavorite && "[&_svg]:fill-white"
+              )}
+              size="normal"
+              disabled={disabled}
+            >
+              <HeartIcon className="stroke-white" />
+            </IconButton>
           )}
-        />
-      )}
-    </div>
+        </ToggleFavorite>
+
+        {cartItem && (
+          <AddedToCartSheet
+            cartItem={cartItem}
+            open={sheetOpen}
+            onOpenChange={(open) => setSheetOpen(open)}
+            renderRelatedProducts={() => (
+              <ProductSectionRelatedProducts products={data} />
+            )}
+          />
+        )}
+      </div>
+      <div
+        className={cn(
+          "hidden sm:flex lg:hidden fixed bottom-6 w-[calc(100%-48px)] mx-2 z-behind-header transition-all duration-300 ease-in-out sm:gap-2",
+          showButton
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 translate-y-8 pointer-events-none"
+        )}
+      >
+        <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-2">
+          <AddToCartButton
+            className="w-full sm:w-1/2"
+            variationId={variation?.id ?? 0}
+            disabled={disabled}
+            onClick={onClick}
+            onSuccess={onAddItemSuccess}
+          >
+            Добавить в корзину
+          </AddToCartButton>
+          <BuyInstantButton variation={variation} />
+        </div>
+        <ToggleFavorite
+          product={product}
+          variation={variation}
+          className="hidden lg:inline-flex"
+        >
+          {(isFavorite) => (
+            <IconButton
+              className={cn(
+                "[&_svg]:fill-transparent ",
+                isFavorite && "[&_svg]:fill-white"
+              )}
+              size="normal"
+              disabled={disabled}
+            >
+              <HeartIcon className="stroke-white" />
+            </IconButton>
+          )}
+        </ToggleFavorite>
+
+        {cartItem && (
+          <AddedToCartSheet
+            cartItem={cartItem}
+            open={sheetOpen}
+            onOpenChange={(open) => setSheetOpen(open)}
+            renderRelatedProducts={() => (
+              <ProductSectionRelatedProducts products={data} />
+            )}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

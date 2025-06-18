@@ -126,9 +126,9 @@ const SearchSheet = ({
                     <ProductCardLoader className="hidden sm:flex" />
                   </div>
                 )}
-                <ScrollArea>
+                <ScrollArea orientation="horizontal">
                   {products?.items && !isLoadingProducts && (
-                    <ul className="grid grid-flow-col auto-cols-[calc((100vw-16px)/2-32px)] sm:auto-cols-[calc((100vw-16px)/3-32px)] md:grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-6 overflow-x-hidden pb-6 md:pb-0">
+                    <ul className="grid grid-flow-col auto-cols-[minmax(190px,calc((100vw-16px)/2))] sm:auto-cols-[calc((100vw-16px)/3-32px)] md:grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-6 overflow-x-hidden pb-6 md:pb-0">
                       {products?.items.map((product) => (
                         <li
                           key={product.id}
@@ -143,7 +143,6 @@ const SearchSheet = ({
                       ))}
                     </ul>
                   )}
-                  <ScrollBar orientation="horizontal" />
                 </ScrollArea>
               </div>
             </div>

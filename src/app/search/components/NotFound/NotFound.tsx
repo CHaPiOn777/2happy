@@ -22,7 +22,7 @@ const NotFound = ({ search }: { search: string }) => {
             подборки и рекомендации или посмотрите разделы с брендами и
             категориями, которые вам интересны.
           </div>
-          <ul className="grid grid-cols-2 grid-rows-[376px_376px] sm:grid-cols-3 lg:grid-cols-4 grid-rows-[552px] gap-6">
+          <ul className="grid grid-cols-2 grid-rows-[376px_376px] sm:grid-cols-3 lg:grid-cols-4 sm:grid-rows-[552px] gap-6">
             <div className="text-description block sm:hidden">
               По вашему запросу ничего не найдено. Обратите внимание на новые
               подборки и рекомендации или посмотрите разделы с брендами и

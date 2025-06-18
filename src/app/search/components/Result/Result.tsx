@@ -37,7 +37,7 @@ const Result = ({ search }: { search: string }) => {
         <h2 className="text-h3">Результаты поиска по запросу: {search}</h2>
       </div>
       {isLoading && (
-        <div className="w-full grid gird-cols-3 lg:grid-cols-4 grid-rows-[552px] gap-x-6">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[510px] md:auto-rows-[552px] min-h-[510px] md:min-h-[552px] gap-6">
           <ProductCardLoader />
           <ProductCardLoader />
           <ProductCardLoader />
@@ -45,7 +45,7 @@ const Result = ({ search }: { search: string }) => {
         </div>
       )}
       {products?.items && !isLoading && (
-        <ul className="w-full grid grid-cols-3 lg:grid-cols-4 grid-flow-row auto-rows-[552px] gap-x-6">
+        <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[510px] md:auto-rows-[552px] min-h-[510px] md:min-h-[552px] gap-6">
           {products.items.map((product) => (
             <li key={product.id}>
               {PRODUCT_CARDS[product.type as "simple" | "variable" | "grouped"](

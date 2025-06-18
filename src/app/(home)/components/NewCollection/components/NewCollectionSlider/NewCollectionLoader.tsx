@@ -1,6 +1,6 @@
 import { ProductCardLoader } from "@/features/Products/components/Cards/ProductServerCard";
 import CustomSlide from "./CustomSlide";
-import { SIZES_TW } from "./consts";
+import { SIZES_TW } from "../../consts";
 
 const NewCollectionLoader = () => {
   return (

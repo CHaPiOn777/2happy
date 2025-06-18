@@ -55,7 +55,7 @@ const CartMediumCard = ({
   return (
     <article
       className={cn(
-        "w-full flex gap-6 h-[144px] lg:h-[248px] pb-4 lg:pb-8 border-b border-gray last:border-b-0",
+        "w-full flex gap-4 sm:gap-6 h-[144px] lg:h-[248px] pb-4 lg:pb-8 border-b border-gray last:border-b-0",
         isPending && "opacity-50 pointer-events-none",
         className
       )}
@@ -92,7 +92,7 @@ const CartMediumCard = ({
               </>
             )}
           </div>
-          <div className="flex flex-row lg:flex-col gap-2 text-description lg:text-body2">
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-2 text-description lg:text-body2">
             <div className="flex items-center gap-2 lg:gap-4">
               <span>Размер</span>
               <Separator className="h-4/6" orientation="vertical" />
@@ -117,7 +117,7 @@ const CartMediumCard = ({
               >
                 <MinusIcon />
               </IconButton>
-              <div className="text-body2 py-1 px-8 bg-gray-light">
+              <div className="text-body2 py-1 px-4 sm:px-8 bg-gray-light">
                 {quantity}
               </div>
               <IconButton

@@ -6,9 +6,9 @@ const CollectionImagesLoader = ({
   className,
 }: ComponentPropsWithoutRef<"div">) => {
   return (
-    <div className={cn("flex flex-col gap-12", className)}>
-      <Skeleton className="w-full h-[960px]" />
-      <Skeleton className="w-full h-[960px]" />
+    <div className={cn("flex flex-row md:flex-col gap-6 md:gap-12", className)}>
+      <Skeleton className="w-full h-[550px] md:h-[960px]" />
+      <Skeleton className="w-full h-[550px] md:h-[960px] hidden sm:block" />
     </div>
   );
 };

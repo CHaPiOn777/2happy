@@ -35,7 +35,7 @@ const NewMain = () => {
         <Image
           fill
           className="object-cover object-[58%_50%] sm:object-[50%_50%]"
-          quality={90}
+          quality={100}
           src="/images/Home/Main/main.jpg"
           alt="main-image"
           priority
@@ -58,9 +58,10 @@ const NewMain = () => {
                 Стильная и комфортная <br className="hidden sm:block" /> одежда
                 на все случаи жизни!
               </span>
-              <MainButton />
+              <MainButton className="hidden sm:flex" />
             </div>
           </div>
+          <MainButton className="absolute -bottom-14 left-0 flex sm:hidden" />
         </motion.div>
       </Container>
     </Section>

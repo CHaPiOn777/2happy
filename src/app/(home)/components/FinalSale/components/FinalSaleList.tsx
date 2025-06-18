@@ -24,7 +24,7 @@ const FinalSaleList = () => {
   );
 
   return (
-    <ScrollArea type="always">
+    <ScrollArea type="always" orientation="horizontal">
       <div className="grid grid-flow-col pb-8 md:pb-0 auto-cols-[218px] md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {data.items.map((product) => (
           <motion.div

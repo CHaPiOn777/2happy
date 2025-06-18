@@ -38,13 +38,15 @@ const MobileHeader = ({
         <Link href={paths.home.getHref()}>
           <Image
             className="hidden sm:block"
+            quality={95}
             width={260}
             height={72}
             src="/images/Header/tablet-logo.png"
             alt="tablet-log"
           />
           <Image
-            className="block sm:hidden"
+            className="block sm:hidden object-cover"
+            quality={95}
             width={56}
             height={48}
             src="/images/Header/mobile-logo.png"

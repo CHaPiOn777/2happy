@@ -64,13 +64,13 @@ const SizesTableDialog = ({ trigger }: { trigger: ReactNode }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="w-full max-w-[928px] max-h-[80vh] lg:mx-0 lg:max-w-[1168px]">
+      <DialogContent className="w-full max-w-[928px] max-h-[80vh] lg:mx-0 lg:max-w-[1168px] px-4 sm:px-8">
         <DialogHeader>
           <DialogTitle className="text-h4">Таблица размеров</DialogTitle>
           <DialogDescription hidden>Таблица размеров</DialogDescription>
         </DialogHeader>
-        <ScrollArea type="auto">
-          <Table>
+        <ScrollArea type="auto" orientation="horizontal">
+          <Table className="pb-2 md:pb-0">
             <colgroup>
               <col className="min-w-[100px]" />
               <col className="min-w-[100px]" />
@@ -111,7 +111,6 @@ const SizesTableDialog = ({ trigger }: { trigger: ReactNode }) => {
               ))}
             </TableBody>
           </Table>
-          <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </DialogContent>
     </Dialog>

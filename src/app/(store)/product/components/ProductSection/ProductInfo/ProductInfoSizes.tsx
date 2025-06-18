@@ -27,11 +27,11 @@ const ProductInfoSizes = ({
     item.disabled || (availableSizes && !availableSizes.includes(item.name));
   return (
     <div className="flex flex-col gap-4">
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between mt-4 sm:mt-0">
         <span className="text-body1">Размер</span>
         <SizesTableDialog
           trigger={
-            <button className="text-button-xs after:bottom-[1px] link-hover">
+            <button className="text-button-xs after:bottom-[1px] link-hover hidden sm:inline-block">
               Таблица размеров
             </button>
           }
@@ -64,6 +64,14 @@ const ProductInfoSizes = ({
         </RadioButtonsGroup>
       ) : null}
       {hasNoSizes && <div>У товара нет размеров</div>}
+
+      <SizesTableDialog
+        trigger={
+          <button className="text-button-xs link-hover custom-underline inline-block sm:hidden">
+            Таблица размеров
+          </button>
+        }
+      />
     </div>
   );
 };

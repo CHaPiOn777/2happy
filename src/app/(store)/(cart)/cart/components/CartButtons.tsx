@@ -16,12 +16,24 @@ const CartButtons = ({ cartItem }: { cartItem: CartItemResponse }) => {
   const { mutate: deleteCartItem, isPending } = useDeleteCartItem({});
 
   const isTablet = useMediaCustom("lg");
+  const isMedium = useMediaCustom("md");
+
+  const getButtonsSize = () => {
+    switch (true) {
+      case isMedium:
+        return "small";
+      case isTablet:
+        return "medium";
+      default:
+        return "small";
+    }
+  };
 
   return (
     <div className="flex justify-end gap-4">
       <IconButton
         variant="secondary"
-        size={isTablet ? "medium" : "small"}
+        size={getButtonsSize()}
         className="border border-gray"
       >
         <HeartIcon />
@@ -31,7 +43,7 @@ const CartButtons = ({ cartItem }: { cartItem: CartItemResponse }) => {
         trigger={
           <IconButton
             variant="secondary"
-            size={isTablet ? "medium" : "small"}
+            size={getButtonsSize()}
             className="border border-gray"
           >
             <EditIcon />
@@ -41,7 +53,7 @@ const CartButtons = ({ cartItem }: { cartItem: CartItemResponse }) => {
       {isTablet && (
         <IconButton
           variant="secondary"
-          size={isTablet ? "medium" : "small"}
+          size={getButtonsSize()}
           className="border border-gray"
           onClick={() => {
             deleteCartItem({ key });

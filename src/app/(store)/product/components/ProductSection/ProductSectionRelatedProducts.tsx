@@ -1,7 +1,6 @@
 "use client";
 
 import ProductServerCard from "@/features/Products/components/Cards/ProductServerCard";
-import ProductsScrollableSection from "@/features/Products/components/ProductsScrollableSection";
 import { ProductServer } from "@/features/Products/types";
 import {
   Accordion,
@@ -9,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/components/UI/Accordion";
-import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
+import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const ProductSectionRelatedProducts = ({
@@ -27,7 +26,7 @@ const ProductSectionRelatedProducts = ({
             Похожие товары
           </AccordionTrigger>
           <AccordionContent>
-            <ScrollArea type="auto">
+            <ScrollArea type="auto" orientation="horizontal">
               <div className="grid grid-flow-col auto-cols-[196px] gap-x-6 grid-rows-[376px] mb-6">
                 {products?.map((item) => (
                   <ProductServerCard
@@ -37,7 +36,6 @@ const ProductSectionRelatedProducts = ({
                   />
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </AccordionContent>
         </AccordionItem>

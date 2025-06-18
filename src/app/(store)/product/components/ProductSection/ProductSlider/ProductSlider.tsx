@@ -52,7 +52,7 @@ const ProductSlider = ({
     >
       {chip && (
         <Chip
-          className="absolute right-4 top-4 z-10"
+          className="absolute left-4 sm:right-4 sm:left-auto top-4 z-10"
           variant={chip.type}
           size="small"
         >
@@ -98,6 +98,10 @@ const ProductSlider = ({
       <Swiper
         direction="horizontal"
         touchStartPreventDefault={false}
+        touchMoveStopPropagation={false}
+        touchAngle={45}
+        passiveListeners={true}
+        threshold={5}
         thumbs={{ swiper: thumbsSwiper }}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
         modules={[Thumbs]}

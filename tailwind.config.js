@@ -27,7 +27,7 @@ module.exports = {
         addition:
           "80px minmax(280px, 496px) minmax(180px, 286px) minmax(180px, 286px)",
         "addition-lg": "minmax(250px, 392px) 80px minmax(270px,440px)",
-        "addition-md": "minmax(150px, 276px) 40px minmax(230px,340px)",
+        "addition-md": "minmax(100px, 276px) 40px minmax(170px,340px)",
         "collections-lg":
           "minmax(200px, 288px) minmax(200px, 280px) minmax(250px, 344px)",
         "collections-md":
@@ -35,7 +35,7 @@ module.exports = {
         "instagram-lg":
           "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
         "instagram-md":
-          "minmax(150px, 240px) minmax(150px, 240px) 30px minmax(100px, 160px)",
+          "minmax(150px, 240px) minmax(130px, 240px) 30px minmax(50px, 160px)",
         aboutProducts:
           "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(130px, 184px) minmax(130px, 184px)",
         aboutProductsLg:
@@ -59,7 +59,7 @@ module.exports = {
         "addition-md": "480px 376px",
         "collections-lg": "272px 174px 226px 40px",
         "collections-md": "440px 136px 272px 304px",
-        "collections-sm": "288px 64px 200px 152px",
+        "collections-sm": "288px 64px 230px 152px",
         "instagram-lg": "288px 288px 312px",
         "instagram-md": "168px 240px 288px",
         aboutProducts: "264px 104px 280px",

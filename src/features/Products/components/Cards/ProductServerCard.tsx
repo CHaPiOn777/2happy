@@ -4,7 +4,7 @@ import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
-import { ComponentPropsWithoutRef, useMemo } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import ColorSquare from "../Colors/ColorSquare";
 import { paths } from "@/config/paths";
@@ -15,9 +15,6 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
-import { Separator } from "@/shared/components/UI/Separator";
-import { useToggleFavorite } from "@/features/Favorite/hooks/useToggleFavorite";
-import { createFavorite } from "@/features/Favorite/utils/createFavorite";
 import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
 
 const ProductServerCard = ({
@@ -62,7 +59,7 @@ const ProductServerCard = ({
         <div className="relative h-full">
           {chip && (
             <Chip
-              className="absolute top-4 left-4 z-10"
+              className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10"
               variant={chip.type}
               size="small"
             >
@@ -70,6 +67,7 @@ const ProductServerCard = ({
             </Chip>
           )}
           <ToggleFavorite
+            className="absolute top-4 right-4 z-50 opacity-100 sm:opacity-0 group-hover/product:opacity-100"
             product={product}
             variation={product.defaultVariation}
           >
@@ -81,10 +79,10 @@ const ProductServerCard = ({
                   handleToggle();
                 }}
                 className={cn(
-                  "absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main",
+                  " hover:fill-main",
                   isFavorite && "fill-main",
                   isFavoriteDisabled &&
-                    "opacity-0 group-hover/product:opacity-60 hover:fill-transparent"
+                    "opacity-40 sm:opacity-0 group-hover/product:opacity-40 hover:fill-transparent"
                 )}
               />
             )}

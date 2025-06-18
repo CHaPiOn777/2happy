@@ -48,6 +48,18 @@ const CartDefaultCard = ({
   } = getCartItemInfo(cartItem);
 
   const isTablet = useMediaCustom("lg");
+  const isMedium = useMediaCustom("md");
+
+  const getButtonsSize = () => {
+    switch (true) {
+      case isMedium:
+        return "small";
+      case isTablet:
+        return "medium";
+      default:
+        return "small";
+    }
+  };
 
   const { mutate: deleteCartItem, isPending } = useDeleteCartItem({});
 
@@ -79,7 +91,7 @@ const CartDefaultCard = ({
         isPending && "opacity-50 pointer-events-none"
       )}
     >
-      <div className="grid grid-cols-[minmax(480px,520px)_1fr] gap-x-12">
+      <div className="grid grid-cols-[minmax(200px,520px)_1fr] gap-x-12">
         <div className="flex gap-6">
           <ImageWithLoader
             wrapperClassName="w-[146px] h-[216px] lg:w-[120px] lg:h-[176px] shrink-0"
@@ -114,19 +126,19 @@ const CartDefaultCard = ({
               <IconButton
                 variant="secondary"
                 className="border border-main"
-                size={isTablet ? "medium" : "small"}
+                size={getButtonsSize()}
                 disabled={isDecreaseDisabled(cartItem)}
                 onClick={() => handleDecreaseQuantity(cartItem)}
               >
                 <MinusIcon />
               </IconButton>
-              <div className="flex justify-center w-20 lg:w-14 p-3 lg:p-2 bg-gray-light">
+              <div className="flex justify-center w-20 lg:w-14 p-2 md:p-3 lg:p-2 bg-gray-light">
                 <span className="text-body2">{quantity}</span>
               </div>
               <IconButton
                 variant="secondary"
                 className="border border-main"
-                size={isTablet ? "medium" : "small"}
+                size={getButtonsSize()}
                 disabled={isIncreaseDisabled(cartItem)}
                 onClick={() => handleIncreaseQuantity(cartItem)}
               >

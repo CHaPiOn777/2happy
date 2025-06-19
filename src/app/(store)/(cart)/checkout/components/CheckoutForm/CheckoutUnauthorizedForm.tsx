@@ -69,8 +69,11 @@ const CheckoutUnauthorizedForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-col gap-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 md:space-y-8"
+      >
+        <div className="flex flex-col gap-6 md:gap-8">
           <FormField
             control={form.control}
             name="email"
@@ -102,7 +105,7 @@ const CheckoutUnauthorizedForm = ({
           </div>
         </div>
         <Separator className="my-10" />
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <FormField
             control={form.control}
             name="firstName"
@@ -288,7 +291,7 @@ const CheckoutUnauthorizedForm = ({
             )}
           />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full mt-2 sm:mt-0">
           Продолжить
         </Button>
       </form>

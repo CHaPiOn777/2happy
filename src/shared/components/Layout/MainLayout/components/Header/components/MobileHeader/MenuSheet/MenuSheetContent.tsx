@@ -70,7 +70,7 @@ const MenuSheetContent = ({
       </SheetHeader>
 
       {tab === "all" && (
-        <ScrollArea type="always">
+        <ScrollArea type="always" orientation="vertical">
           <div className="space-y-6 mr-4 sm:mr-6">
             <ul className="space-y-4">
               <li>

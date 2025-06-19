@@ -1,4 +1,4 @@
-import { useClearFavorites } from "@/features/Favorite/api/favoriteApi";
+import { useClearFavorites } from "@/features/Favorite/api/favoriteQueries";
 import { FavoriteProduct } from "@/features/Favorite/types";
 import { Button } from "@/shared/components/UI/Button";
 
@@ -9,13 +9,17 @@ const FavoriteSectionButtons = ({
 }) => {
   const { mutate: clearFavorites } = useClearFavorites();
 
-  const handleClearFavorites = () => clearFavorites();
+  const handleClearFavorites = () => clearFavorites({});
   return (
     <div className="flex gap-6 justify-end">
-      <Button variant="secondary" onClick={handleClearFavorites}>
+      <Button
+        className="w-full lg:w-max"
+        variant="secondary"
+        onClick={handleClearFavorites}
+      >
         Очистить избраное
       </Button>
-      <Button>Добавить в корзину</Button>
+      <Button className="w-full lg:w-max">Добавить в корзину</Button>
     </div>
   );
 };

@@ -3,10 +3,9 @@ import Main from "./components/Main/Main";
 import SuggestSection from "./components/SuggestSection";
 import DividerSection from "./components/DividerSection";
 import LoyalSection from "./components/LoyalSection";
-import InstagramSection from "./components/InstagramSection";
 import ContactUsSection from "./components/ContactUsSection";
 import WhyChooseUsSection from "./components/WhyChooseUsSection";
-import { sleep } from "@/sleep";
+import Instagram from "@/shared/components/Layout/Instagram/Instagram";
 
 const PartnershipPage = async () => {
   return (
@@ -17,7 +16,7 @@ const PartnershipPage = async () => {
       <LoyalSection />
       <WhyChooseUsSection />
       <ContactUsSection />
-      <InstagramSection />
+      <Instagram />
       <WhatsAppButton />
     </>
   );

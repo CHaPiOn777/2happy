@@ -22,7 +22,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
   );
   return (
     <Section className="border-b border-main">
-      <Container className="flex-col gap-20 mb-section">
+      <Container className="flex-col gap-12 md:gap-20 mb-section">
         <div className="flex flex-col gap-6 lg:gap-8 lg:gap-10 w-full">
           <TabTitle titleClass="text-h3 uppercase ">
             1. Детализация заказа
@@ -44,8 +44,8 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
                 <OrderProductCard key={product.id} product={product} />
               ))}
             </div>
-            <div className="flex items-center w-full">
-              <div className="w-full flex gap-2 bg-checkout-order-gradient p-10">
+            <div className="flex flex-col gap-6 md:gap-0 md:flex-row items-center w-full">
+              <div className="w-full flex gap-2 bg-checkout-order-gradient rounded-xs py-6 px-4 sm:py-10 sm:px-10">
                 <InfoBoldIcon />
                 <div className="w-full max-w-[525px] space-y-2">
                   <h5 className="text-h5">Обратите внимание!</h5>
@@ -56,7 +56,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col w-[320px] shrink-0 gap-4 border border-main rounded-xs py-6 lg:py-7 px-10 lg:px-6">
+              <div className="flex flex-col w-full md:w-[320px] shrink-0 gap-4 border border-main rounded-xs py-6 lg:py-7 px-4 sm:px-10 lg:px-6">
                 <h5 className="text-h5">Сумма заказа</h5>
                 <div className="flex flex-col text-gray-dark text-body2">
                   <div className="flex justify-between py-3 border-b border-gray-light">
@@ -82,7 +82,7 @@ const OrderDetails = ({ orderId }: { orderId: number }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6 md:gap-10">
           <TabTitle>2. АДРЕС ДОСТАВКИ</TabTitle>
           <div className="flex flex-col gap-2 text-gray-dark">
             <span>

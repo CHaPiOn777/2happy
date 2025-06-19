@@ -32,7 +32,7 @@ const CheckoutSide = () => {
 
   return (
     <aside className="flex flex-col gap-6">
-      <div className="grid grid-cols-[1fr_288px] items-end lg:items-stretch lg:grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_288px] items-end lg:items-stretch lg:grid-cols-1 gap-6">
         <div className="flex flex-col gap-4 border border-main rounded-xs py-7 px-6">
           <h5 className="text-h5">Сумма заказа</h5>
           <div className="flex flex-col text-gray-dark text-body2">

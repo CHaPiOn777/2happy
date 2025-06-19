@@ -10,10 +10,10 @@ import {
   SheetTrigger,
   TSheetTrigger,
 } from "@/shared/components/UI/Sheet";
-import { ReactNode, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import FavoriteSheetEmpty from "./FavoriteSheetEmpty";
 import FavoriteSheetContent from "./FavoriteSheetContent";
-import { useGetAllFavorite } from "../api/favoriteApi";
+import { useGetAllFavorite } from "../api/favoriteQueries";
 import FavoriteSheetLoader from "./FavoriteSheetLoader";
 
 const FavoriteSheet = ({
@@ -27,6 +27,11 @@ const FavoriteSheet = ({
 
   const { data: favorites, isLoading } = useGetAllFavorite();
 
+  const totalCount = useMemo(
+    () => favorites?.data.reduce((acc, item) => (acc += item.quantity), 0),
+    [favorites]
+  );
+
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
       <SheetTrigger className="relative" {...triggerProps}>
@@ -38,10 +43,8 @@ const FavoriteSheet = ({
       >
         <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
           <SheetTitle>Избранное</SheetTitle>
-          {favorites?.totalCount ? (
-            <SheetDescription>
-              Всего товаров {favorites?.totalCount}
-            </SheetDescription>
+          {totalCount ? (
+            <SheetDescription>Всего товаров {totalCount}</SheetDescription>
           ) : null}
           <SheetClose className="top-6 right-10" />
         </SheetHeader>

@@ -10,6 +10,7 @@ import { z } from "zod";
 import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
+import { getFavoriteQueryOptions } from "@/features/Favorite/api/favoriteQueries";
 
 export const getUserURL = "/wp/v2/users/me";
 
@@ -53,6 +54,7 @@ export const useLogin = ({
     onSuccess: ({ token }) => {
       Cookies.set("access_token", token, { expires: 5 });
       setAccessToken(token);
+      queryClient.invalidateQueries(getFavoriteQueryOptions());
       queryClient.invalidateQueries(getUserQueryOptions());
       queryClient.invalidateQueries(getCartQueryOptions());
       onSuccess?.();

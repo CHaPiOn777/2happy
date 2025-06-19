@@ -8,7 +8,7 @@ import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import { FavoriteProduct } from "../../types";
 import { getFavoriteItemInfo } from "../../utils/getFavoriteItemInfo";
 import { getFavoriteChip } from "../../utils/getFavoriteChip";
-import { useRemoveFromFavorite } from "../../api/favoriteApi";
+import { useRemoveFromFavorite } from "../../api/favoriteQueries";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { useAddToCart } from "@/features/Cart/api/cartMutations";
 import { cn } from "@/shared/utils";
@@ -35,11 +35,11 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
 
   const { mutate: addToCart, isPending } = useAddToCart({
     onSuccess: () => {
-      removeFromFavorite(id);
+      removeFromFavorite({ id });
     },
   });
 
-  const handleDelete = () => removeFromFavorite(id);
+  const handleDelete = () => removeFromFavorite({ id });
   const handleAddToCart = () => {
     addToCart({ quantity, id: variationId });
   };
@@ -67,7 +67,7 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
             </Chip>
           </div>
 
-          <div className="text-description lg:text-h5 flex flex-col items-center gap-2">
+          <div className="text-h5 flex flex-col items-center gap-2">
             <span className={"line-through text-gray-middle"}>
               {regularPrice} ₸
             </span>

@@ -17,7 +17,7 @@ const ContinueButton = () => {
     <Button
       size={isTablet ? "medium" : "large"}
       variant="secondary"
-      className="text-white border-white border-b-0 border-t-0"
+      className="text-white border-white border-b-0 border-t-0 hidden md:inline-block"
       asChild
     >
       <Link href={paths.checkout.getHref()}>Продолжить покупки</Link>

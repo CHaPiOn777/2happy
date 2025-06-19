@@ -1,6 +1,5 @@
 "use client";
 
-import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
@@ -15,7 +14,7 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
-import ToggleFavorite from "@/features/Favorite/components/ToggleFavorite";
+import ProductFavoriteButton from "./ProductFavoriteButton";
 
 const ProductServerCard = ({
   product,
@@ -32,8 +31,6 @@ const ProductServerCard = ({
     []
   );
   const { colors, image, sizes, chip } = getProductCardInfo(product);
-
-  const isFavoriteDisabled = !product.defaultVariation;
 
   const handleLinkClick = () => {
     queryClient.setQueryData(
@@ -66,27 +63,7 @@ const ProductServerCard = ({
               {chip.text}
             </Chip>
           )}
-          <ToggleFavorite
-            className="absolute top-4 right-4 z-50 opacity-100 sm:opacity-0 group-hover/product:opacity-100"
-            product={product}
-            variation={product.defaultVariation}
-          >
-            {(isFavorite, handleToggle) => (
-              <HeartIcon
-                role="button"
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleToggle();
-                }}
-                className={cn(
-                  " hover:fill-main",
-                  isFavorite && "fill-main",
-                  isFavoriteDisabled &&
-                    "opacity-40 sm:opacity-0 group-hover/product:opacity-40 hover:fill-transparent"
-                )}
-              />
-            )}
-          </ToggleFavorite>
+          <ProductFavoriteButton product={product} />
           {image && (
             <ImageWithLoader
               src={image.src}

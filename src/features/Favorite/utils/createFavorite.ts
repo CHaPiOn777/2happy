@@ -14,6 +14,7 @@ export const createFavorite = (
     name: product.name,
     on_sale: variation.on_sale,
     variationId: variation.id,
+    parent_id: product.id,
     price: variation.price,
     attributes: variation.attributes,
     tags: product.tags,

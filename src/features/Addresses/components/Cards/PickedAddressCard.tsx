@@ -10,7 +10,7 @@ const PickedAddressCard = ({
   rightSlot?: ReactNode;
 }) => {
   return (
-    <div className="flex justify-between gap-4 border border-main p-6">
+    <div className="flex justify-between flex-col sm:flex-row gap-4 border border-main p-6">
       <div className="flex flex-col gap-6">
         <div className="flex justify-between">
           <h5 className="text-h5">

@@ -20,6 +20,7 @@ const RecommendedProducts = ({ orderId }: { orderId: number }) => {
   return (
     <ProductsScrollableSection
       title="Рекомендуемые товары /"
+      className="sm:my-12"
       data={data}
       isLoading={isPending}
     />

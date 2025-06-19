@@ -3,7 +3,7 @@ import {
   useAddToFavorite,
   useGetAllFavorite,
   useRemoveFromFavorite,
-} from "../api/favoriteApi";
+} from "../api/favoriteQueries";
 import { FavoriteProduct } from "../types";
 
 export const useToggleFavorite = (favorite: FavoriteProduct | null) => {
@@ -15,19 +15,25 @@ export const useToggleFavorite = (favorite: FavoriteProduct | null) => {
   );
 
   const [disabled, setDisabled] = useState<boolean>(false);
-
   const disabledTimerRef = useRef<NodeJS.Timeout>(null);
 
   const { mutate: addToFavorite } = useAddToFavorite({});
-
   const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
+
+  const abortControllerRef = useRef<AbortController>(null);
 
   const handleToggle = () => {
     if (!favorite || disabled) return;
+
+    abortControllerRef.current?.abort();
+
+    const abortController = new AbortController();
+    abortControllerRef.current = abortController;
+
     if (!isFavorite) {
-      addToFavorite(favorite);
+      addToFavorite({ item: favorite, signal: abortController.signal });
     } else {
-      removeFromFavorite(favorite.id);
+      removeFromFavorite({ id: favorite.id, signal: abortController.signal });
     }
 
     setDisabled(true);

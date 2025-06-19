@@ -1,4 +1,4 @@
-import { useUpdateFavoriteItem } from "../api/favoriteApi";
+import { useUpdateFavoriteItem } from "../api/favoriteQueries";
 import { FavoriteProduct } from "../types";
 
 export const useChangeFavoriteQuantity = () => {

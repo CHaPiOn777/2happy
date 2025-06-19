@@ -149,7 +149,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
           </div>
         )}
       </AuthorizedView>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-6 sm:gap-10">
         <div className="flex items-center justify-between gap-2 py-4 px-5 bg-light-disabled border border-gray rounded-xs">
           <h5 className="text-h5">1. Контактные данные</h5>
           {step != "contacts" && (
@@ -200,7 +200,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
           <CheckoutFormAddress address={contacts} />
         )}
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6 sm:gap-10">
           <div className="py-4 px-5 bg-light-disabled border border-gray rounded-xs">
             <h5 className="text-h5">2. Оплата</h5>
           </div>

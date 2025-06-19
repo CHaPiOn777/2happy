@@ -18,7 +18,7 @@ import AddToCartIcon from "@/shared/components/icons/AddToCartIcon";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { FavoriteProduct } from "../../types";
 import { getFavoriteItemInfo } from "../../utils/getFavoriteItemInfo";
-import { useRemoveFromFavorite } from "../../api/favoriteApi";
+import { useRemoveFromFavorite } from "../../api/favoriteQueries";
 import { useAddToCart } from "@/features/Cart/api/cartMutations";
 import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity";
 
@@ -46,11 +46,11 @@ const FavoriteSheetCard = ({
 
   const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
 
-  const handleDelete = () => removeFromFavorite(id);
+  const handleDelete = () => removeFromFavorite({ id });
 
   const { mutate, isPending } = useAddToCart({
     onSuccess: () => {
-      removeFromFavorite(id);
+      removeFromFavorite({ id });
     },
   });
 

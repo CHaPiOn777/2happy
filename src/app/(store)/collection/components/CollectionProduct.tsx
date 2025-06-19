@@ -6,16 +6,21 @@ import { paths } from "@/config/paths";
 import ProductSectionButtons from "../../product/components/ProductSection/ProductSectionButtons";
 import { Separator } from "@/shared/components/UI/Separator";
 import { Image } from "@/shared/types/api";
-import CollectionProductImages from "./CollectionProductImages";
+import CollectionProductImages from "./CollectionProductImages/CollectionProductImages";
 import CollectionImagesLoader from "./CollectionImagesLoader";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const CollectionProduct = ({ id }: { id: number }) => {
   const [images, setImages] = useState<Image[]>([]);
+
+  const isMedium = useMediaCustom("md");
   return (
     <div className="flex flex-col gap-6">
-      <Suspense fallback={<CollectionImagesLoader />}>
-        <CollectionProductImages productId={id} images={images} />
-      </Suspense>
+      {isMedium && (
+        <Suspense fallback={<CollectionImagesLoader />}>
+          <CollectionProductImages productId={id} images={images} />
+        </Suspense>
+      )}
       <Suspense
         fallback={<ProductInfoLoader className="gap-12 justify-normal h-min" />}
       >

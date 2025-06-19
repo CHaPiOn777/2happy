@@ -1,6 +1,6 @@
 import { Separator } from "@/shared/components/UI/Separator";
-import ProductInfoLoader from "../../product/components/ProductSection/ProductInfo/ProductInfoLoader";
-import CollectionImagesLoader from "./CollectionImagesLoader";
+import ProductInfoLoader from "../../../product/components/ProductSection/ProductInfo/ProductInfoLoader";
+import CollectionImagesLoader from "../CollectionImagesLoader";
 
 const CollectionProductsLoader = () => {
   return (

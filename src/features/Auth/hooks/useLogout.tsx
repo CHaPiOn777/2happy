@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
 import { getUserQueryOptions } from "@/shared/api/authApi";
 import { paths } from "@/config/paths";
+import { getFavoriteQueryOptions } from "@/features/Favorite/api/favoriteQueries";
 
 export const useLogout = () => {
   const queryClient = getQueryClient();
@@ -18,6 +19,7 @@ export const useLogout = () => {
   const handleLogout = () => {
     Cookies.remove("access_token");
     clearUserToken();
+    queryClient.invalidateQueries(getFavoriteQueryOptions());
     queryClient.invalidateQueries(getCartQueryOptions());
     queryClient.removeQueries(getUserQueryOptions());
 

@@ -4,8 +4,8 @@ import { formatPhoneNumberIntl } from "react-phone-number-input";
 
 const CheckoutFormAddress = ({ address }: { address: CheckoutFormInput }) => {
   return (
-    <div className="flex">
-      <div className="flex-1 space-y-4">
+    <div className="flex gap-6 flex-col md:flex-row">
+      <div className="flex-1 space-y-4 px-5">
         <h5 className="text-h5">
           {address.firstName} {address.lastName}
         </h5>

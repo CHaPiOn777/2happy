@@ -5,7 +5,7 @@ import { useGetProductId } from "@/features/Products/hooks/useGetProductId";
 import { cn } from "@/shared/utils";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ComponentPropsWithoutRef } from "react";
-import CollectionProduct from "./CollectionProduct";
+import CollectionProduct from "../CollectionProduct";
 
 const CollectionProducts = ({
   className,

@@ -10,10 +10,10 @@ import Link from "next/link";
 const LoginSuggest = () => {
   return (
     <Section>
-      <Container className="my-section justify-between gap-6">
+      <Container className="my-12 md:my-section flex-col md:flex-row justify-between gap-6">
         <AuthorizedView condition={true}>
-          <div className="w-full lg:max-w-[336px] space-y-12">
-            <div className="space-y-6">
+          <div className="w-full lg:max-w-[336px] space-y-8 md:space-y-12">
+            <div className="text-left sm:text-center md:text-left space-y-6">
               <h4 className="text-h4">Спасибо, что вы с нами!</h4>
               <p>
                 В личном кабинете вы сможете: <br />
@@ -60,7 +60,7 @@ const LoginSuggest = () => {
             </div>
           </div>
         </AuthorizedView>
-        <div className="relative flex items-center justify-center w-full max-w-[705px] h-full bg-gradient-7">
+        <div className="relative flex items-center justify-center max-w-[448px] h-[336px] w-full sm:max-w-[705px] md:h-full bg-gradient-7">
           <div className="absolute w-full h-full bg-checkout-login-suggest-gradient z-10"></div>
           <ImageWithLoader
             wrapperClassName="absolute top-0 left-0"

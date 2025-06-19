@@ -7,7 +7,7 @@ import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import FavoriteList from "./FavoriteList";
-import { useGetAllFavorite } from "@/features/Favorite/api/favoriteApi";
+import { useGetAllFavorite } from "@/features/Favorite/api/favoriteQueries";
 import { useMemo } from "react";
 import { FavoriteCardLoader } from "@/features/Favorite/components/Cards/FavoriteCard";
 import FavoriteEmpty from "./FavoriteEmpty";
@@ -16,19 +16,19 @@ import FavoriteSectionButtons from "./FavoriteSectionButtons";
 const FavoriteSection = () => {
   const { data: favorites, isLoading } = useGetAllFavorite();
 
-  // const favoriteCount = useMemo(
-  //   () => favorites?.reduce((acc, item) => (acc += item.quantity), 0),
-  //   [favorites]
-  // );
+  const favoriteCount = useMemo(
+    () => favorites?.data.reduce((acc, item) => (acc += item.quantity), 0),
+    [favorites]
+  );
 
   return (
     <Section className="border-b border-main">
       <Container className="flex-col gap-12 lg:gap-16 my-20 lg:my-section">
         <div className="flex flex-col gap-4">
           <h2 className="text-h2">Избранное /</h2>
-          {!!favorites?.totalCount && (
+          {!!favoriteCount && (
             <div className="text-gray-middle">
-              Всего товаров: {favorites?.totalCount}
+              Всего товаров: {favoriteCount}
             </div>
           )}
         </div>

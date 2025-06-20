@@ -65,7 +65,6 @@ export const useAddToFavorite = ({
       return addToFavorites(item);
     },
     onMutate: async ({ item }) => {
-      console.log("onMutate", item);
       const previousFavorites = queryClient.getQueryData(
         getFavoriteQueryOptions().queryKey
       );
@@ -76,6 +75,9 @@ export const useAddToFavorite = ({
       });
 
       return { previousFavorites };
+    },
+    onSuccess: (data, variables, context) => {
+      onSuccess?.(data, variables.item, context);
     },
     onError: (_, __, context) => {
       if (context) {
@@ -137,8 +139,6 @@ export const useClearFavorites = () => {
   return useMutation({
     mutationFn: ({ signal }: { signal?: AbortSignal }) => {
       const access_token = Cookies.get("access_token");
-
-      console.log(access_token);
 
       if (access_token) {
         return clearFavoritesListServer({ signal });

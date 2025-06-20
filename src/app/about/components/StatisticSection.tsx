@@ -4,15 +4,15 @@ import Image from "next/image";
 
 const StatisticSection = () => {
   return (
-    <Section className="h-[520px] xl:h-[912px] lg:h-[720px] bg-banner">
+    <Section className="h-auto md:h-[520px] xl:h-[912px] lg:h-[720px] bg-banner">
       <Image
         fill
         className="object-cover -z-10 -scale-x-100 object-[50%_20%]"
         src="/images/About/Statistic/bg.jpg"
         alt="statistic-bg"
       />
-      <Container className="my-section items-end">
-        <div className="flex justify-between w-full">
+      <Container className="my-section items-center md:items-end">
+        <div className="flex flex-col gap-8 md:flex-row justify-between w-full">
           <div className="flex flex-col h-full items-center gap-6 text-white">
             <div className="flex flex-col items-center gap-2">
               <span className="text-h2">15</span>

@@ -17,15 +17,17 @@ const ProductsScrollableSection = ({
   data,
   isLoading,
   className,
+  disabled,
   renderCard = defaultRenderCard,
 }: {
   title: string;
   data: ProductServer[] | undefined;
   isLoading?: boolean;
   className?: string;
+  disabled?: boolean;
   renderCard?: (product: ProductServer) => ReactNode;
 }) => {
-  if (!isLoading && (!data || !data.length)) return null;
+  if ((!isLoading && (!data || !data.length)) || disabled) return null;
 
   return (
     <Section className="block">
@@ -36,7 +38,7 @@ const ProductsScrollableSection = ({
         )}
       >
         <h2 className="text-h2">{title}</h2>
-        <ScrollArea orientation="horizontal">
+        <ScrollArea orientation="horizontal" type="always">
           <div className="grid grid-flow-col auto-cols-[216px] md:auto-cols-[288px] grid-rows-[472px] md:grid-rows-[552px] gap-4 sm:gap-6 mb-6">
             {isLoading && (
               <>
@@ -50,6 +52,7 @@ const ProductsScrollableSection = ({
               <Fragment key={product.id}>{renderCard(product)}</Fragment>
             ))}
           </div>
+          <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </Container>
     </Section>

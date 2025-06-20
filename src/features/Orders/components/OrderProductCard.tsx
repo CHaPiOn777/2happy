@@ -12,6 +12,7 @@ const OrderProductCard = ({ product }: { product: OrderProductItem }) => {
       <div className="flex gap-6 items-center">
         <ImageWithLoader
           src={product.image.src}
+          textClassName="text-sm"
           wrapperClassName="w-[96px] h-[128px]"
           alt=""
         />

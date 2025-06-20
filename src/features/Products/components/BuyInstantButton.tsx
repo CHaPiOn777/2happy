@@ -6,10 +6,14 @@ import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 
 const BuyInstantButton = ({
+  name,
   variation,
   onClick,
   ...props
-}: { variation: ProductVariation | null } & ButtonProps) => {
+}: {
+  name: string | undefined;
+  variation: ProductVariation | null;
+} & Omit<ButtonProps, "name">) => {
   const { setCheckoutItems, setIsEditable } = useCheckoutStore();
   const router = useRouter();
 
@@ -27,6 +31,7 @@ const BuyInstantButton = ({
   }
 
   const handleClick = () => {
+    variation.name = name ?? "";
     const checkoutItem = variationToCheckoutItem(variation);
     setCheckoutItems([checkoutItem]);
     setIsEditable(false);
@@ -36,7 +41,7 @@ const BuyInstantButton = ({
 
   return (
     <Button
-      className="w-full sm:w-1/2"
+      className="w-full sm:w-1/2 !bg-white"
       variant="secondary"
       onClick={(e) => {
         handleClick();

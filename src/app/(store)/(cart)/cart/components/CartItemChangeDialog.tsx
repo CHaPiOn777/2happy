@@ -67,7 +67,7 @@ const CartItemChangeDialog = ({
           >
             <ProductInfo
               id={productId}
-              className="flex-1 basis-[49%]"
+              classNames={{ wrapper: "flex-1 basis-[49%]" }}
               defaultColor={cartItemColor}
               defaultSize={cartItemSize}
               setImages={setImages}

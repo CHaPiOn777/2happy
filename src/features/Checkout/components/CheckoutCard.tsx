@@ -14,17 +14,19 @@ const CheckoutCard = ({ checkoutItem }: { checkoutItem: CheckoutItem }) => {
     sumPrice,
     currencySymbol,
   } = checkoutItem;
+
   return (
     <article className="flex flex-col gap-4 text-title pb-6 border-b border-gray last:border-b-0 last:pb-0">
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <ImageWithLoader
-          wrapperClassName="w-16 shrink-0"
+          wrapperClassName="w-16 h-24 shrink-0"
+          textClassName="text-sm"
           src={image?.src ?? ""}
           alt={image?.alt ?? ""}
         />
         <div className="flex flex-col gap-2">
           <div>
-            <h5>{name}</h5>
+            <h5 className="text-placeholder sm:text-body2">{name}</h5>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">

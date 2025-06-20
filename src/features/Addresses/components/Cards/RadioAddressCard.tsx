@@ -53,13 +53,13 @@ const AddressRadioGroupItem = React.forwardRef<
     return (
       <div
         className={cn(
-          "flex  items-center gap-6 px-6 border border-main",
+          "flex flex-col md:flex-row items-center gap-6 px-6 pb-6 md:pb-0 border border-main",
           disabled && "border-gray cursor-not-allowed"
         )}
       >
         <label
           htmlFor={id}
-          className="flex flex-col gap-6 items-start py-6 lg:items-center w-full lg:flex-row"
+          className="flex flex-col gap-6 items-start pt-6 md:py-6 lg:items-center w-full lg:flex-row"
         >
           <div className="flex gap-2.5 ">
             <RadioGroupPrimitive.Item

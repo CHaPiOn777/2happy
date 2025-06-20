@@ -31,13 +31,13 @@ const RadioGroupButton = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, children, disabled, ...props }, ref) => {
   return (
-    <IconButton asChild size="small" variant="secondary">
+    <IconButton asChild size="small" variant="secondary" disabled={disabled}>
       <RadioGroupPrimitive.Item
         ref={ref}
         className={cn(
           `px-3 sm:px-4 py-2 focus:outline-none hover:text-white hover:shadow-elevation-1 text-button-small sm:text-body2 focus-visible:ring-1 border border-main focus-visible:ring-ring data-[state=checked]:bg-none data-[state=checked]:bg-main data-[state=checked]:text-white`,
           disabled &&
-            "border-disabled  bg-button-bg-disabled text-button-text-disabled svg-disabled border-transparent transition-none",
+            "!border-gray-light !bg-white !text-button-text-disabled svg-disabled border-transparent transition-none",
           className
         )}
         {...props}

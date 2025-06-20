@@ -16,7 +16,7 @@ const FavoriteSheetEmpty = ({
   const isTablet = useMediaCustom("lg");
   return (
     <div className="flex flex-col gap-10 items-center justify-center w-full h-full">
-      <p className="text-h5 text-gray-dark">
+      <p className="text-h5 text-gray-dark text-center">
         Вы пока ничего не добавили в избранное
       </p>
       <div className="flex flex-col gap-4 w-full">

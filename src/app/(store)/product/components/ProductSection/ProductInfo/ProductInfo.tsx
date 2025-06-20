@@ -48,12 +48,19 @@ const ProductInfo = ({
   renderName = defaultRenderName,
   renderButtons,
   setImages,
-  className,
+  classNames,
 }: {
   id: number;
   defaultSize?: string | null;
   defaultColor?: string | null;
-  className?: string;
+  classNames?: {
+    wrapper?: string;
+    info?: string;
+    title?: string;
+    sku?: string;
+    variations?: string;
+    favoriteButton?: string;
+  };
   handleChange?: TProductAttributesHandler;
   renderName?: (product: ProductServer) => ReactNode;
   renderButtons?: (
@@ -114,8 +121,10 @@ const ProductInfo = ({
     : false;
 
   return (
-    <div className={cn("flex flex-col gap-8 justify-between", className)}>
-      <div className="flex flex-col gap-4 sm:gap-8">
+    <div
+      className={cn("flex flex-col gap-8 justify-between", classNames?.wrapper)}
+    >
+      <div className={cn("flex flex-col gap-4 sm:gap-8", classNames?.info)}>
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-4">
             {renderName(product)}
@@ -132,7 +141,10 @@ const ProductInfo = ({
               <ToggleFavorite
                 product={product}
                 variation={variation}
-                className="absolute sm:relative top-4 right-8 sm:top-0 sm:right-0 z-10 w-10 h-10 bg-white justify-center items-center flex lg:hidden"
+                className={cn(
+                  "absolute sm:relative top-4 right-8 sm:top-0 sm:right-0 z-10 w-10 h-10 bg-white justify-center items-center flex lg:hidden",
+                  classNames?.favoriteButton
+                )}
               >
                 {(isFavorite, handleToggle) => (
                   <button onClick={handleToggle}>
@@ -144,8 +156,10 @@ const ProductInfo = ({
               </ToggleFavorite>
             </div>
           </div>
-          <span className="text-gray-middle">Артикул: {product.sku}</span>
-          <div className="flex flex-col gap-2">
+          <span className={cn("text-gray-middle", classNames?.sku)}>
+            Артикул: {product.sku}
+          </span>
+          <div className={cn("flex flex-col gap-2", classNames?.variations)}>
             <div className="flex items-center gap-2">
               {isLoadingVariation && (
                 <Skeleton className="w-[120px] h-[28px]" />

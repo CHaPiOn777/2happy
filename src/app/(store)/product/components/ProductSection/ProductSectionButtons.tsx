@@ -102,20 +102,21 @@ const ProductSectionButtons = ({
           >
             Добавить в корзину
           </AddToCartButton>
-          <BuyInstantButton variation={variation} />
+          <BuyInstantButton name={product?.name} variation={variation} />
         </div>
         <ToggleFavorite
           product={product}
           variation={variation}
           className="hidden lg:inline-flex"
         >
-          {(isFavorite) => (
+          {(isFavorite, handleToggle) => (
             <IconButton
               className={cn(
                 "[&_svg]:fill-transparent hidden sm:inline-flex",
                 isFavorite && "[&_svg]:fill-white"
               )}
               size="normal"
+              onClick={handleToggle}
               disabled={disabled}
             >
               <HeartIcon className="stroke-white" />
@@ -153,20 +154,21 @@ const ProductSectionButtons = ({
             >
               Добавить в корзину
             </AddToCartButton>
-            <BuyInstantButton variation={variation} />
+            <BuyInstantButton name={product?.name} variation={variation} />
           </div>
           <ToggleFavorite
             product={product}
             variation={variation}
             className="hidden lg:inline-flex"
           >
-            {(isFavorite) => (
+            {(isFavorite, handleToggle) => (
               <IconButton
                 className={cn(
                   "[&_svg]:fill-transparent ",
                   isFavorite && "[&_svg]:fill-white"
                 )}
                 size="normal"
+                onClick={handleToggle}
                 disabled={disabled}
               >
                 <HeartIcon className="stroke-white" />

@@ -39,7 +39,8 @@ module.exports = {
         aboutProducts:
           "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(130px, 184px) minmax(130px, 184px)",
         aboutProductsLg:
-          "minmax(150px, 212px) minmax(130px, 184px) 80px minmax(330px, 416px)",
+          "minmax(120px, 212px) minmax(120px, 184px) 80px minmax(270px, 416px)",
+        aboutProductsMd: "2fr 1fr 2fr",
         aboutHistory: "minmax(400px,728px) minmax(200px,472px)",
         aboutReviews:
           "minmax(300px, 424px) minmax(300px, 424px) minmax(100px, 128px)",
@@ -64,6 +65,7 @@ module.exports = {
         "instagram-md": "168px 240px 288px",
         aboutProducts: "264px 104px 280px",
         aboutProductsLg: "640px 264px 94px",
+        aboutProductsMd: "120px 264px 48px 264px 120px",
         aboutReviews: "repeat(4, 120px)",
         aboutReviewsLg: "repeat(2, 272px)",
       },
@@ -101,6 +103,8 @@ module.exports = {
         lg: "16px",
       },
       backgroundImage: {
+        "image-gradient":
+          "linear-gradient(92.02deg, rgba(252, 252, 255, 0) 63.25%, #FCFCFF 94.58%),linear-gradient(57.59deg, rgba(252, 252, 255, 0) 65.98%, #FCFCFF 81.8%);",
         "cookie-gradient":
           "linear-gradient(360deg, #111112 0%, rgba(17, 17, 18, 0.5) 210.44%)",
         "choose-gradient":

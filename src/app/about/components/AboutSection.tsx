@@ -12,14 +12,17 @@ const AboutSection = () => {
       <Container className="my-section flex-col gap-16">
         <div className="flex flex-col gap-8">
           <h2 className="text-h2 uppercase">кто мы /</h2>
-          <p className="text-h5 lg:text-h4 ml-[136px] lg:ml-[184px]">
-            Казахстанский бренд, вдохновлённый свободой, стилем <br />
-            и индивидуальностью
-          </p>
+          <div className="flex justify-end md:justify-normal">
+            <p className="text-h5 lg:text-h4 w-full max-w-[344px] sm:max-w-[430px] md:max-w-full text-left md:ml-[136px] lg:ml-[184px] text-gray-dark">
+              Казахстанский бренд, вдохновлённый свободой, стилем{" "}
+              <br className="hidden md:block" />
+              и индивидуальностью
+            </p>
+          </div>
         </div>
-        <div className="flex gap-[104px] h-[984px] lg:h-full">
-          <div className="flex flex-col gap-8 lg:gap-12 justify-end lg:justify-between lg:max-w-[496px] w-full mr-[344px] lg:mr-0">
-            <div className="space-y-4 mt-20">
+        <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-[104px] md:h-[984px] lg:h-full">
+          <div className="relative z-20 flex flex-col gap-8 lg:gap-12 justify-end lg:justify-between lg:max-w-[496px] w-full mr-[344px] lg:mr-0">
+            <div className="space-y-4 md:mt-20 bg-white">
               <p className="text-gray-dark">
                 2Happy — это не просто вещи. Это про тебя, твою энергию и стиль,
                 который говорит за тебя
@@ -34,7 +37,7 @@ const AboutSection = () => {
                 подчеркнуть характер и уникальность наших клиенток.
               </p>
             </div>
-            <div className="flex flex-col items-center gap-12 lg:gap-[104px]">
+            <div className="flex flex-col items-center gap-12 lg:gap-[104px] bg-white">
               <div className="flex gap-5">
                 <span className="h-full w-[1px] bg-gray-dark" />
                 <div className="flex flex-col gap-4">
@@ -57,7 +60,7 @@ const AboutSection = () => {
               </Button>
             </div>
           </div>
-          <div className="absolute lg:relative right-6 w-full min-w-[570px] max-w-[630px] h-[984px] lg:h-[904px]">
+          <div className="relative md:absolute lg:relative md:right-6 w-full md:min-w-[570px] md:max-w-[630px] h-[984px] lg:h-[904px] z-10">
             <div className="w-[368px] h-[532px] lg:h-[600px] absolute top-0 left-0 border-r-[24px] border-b-[24px] border-white z-10">
               <Image
                 fill

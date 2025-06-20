@@ -100,7 +100,7 @@ const ProductServerCard = ({
             <div
               className={cn(
                 "flex w-full gap-2",
-                showAttributes && "md:justify-end"
+                showAttributes && "lg:justify-end"
               )}
             >
               {product.on_sale ? (

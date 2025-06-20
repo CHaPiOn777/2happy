@@ -13,17 +13,24 @@ import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { useAddToCart } from "@/features/Cart/api/cartMutations";
 import { cn } from "@/shared/utils";
 import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity";
+import FavoriteChangeDialog from "../Dialogs/FavoriteChangeDialog";
+import Link from "next/link";
+import { paths } from "@/config/paths";
 
 const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
   const {
     id,
     name,
     isOnSale,
+    parentId,
+    parentSlug,
     variationId,
     regularPrice,
     salePrice,
     salePercent,
     currencySymbol,
+    color,
+    size,
     quantity,
     isInStock,
     image,
@@ -61,14 +68,21 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
       <div className="flex flex-col w-full justify-between pr-6 border-r border-gray">
         <div className="flex justify-between gap-4">
           <div className="flex flex-col gap-4">
-            <h5 className="text-h5">{name}</h5>
+            <Link
+              href={paths.product.getHref(parentId, parentSlug, {
+                color,
+                size,
+              })}
+            >
+              <h5 className="text-h5">{name}</h5>
+            </Link>
             <Chip className="uppercase" variant={chip?.type} size="normal">
               {chip?.text}
             </Chip>
           </div>
 
           <div className="text-h5 flex flex-col items-center gap-2">
-            <span className={"line-through text-gray-middle"}>
+            <span className={`${isOnSale && "line-through text-gray-middle"}`}>
               {regularPrice} ₸
             </span>
             {isOnSale && (
@@ -130,9 +144,11 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
             В корзину
           </Button>
         )}
-        <Button variant="secondary" size="medium">
-          Изменить
-        </Button>
+        <FavoriteChangeDialog favoriteItem={favorite}>
+          <Button variant="secondary" size="medium">
+            Изменить
+          </Button>
+        </FavoriteChangeDialog>
       </div>
     </article>
   );

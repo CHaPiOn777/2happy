@@ -7,12 +7,14 @@ import { RefObject, useEffect, useState } from "react";
 const ImageWithLoader = ({
   wrapperClassName,
   className,
+  textClassName,
   src,
   alt,
   ref,
   ...props
 }: {
   wrapperClassName?: string;
+  textClassName?: string;
   ref?: RefObject<HTMLImageElement | null>;
 } & ImageProps) => {
   const [imageSrc, setImageSrc] = useState(src);
@@ -34,7 +36,11 @@ const ImageWithLoader = ({
           isLoading && "opacity-100"
         )}
       >
-        <span className="animate-pulse font-akira text-3xl">2HAPPY</span>
+        <span
+          className={cn("animate-pulse font-akira text-3xl", textClassName)}
+        >
+          2HAPPY
+        </span>
       </div>
       <Image
         fill

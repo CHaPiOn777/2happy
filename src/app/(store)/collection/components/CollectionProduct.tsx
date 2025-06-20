@@ -26,7 +26,7 @@ const CollectionProduct = ({ id }: { id: number }) => {
       >
         <ProductInfo
           id={id}
-          className="gap-12 justify-normal h-min"
+          classNames={{ wrapper: "gap-12 justify-normal h-min" }}
           setImages={setImages}
           renderName={(product) => (
             <Link href={paths.product.getHref(product.id, product.name)}>

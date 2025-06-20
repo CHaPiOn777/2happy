@@ -1,10 +1,10 @@
 import { FavoriteProduct } from "../types";
 
 export const getFavoriteItemInfo = (favoriteItem: FavoriteProduct) => {
-  const size =
+  const color =
     favoriteItem.attributes.find((item) => item.slug === "pa_color")?.option ??
     "";
-  const color =
+  const size =
     favoriteItem.attributes.find((item) => item.slug === "pa_size")?.option ??
     "";
 
@@ -24,6 +24,8 @@ export const getFavoriteItemInfo = (favoriteItem: FavoriteProduct) => {
   return {
     id: favoriteItem.id,
     image: favoriteItem.image,
+    parentId: favoriteItem.parent_id,
+    parentSlug: favoriteItem.parent_slug,
     variationId: favoriteItem.variationId,
     name: favoriteItem.name,
     size,

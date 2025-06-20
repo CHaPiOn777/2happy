@@ -35,7 +35,9 @@ const ProductSection = () => {
         >
           <ProductInfo
             id={id}
-            className="flex-1 basis-[49%]"
+            classNames={{
+              wrapper: "flex-1 basis-[49%]",
+            }}
             defaultColor={params.get("color")}
             defaultSize={params.get("size")}
             handleChange={({ type, value }) => {

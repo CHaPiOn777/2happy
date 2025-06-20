@@ -21,6 +21,8 @@ import { getFavoriteItemInfo } from "../../utils/getFavoriteItemInfo";
 import { useRemoveFromFavorite } from "../../api/favoriteQueries";
 import { useAddToCart } from "@/features/Cart/api/cartMutations";
 import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity";
+import Link from "next/link";
+import { paths } from "@/config/paths";
 
 const FavoriteSheetCard = ({
   favorite,
@@ -30,13 +32,16 @@ const FavoriteSheetCard = ({
   const {
     id,
     name,
+    parentId,
+    parentSlug,
     variationId,
+    color,
+    size,
     isOnSale,
     regularPrice,
     salePrice,
     salePercent,
     currencySymbol,
-    variation,
     quantity,
     isInStock,
     image,
@@ -81,7 +86,15 @@ const FavoriteSheetCard = ({
       <div className="flex flex-col gap-4 lg:gap-6 w-full">
         <div className="flex flex-col gap-2 lg:gap-4">
           <div className="flex justify-between gap-6">
-            <h5 className="text-button-xs lg:text-h5">{name}</h5>
+            <Link
+              href={paths.product.getHref(parentId, parentSlug, {
+                color,
+                size,
+              })}
+            >
+              <h5 className="text-button-xs lg:text-h5">{name}</h5>
+            </Link>
+
             {isInStock && (
               <IconButton
                 className={cn(
@@ -119,12 +132,12 @@ const FavoriteSheetCard = ({
             <div className="flex items-center gap-2 lg:gap-4">
               <span>Размер</span>
               <Separator className="h-4/6" orientation="vertical" />
-              <span className="text-gray-middle">{variation.size}</span>
+              <span className="text-gray-middle">{size}</span>
             </div>
             <div className="flex items-center gap-2 lg:gap-4">
               <span>Цвет</span>
               <Separator className="h-4/6" orientation="vertical" />
-              <span className="text-gray-middle">{variation.color}</span>
+              <span className="text-gray-middle">{color}</span>
             </div>
           </div>
         </div>

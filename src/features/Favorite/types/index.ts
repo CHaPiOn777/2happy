@@ -15,6 +15,7 @@ export interface FavoriteProduct {
   name: string;
   on_sale: boolean;
   parent_id: number;
+  parent_slug: string;
   variationId: number;
   attributes: ProductVariationAttribute[];
   stock_status: StockStatus;

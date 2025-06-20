@@ -13,6 +13,7 @@ export const createFavorite = (
     id: variation.id,
     name: product.name,
     on_sale: variation.on_sale,
+    parent_slug: product.slug,
     variationId: variation.id,
     parent_id: product.id,
     price: variation.price,

@@ -12,7 +12,7 @@ import Image from "next/image";
 const SuggestSection = () => {
   return (
     <Section>
-      <Container className="flex-col gap-16 my-section">
+      <Container className="flex-col gap-16 my-[96px] lg:my-section">
         <h2 className="text-h2">Что мы предлагаем / </h2>
         <div className="flex flex-col gap-6">
           <div className="grid grid-cols-partnersSuggestFirst grid-rows-[176px_176px] gap-6">

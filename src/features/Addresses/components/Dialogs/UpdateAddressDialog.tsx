@@ -46,7 +46,7 @@ const UpdateAddressDialog = ({
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="w-full max-w-[1224px] p-20">
+      <DialogContent className="w-full max-w-[1224px] h-full max-h-[95vh] sm:h-auto px-4 pb-8 pt-14 md:px-14 pb-8 md:pt-12 lg:px-20 lg:py-20 lg:pt-20">
         <DialogHeader className="sr-only">
           <DialogTitle className="sr-only">
             Добавьте новый адрес для доставки

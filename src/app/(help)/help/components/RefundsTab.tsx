@@ -2,11 +2,12 @@ import CheckIcon from "@/shared/components/icons/CheckIcon";
 import InfoBoldIcon from "@/shared/components/icons/InfoBoldIcon";
 import InstagramBoldIcon from "@/shared/components/icons/Social/InstagramBoldIcon";
 import WhatsAppBoldIcon from "@/shared/components/icons/Social/WhatsAppBoldIcon";
+import Container from "@/shared/components/UI/Container";
 import TabTitle from "@/shared/components/UI/TabTitle";
 
 const RefundsTab = () => {
   return (
-    <div className="flex flex-col gap-16">
+    <Container className="flex-col gap-12 sm:gap-16">
       <div className="space-y-8">
         <h2 className="text-h2">Условия возврата и обмена /</h2>
         <p className="text-body2">
@@ -58,7 +59,7 @@ const RefundsTab = () => {
         <TabTitle>Как оформить возврат или обмен</TabTitle>
         <ul className="flex flex-col gap-4 text-placeholder text-gray-dark">
           <li className="flex gap-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-black text-white text-description">
+            <div className="flex items-center justify-center w-6 h-6 shrink-0 bg-black text-white text-description">
               1
             </div>
             Напишите нам в Direct Instagram или WhatsApp:
@@ -78,13 +79,13 @@ const RefundsTab = () => {
             </a>
           </li>
           <li className="flex gap-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-black text-white text-description">
+            <div className="flex items-center justify-center w-6 h-6 shrink-0 bg-black text-white text-description">
               2
             </div>
             Укажите номер заказа, причину возврата и приложите фото (если есть)
           </li>
           <li className="flex gap-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-black text-white text-description">
+            <div className="flex items-center justify-center w-6 h-6 shrink-0 bg-black text-white text-description">
               3
             </div>
             Приносим свои извинения, но Казпочтой мы не сможем принять
@@ -92,7 +93,7 @@ const RefundsTab = () => {
             с доставкой для магазина
           </li>
           <li className="flex gap-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-black text-white text-description">
+            <div className="flex items-center justify-center w-6 h-6 shrink-0 bg-black text-white text-description">
               4
             </div>
             После получения и проверки товара, мы вернём деньги в течение
@@ -100,8 +101,8 @@ const RefundsTab = () => {
           </li>
         </ul>
       </div>
-      <div className="flex gap-2.5 bg-gray-light border border-main rounded-xs px-6 py-4">
-        <InfoBoldIcon />
+      <div className="flex gap-2.5 bg-gray-light border border-main rounded-xs px-4 sm:px-6 py-4">
+        <InfoBoldIcon className="shrink-0" />
         <div className="flex flex-col gap-1.5">
           <h5 className="text-h5">Важно!</h5>
           <p>
@@ -110,7 +111,7 @@ const RefundsTab = () => {
           </p>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

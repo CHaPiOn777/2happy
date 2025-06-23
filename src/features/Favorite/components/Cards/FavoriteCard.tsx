@@ -16,6 +16,10 @@ import { useChangeFavoriteQuantity } from "../../hooks/useChangeFavoriteQuantity
 import FavoriteChangeDialog from "../Dialogs/FavoriteChangeDialog";
 import Link from "next/link";
 import { paths } from "@/config/paths";
+import FavoriteAddToCartDialog from "../Dialogs/FavoriteAddToCartDialog";
+import { Separator } from "@/shared/components/UI/Separator";
+import AddToCartIcon from "@/shared/components/icons/AddToCartIcon";
+import EditIcon from "@/shared/components/icons/EditIcon";
 
 const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
   const {
@@ -24,7 +28,6 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
     isOnSale,
     parentId,
     parentSlug,
-    variationId,
     regularPrice,
     salePrice,
     salePercent,
@@ -40,16 +43,7 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
 
   const { mutate: removeFromFavorite } = useRemoveFromFavorite({});
 
-  const { mutate: addToCart, isPending } = useAddToCart({
-    onSuccess: () => {
-      removeFromFavorite({ id });
-    },
-  });
-
   const handleDelete = () => removeFromFavorite({ id });
-  const handleAddToCart = () => {
-    addToCart({ quantity, id: variationId });
-  };
 
   const {
     handleDecreaseQuantity,
@@ -59,30 +53,94 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
   } = useChangeFavoriteQuantity();
 
   return (
-    <article className="flex gap-12 w-full py-8 border-b border-gray">
-      <ImageWithLoader
-        wrapperClassName="w-[120px] h-[176px] shrink-0"
-        src={image?.src ?? ""}
-        alt={image?.alt ?? ""}
-      />
-      <div className="flex flex-col w-full justify-between pr-6 border-r border-gray">
+    <article className="flex gap-4 md:gap-12 w-full py-6 md:py-8 border-b border-gray last:border-b-0">
+      <div className="relative">
+        <ImageWithLoader
+          textClassName="text-lg"
+          wrapperClassName="w-[96px] md:w-[120px] h-[176px] shrink-0"
+          src={image?.src ?? ""}
+          alt={image?.alt ?? ""}
+        />
+        <Chip
+          className="absolute bottom-0 w-full capitalize py-1 justify-center flex md:hidden"
+          variant={chip?.type}
+          size="normal"
+        >
+          {chip?.text}
+        </Chip>
+      </div>
+      <div className="relative flex flex-col w-full justify-between md:pr-6 md:border-r border-gray">
         <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-4">
-            <Link
-              href={paths.product.getHref(parentId, parentSlug, {
-                color,
-                size,
-              })}
+          <div className="w-full flex flex-col gap-4">
+            <div className="flex w-full justify-between gap-4">
+              <Link
+                href={paths.product.getHref(parentId, parentSlug, {
+                  color,
+                  size,
+                })}
+              >
+                <h5 className="text-body2 sm:text-h5">{name}</h5>
+              </Link>
+              {isInStock && (
+                <FavoriteAddToCartDialog favoriteItem={favorite}>
+                  <IconButton
+                    className={cn(
+                      "absolute right-0 top-0 border border-gray inline- flex md:hidden"
+                    )}
+                    variant="secondary"
+                    size="medium"
+                  >
+                    <AddToCartIcon />
+                  </IconButton>
+                </FavoriteAddToCartDialog>
+              )}
+            </div>
+            <div className="text-description sm:text-h5 flex md:hidden items-center gap-2">
+              <span
+                className={`${isOnSale && "line-through text-gray-middle"}`}
+              >
+                {regularPrice} ₸
+              </span>
+              {isOnSale && (
+                <>
+                  <span>
+                    {salePrice} {currencySymbol}
+                  </span>
+                  <Chip variant="pink" size="small">
+                    - {salePercent} %
+                  </Chip>
+                </>
+              )}
+            </div>
+            {isInStock && (
+              <div className="flex md:hidden flex-row lg:flex-col gap-2 text-description sm:text-body2">
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <span>Размер</span>
+                  <Separator className="h-4/6" orientation="vertical" />
+                  <span className="text-gray-middle">{size}</span>
+                </div>
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <span>Цвет</span>
+                  <Separator className="h-4/6" orientation="vertical" />
+                  <span className="text-gray-middle">{color}</span>
+                </div>
+              </div>
+            )}
+            <Chip
+              className="uppercase hidden md:block"
+              variant={chip?.type}
+              size="normal"
             >
-              <h5 className="text-h5">{name}</h5>
-            </Link>
-            <Chip className="uppercase" variant={chip?.type} size="normal">
               {chip?.text}
             </Chip>
           </div>
 
-          <div className="text-h5 flex flex-col items-center gap-2">
-            <span className={`${isOnSale && "line-through text-gray-middle"}`}>
+          <div className="text-h5 hidden md:flex flex-col items-center gap-2">
+            <span
+              className={`${
+                isOnSale && "line-through whitespace-nowrap text-gray-middle"
+              }`}
+            >
               {regularPrice} ₸
             </span>
             {isOnSale && (
@@ -97,7 +155,7 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
             )}
           </div>
         </div>
-        <div className="flex justify-between gap-6">
+        <div className="flex justify-between gap-2 md:gap-6">
           {isInStock && (
             <div className="flex gap-2">
               <IconButton
@@ -123,26 +181,31 @@ const FavoriteCard = ({ favorite }: { favorite: FavoriteProduct }) => {
               </IconButton>
             </div>
           )}
-          <IconButton
-            className="border border-gray "
-            variant="secondary"
-            size="small"
-            onClick={handleDelete}
-          >
-            <TrashIcon />
-          </IconButton>
+          <div className="flex items-center gap-4">
+            <IconButton
+              className="border border-gray hidden md:inline-flex"
+              variant="secondary"
+              size="small"
+              onClick={handleDelete}
+            >
+              <TrashIcon />
+            </IconButton>
+            <button className="inline-flex md:hidden" onClick={handleDelete}>
+              <TrashIcon />
+            </button>
+            <FavoriteChangeDialog favoriteItem={favorite}>
+              <button className="inline-flex md:hidden">
+                <EditIcon className="size-6" />
+              </button>
+            </FavoriteChangeDialog>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-6 items-center justify-center h-auto">
+      <div className="hidden md:flex flex-col gap-6 items-center justify-center h-auto">
         {isInStock && (
-          <Button
-            className={cn(isPending && "animate-pulse duration-1000")}
-            size="medium"
-            disabled={isPending}
-            onClick={handleAddToCart}
-          >
-            В корзину
-          </Button>
+          <FavoriteAddToCartDialog favoriteItem={favorite}>
+            <Button size="medium">В корзину</Button>
+          </FavoriteAddToCartDialog>
         )}
         <FavoriteChangeDialog favoriteItem={favorite}>
           <Button variant="secondary" size="medium">

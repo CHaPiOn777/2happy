@@ -10,7 +10,7 @@ const ReviewsPage = async () => {
   }
   return (
     <Section>
-      <Container className="flex-col gap-12 my-section">
+      <Container className="flex-col gap-8 md:gap-12 my-section">
         <h2 className="text-h2">Отзывы наших клиенток /</h2>
         <CreateReviewButton />
         <ReviewsList />

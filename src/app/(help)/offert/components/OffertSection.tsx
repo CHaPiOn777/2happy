@@ -6,7 +6,7 @@ const OffertSection = () => {
   return (
     <Section>
       <Container className="flex-col gap-12">
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <h2 className="text-h2">ПУБЛИЧНЫЙ ДОГОВОР-ОФЕРТА /</h2>
           <h4 className="text-h4">Интернет магазина 2HAPPY</h4>
           <p className="text-gray-dark">

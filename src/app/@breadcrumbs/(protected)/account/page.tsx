@@ -42,7 +42,7 @@ const AccountBreadcrumbs = () => {
         </BreadcrumbList>
       </Breadcrumbs>
       <Container>
-        <div className="w-full flex items-center justify-between mt-6 mb-12">
+        <div className="w-full flex items-center justify-between mt-8 mb-8 md:mt-6 md:mb-12">
           <h2 className="text-h3 text-white">
             Личный кабинет, {data?.name.split(" ")[0]}{" "}
           </h2>

@@ -17,6 +17,7 @@ import RefundsTab from "./components/RefundsTab";
 import Image from "next/image";
 import DeliveryTab from "./components/DeliveryTab";
 import KaspiTab from "./components/KaspiTab";
+import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 
 const HelpPage = () => {
   const params = useSearchParams();
@@ -43,17 +44,25 @@ const HelpPage = () => {
         </Container>
       </div>
       <PageTabs value={defaultTab} onValueChange={handleTabChange}>
-        <PageTabsList>
-          <PageTabsTrigger value={HELP_TABS.REFUNDS}>
-            Условия возврата и обмена
-          </PageTabsTrigger>
-          <PageTabsTrigger value={HELP_TABS.DELIVERY}>
-            Доставка и оплата
-          </PageTabsTrigger>
-          <PageTabsTrigger value={HELP_TABS.KASPI}>
-            Рассрочка от KASPI RED
-          </PageTabsTrigger>
-        </PageTabsList>
+        <ScrollArea orientation="horizontal" scrollClassName="hidden">
+          <PageTabsList>
+            <PageTabsTrigger
+              className="min-w-[256px]"
+              value={HELP_TABS.REFUNDS}
+            >
+              Условия возврата и обмена
+            </PageTabsTrigger>
+            <PageTabsTrigger
+              className="min-w-[256px]"
+              value={HELP_TABS.DELIVERY}
+            >
+              Доставка и оплата
+            </PageTabsTrigger>
+            <PageTabsTrigger className="min-w-[256px]" value={HELP_TABS.KASPI}>
+              Рассрочка от KASPI RED
+            </PageTabsTrigger>
+          </PageTabsList>
+        </ScrollArea>
         <PageTabsContent
           className="w-full mt-section mb-section"
           value={HELP_TABS.REFUNDS}

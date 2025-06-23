@@ -79,7 +79,7 @@ const ReviewsList = () => {
   });
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-6 md:space-y-12">
       <div className="flex justify-between items-center">
         <h4 className="text-h4">
           {data?.totalItems ?? 0} {reviewWordForm}

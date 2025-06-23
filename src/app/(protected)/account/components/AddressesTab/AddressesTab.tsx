@@ -3,6 +3,7 @@ import AddressCard from "@/features/Addresses/components/Cards/AddressCard";
 import { useUser } from "@/shared/api/authApi";
 import { Button } from "@/shared/components/UI/Button";
 import { useMemo } from "react";
+import Container from "@/shared/components/UI/Container";
 
 const AddressesTab = () => {
   const { data } = useUser();
@@ -13,7 +14,7 @@ const AddressesTab = () => {
   );
 
   return (
-    <div className="flex flex-col w-full gap-12">
+    <Container className="flex-col w-full gap-8 md:gap-12">
       <div className="border border-gray-middle bg-gray-light py-4 px-5">
         <h4 className="text-h5">Адресная книга</h4>
       </div>
@@ -25,7 +26,7 @@ const AddressesTab = () => {
       {addresses.map((address) => (
         <AddressCard key={address.id} address={address} />
       ))}
-      <div className="flex flex-col gap-8 lg:gap-4 border border-gray-middle p-6 mt-12">
+      <div className="flex flex-col gap-8 lg:gap-4 border border-gray-middle px-4 py-6 md:px-6">
         <h5 className="text-h5">Добавить новый адрес</h5>
         <div className="flex justify-end">
           <AddAddressDialog title="Новый адрес">
@@ -33,7 +34,7 @@ const AddressesTab = () => {
           </AddAddressDialog>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -47,7 +47,11 @@ const NavigateToCartButton = ({
         </Link>
       ) : (
         <AuthModal
-          triggerProps={{ asChild: true, disabled: !!user || buttonDisabled }}
+          triggerProps={{
+            asChild: true,
+            disabled: !!user || buttonDisabled,
+            className,
+          }}
           onSuccess={() => {
             handleClick();
             router.push(link);

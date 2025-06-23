@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const DividerSection = () => {
   return (
-    <Section className="h-[480px] lg:h-[720px] xl:h-[912px] ">
+    <Section className="h-[320px] sm:h-[480px] lg:h-[720px] xl:h-[912px] ">
       <Image
         fill
         className="object-cover object-[50%_10%]"

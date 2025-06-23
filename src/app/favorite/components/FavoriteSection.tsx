@@ -22,8 +22,8 @@ const FavoriteSection = () => {
   );
 
   return (
-    <Section className="border-b border-main">
-      <Container className="flex-col gap-12 lg:gap-16 my-20 lg:my-section">
+    <Section className="sm:border-b border-main">
+      <Container className="flex-col gap-8 sm:gap-12 lg:gap-16 my-section md:my-20 lg:my-section">
         <div className="flex flex-col gap-4">
           <h2 className="text-h2">Избранное /</h2>
           {!!favoriteCount && (
@@ -33,19 +33,21 @@ const FavoriteSection = () => {
           )}
         </div>
         <div className="flex flex-col gap-12">
-          <AuthorizedView condition={false}>
-            <div className="flex flex-col gap-6">
-              <div className="text-body1">
-                Войдите или создайте аккаунт, чтобы эти товары сохранились
-                в вашем вишлисте.
+          {!!favoriteCount && (
+            <AuthorizedView condition={false}>
+              <div className="flex flex-col gap-6">
+                <div className="text-body1">
+                  Войдите или создайте аккаунт, чтобы эти товары сохранились
+                  в вашем вишлисте.
+                </div>
+                <AuthModal defaultTab="login" triggerProps={{ asChild: true }}>
+                  <Button size="medium" className="!w-full sm:w-min">
+                    Войти <ArrowUpRightIcon />
+                  </Button>
+                </AuthModal>
               </div>
-              <AuthModal defaultTab="login" triggerProps={{ asChild: true }}>
-                <Button size="medium">
-                  Войти <ArrowUpRightIcon />
-                </Button>
-              </AuthModal>
-            </div>
-          </AuthorizedView>
+            </AuthorizedView>
+          )}
 
           {isLoading && (
             <>
@@ -55,10 +57,10 @@ const FavoriteSection = () => {
             </>
           )}
           {!isLoading && favorites?.data.length ? (
-            <>
+            <div className="flex gap-6 sm:gap-8 md:gap-12 flex-col">
               <FavoriteList favorites={favorites.data} />
               <FavoriteSectionButtons favorites={favorites.data} />
-            </>
+            </div>
           ) : null}
           {!isLoading && !favorites?.data.length ? <FavoriteEmpty /> : null}
         </div>

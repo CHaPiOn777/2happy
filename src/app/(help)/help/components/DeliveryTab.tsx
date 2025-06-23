@@ -1,9 +1,10 @@
 import InfoBoldIcon from "@/shared/components/icons/InfoBoldIcon";
+import Container from "@/shared/components/UI/Container";
 import TabTitle from "@/shared/components/UI/TabTitle";
 
 const DeliveryTab = () => {
   return (
-    <div className="w-full flex flex-col gap-16">
+    <Container className=" flex-col gap-12 sm:gap-16">
       <div className="space-y-8">
         <h2 className="text-h2  ">Доставка и оплата /</h2>
         <p className="text-body2">
@@ -25,7 +26,7 @@ const DeliveryTab = () => {
       </div>
       <div className="space-y-8">
         <TabTitle>2. Курьерская доставка по Алматы (Яндекс)</TabTitle>
-        <div className="flex gap-24">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-24">
           <ul className="pl-6 list-disc space-y-4 flex-1 ">
             <li className="text-placeholder text-main">
               Стоимость определяется Яндексом в зависимости от адреса
@@ -41,7 +42,7 @@ const DeliveryTab = () => {
               после 17:00 отправляются в понедельник)
             </li>
           </ul>
-          <ul className="pl-6 list-disc space-y-4 flex-1">
+          <ul className="pl-6 list-disc  space-y-4 flex-1">
             <li className="text-placeholder text-main">
               Срок доставки: 1–2 рабочих дня
             </li>
@@ -60,7 +61,7 @@ const DeliveryTab = () => {
       <div className="space-y-8">
         <TabTitle>3. Курьерская доставка в Астану</TabTitle>
 
-        <div className="flex gap-24">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-24">
           <ul className="pl-6 list-disc space-y-4 flex-1">
             <li className="text-placeholder text-main">
               Стандарт: от 2 700 ₸ (до 3 рабочих дней)
@@ -148,7 +149,7 @@ const DeliveryTab = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </Container>
   );
 };
 

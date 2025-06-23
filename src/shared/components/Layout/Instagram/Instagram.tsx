@@ -56,16 +56,16 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
           />
           <InstagramCard
             href="https://www.instagram.com/2happy_kz/p/DKybS1oxm0O/?hl=ru"
-            className="md:pl-12 lg:pl-0 col-start-2 sm:col-end-5 md:col-start-1 md:col-end-4 row-start-1 sm:row-span-2 md:row-start-2 md:row-end-4 lg:row-span-2 lg:col-span-2"
+            className="col-start-2 sm:col-end-5 md:col-start-1 md:col-end-3 row-start-1 row-end-1 sm:row-end-3 md:row-start-2 md:row-end-4 lg:row-span-2 lg:col-span-2"
             src="/images/Instagram/instagram-2.jpg"
           />
           <InstagramCard
-            className="col-start-1 md:col-start-4 lg:col-start-auto md:col-end-5 lg:col-end-auto row-start-3 md:row-start-2 lg:row-start-auto"
+            className="col-start-1 md:col-start-4 lg:col-start-auto md:col-end-3 lg:col-end-auto row-start-3 md:row-start-2 lg:row-start-auto"
             href="https://www.instagram.com/2happy_kz/p/DKG2dbgTTg8/?hl=ru"
             src="/images/Instagram/instagram-3.jpg"
           />
           <InstagramCard
-            className="md:pr-12 lg:pr-0 col-start-1 md:col-start-3 lg:col-start-auto md:col-end-5 lg:col-end-auto row-start-2 md:row-start-1 lg:row-start-auto"
+            className="col-start-1 md:col-start-3 lg:col-start-auto lg:col-end-auto row-start-2 md:row-start-1 lg:row-start-auto"
             href="https://www.instagram.com/2happy_kz/p/DKJe2LBC-bC/?hl=ru"
             src="/images/Instagram/instagram-4.jpg"
           />

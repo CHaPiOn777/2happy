@@ -1,11 +1,12 @@
 import CheckIcon from "@/shared/components/icons/CheckIcon";
 import InfoBoldIcon from "@/shared/components/icons/InfoBoldIcon";
+import Container from "@/shared/components/UI/Container";
 import TabTitle from "@/shared/components/UI/TabTitle";
 import Image from "next/image";
 
 const KaspiTab = () => {
   return (
-    <div className="w-full flex flex-col gap-16">
+    <Container className=" flex-col gap-12 sm:gap-16">
       <div className="space-y-8">
         <div className="flex gap-4 items-center">
           <Image
@@ -103,7 +104,7 @@ const KaspiTab = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </Container>
   );
 };
 

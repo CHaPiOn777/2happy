@@ -5,7 +5,7 @@ import Image from "next/image";
 const HeaderSection = () => {
   return (
     <Section>
-      <div className="relative w-full h-[600px] bg-help-gradient">
+      <div className="relative w-full h-[448px] sm:h-[480px] lg:h-[600px] bg-help-gradient">
         <Image
           className="object-cover object-[50%_10%] -z-10"
           fill

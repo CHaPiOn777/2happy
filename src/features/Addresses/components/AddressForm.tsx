@@ -45,7 +45,7 @@ const AddressForm = ({
     <Form {...addressForm}>
       <form
         onSubmit={addressForm.handleSubmit(onSubmit)}
-        className="space-y-10"
+        className="space-y-10 h-full overflow-y-auto"
       >
         <div className="space-y-6">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">

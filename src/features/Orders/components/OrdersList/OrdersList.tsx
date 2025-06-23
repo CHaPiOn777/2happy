@@ -39,9 +39,7 @@ const OrdersList = () => {
 
   const noResults = !isPending && !orders?.items.length;
 
-  if (noResults) {
-    return <OrdersNotFound />;
-  }
+  return <OrdersNotFound />;
 
   if (isPending && !isFetchingNextPage) {
     return (

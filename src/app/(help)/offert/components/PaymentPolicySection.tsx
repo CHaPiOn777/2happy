@@ -1,11 +1,10 @@
-import CookieDialog from "@/shared/components/Layout/MainLayout/components/CookieDialog/CookieDialog";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 
 const PaymentPolicySection = () => {
   return (
     <Section>
-      <Container className="flex-col gap-8">
+      <Container className="flex-col gap-6 sm:gap-8">
         <h2 className="text-h2">
           Политика проведения платежей. <br /> Оплата банковской картой онлайн /
         </h2>

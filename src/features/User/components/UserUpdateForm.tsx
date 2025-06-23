@@ -22,8 +22,11 @@ import {
   useUpdateUser,
 } from "../api/updateUserApi";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const UserUpdateForm = () => {
+  const isMedium = useMediaCustom("md");
+
   const { data } = useUser();
 
   const form = useForm<z.infer<typeof updateUserSchema>>({
@@ -43,15 +46,17 @@ const UserUpdateForm = () => {
 
   const { mutate, isPending } = useUpdateUser();
 
-  // 2. Define a submit handler.
   function onSubmit(values: UpdateUserInput) {
     if (!data) return;
     mutate({ id: data.id, data: values });
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
-        <div className="grid grid-cols-2 gap-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 md:space-y-12"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="name"
@@ -166,6 +171,7 @@ const UserUpdateForm = () => {
           disabled={isPending || !form.formState.isDirty}
           type="submit"
           className="w-full"
+          size={isMedium ? "medium" : "normal"}
         >
           {isPending && <LoaderIcon className="animate-spin" />}
           Сохранить

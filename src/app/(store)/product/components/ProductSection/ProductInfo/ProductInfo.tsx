@@ -149,7 +149,10 @@ const ProductInfo = ({
                 {(isFavorite, handleToggle) => (
                   <button onClick={handleToggle}>
                     <HeartIcon
-                      className={cn("inline-flex", isFavorite && "fill-main")}
+                      className={cn(
+                        "inline-flex hover:fill-main",
+                        isFavorite && "fill-main"
+                      )}
                     />
                   </button>
                 )}

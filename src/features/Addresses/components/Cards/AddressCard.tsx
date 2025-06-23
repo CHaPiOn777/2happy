@@ -21,7 +21,7 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
     },
   });
   return (
-    <div className="flex flex-col gap-8 lg:gap-4 border border-gray-middle p-6">
+    <div className="flex flex-col gap-8 lg:gap-4 border border-gray-middle px-4 py-6 md:py-6 md:px-6">
       <div className="flex flex-col gap-6">
         <div className="flex justify-between">
           <h5 className="text-h5">
@@ -38,7 +38,7 @@ const AddressCard = ({ address }: { address: UserAddress }) => {
           <span>{formatPhoneNumberIntl(address.phone)}</span>
         </div>
       </div>
-      <div className="flex justify-end gap-6">
+      <div className="flex flex-col sm:flex-row justify-end gap-4 md:gap-6">
         <UpdateAddressDialog title="Адрес" address={address}>
           <Button variant="secondary" className="w-full lg:w-max">
             Редактировать

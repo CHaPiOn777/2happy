@@ -13,7 +13,6 @@ const PolicyPage = async () => {
         <div className="space-y-8">
           <h2 className="text-h2">
             Политика конфиденциальности <br /> и обработки персональных данных /
-            /
           </h2>
           <div className="space-y-4">
             <p>

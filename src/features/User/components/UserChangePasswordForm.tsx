@@ -14,8 +14,11 @@ import {
 } from "../api/updateUserApi";
 import { notify } from "@/shared/lib/notify";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const UserChangePasswordForm = () => {
+  const isMedium = useMediaCustom("md");
+
   const form = useForm<ChangePasswordInput>({
     resolver: zodResolver(changePasswordSchema),
     mode: "onChange",
@@ -46,14 +49,17 @@ const UserChangePasswordForm = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
-        <div className="grid grid-cols-2 gap-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 md:space-y-12"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <PasswordInput
             name="currentPassword"
             control={form.control}
             placeholder="Текущий пароль*"
           />
-          <div />
+          <div className="hidden md:block" />
           <PasswordInput
             name="newPassword"
             control={form.control}
@@ -69,6 +75,7 @@ const UserChangePasswordForm = () => {
           disabled={isPending || !form.formState.isDirty}
           type="submit"
           className="w-full"
+          size={isMedium ? "medium" : "normal"}
         >
           {isPending && <LoaderIcon className="animate-spin" />}
           Сохранить

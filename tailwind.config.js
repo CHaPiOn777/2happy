@@ -33,7 +33,7 @@ module.exports = {
         "collections-md":
           "minmax(100px, 288px) minmax(40px, 80px) minmax(140px, 288px)",
         "instagram-lg":
-          "minmax(200px, 288px) minmax(200px, 288px) 30px minmax(200px, 288px)",
+          "minmax(240px, 336px) minmax(190px, 288px) minmax(190px, 288px)",
         "instagram-md":
           "minmax(150px, 240px) minmax(130px, 240px) 30px minmax(50px, 160px)",
         aboutProducts:
@@ -68,6 +68,7 @@ module.exports = {
         aboutProductsMd: "120px 264px 48px 264px 120px",
         aboutReviews: "repeat(4, 120px)",
         aboutReviewsLg: "repeat(2, 272px)",
+        aboutWeMd: "352px minmax(128px, 180px) 400px",
       },
       cursor: {
         default: "url('/icons/system/cursor-arrow.svg') 2 2, default",
@@ -336,10 +337,10 @@ module.exports = {
             fontSize: "48px",
             lineHeight: "56px",
           },
-          // [`@media (max-width: ${theme("screens.sm")})`]: {
-          //   fontSize: "40px",
-          //   lineHeight: "48px",
-          // },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "32px",
+            lineHeight: "40px",
+          },
         },
 
         ".text-h1-table": {
@@ -458,6 +459,11 @@ module.exports = {
           fontSize: "16px",
           lineHeight: "24px",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "14px",
+            lineHeight: "24px",
+          },
         },
         ".text-body2": {
           fontSize: "16px",

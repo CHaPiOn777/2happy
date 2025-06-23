@@ -1,12 +1,14 @@
 import { useClearFavorites } from "@/features/Favorite/api/favoriteQueries";
 import { FavoriteProduct } from "@/features/Favorite/types";
 import { Button } from "@/shared/components/UI/Button";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const FavoriteSectionButtons = ({
   favorites,
 }: {
   favorites: FavoriteProduct[];
 }) => {
+  const isMobile = useMediaCustom("small");
   const { mutate: clearFavorites } = useClearFavorites();
 
   const handleClearFavorites = () => clearFavorites({});
@@ -15,11 +17,14 @@ const FavoriteSectionButtons = ({
       <Button
         className="w-full lg:w-max"
         variant="secondary"
+        size={isMobile ? "medium" : "normal"}
         onClick={handleClearFavorites}
       >
         Очистить избраное
       </Button>
-      <Button className="w-full lg:w-max">Добавить в корзину</Button>
+      <Button size={isMobile ? "medium" : "normal"} className="w-full lg:w-max">
+        Добавить в корзину
+      </Button>
     </div>
   );
 };

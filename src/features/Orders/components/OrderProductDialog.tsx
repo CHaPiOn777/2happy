@@ -64,7 +64,7 @@ const OrderProductDialog = ({
               defaultColor={orderItemColor}
               defaultSize={orderItemSize}
               setImages={setImages}
-              className="basis-auto"
+              classNames={{ wrapper: "basis-auto" }}
               renderButtons={(product, variation, disabled) => (
                 <>
                   {variation?.stock_status === "outofstock" ? null : (

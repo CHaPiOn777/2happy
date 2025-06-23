@@ -13,15 +13,19 @@ import ContactsForm from "./ContactForm";
 import Image from "next/image";
 import ClockIcon from "@/shared/components/icons/ClockIcon";
 import PinIcon from "@/shared/components/icons/PinIcon";
+import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 
 const ContactsSection = () => {
   return (
     <Section>
-      <Container className="flex-col gap-16 mt-section">
-        <TabTitle titleClass="text-h4" iconElement={<MarketIcon />}>
+      <Container className="flex-col gap-8 md:gap-16 mt-section">
+        <TabTitle
+          titleClass="text-h4"
+          iconElement={<MarketIcon className="size-6 md:size-10" />}
+        >
           Контакты и обратная связь
         </TabTitle>
-        <div className="flex gap-16">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-16">
           <div className="flex flex-col gap-4">
             <div className="flex gap-1">
               <PinIcon />
@@ -42,7 +46,7 @@ const ContactsSection = () => {
             </p>
           </div>
         </div>
-        <div className="flex justify-between border border-main rounded-xs p-6">
+        <div className="flex flex-col sm:flex-row sm:grid grid-cols-2 gap-6 lg:flex justify-between border border-main rounded-xs p-6">
           <a
             href="https://wa.me/77021657378"
             target="_blank"
@@ -83,8 +87,8 @@ const ContactsSection = () => {
             </span>
           </a>
         </div>
-        <div className="flex gap-12">
-          <div className="w-full max-w-[785px] flex flex-col gap-8 mt-12">
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-12">
+          <div className="w-full max-w-[785px] flex flex-col gap-8 md:mt-12">
             <div className="space-y-4">
               <h5 className="text-h5">У вас есть вопросы или идеи?</h5>
               <p className="text-gray-dark">
@@ -93,8 +97,12 @@ const ContactsSection = () => {
             </div>
             <ContactsForm className="" onSubmit={() => {}} isPending={false} />
           </div>
-          <div className="relative max-w-[392px] w-full h-[600px] shrink">
-            <Image fill src="/images/Contacts/form.jpg" alt="form-image" />
+          <div className="flex justify-end md:justify-normal md:max-w-[392px] w-full shrink-0">
+            <ImageWithLoader
+              wrapperClassName="relative right-0 md:justify-normal max-w-[280px] sm:max-w-[392px] w-full h-[400px] sm:h-[600px]"
+              src="/images/Contacts/form.jpg"
+              alt="form-image"
+            />
           </div>
         </div>
       </Container>

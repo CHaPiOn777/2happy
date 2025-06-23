@@ -12,7 +12,11 @@ const LoyalButton = () => {
 
   if (!hasMounted) return null;
   return (
-    <Button className="w-full" size={isTablet ? "medium" : "large"} asChild>
+    <Button
+      className="w-full mt-4 md:mt-0"
+      size={isTablet ? "medium" : "large"}
+      asChild
+    >
       <a target="_blank" href="https://wa.me/77021657378">
         Стать стилистом <ArrowUpRightIcon />
       </a>

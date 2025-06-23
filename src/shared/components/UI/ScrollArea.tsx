@@ -10,36 +10,56 @@ const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> & {
     orientation?: "vertical" | "horizontal";
+    scrollClassName?: string;
   }
->(({ className, children, orientation = "vertical", ...props }, ref) => {
-  const isMedium = useMediaCustom("md");
+>(
+  (
+    {
+      className,
+      children,
+      orientation = "vertical",
+      scrollClassName,
+      ...props
+    },
+    ref
+  ) => {
+    const isMedium = useMediaCustom("md");
 
-  const viewportRef = React.useRef<HTMLDivElement>(null);
+    const viewportRef = React.useRef<HTMLDivElement>(null);
 
-  return (
-    <ScrollAreaPrimitive.Root
-      ref={ref}
-      className={cn("relative overflow-hidden", className)}
-      type={isMedium ? "always" : "auto"}
-      {...props}
-    >
-      <ScrollAreaPrimitive.Viewport
-        ref={viewportRef}
-        className="h-full w-full rounded-[inherit] pb-[1px]"
+    return (
+      <ScrollAreaPrimitive.Root
+        ref={ref}
+        className={cn("relative overflow-hidden", className)}
+        type={isMedium ? "always" : "auto"}
+        {...props}
       >
-        {children}
-      </ScrollAreaPrimitive.Viewport>
-      {orientation === "vertical" && (
-        <ScrollBar orientation="vertical" viewportRef={viewportRef} />
-      )}
-      {orientation === "horizontal" && (
-        <ScrollBar orientation="horizontal" viewportRef={viewportRef} />
-      )}
+        <ScrollAreaPrimitive.Viewport
+          ref={viewportRef}
+          className="h-full w-full rounded-[inherit] pb-[1px]"
+        >
+          {children}
+        </ScrollAreaPrimitive.Viewport>
+        {orientation === "vertical" && (
+          <ScrollBar
+            className={scrollClassName}
+            orientation="vertical"
+            viewportRef={viewportRef}
+          />
+        )}
+        {orientation === "horizontal" && (
+          <ScrollBar
+            className={scrollClassName}
+            orientation="horizontal"
+            viewportRef={viewportRef}
+          />
+        )}
 
-      <ScrollAreaPrimitive.Corner />
-    </ScrollAreaPrimitive.Root>
-  );
-});
+        <ScrollAreaPrimitive.Corner />
+      </ScrollAreaPrimitive.Root>
+    );
+  }
+);
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
 interface ScrollBarProps

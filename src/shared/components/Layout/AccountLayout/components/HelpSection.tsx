@@ -10,70 +10,87 @@ const HelpSection = () => {
   return (
     <Section className="mb-section">
       <Container>
-        <ImageWithLoader
-          wrapperClassName="w-[356px] h-[440px] lg:w-[416px] lg:h-[504px] absolute top-0 right-6"
-          className="-scale-x-100"
-          src="/images/Account/contact-us.jpg"
-          alt="contact-us"
-        />
-        <div className="w-full">
-          <div>
-            <div className="flex flex-col gap-10 lg:gap-14 mt-[176px] mb-[104px] ml-16 xl:ml-36">
-              <h3 className="text-h3">Нужна помощь?</h3>
-              <p className="text-h5 ml-28 xl:ml-44">
+        <div className="w-[200px] h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[152px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6">
+          <ImageWithLoader
+            className="-scale-x-100"
+            src="/images/Account/contact-us.jpg"
+            alt="contact-us"
+          />
+          <div className="absolute top-0 left-0 -scale-x-100 w-full h-full bg-image-gradient" />
+        </div>
+        <div className="w-full ">
+          <div className="flex justify-between gap-[40px]">
+            <div className="flex flex-col gap-10 lg:gap-14 sm:mt-[100px] md:mt-[176px] mb-20 sm:mb-[104px] ml-0 md:ml-16 xl:ml-36 z-10">
+              <h3 className="text-h2 sm:text-h3 pt-12 sm:pt-0">
+                Нужна помощь?
+              </h3>
+              <p className="text-body2 sm:text-h5 ml-12 md:ml-28 xl:ml-44">
                 Мы всегда на связи и готовы <br /> ответить на любые вопросы.
               </p>
             </div>
+            <div className="w-[356px] shrink-0 hidden md:block" />
           </div>
-          <div className="flex flex-col gap-10 py-10 px-6 lg:px-20 bg-black text-white">
+          <div className="flex flex-col gap-10 pt-12 pb-8 sm:py-12 lg:py-10 px-6 lg:px-20 bg-black text-white">
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
-            <ul className="flex justify-between">
-              <li className="flex items-center gap-4">
-                <div className="border border-white rounded-xs">
-                  <PhoneIcon className="fill-white" />
-                </div>
+            <ul className="flex md:grid grid-cols-2 gap-6 lg:flex justify-between">
+              <li>
                 <a
                   href="tel:+77021657378"
-                  className="relative text-body1 after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:bottom-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 relative text-body1"
                 >
-                  +7-702-165-73-78
+                  <div className="border border-white rounded-xs">
+                    <PhoneIcon className="fill-white" />
+                  </div>
+                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                    +7-702-165-73-78
+                  </span>
                 </a>
               </li>
-              <li className="flex items-center gap-4">
-                <div className="border border-white rounded-xs">
-                  <MailIcon className="fill-white" />
-                </div>
+              <li>
                 <a
                   href="mailto:2happy.almaty@gmail.com"
-                  className="relative text-body1 after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:bottom-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 relative text-body1"
                 >
-                  2happy.almaty@gmail.com
+                  <div className="border border-white rounded-xs">
+                    <MailIcon className="fill-white" />
+                  </div>
+                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                    2happy.almaty@gmail.com
+                  </span>
                 </a>
               </li>
-              <li className="flex items-center gap-4">
-                <div className="border border-white rounded-xs">
-                  <WhatsAppIcon className="fill-white" />
-                </div>
+              <li>
                 <a
                   href="https://wa.me/77021657378"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative text-body1 after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:bottom-0"
+                  className="inline-flex items-center gap-4 relative text-body1"
                 >
-                  Whats App
+                  <div className="border border-white rounded-xs">
+                    <WhatsAppIcon className="fill-white" />
+                  </div>
+                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                    Whats App
+                  </span>
                 </a>
               </li>
-              <li className="flex items-center gap-4">
-                <div className="border border-white rounded-xs">
-                  <InstagramIcon className="fill-white" />
-                </div>
+              <li>
                 <a
                   href="https://www.instagram.com/2happy_kz/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative text-body1 after:absolute after:w-full after:h-[1px] after:bg-white after:left-0 after:bottom-0"
+                  className="inline-flex items-center gap-4 relative text-body1"
                 >
-                  @2HAPPY_KZ
+                  <div className="border border-white rounded-xs">
+                    <InstagramIcon className="fill-white" />
+                  </div>
+                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                    @2HAPPY_KZ
+                  </span>
                 </a>
               </li>
             </ul>

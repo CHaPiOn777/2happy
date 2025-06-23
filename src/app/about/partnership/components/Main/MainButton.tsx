@@ -13,7 +13,11 @@ const MainButton = () => {
   if (!hasMounted) return null;
 
   return (
-    <Button className="w-full" size={isTablet ? "medium" : "large"} asChild>
+    <Button
+      className="w-full absolute -bottom-12 left-0 sm:relative"
+      size={isTablet ? "medium" : "large"}
+      asChild
+    >
       <a target="_blank" href="https://wa.me/77021657378">
         Стать партнером <ArrowUpRightIcon />
       </a>

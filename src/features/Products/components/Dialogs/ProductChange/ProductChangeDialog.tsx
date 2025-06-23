@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/shared/components/UI/Dialog";
 import { Image } from "@/shared/types/api";
-import { ReactNode, Suspense, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, Suspense, useState } from "react";
 import ProductChangeImages from "./ProductChangeImages";
 import ProductChangeImagesLoader from "./ProductChangeImagesLoader";
 
@@ -47,6 +47,8 @@ import ProductChangeImagesLoader from "./ProductChangeImagesLoader";
 // };
 
 const ProductChangeDialog = ({
+  manualOpen,
+  setManualOpen,
   productId,
   title,
   description,
@@ -55,6 +57,8 @@ const ProductChangeDialog = ({
   renderButtons,
   children,
 }: {
+  manualOpen?: boolean;
+  setManualOpen?: Dispatch<SetStateAction<boolean>>;
   productId: number;
   title?: ReactNode;
   description?: ReactNode;
@@ -67,12 +71,15 @@ const ProductChangeDialog = ({
   ) => ReactNode;
   children: ReactNode;
 }) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [innerOpen, setInnerOpen] = useState<boolean>(false);
   const [images, setImages] = useState<Image[]>([]);
+
+  const open = manualOpen ?? innerOpen;
+  const setOpen = setManualOpen ?? setInnerOpen;
 
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-      <DialogTrigger onClick={() => setOpen(true)} asChild>
+      <DialogTrigger onClick={() => setOpen(open)} asChild>
         {children}
       </DialogTrigger>
       <DialogContent className="w-screen max-w-full h-screen md:max-w-[720px] md:h-[552px] lg:max-w-[1224px] lg:h-min !pr-2 !pl-4 md:!pr-8 md:!pl-8 !py-10 !pt-12 lg:!px-20 lg:!py-20">

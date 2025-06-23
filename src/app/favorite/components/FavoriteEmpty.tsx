@@ -11,7 +11,7 @@ const FavoriteEmpty = () => {
         <h2 className="text-h2">Здесь пусто</h2>
         <p>Посмотрите интересующие вас товары в каталоге</p>
       </div>
-      <Button size={isMobile ? "small" : "normal"} asChild>
+      <Button size={isMobile ? "medium" : "normal"} asChild>
         <Link href={paths.catalog.getHref()}>Перейти в каталог</Link>
       </Button>
     </div>

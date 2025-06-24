@@ -18,28 +18,28 @@ const OurValues = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="w-full flex flex-col items-center gap-6 bg-white p-4 shadow-value">
+          <div className="w-full flex flex-col items-center gap-2 sm:gap-6 bg-white p-4 shadow-value">
             <InspirationIcon />
             <span className="text-body1 text-center">
-              Делиться <br /> вдохновением
+              Делиться <br className="hidden sm:block" /> вдохновением
             </span>
           </div>
           <div className="w-full flex flex-col items-center gap-6 bg-white p-4 shadow-value">
             <LeafIcon />
             <span className="text-body1 text-center">
-              Быть <br /> естественными
+              Быть <br className="hidden sm:block" /> естественными
             </span>
           </div>
           <div className="w-full flex flex-col items-center gap-6 bg-white p-4 shadow-value">
             <HeartValueIcon />
             <span className="text-body1 text-center">
-              Создавать <br /> настроение
+              Создавать <br className="hidden sm:block" /> настроение
             </span>
           </div>
           <div className="w-full flex flex-col items-center gap-6 bg-white p-4 shadow-value">
             <DiamondIcon />
             <span className="text-body1 text-center">
-              Выражать <br /> индивидуальность
+              Выражать <br className="hidden sm:block" /> индивидуальность
             </span>
           </div>
         </div>

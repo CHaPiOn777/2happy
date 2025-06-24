@@ -39,7 +39,7 @@ const Categories = () => {
             >
               Смотреть все <ArrowRightIcon />
             </Link>
-            <div className="flex gap-6">
+            <div className="flex gap-2 xs:gap-6">
               <div className="relative w-[136px] h-[96px] sm:w-[152px] sm:h-[100px] lg:w-[184px] lg:h-[128px]">
                 <Image
                   fill

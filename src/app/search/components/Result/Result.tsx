@@ -32,7 +32,7 @@ const Result = ({ search }: { search: string }) => {
     return <NotFound search={search} />;
 
   return (
-    <Container className="mt-20 mb-20 lg:mt-24 lg:mb-section flex-col gap-12">
+    <Container className="mt-20 mb-20 lg:mt-24 lg:mb-section flex-col gap-8 sm:gap-12">
       <div>
         <h2 className="text-h3">Результаты поиска по запросу: {search}</h2>
       </div>

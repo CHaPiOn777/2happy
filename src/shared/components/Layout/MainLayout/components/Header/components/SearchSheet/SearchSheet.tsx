@@ -24,8 +24,7 @@ import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 import SearchForm, { SearchFormInput } from "./SearchForm";
 import { DialogTriggerProps } from "@radix-ui/react-dialog";
-import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
-import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
+import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 
 const SearchSheet = ({
   children,
@@ -74,9 +73,9 @@ const SearchSheet = ({
       </SheetTrigger>
       <SheetContent
         side="top"
-        className="flex flex-col max-h-full z-over-header  p-0 bg-white"
+        className="flex flex-col max-h-full z-over-header p-0 bg-white"
       >
-        <Container className="flex-col flex-1 overflow-hidden py-8 lg:py-10 lg:px-6 gap-12 h-full">
+        <Container className="flex-col flex-1 overflow-hidden py-8 pt-4 xs:pt-8 lg:py-10 lg:px-6 gap-12 h-full">
           <SheetHeader className="relative flex flex-col gap-12 w-full">
             <SheetTitle className="hidden">Поиск</SheetTitle>
             <div className="flex flex-col-reverse items-start gap-6 lg:flex-col">
@@ -84,7 +83,7 @@ const SearchSheet = ({
               <SheetClose className="relative opacity-100 bg-black lg:bg-white w-[48px] h-[48px] lg:w-auto lg:h-auto lg:absolute right-auto lg:right-0 top-0 lg:top-[20px] mt-0 [&_svg]:fill-white lg:[&_svg]:fill-black" />
             </div>
           </SheetHeader>
-          <div className="flex flex-col gap-12 flex-1 overflow-y-auto pr-2">
+          <div className="flex flex-col gap-12 flex-1 overflow-y-auto xs:pr-2">
             <SearchForm onSubmit={handleSubmit} />
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-6 h-full">
               <div className="flex flex-col gap-6 w-full max-w-[185px]">
@@ -128,7 +127,7 @@ const SearchSheet = ({
                 )}
                 <ScrollArea orientation="horizontal">
                   {products?.items && !isLoadingProducts && (
-                    <ul className="grid grid-flow-col auto-cols-[minmax(190px,calc((100vw-16px)/2))] sm:auto-cols-[calc((100vw-16px)/3-32px)] md:grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-6 overflow-x-hidden pb-6 md:pb-0">
+                    <ul className="grid grid-flow-col auto-cols-[calc((100vw-32px-4px)/2)] sm:auto-cols-[calc((100vw-16px)/3-32px)] md:grid-cols-4 grid-rows-[472px] lg:grid-rows-[464px] h-full gap-x-2 xs:gap-x-4 sm:gap-x-6 overflow-x-hidden pb-6 md:pb-0">
                       {products?.items.map((product) => (
                         <li
                           key={product.id}

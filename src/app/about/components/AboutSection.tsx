@@ -27,7 +27,7 @@ const AboutSection = () => {
                 2Happy — это не просто вещи. Это про тебя, твою энергию и стиль,
                 который говорит за тебя
               </p>
-              <p className="text-gray-dark max-w-[312px] md:max-w-full pt-4 pr-4">
+              <p className="text-gray-dark max-w-[312px] md:max-w-full pt-4 pr-4 bg-white">
                 Наша одежда — это гармония уличной эстетики и утончённой
                 женственности.
               </p>
@@ -37,7 +37,7 @@ const AboutSection = () => {
                 подчеркнуть характер и уникальность наших клиенток.
               </p>
             </div>
-            <div className="flex flex-col items-center gap-12 lg:gap-[104px] bg-white">
+            <div className="flex flex-col md:items-center gap-12 lg:gap-[104px] bg-white">
               <div className="flex gap-5">
                 <span className="h-full w-[1px] bg-gray-dark" />
                 <div className="flex flex-col gap-4">

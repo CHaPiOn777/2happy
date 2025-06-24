@@ -1,6 +1,6 @@
 import Catalog from "../components/MainCatalog/Catalog";
 import FiltersList from "@/features/Products/components/Filters/FiltersList";
-import MainCategories from "../components/MainCatalog/MainCategories";
+import MainCategories from "../components/MainCatalog/MainCategories/MainCategories";
 import { getQueryClient } from "@/shared/api/queryClient";
 import {
   attributesMap,

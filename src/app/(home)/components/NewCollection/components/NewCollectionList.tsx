@@ -22,7 +22,7 @@ const NewCollectionList = () => {
         Погрузитесь в мир стильных новинок!
       </h5>
       <ScrollArea orientation="horizontal">
-        <div className="grid grid-flow-col auto-cols-[216px] sm:auto-cols-[256px] mb-4 gap-4 grid-rows-[472px] sm:grid-rows-[552px]">
+        <div className="grid grid-flow-col auto-cols-[calc((100vw-32px-4px)/2)] xs:auto-cols-[216px] sm:auto-cols-[256px] mb-4 gap-2 xs:gap-4 grid-rows-[472px] sm:grid-rows-[552px]">
           {data.items.map((product, index) => {
             const size = SLIDES_SIZES[index];
 

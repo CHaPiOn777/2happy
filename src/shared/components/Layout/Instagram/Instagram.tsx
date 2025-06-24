@@ -30,7 +30,7 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, type: "spring" }}
-          className="grid grid-cols-2 sm:grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-[repeat(3,216px)] sm:grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-4 sm:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-instagram-md md:grid-cols-instagram-lg lg:grid-cols-4 grid-rows-[repeat(3,160px)] xs:grid-rows-[repeat(3,216px)] sm:grid-rows-instagram-md md:grid-rows-instagram-lg lg:grid-rows-[repeat(2,288px)] gap-4 sm:gap-6"
         >
           <div
             className={cn(
@@ -38,17 +38,22 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
               variant === "black" ? "text-white" : "text-main"
             )}
           >
-            Откройте для себя больше вдохновения и стильных идей в нашем
-            Instagram @2happy_kz! Будьте в курсе новинок, акций и трендов
+            <span>
+              Откройте для себя больше вдохновения и стильных идей в нашем
+              Instagram @2happy_kz! Будьте в курсе новинок, акций и трендов
+            </span>
           </div>
+
           <div
             className={cn(
-              "text-body2 sm:text-body1 block md:hidden",
+              "flex md:hidden items-end xs:items-start text-button-xs xs:text-body2 sm:text-body1 ",
               variant === "black" ? "text-white" : "text-main"
             )}
           >
-            Откройте для себя больше вдохновения и стильных идей в нашем
-            Instagram @2happy_kz!
+            <span>
+              Откройте для себя больше вдохновения и стильных идей в нашем
+              Instagram @2happy_kz! Будьте в курсе новинок, акций и трендов
+            </span>
           </div>
           <InstagramCard
             href="https://www.instagram.com/2happy_kz/p/DKybgeNxDpB/?hl=ru"
@@ -70,7 +75,7 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
             src="/images/Instagram/instagram-4.jpg"
           />
           <Button
-            className="inline-flex text-white [&_svg]:fill-white mx-auto self-end sm:hidden px-3"
+            className="inline-flex text-white [&_svg]:fill-white mx-auto self-end sm:hidden px-1 xs:px-3"
             variant="tertiary"
             size="small"
             asChild

@@ -16,7 +16,7 @@ const Bestsellers = () => {
       <div className="absolute w-full h-full bg-main z-[-2]" />
       <Image
         fill
-        className="object-cover bg-main object-[100%_35%] z-[-1] scale-x-[-1] opacity-50"
+        className="object-cover bg-main object-[50%_35%] sm:object-[40%_35%] md:object-[60%_35%] lg:object-[100%_35%] z-[-1] scale-x-[-1] opacity-70"
         alt="bestseller-background"
         src={"/images/Home/Bestsellers/bg.jpg"}
       />
@@ -53,7 +53,7 @@ const Bestsellers = () => {
             Наши <br /> бестселлеры / 25
           </Link>
         </AnimatedInView>
-        <div className="grid grid-cols-2 grid-rows-[216px_104px] sm:grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-6">
+        <div className="grid grid-cols-2 grid-rows-[158px_80px] xs:grid-rows-[216px_104px] sm:grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-2 xs:gap-x-6">
           <AnimatedInView
             as="div"
             viewport={{ once: true, amount: 0.3 }}
@@ -136,9 +136,10 @@ const Bestsellers = () => {
               transition: { duration: 0.6, type: "tween" },
             },
           }}
+          className="block sm:hidden"
         >
           <Button
-            className="inline-flex w-full border-white text-white [&_svg]:fill-white sm:hidden"
+            className="inline-flex w-full border-white text-white [&_svg]:fill-white"
             variant={"secondary"}
             size={"medium"}
             asChild

@@ -63,15 +63,23 @@ const Header = () => {
               </div>
             </SearchSheet>
             <FavoriteSheet>
-              <div data-tooltip-id="favorite" data-tooltip-content="Избранное">
-                <HeartIcon className="hover:fill-main" />
+              <div
+                className="group"
+                data-tooltip-id="favorite"
+                data-tooltip-content="Избранное"
+              >
+                <HeartIcon className="group-hover:fill-main" />
                 <FavoriteItemsCount />
                 <StyledTooltip id="favorite" />
               </div>
             </FavoriteSheet>
             <CartSheet>
-              <div data-tooltip-id="cart" data-tooltip-content="Корзина">
-                <CartIcon className="hover:fill-main" />
+              <div
+                className="group"
+                data-tooltip-id="cart"
+                data-tooltip-content="Корзина"
+              >
+                <CartIcon className="group-hover:fill-main" />
                 <CartItemsCount />
                 <StyledTooltip id="cart" />
               </div>

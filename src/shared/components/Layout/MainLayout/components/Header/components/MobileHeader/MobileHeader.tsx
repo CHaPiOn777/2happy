@@ -5,7 +5,8 @@ import MenuSheet from "./MenuSheet/MenuSheet";
 import BurgerIcon from "@/shared/components/icons/BurgerIcon";
 import Link from "next/link";
 import { paths } from "@/config/paths";
-import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+
+import * as motion from "motion/react-client";
 
 const MobileHeader = ({
   leftSlot,
@@ -15,17 +16,11 @@ const MobileHeader = ({
   rightSlot?: ReactNode;
 }) => {
   return (
-    <AnimatedInView
-      as="header"
-      fallbackClassName="opacity-0"
-      animations={{
-        default: {
-          initial: { y: -50, opacity: 0 },
-          whileInView: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, type: "tween" },
-          viewport: { once: true, amount: 0 },
-        },
-      }}
+    <motion.header
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, type: "tween" }}
+      viewport={{ once: true, amount: 0 }}
       className="fixed items-center z-header w-full min-h-[56px] sm:min-h-[80px] border-b border-b-main bg-white flex lg:hidden pt-safe-top"
     >
       <Container className="h-full justify-between items-center">
@@ -42,7 +37,7 @@ const MobileHeader = ({
             width={260}
             height={72}
             src="/images/Header/tablet-logo.png"
-            alt="tablet-log"
+            alt="tablet-logo"
           />
           <Image
             className="block sm:hidden object-cover"
@@ -50,12 +45,12 @@ const MobileHeader = ({
             width={56}
             height={48}
             src="/images/Header/mobile-logo.png"
-            alt="tablet-log"
+            alt="mobile-logo"
           />
         </Link>
         <div className="flex-1">{rightSlot}</div>
       </Container>
-    </AnimatedInView>
+    </motion.header>
   );
 };
 

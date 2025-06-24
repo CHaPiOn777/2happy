@@ -5,6 +5,7 @@ import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
 import { cn } from "@/shared/utils/cn";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
+import { useHasMounted } from "@/shared/hooks/useHasMounted";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
@@ -23,15 +24,13 @@ const ScrollArea = React.forwardRef<
     },
     ref
   ) => {
-    const isMedium = useMediaCustom("md");
-
     const viewportRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <ScrollAreaPrimitive.Root
         ref={ref}
         className={cn("relative overflow-hidden", className)}
-        type={isMedium ? "always" : "auto"}
+        type={"auto"}
         {...props}
       >
         <ScrollAreaPrimitive.Viewport
@@ -93,6 +92,8 @@ const ScrollBar = React.forwardRef<
     const [progress, setProgress] = React.useState(initialProgress ?? 0);
     const hasTriggeredRef = React.useRef(false);
 
+    const hasMounted = useHasMounted();
+
     React.useEffect(() => {
       if (variant !== "progress" || !viewportRef?.current) return;
 
@@ -138,7 +139,7 @@ const ScrollBar = React.forwardRef<
         )}
         {...props}
       >
-        {variant === "progress" ? (
+        {variant === "progress" && hasMounted ? (
           <div
             className={cn(
               "absolute z-10 pointer-events-none bg-gray-light",

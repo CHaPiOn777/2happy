@@ -4,6 +4,7 @@ import ProductSliderLoader from "@/app/(store)/product/components/ProductSection
 import { ProductServer, ProductVariation } from "@/features/Products/types";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -14,6 +15,7 @@ import { Image } from "@/shared/types/api";
 import { Dispatch, ReactNode, SetStateAction, Suspense, useState } from "react";
 import ProductChangeImages from "./ProductChangeImages";
 import ProductChangeImagesLoader from "./ProductChangeImagesLoader";
+import CloseIcon from "@/shared/components/icons/CloseIcon";
 
 {
   /* <div className="flex gap-2">
@@ -54,6 +56,7 @@ const ProductChangeDialog = ({
   description,
   defaultColor,
   defaultSize,
+  disabled,
   renderButtons,
   children,
 }: {
@@ -64,6 +67,7 @@ const ProductChangeDialog = ({
   description?: ReactNode;
   defaultSize: string;
   defaultColor: string;
+  disabled?: boolean;
   renderButtons?: (
     product: ProductServer | null,
     variation: ProductVariation | null,
@@ -79,17 +83,28 @@ const ProductChangeDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-      <DialogTrigger onClick={() => setOpen(open)} asChild>
+      <DialogTrigger
+        onClick={() => {
+          if (!disabled) setOpen(open);
+        }}
+        asChild
+      >
         {children}
       </DialogTrigger>
-      <DialogContent className="w-screen max-w-full h-screen md:max-w-[720px] md:h-[552px] lg:max-w-[1224px] lg:h-min !pr-2 !pl-4 md:!pr-8 md:!pl-8 !py-10 !pt-12 lg:!px-20 lg:!py-20">
+      <DialogContent
+        hideClose
+        className="w-screen max-w-full h-screen md:max-w-[720px] md:h-[552px] lg:max-w-[1224px] lg:h-min !pr-2 !pl-4 md:!pr-8 md:!pl-8 !py-10 !pt-16 lg:!px-20 lg:!py-20"
+      >
         <DialogHeader className="sr-only">
           <DialogTitle className="sr-only">{title}</DialogTitle>
           <DialogDescription className="sr-only">
             {description}
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 overflow-y-auto md:overflow-y-hidden  pr-2 md:pr-0 relative">
+        <DialogClose className="absolute top-8 right-4">
+          <CloseIcon />
+        </DialogClose>
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 overflow-y-auto md:overflow-y-hidden pr-2 md:pr-0 relative">
           <Suspense fallback={<ProductChangeImagesLoader />}>
             <ProductChangeImages productId={productId} images={images} />
           </Suspense>

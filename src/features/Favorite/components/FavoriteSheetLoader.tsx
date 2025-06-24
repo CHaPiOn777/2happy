@@ -1,6 +1,6 @@
 import { Skeleton } from "@/shared/components/UI/Skeleton";
-import { FavoriteSheetCardLoader } from "./Cards/FavoriteSheetCard";
 import { ButtonLoader } from "@/shared/components/UI/Button";
+import FavoriteSheetCardLoader from "./Cards/FavoriteSheetCard/FavoriteSheetCardLoader";
 
 const FavoriteSheetLoader = () => {
   return (

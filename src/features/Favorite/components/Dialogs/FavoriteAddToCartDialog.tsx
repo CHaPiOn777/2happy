@@ -15,9 +15,11 @@ import { notify } from "@/shared/lib/notify";
 
 const FavoriteAddToCartDialog = ({
   favoriteItem,
+  disabled,
   children,
 }: {
   favoriteItem: FavoriteProduct;
+  disabled: boolean;
   children: ReactNode;
 }) => {
   const { id, parentId, quantity, color, size } =
@@ -50,6 +52,7 @@ const FavoriteAddToCartDialog = ({
       productId={parentId}
       defaultColor={color}
       defaultSize={size}
+      disabled={disabled}
       renderButtons={(product, variation, disabled) => (
         <div className="flex flex-col gap-4 lg:gap-10">
           <Button

@@ -39,7 +39,7 @@ const ProductsScrollableSection = ({
       >
         <h2 className="text-h2">{title}</h2>
         <ScrollArea orientation="horizontal" type="always">
-          <div className="grid grid-flow-col auto-cols-[216px] md:auto-cols-[288px] grid-rows-[472px] md:grid-rows-[552px] gap-4 sm:gap-6 mb-6">
+          <div className="grid grid-flow-col auto-cols-[calc(100vw-32px)] xs:auto-cols-[216px] md:auto-cols-[288px] grid-rows-[472px] md:grid-rows-[552px] gap-4 sm:gap-6 mb-6">
             {isLoading && (
               <>
                 <ProductCardLoader />

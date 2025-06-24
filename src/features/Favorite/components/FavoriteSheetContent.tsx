@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { useUser } from "@/shared/api/authApi";
 import AuthModal from "@/features/Auth/components/AuthModal";
-import FavoriteSheetCard from "./Cards/FavoriteSheetCard";
+import FavoriteSheetCard from "./Cards/FavoriteSheetCard/FavoriteSheetCard";
 import { FavoriteProduct } from "../types";
 
 const FavoriteSheetContent = ({
@@ -20,7 +20,7 @@ const FavoriteSheetContent = ({
   const isTablet = useMediaCustom("lg");
 
   return (
-    <div className="flex flex-col justify-between gap-6 w-full h-full flex-1 overflow-hidden">
+    <div className="flex flex-col justify-between gap-0 sm:gap-6 w-full h-full flex-1 overflow-hidden">
       <div className="flex flex-col flex-1 overflow-hidden">
         <div className="flex flex-col gap-4 lg:gap-6 overflow-scroll max-h-[532px]">
           {favorites?.map((favorite) => (
@@ -30,7 +30,7 @@ const FavoriteSheetContent = ({
       </div>
       <div className="flex flex-col gap-8">
         {!user && (
-          <div className="text-h5 text-center">
+          <div className="text-body1 md:text-h5 text-center">
             Войдите или создайте аккаунт, чтобы эти товары сохранились в вашем
             избранном
           </div>

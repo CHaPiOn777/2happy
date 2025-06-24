@@ -15,6 +15,7 @@ import { Button } from "@/shared/components/UI/Button";
 import LogoutIcon from "@/shared/components/icons/LogoutIcon";
 import { useUser } from "@/shared/api/authApi";
 import { useLogout } from "@/features/Auth/hooks/useLogout";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const AccountBreadcrumbs = () => {
   const { data } = useUser();
@@ -31,8 +32,17 @@ const AccountBreadcrumbs = () => {
       <Breadcrumbs className="border-b-0">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+            <BreadcrumbLink
+              className="text-white xs:inline-block hidden"
+              href={paths.home.getHref()}
+            >
               Главная
+            </BreadcrumbLink>
+            <BreadcrumbLink
+              className="text-white inline-block xs:hidden"
+              href={paths.home.getHref()}
+            >
+              <HomeIcon className="!size-6" />
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

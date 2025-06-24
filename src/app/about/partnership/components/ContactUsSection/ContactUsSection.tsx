@@ -13,7 +13,7 @@ const ContactUsSection = () => {
   return (
     <Section className="my-section">
       <Container>
-        <div className="w-[200px] sm:w-[280px] md:w-[356px] lg:w-[416px] h-[264px] sm:h-[340px] md:h-[440px] lg:h-[504px] absolute bottom-[140px] md:bottom-[184px] lg:bottom-[96px] right-4 md:right-6">
+        <div className="hidden sm:block w-[200px] sm:w-[280px] md:w-[356px] lg:w-[416px] h-[264px] sm:h-[340px] md:h-[440px] lg:h-[504px] absolute bottom-[140px] md:bottom-[184px] lg:bottom-[96px] right-4 md:right-6">
           <ImageWithLoader
             wrapperClassName=""
             className="object-[50%_50%] -scale-x-100"
@@ -25,20 +25,27 @@ const ContactUsSection = () => {
 
         <div className="w-full">
           <div className="flex justify-between gap-[60px]">
-            <div className="flex flex-col justify-center gap-8 max-w-[624px] ml-0 lg:ml-[60px] xl:ml-[104px] mb-[60px] md:mb-[112px] mt-[56px] lg:mb-[88px] lg:mt-[88px] z-10">
+            <div className="flex flex-col w-full sm:w-auto justify-center gap-8 max-w-[624px] ml-0 lg:ml-[60px] xl:ml-[104px] mb-8 sm:mb-[60px] md:mb-[112px] mt-[56px] lg:mb-[88px] lg:mt-[88px] z-10">
               <h3 className="text-h2 lg:text-h3">Объединим идеи и стиль</h3>
-              <div className="max-w-[288px] md:max-w-full sm:ml-12 md:ml-16 lg:ml-[104px]">
+              <div className="flex flex-row sm:flex-col w-full sm:w-auto items-end sm:items-start gap-6 sm:max-w-[288px] md:max-w-full sm:ml-12 md:ml-16 lg:ml-[104px]">
                 <p className="text-body2 lg:text-h5">
                   Если вы хотите стать частью нашей истории — напишите нам.
                   Обсудим идеи и создадим <br className="hidden lg:block" />{" "}
                   что-то особенное вместе!
                 </p>
-                <ContactUsButton />
+                <ImageWithLoader
+                  wrapperClassName="w-[128px] h-[216px] xs:w-[180px] xs:h-[270px] shrink-0 flex sm:hidden"
+                  className="object-[50%_50%] -scale-x-100"
+                  src="/images/Account/contact-us.jpg"
+                  alt="contact-us"
+                />
+                <ContactUsButton className="hidden sm:inline-flex" />
               </div>
+              <ContactUsButton className="inline-flex sm:hidden mt-0" />
             </div>
             <div className="w-[356px] lg:w-[416px] hidden md:block shrink-0" />
           </div>
-          <div className="flex flex-col gap-8 sm:gap-10 pt-14 pb-8 sm:pb-10 sm:pt-10 px-8 lg:px-20 bg-black text-white">
+          <div className="flex flex-col gap-8 sm:gap-10 py-6 px-4 sm:pt-14 sm:pb-8 sm:pb-10 sm:pt-10 sm:px-8 lg:px-20 bg-black text-white">
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
             <ul className="flex md:grid grid-cols-2 justify-items-center md:justify-items-stretch gap-6 lg:flex justify-between">
               <li>

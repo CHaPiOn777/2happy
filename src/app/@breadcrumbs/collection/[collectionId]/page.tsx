@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductByIdQueryOptions } from "@/features/Products/api/productsApi";
 import React from "react";
 import { useGetProductId } from "@/features/Products/hooks/useGetProductId";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const ProductBreadcrumbs = () => {
   const { id } = useGetProductId("collectionId");
@@ -24,8 +25,17 @@ const ProductBreadcrumbs = () => {
     <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+          <BreadcrumbLink
+            className="text-white xs:inline-block hidden"
+            href={paths.home.getHref()}
+          >
             Главная
+          </BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white inline-block xs:hidden"
+            href={paths.home.getHref()}
+          >
+            <HomeIcon className="!size-6" />
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

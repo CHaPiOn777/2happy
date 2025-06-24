@@ -14,8 +14,12 @@ const ComplementFashion = () => {
   return (
     <Section className="bg-main">
       <Container className="flex-col gap-8 my-12 sm:my-20">
-        <div className="grid grid-cols-addition-md md:grid-cols-addition-lg lg:grid-cols-addition grid-rows-addition-md md:grid-rows-addition-lg lg:grid-rows-addition gap-y-6 gap-x-4 sm:gap-x-6 h-full overflow-hidden">
-          <div className="relative h-[376px] md:h-[640px] col-start-2 lg:col-start-auto row-start-2 lg:row-start-auto">
+        <div
+          className={`grid grid-cols-addition-md md:grid-cols-addition-lg lg:grid-cols-addition 
+          grid-rows-addition-xs xs:grid-rows-addition-sm sm:grid-rows-addition-md md:grid-rows-addition-lg lg:grid-rows-addition 
+          gap-y-4 gap-x-2 xs:gap-y-6 xs:gap-x-4 sm:gap-x-6 h-full overflow-hidden`}
+        >
+          <div className="relative h-[208px] xs:h-[280px] sm:h-[376px] md:h-[640px] col-start-2 lg:col-start-auto row-start-2 lg:row-start-auto">
             <Image
               src="/images/2happy-white-logo-90.png"
               alt="white-logo"

@@ -5,6 +5,7 @@ import GoogleIcon from "@/shared/components/icons/Social/GoogleIcon";
 import { Button } from "@/shared/components/UI/Button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -19,6 +20,7 @@ import {
 import { ComponentPropsWithoutRef, ReactNode, useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import CloseIcon from "@/shared/components/icons/CloseIcon";
 
 const AuthModal = ({
   children,
@@ -56,11 +58,15 @@ const AuthModal = ({
         {children}
       </DialogTrigger>
       <DialogContent
-        className="px-6 sm:px-8 gap-10"
+        hideClose
+        className="px-4 xs:px-6 sm:px-8 gap-10"
         closeClassName="top-10 right-8"
       >
-        <DialogHeader>
+        <DialogHeader className="justify-between flex-row items-end">
           <DialogTitle>Войдите или создайте аккаунт</DialogTitle>
+          <DialogClose>
+            <CloseIcon />
+          </DialogClose>
         </DialogHeader>
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

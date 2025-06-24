@@ -8,7 +8,7 @@ import Section from "@/shared/components/UI/Section";
 const NotFound = ({ search }: { search: string }) => {
   return (
     <Section className="border-b-[1px] border-main">
-      <Container className="flex-col gap-12 mt-12 mb-12 sm:mt-14 sm:mb-[136px]">
+      <Container className="flex-col gap-8 sm:gap-12 mt-12 mb-12 sm:mt-14 sm:mb-[136px]">
         <div className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-h3">Результаты поиска</h2>
           <div className="text-body2">

@@ -77,7 +77,7 @@ const Collections = () => {
             src="/images/Home/Collections/fashion-1.jpg"
           />
           <div className="w-full flex flex-col justify-between sm:h-[272px] bg-main pt-6 pb-4 sm:pt-10 sm:pb-6 px-4 text-white text-center sm:col-start-3 md:col-start-2 lg:col-start-auto row-start-3 md:row-start-1 md:row-span-2 lg:row-span-4 ">
-            <span className="text-body2 sm:text-h5">
+            <span className="text-title xs:text-body2 sm:text-h5">
               С &quot;Образами 2Happy&quot; создать идеальный лук стало просто и
               удобно
             </span>

@@ -3,13 +3,14 @@
 import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 import { Button } from "@/shared/components/UI/Button";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
+import { cn } from "@/shared/utils";
 
-const ContactUsButton = () => {
+const ContactUsButton = ({ className }: { className?: string }) => {
   const isMobile = useMediaCustom("small");
 
   return (
     <Button
-      className="w-full mt-8 sm:mt-14"
+      className={cn("w-full mt-8 sm:mt-14", className)}
       size={isMobile ? "small" : "medium"}
       asChild
     >

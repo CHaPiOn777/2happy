@@ -9,14 +9,24 @@ import {
   BreadcrumbSeparator,
 } from "@/shared/components/UI/Breadcrumb";
 import { paths } from "@/config/paths";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const OffertBreadcrumbs = () => {
   return (
     <Breadcrumbs className="bg-main border-b-0">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-white" href={paths.home.getHref()}>
+          <BreadcrumbLink
+            className="text-white xs:inline-block hidden"
+            href={paths.home.getHref()}
+          >
             Главная
+          </BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white inline-block xs:hidden"
+            href={paths.home.getHref()}
+          >
+            <HomeIcon className="!size-6" />
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

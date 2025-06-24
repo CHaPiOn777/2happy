@@ -34,6 +34,7 @@ export const getCartItemInfo = (cartItem: CartItemResponse) => {
 
   return {
     key: cartItem.key,
+    id: cartItem.id,
     parentId: cartItem.parent_id,
     image: cartItem.images[0],
     name: decodeHtmlEntities(cartItem.name),

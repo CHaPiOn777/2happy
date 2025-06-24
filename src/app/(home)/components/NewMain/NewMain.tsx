@@ -4,43 +4,26 @@ import Image from "next/image";
 import MainButton from "./components/MainButton";
 
 import * as motion from "motion/react-client";
-import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewMain = () => {
   return (
     <Section className="h-[584px] md:h-[480px] xl:h-[865px] lg:h-[760px] mb-10 md:mb-0">
-      <AnimatedInView
-        as="div"
+      <motion.div
         viewport={{ once: true }}
-        fallbackClassName="opacity-0"
-        animations={{
-          md: {
-            initial: { opacity: 0, y: 80 },
-            whileInView: { opacity: 1, y: 0 },
-            transition: { duration: 0.5 },
-          },
-          lg: {
-            initial: { opacity: 0, y: 120 },
-            whileInView: { opacity: 1, y: 0 },
-            transition: { duration: 0.6 },
-          },
-          default: {
-            initial: { opacity: 0 },
-            animate: { opacity: 1 },
-            transition: { duration: 0.6 },
-          },
-        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
         className="absolute w-full h-full border-b border-main"
       >
         <Image
           fill
           className="object-cover object-[58%_50%] sm:object-[50%_50%]"
-          quality={100}
+          quality={90}
           src="/images/Home/Main/main.jpg"
           alt="main-image"
           priority
         />
-      </AnimatedInView>
+      </motion.div>
       <Container className="gap-6 items-center h-full">
         <motion.div
           transition={{ duration: 1, type: "spring" }}
@@ -61,8 +44,8 @@ const NewMain = () => {
               <MainButton className="hidden sm:flex" />
             </div>
           </div>
-          <MainButton className="absolute -bottom-14 left-0 flex sm:hidden" />
         </motion.div>
+        <MainButton className="absolute -bottom-14 left-0 flex sm:hidden" />
       </Container>
     </Section>
   );

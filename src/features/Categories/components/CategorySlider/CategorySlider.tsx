@@ -21,12 +21,16 @@ export const CategorySlider = ({
   activeSlug?: string;
   getHref: (category: Category) => string;
 }) => {
+  const activeSlugIndex = categories?.findIndex(
+    (item) => item.slug === activeSlug
+  );
   return (
     <div className="category-slider">
       <Swiper
         slidesPerView="auto"
         spaceBetween={16}
         slidesPerGroup={2}
+        initialSlide={activeSlugIndex ?? 0}
         onSwiper={(swiper) => {
           swiper.wrapperEl.classList.add("swiper-wrapper");
           swiper.wrapperEl.classList.remove("gap-4");
@@ -34,7 +38,7 @@ export const CategorySlider = ({
         wrapperClass="gap-4"
       >
         <SliderButton
-          className="absolute bg-white left-[-1px] top-0 z-10 disabled:hidden"
+          className="absolute hidden sm:inline-flex bg-white left-[-1px] top-0 z-10 disabled:hidden"
           slideType="prev"
           asChild
         >
@@ -55,7 +59,7 @@ export const CategorySlider = ({
             </SwiperSlide>
           ))}
         <SliderButton
-          className="absolute bg-white top-0 right-[-1px] z-10 disabled:hidden"
+          className="absolute hidden sm:inline-flex bg-white top-0 right-[-1px] z-10 disabled:hidden"
           slideType="next"
           asChild
         >

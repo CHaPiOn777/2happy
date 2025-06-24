@@ -18,7 +18,7 @@ const UserMobileButton = () => {
   if (!hasMounted)
     return (
       <IconButton
-        className="w-12 opacity-0"
+        className="w-12 opacity-0 hidden sm:inline-flex"
         variant="secondary"
         size="medium"
         asChild
@@ -36,7 +36,12 @@ const UserMobileButton = () => {
 
   if (user)
     return (
-      <IconButton className="w-12" variant="secondary" size="medium" asChild>
+      <IconButton
+        className="w-12 hidden sm:inline-flex"
+        variant="secondary"
+        size="medium"
+        asChild
+      >
         <Link className="relative" href={paths.account.getHref()}>
           <UserIcon className="hover:fill-main transition-colors" />
           <span className="absolute top-3 right-3 w-1 h-1 rounded-full bg-red" />

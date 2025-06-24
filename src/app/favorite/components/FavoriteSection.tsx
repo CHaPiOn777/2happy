@@ -9,9 +9,9 @@ import Section from "@/shared/components/UI/Section";
 import FavoriteList from "./FavoriteList";
 import { useGetAllFavorite } from "@/features/Favorite/api/favoriteQueries";
 import { useMemo } from "react";
-import { FavoriteCardLoader } from "@/features/Favorite/components/Cards/FavoriteCard";
 import FavoriteEmpty from "./FavoriteEmpty";
 import FavoriteSectionButtons from "./FavoriteSectionButtons";
+import FavoriteCardLoader from "@/features/Favorite/components/Cards/FavoriteCard/FavoriteCardLoader";
 
 const FavoriteSection = () => {
   const { data: favorites, isLoading } = useGetAllFavorite();
@@ -41,7 +41,7 @@ const FavoriteSection = () => {
                   в вашем вишлисте.
                 </div>
                 <AuthModal defaultTab="login" triggerProps={{ asChild: true }}>
-                  <Button size="medium" className="!w-full sm:w-min">
+                  <Button size="medium" className="w-full sm:w-min">
                     Войти <ArrowUpRightIcon />
                   </Button>
                 </AuthModal>

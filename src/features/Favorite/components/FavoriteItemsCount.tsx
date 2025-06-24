@@ -19,7 +19,8 @@ const FavoriteItemsCount = ({
   return (
     <span
       className={cn(
-        "absolute size-4 -top-1 -right-1.5 bg-red rounded-full text-white text-[12px]",
+        "absolute -top-1 -right-1.5 bg-red rounded-full text-white text-[12px]",
+        totalCount >= 10 ? "size-[18px]" : "size-4",
         className
       )}
     >

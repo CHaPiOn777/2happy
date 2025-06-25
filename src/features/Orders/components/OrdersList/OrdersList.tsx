@@ -4,9 +4,9 @@ import OrdersNotFound from "./OrdersNotFound";
 import OrdersListSelect from "./OrdersListSelect";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getOrdersInfiniteQueryOptions } from "../../api/ordersApi";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useUser } from "@/shared/api/authApi";
-import useObserver, { useIntersection } from "@/shared/hooks/useObserver";
+import { useIntersection } from "@/shared/hooks/useObserver";
 
 const OrdersList = () => {
   const { data: user } = useUser();
@@ -17,6 +17,7 @@ const OrdersList = () => {
   const {
     data: orders,
     isPending,
+    isLoading,
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
@@ -33,13 +34,19 @@ const OrdersList = () => {
     }),
   });
 
+  const isFetchingRef = useRef<boolean>(false);
+
   const callbackRef = useIntersection(() => {
-    fetchNextPage();
+    if (!isFetchingRef.current) fetchNextPage();
   });
+
+  useEffect(() => {
+    isFetchingRef.current = isFetchingNextPage;
+  }, [isFetchingNextPage]);
 
   const noResults = !isPending && !orders?.items.length;
 
-  return <OrdersNotFound />;
+  if (noResults) return <OrdersNotFound />;
 
   if (isPending && !isFetchingNextPage) {
     return (

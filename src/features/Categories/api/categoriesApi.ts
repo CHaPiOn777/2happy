@@ -4,6 +4,7 @@ import { queryOptions, useQuery } from "@tanstack/react-query";
 import { env } from "@/config/env";
 import { WooResponse } from "@/shared/types/api";
 import { createURLWithParams } from "@/shared/utils/createURLWithParams";
+import { requestQueue } from "@/shared/api/requestQueue";
 
 //------------ Categories List ------------\\
 
@@ -25,10 +26,13 @@ export const getCategoriesList = async (
     params
   );
 
-  const response = await formattedApiInstance.get<
-    unknown,
-    WooResponse<Category[]>
-  >(getCategoriesListURLWithParams);
+  const response = await requestQueue.addRequest(
+    () =>
+      formattedApiInstance.get<unknown, WooResponse<Category[]>>(
+        getCategoriesListURLWithParams
+      ),
+    "low"
+  );
 
   return response;
 };

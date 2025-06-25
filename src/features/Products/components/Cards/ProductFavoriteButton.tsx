@@ -10,7 +10,7 @@ const ProductFavoriteButton = ({ product }: { product: ProductServer }) => {
   const hasMounted = useHasMounted();
   return (
     <ToggleFavorite
-      className="absolute top-4 right-4 z-50 opacity-100 lg:opacity-0 group-hover/product:opacity-100 transition-opacity"
+      className="absolute top-4 right-4 z-30 opacity-100 lg:opacity-0 group-hover/product:opacity-100 transition-opacity"
       product={product}
       variation={product.defaultVariation}
     >

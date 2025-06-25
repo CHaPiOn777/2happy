@@ -5,7 +5,7 @@ import { TabsContent } from "@radix-ui/react-tabs";
 
 const OrdersTab = () => {
   return (
-    <Container>
+    <div className="w-full">
       <Tabs className="w-full space-y-6" defaultValue="orders">
         <TabsList>
           <TabsTrigger value="orders">Мои заказы</TabsTrigger>
@@ -18,7 +18,7 @@ const OrdersTab = () => {
           <OrdersList />
         </TabsContent>
       </Tabs>
-    </Container>
+    </div>
   );
 };
 

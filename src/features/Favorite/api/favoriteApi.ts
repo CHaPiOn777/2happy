@@ -1,3 +1,4 @@
+import { requestQueue } from "@/shared/api/requestQueue";
 import { FavoriteProduct, FavoriteResponse } from "../types";
 import { formattedApiInstance } from "@/shared/api/formattedApiInstance";
 
@@ -8,11 +9,12 @@ export const getFavoritesListServer = async ({
 }: {
   signal: AbortSignal;
 }): Promise<FavoriteResponse> => {
-  const response = await formattedApiInstance.get<unknown, FavoriteResponse>(
-    favoritesListURL,
-    {
-      signal,
-    }
+  const response = await requestQueue.addRequest<FavoriteResponse>(
+    () =>
+      formattedApiInstance.get<unknown, FavoriteResponse>(favoritesListURL, {
+        signal,
+      }),
+    "medium"
   );
 
   return response;

@@ -30,7 +30,7 @@ const CollectionsList = ({
   const observerRef = useRef<HTMLDivElement>(null);
 
   useObserver(observerRef, () => {
-    fetchNextPage();
+    if (!isFetchingNextPage) fetchNextPage();
   });
 
   const noResults = !isPending && !data?.items.length;

@@ -3,7 +3,7 @@
 import { useCart } from "@/features/Cart/api/cartQueries";
 import CartCard, {
   CartDefaultCardLoader,
-} from "@/features/Cart/components/Cards/CartDefaultCard";
+} from "@/features/Cart/components/Cards/CartDefaultCard/CartDefaultCard";
 import Container from "@/shared/components/UI/Container";
 import CartInfo from "./CartInfo";
 import { getWordForm } from "@/shared/utils/getWordForm";
@@ -14,11 +14,11 @@ const CartList = () => {
   const { data, isPending } = useCart();
   return (
     <Container
-      className={cn("my-section flex-col gap-12", isPending && "mb-8")}
+      className={cn("my-section flex-col gap-6 md:gap-12", isPending && "mb-8")}
     >
       <div className="flex gap-2 items-end">
         <h1 className="text-h2">Корзина /</h1>
-        <span className="text-body2 text-gray-middle mb-1">
+        <span className="text-body2 text-gray-middle md:mb-1">
           {data?.items_count ?? 0}{" "}
           {getWordForm(data?.items_count ?? 0, {
             one: "товар",

@@ -11,12 +11,14 @@ import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
 import { getFavoriteQueryOptions } from "@/features/Favorite/api/favoriteQueries";
+import { requestQueue } from "./requestQueue";
 
 export const getUserURL = "/wp/v2/users/me";
 
 export const getUser = async (): Promise<UserData> => {
-  const response = await formattedApiInstance.get<unknown, UserData>(
-    getUserURL
+  const response = await requestQueue.addRequest(
+    () => formattedApiInstance.get<unknown, UserData>(getUserURL),
+    "medium"
   );
 
   return response;

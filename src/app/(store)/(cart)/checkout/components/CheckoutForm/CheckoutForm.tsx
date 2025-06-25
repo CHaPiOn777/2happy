@@ -29,7 +29,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
 
   const { data: user } = useUser();
 
-  const { checkoutItems } = useCheckoutStore();
+  const { checkoutItems, isEditable } = useCheckoutStore();
 
   const [contacts, setContacts] = useState<CheckoutFormInput | null>(null);
   const [payment, setPayment] = useState<string>("");
@@ -39,7 +39,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
     useCreateOrder({
       onSuccess: (data) => {
         router.replace(paths.successCheckout.getHref(data.id));
-        deleteCart();
+        if (isEditable) deleteCart();
       },
     });
   const { mutate: createAddress } = useCreateUserAddress({});

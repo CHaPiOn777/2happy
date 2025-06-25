@@ -16,6 +16,8 @@ import OrdersTab from "./components/OrdersTab/OrdersTab";
 import ProfileTabLoader from "./components/ProfileTab/ProfileTabLoader";
 import AddressesTabLoader from "./components/AddressesTab/AddressesTabLoader";
 import { ScrollArea } from "@/shared/components/UI/ScrollArea";
+import Container from "@/shared/components/UI/Container";
+import OrdersTabLoader from "./components/OrdersTab/OrdersTabLoader";
 
 const AccountPage = () => {
   const params = useSearchParams();
@@ -47,13 +49,19 @@ const AccountPage = () => {
         </ScrollArea>
         <div className="my-12 sm:my-16 md:my-[80px] xl:my-section">
           <PageTabsContent className="w-full" value={ACCOUNT_TABS.PROFILE}>
-            {!isLoading && data ? <ProfileTab /> : <ProfileTabLoader />}
+            <Container>
+              {!isLoading && data ? <ProfileTab /> : <ProfileTabLoader />}
+            </Container>
           </PageTabsContent>
           <PageTabsContent className="w-full" value={ACCOUNT_TABS.ADDRESSES}>
-            {!isLoading && data ? <AddressesTab /> : <AddressesTabLoader />}
+            <Container>
+              {!isLoading && data ? <AddressesTab /> : <AddressesTabLoader />}
+            </Container>
           </PageTabsContent>
           <PageTabsContent className="w-full" value={ACCOUNT_TABS.ORDERS}>
-            {!isLoading && data ? <OrdersTab /> : "Загрузка..."}
+            <Container>
+              {!isLoading && data ? <OrdersTab /> : <OrdersTabLoader />}
+            </Container>
           </PageTabsContent>
         </div>
       </PageTabs>

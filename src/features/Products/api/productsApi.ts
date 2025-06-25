@@ -8,6 +8,7 @@ import { env } from "@/config/env";
 import { createURLWithParams } from "@/shared/utils/createURLWithParams";
 import { ProductServer, ProductVariation } from "../types";
 import { WooResponse } from "@/shared/types/api";
+import { requestQueue } from "@/shared/api/requestQueue";
 
 export type getProductsListParameters = {
   page?: number;
@@ -37,12 +38,16 @@ export const getProductsList = async (
     params
   );
 
-  const response = await formattedApiInstance.get<
-    unknown,
-    WooResponse<ProductServer[]>
-  >(getProductsListURLWithParams, {
-    signal,
-  });
+  const response = await requestQueue.addRequest<WooResponse<ProductServer[]>>(
+    () =>
+      formattedApiInstance.get<unknown, WooResponse<ProductServer[]>>(
+        getProductsListURLWithParams,
+        {
+          signal,
+        }
+      ),
+    "high"
+  );
 
   return response;
 };
@@ -106,11 +111,15 @@ export const getProductById = async (
     signal: AbortSignal;
   }
 ): Promise<ProductServer> => {
-  const response = await formattedApiInstance.get<unknown, ProductServer>(
-    getProductByIdURL.replace("{id}", `${id}`),
-    {
-      signal,
-    }
+  const response = await requestQueue.addRequest(
+    () =>
+      formattedApiInstance.get<unknown, ProductServer>(
+        getProductByIdURL.replace("{id}", `${id}`),
+        {
+          signal,
+        }
+      ),
+    "high"
   );
 
   return response;
@@ -136,12 +145,16 @@ const getProductVariations = async (
     signal: AbortSignal;
   }
 ): Promise<WooResponse<ProductVariation[]>> => {
-  const response = await formattedApiInstance.get<
-    unknown,
-    WooResponse<ProductVariation[]>
-  >(getProductVariationsURL.replace("{id}", `${id}`), {
-    signal,
-  });
+  const response = await requestQueue.addRequest(
+    () =>
+      formattedApiInstance.get<unknown, WooResponse<ProductVariation[]>>(
+        getProductVariationsURL.replace("{id}", `${id}`),
+        {
+          signal,
+        }
+      ),
+    "high"
+  );
 
   return response;
 };

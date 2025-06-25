@@ -10,12 +10,33 @@ import { IconButton } from "@/shared/components/UI/IconButton";
 import Section from "@/shared/components/UI/Section";
 import TabTitle from "@/shared/components/UI/TabTitle";
 import ContactsForm from "./ContactForm";
-import Image from "next/image";
 import ClockIcon from "@/shared/components/icons/ClockIcon";
 import PinIcon from "@/shared/components/icons/PinIcon";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
+import { ContactFormInput, useSendEmail } from "@/shared/api/contactsApi";
+import { notify } from "@/shared/lib/notify";
 
 const ContactsSection = () => {
+  const { mutate: sendEmail, isPending } = useSendEmail({
+    onSuccess: () => {
+      notify({
+        message: "Ваше обращение успешно отправлено!",
+        variant: "success",
+      });
+    },
+    onError: () => {
+      notify({
+        message: "Возникла непредвиденная ошибка, попробуйте еще раз!",
+        variant: "error",
+      });
+    },
+  });
+
+  const handleSubmit = (data: ContactFormInput) => {
+    const { agreement, ...body } = data;
+
+    sendEmail(body);
+  };
   return (
     <Section>
       <Container className="flex-col gap-8 md:gap-16 mt-section">
@@ -95,11 +116,11 @@ const ContactsSection = () => {
                 Заполните форму — мы свяжемся с вами в ближайшее время
               </p>
             </div>
-            <ContactsForm className="" onSubmit={() => {}} isPending={false} />
+            <ContactsForm onSubmit={handleSubmit} isPending={isPending} />
           </div>
-          <div className="flex justify-end md:justify-normal md:max-w-[392px] w-full shrink-0">
+          <div className="flex justify-end md:justify-normal w-full md:max-w-[352px] lg:max-w-[392px] w-full shrink-0">
             <ImageWithLoader
-              wrapperClassName="relative right-0 md:justify-normal max-w-[280px] sm:max-w-[392px] w-full h-[400px] sm:h-[600px]"
+              wrapperClassName="relative right-0 md:justify-normal xs:max-w-[280px] sm:max-w-[392px] w-full h-[400px] sm:h-[500px] md:h-full"
               src="/images/Contacts/form.jpg"
               alt="form-image"
             />

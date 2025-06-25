@@ -1,99 +1,68 @@
-import AddToCartButton from "@/features/Cart/components/AddToCartButton";
+"use client";
+
+import { paths } from "@/config/paths";
+import ProductChangeDialog from "@/features/Products/components/Dialogs/ProductChange/ProductChangeDialog";
+import Link from "next/link";
+import { ReactNode } from "react";
+import { ProductVariation } from "@/features/Products/types";
+import { useAddToCart } from "@/features/Cart/api/cartMutations";
+import { Button } from "@/shared/components/UI/Button";
 import { OrderProductItem } from "../types";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/shared/components/UI/Dialog";
-import { Image } from "@/shared/types/api";
-import { ReactNode, Suspense, useState } from "react";
-import ProductSliderLoader from "@/app/(store)/product/components/ProductSection/ProductSlider/ProductSliderLoader";
-import ProductSlider from "@/app/(store)/product/components/ProductSection/ProductSlider/ProductSlider";
-import ProductInfo from "@/app/(store)/product/components/ProductSection/ProductInfo/ProductInfo";
-import ProductInfoLoader from "@/app/(store)/product/components/ProductSection/ProductInfo/ProductInfoLoader";
-import HeartIcon from "@/shared/components/icons/HeartIcon";
-import { IconButton } from "@/shared/components/UI/IconButton";
+import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 
 const OrderProductDialog = ({
+  orderProduct,
   children,
-  orderItem,
 }: {
+  orderProduct: OrderProductItem;
   children: ReactNode;
-  orderItem: OrderProductItem;
 }) => {
-  const productId = orderItem.product_id;
-  const [open, setOpen] = useState<boolean>(false);
-  const [images, setImages] = useState<Image[]>([]);
+  const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart({
+    onSuccess: () => {},
+  });
 
-  const orderItemColor = orderItem.meta_data.find(
-    (item) => item.key === "pa_color"
-  )?.display_value;
-  const orderItemSize = orderItem.meta_data.find(
-    (item) => item.key === "pa_size"
-  )?.display_value;
+  const handleAddToCart = (variation: ProductVariation | null) => {
+    addToCart({ id: variation?.id, quantity: 1 });
+  };
+
+  const orderProductColor =
+    orderProduct.meta_data.find((item) => item.key === "pa_color")
+      ?.display_value ?? "";
+  const orderProductSize =
+    orderProduct.meta_data.find((item) => item.key === "pa_size")
+      ?.display_value ?? "";
+
   return (
-    <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-      <DialogTrigger
-        className="cursor-pointer"
-        onClick={() => setOpen(true)}
-        asChild
-      >
-        {children}
-      </DialogTrigger>
-      <DialogContent className="w-full max-w-[1224px] p-20">
-        <DialogHeader className="sr-only">
-          <DialogTitle className="sr-only">Товар из заказа</DialogTitle>
-          <DialogDescription className="sr-only">
-            Товар из заказа
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex gap-12">
-          <Suspense fallback={<ProductSliderLoader />}>
-            <ProductSlider
-              className="max-w-[600px] w-full"
-              id={productId}
-              images={images}
-            />
-          </Suspense>
-          <Suspense fallback={<ProductInfoLoader className="basis-auto" />}>
-            <ProductInfo
-              id={productId}
-              defaultColor={orderItemColor}
-              defaultSize={orderItemSize}
-              setImages={setImages}
-              classNames={{ wrapper: "basis-auto" }}
-              renderButtons={(product, variation, disabled) => (
-                <>
-                  {variation?.stock_status === "outofstock" ? null : (
-                    <div className="flex gap-2">
-                      <AddToCartButton
-                        className="w-full"
-                        variationId={variation?.id ?? 0}
-                        quantity={1}
-                        disabled={disabled}
-                      >
-                        Добавить в корзину
-                      </AddToCartButton>
-                      <IconButton
-                        variant="secondary"
-                        className="border border-black [&_svg]:fill-transparent"
-                        size="normal"
-                        disabled={disabled}
-                      >
-                        <HeartIcon className="stroke-black" />
-                      </IconButton>
-                    </div>
-                  )}
-                </>
-              )}
-            />
-          </Suspense>
+    <ProductChangeDialog
+      productId={orderProduct.product_id}
+      defaultColor={orderProductColor}
+      defaultSize={orderProductSize}
+      renderButtons={(product, variation, disabled) => (
+        <div className="flex flex-col gap-4 lg:gap-10">
+          <Button
+            className="w-full"
+            disabled={disabled || isAddingToCart}
+            onClick={() => handleAddToCart(variation)}
+          >
+            {isAddingToCart && <LoaderIcon className="animate-spin" />}
+            Добавить в корзину
+          </Button>
+          {product && (
+            <Link
+              href={paths.product.getHref(product.id, product.slug, {
+                color: orderProductColor,
+                size: orderProductSize,
+              })}
+              className="custom-underline w-max after:bottom-0"
+            >
+              Посмотреть детали
+            </Link>
+          )}
         </div>
-      </DialogContent>
-    </Dialog>
+      )}
+    >
+      {children}
+    </ProductChangeDialog>
   );
 };
 

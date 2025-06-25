@@ -52,6 +52,8 @@ module.exports = {
           "minmax(250px, 296px) 0px minmax(130px, 296px) 0px minmax(250px, 296px)",
         partnersSuggestFirst:
           "minmax(220px, 288px) minmax(220px, 288px) minmax(50px, 128px) minmax(200px, 264px) minmax(120px, 184px)",
+        partnersSuggestFirstLg:
+          "minmax(200px, 288px) minmax(100px, 188px) minmax(200px, 288px) minmax(80px, 136px)",
         partnersSuggestSecond:
           "minmax(220px, 296px) minmax(50px, 128px) minmax(212px, 280px) minmax(300px, 448px)",
       },

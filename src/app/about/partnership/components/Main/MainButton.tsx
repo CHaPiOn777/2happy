@@ -14,7 +14,7 @@ const MainButton = () => {
 
   return (
     <Button
-      className="w-full absolute -bottom-12 left-0 sm:relative"
+      className="w-full absolute -bottom-12 sm:bottom-0 left-0 sm:relative"
       size={isTablet ? "medium" : "large"}
       asChild
     >

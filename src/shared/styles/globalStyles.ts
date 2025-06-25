@@ -1,8 +1,8 @@
 export const GlobalMediaAsNumber = {
-  small: 480,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
+  small: 479,
+  md: 767,
+  lg: 1023,
+  xl: 1279,
 };
 
 export const GlobalMedia = {

@@ -21,7 +21,7 @@ const AboutSection = () => {
           </div>
         </div>
         <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-[104px] md:h-[984px] lg:h-full">
-          <div className="relative -translate-y-20 md:translate-y-0 z-20 flex flex-col gap-8 lg:gap-12 justify-end lg:justify-between lg:max-w-[496px] w-full mr-[344px] lg:mr-0">
+          <div className="relative -translate-y-20 md:translate-y-0 -mb-20 md:-mb-0 z-20 flex flex-col gap-8 lg:gap-12 justify-end lg:justify-between lg:max-w-[496px] w-full mr-[344px] lg:mr-0">
             <div className="flex flex-col gap-4 md:mt-20 ">
               <p className="text-gray-dark hidden md:block">
                 2Happy — это не просто вещи. Это про тебя, твою энергию и стиль,

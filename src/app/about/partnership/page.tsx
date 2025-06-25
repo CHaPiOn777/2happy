@@ -1,6 +1,6 @@
 import WhatsAppButton from "@/shared/components/Layout/MainLayout/components/WhatsAppButton";
 import Main from "./components/Main/Main";
-import SuggestSection from "./components/SuggestSection";
+import SuggestSection from "./components/SuggestSection/SuggestSection";
 import DividerSection from "./components/DividerSection";
 import LoyalSection from "./components/LoyalSection";
 import ContactUsSection from "./components/ContactUsSection/ContactUsSection";

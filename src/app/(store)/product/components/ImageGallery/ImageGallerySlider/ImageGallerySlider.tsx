@@ -3,10 +3,9 @@ import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import { Navigation } from "swiper/modules";
 import ArrowRightIcon from "@/shared/components/icons/Arrows/ArrowRightIcon";
 import { IconButton } from "@/shared/components/UI/IconButton";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SliderProgress from "@/shared/components/Slider/SliderProgress";
-import ImageWithZoom from "@/shared/components/UI/ImageWithZoom";
-import { NavigationOptions } from "swiper/types";
+import { NavigationOptions, Swiper as SwiperType } from "swiper/types";
 import { Image } from "@/shared/types/api";
 import { cn } from "@/shared/utils/cn";
 
@@ -26,6 +25,8 @@ const ImageGallerySlider = ({
   initialSlide: number;
   images: Image[];
 }) => {
+  const swiperRef = useRef<SwiperType | null>(null);
+
   const [activeImage, setActiveImage] = useState<Image>(() => images[0]);
   const prevRef = (el: HTMLElement | null) => {
     if (el) navigation.current.prevEl = el;
@@ -38,6 +39,11 @@ const ImageGallerySlider = ({
     nextEl: null,
     prevEl: null,
   });
+
+  useEffect(() => {
+    if (swiperRef.current) swiperRef.current.allowTouchMove = !openWide;
+  }, [openWide]);
+
   return (
     <div className="w-full h-full flex justify-center">
       <div
@@ -53,6 +59,9 @@ const ImageGallerySlider = ({
           centeredSlides={true}
           allowTouchMove={false}
           initialSlide={initialSlide}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
           onSlideChange={(swiper) => {
             setActiveImage(images[swiper.activeIndex]);
           }}

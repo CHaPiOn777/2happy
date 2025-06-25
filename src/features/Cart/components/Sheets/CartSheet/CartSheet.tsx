@@ -34,7 +34,7 @@ const CartSheet = ({
         {children}
       </SheetTrigger>
       <SheetContent
-        className="w-full h-full flex flex-col z-over-header max-w-[480px] lg:max-w-[680px] px-8 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14"
+        className="w-full h-full flex flex-col z-over-header max-w-[480px] lg:max-w-[680px] px-4 xs:px-6 sm:px-8 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14"
         overlayClassName="z-over-header"
       >
         <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
@@ -49,7 +49,7 @@ const CartSheet = ({
               })}
             </SheetDescription>
           ) : null}
-          <SheetClose className="top-4 right-8 sm:top-6 sm:right-10" />
+          <SheetClose className="top-4 right-6 sm:top-6 sm:right-10" />
         </SheetHeader>
 
         {isLoading && <CartSheetLoader />}

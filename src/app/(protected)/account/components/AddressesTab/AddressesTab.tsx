@@ -14,7 +14,7 @@ const AddressesTab = () => {
   );
 
   return (
-    <Container className="flex-col w-full gap-8 md:gap-12">
+    <div className="flex flex-col w-full gap-8 md:gap-12">
       <div className="border border-gray-middle bg-gray-light py-4 px-5">
         <h4 className="text-h5">Адресная книга</h4>
       </div>
@@ -34,7 +34,7 @@ const AddressesTab = () => {
           </AddAddressDialog>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

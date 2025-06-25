@@ -29,14 +29,14 @@ const CartInfo = ({ cartData }: { cartData: CartResponse }) => {
   );
 
   return (
-    <div className="grid grid-cols-[minmax(420px,632px)_minmax(250px,304px)] lg:grid-cols-[repeat(2,_minmax(300px,_490px))_296px] grid-rows-[360px_184px_184px] lg:grid-rows-1 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-[minmax(420px,632px)_minmax(250px,304px)] lg:grid-cols-[repeat(2,_minmax(300px,_490px))_296px] grid-rows-[minmax(156px,auto)_360px_296px] md:grid-rows-[360px_184px_184px] lg:grid-rows-1 gap-6">
       <div
         ref={observableRef}
-        className="flex flex-col col-span-2 lg:col-span-1 gap-8 shadow-elevation-6 rounded-xs border border-main py-8 px-6"
+        className="flex flex-col md:col-span-2 lg:col-span-1 gap-8 shadow-elevation-6 rounded-xs border border-main py-8 px-6"
       >
         <h4 className="text-h4">Сумма заказа</h4>
         <div className="flex flex-col text-gray-dark text-body2">
-          <div className="flex justify-between py-3 border-b border-gray-light  ">
+          <div className="flex justify-between py-3 border-b border-gray-light">
             <span>Товары:</span>
             <span>
               {totalPriceWithoutSale} {currencySymbol}
@@ -61,7 +61,7 @@ const CartInfo = ({ cartData }: { cartData: CartResponse }) => {
           buttonProps={{ disabled: !cartData.items_count }}
         />
       </div>
-      <div className="flex gap-2 bg-light-disabled py-10 px-4 rounded-xs h-min">
+      <div className="flex gap-2 h-full bg-light-disabled py-10 px-4 rounded-xs md:h-min row-start-1 md:row-start-auto">
         <WarningIcon className="shrink-0" />
         <div className="flex flex-col gap-2">
           <h5 className="text-h5">Обратите внимание</h5>
@@ -76,7 +76,7 @@ const CartInfo = ({ cartData }: { cartData: CartResponse }) => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center items-center row-span-2 lg:row-span-1 relative rounded-xs border border-main px-4 shadow-elevation-6">
+      <div className="flex justify-center items-center md:row-span-2 lg:row-span-1 relative rounded-xs border border-main px-4 shadow-elevation-6">
         <div className="absolute w-full h-full bg-gradient-7 z-10 opacity-50"></div>
         <ImageWithLoader
           wrapperClassName="absolute top-0 left-0"
@@ -97,7 +97,7 @@ const CartInfo = ({ cartData }: { cartData: CartResponse }) => {
 
       <NavigateToCartButton
         className={cn(
-          "fixed lg:hidden left-0 bottom-4 w-[calc(100%-64px)] mx-8 z-behind-header transition-all duration-300 ease-in-out",
+          "hidden sm:fixed lg:hidden left-0 bottom-4 !w-[calc(100vw-32px)] mx-4 z-behind-header transition-all duration-300 ease-in-out",
           showButton
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-8 pointer-events-none"

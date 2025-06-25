@@ -11,16 +11,16 @@ const debounce = (fn: () => void, delay: number) => {
 
 const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
 
-  const zoomFactor = 1.2;
+  const zoomFactor = 1; // можно менять динамически или через пропс
 
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  // Сохраняем натуральные размеры изображения
+  const [naturalSize, setNaturalSize] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-  const [naturalAspectRatio, setNaturalAspectRatio] = useState<number | null>(
-    null
-  );
-
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [start, setStart] = useState({ x: 0, y: 0 });
@@ -33,8 +33,8 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     const img = new window.Image();
     img.src = src;
     img.onload = () => {
-      const ratio = img.naturalHeight / img.naturalWidth;
-      setNaturalAspectRatio(ratio);
+      console.log("изображение загрузилось");
+      setNaturalSize({ width: img.naturalWidth, height: img.naturalHeight });
     };
   }, [src]);
 
@@ -43,25 +43,26 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
 
   const updateSizes = () => {
     const container = containerRef.current;
-    if (container && naturalAspectRatio !== null) {
+    if (container && naturalSize) {
       const rect = container.getBoundingClientRect();
       const containerWidth = rect.width;
       const containerHeight = rect.height;
 
-      const zoomedWidth = containerWidth * zoomFactor;
-      const zoomedHeight = zoomedWidth * naturalAspectRatio;
+      // Вычисляем зум относительно натурального размера
+      const zoomedWidth = naturalSize.width * zoomFactor;
+      const zoomedHeight = naturalSize.height * zoomFactor;
 
       const maxX = 0;
       const minX = Math.min(containerWidth - zoomedWidth, 0);
       const maxY = 0;
       const minY = Math.min(containerHeight - zoomedHeight, 0);
 
-      setContainerSize({ width: containerWidth, height: containerHeight });
       setImageSize({ width: zoomedWidth, height: zoomedHeight });
       setLimits({
         x: { min: minX, max: maxX },
         y: { min: minY, max: maxY },
       });
+      // Центруем картинку
       setPosition({
         x: clamp((containerWidth - zoomedWidth) / 2, minX, maxX),
         y: clamp((containerHeight - zoomedHeight) / 2, minY, maxY),
@@ -69,20 +70,24 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     }
   };
 
+  // Следим за изменением naturalSize и размеров контейнера
   useEffect(() => {
-    if (!containerRef.current || naturalAspectRatio === null) return;
+    if (!containerRef.current || !naturalSize) return;
 
     const observer = new ResizeObserver(
       debounce(() => {
         updateSizes();
       }, 100)
     );
-
     observer.observe(containerRef.current);
 
-    return () => observer.disconnect();
-  }, [naturalAspectRatio]);
+    // Инициалный вызов
+    updateSizes();
 
+    return () => observer.disconnect();
+  }, [naturalSize]);
+
+  // Drag handlers
   const startDrag = (x: number, y: number) => {
     setDragging(true);
     setStart({ x: x - position.x, y: y - position.y });
@@ -107,10 +112,11 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     e.preventDefault();
     startDrag(e.clientX, e.clientY);
   };
-
   const handleMouseMove = (e: React.MouseEvent) => {
     updateDrag(e.clientX, e.clientY);
   };
+  const handleMouseUp = () => endDrag();
+  const handleMouseLeave = () => endDrag();
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
@@ -118,14 +124,12 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
       startDrag(touch.clientX, touch.clientY);
     }
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
       const touch = e.touches[0];
       updateDrag(touch.clientX, touch.clientY);
     }
   };
-
   const handleTouchEnd = () => endDrag();
   const handleTouchCancel = () => endDrag();
 
@@ -134,15 +138,14 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
       ref={containerRef}
       className="relative w-full h-full overflow-hidden touch-none select-none"
       onMouseMove={handleMouseMove}
-      onMouseUp={endDrag}
-      onMouseLeave={endDrag}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchCancel}
     >
-      {naturalAspectRatio !== null && (
+      {naturalSize && (
         <div
-          ref={imageRef}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
           className="absolute select-none pointer-events-auto touch-none"

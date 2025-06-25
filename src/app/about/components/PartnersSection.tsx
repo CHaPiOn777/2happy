@@ -28,7 +28,7 @@ const PartnersSection = () => {
               <h3 className="text-h2 sm:text-h3">
                 Хочешь стать частью 2HAPPY?
               </h3>
-              <div className="flex w-full sm:w-auto gap-2 sm:gap-0 items-end sm:items-start flex-row sm:flex-col xs:max-w-[288px] sm:max-w-max md:ml-14 lg:ml-[104px]">
+              <div className="flex w-full sm:w-auto gap-2 sm:gap-0 items-end sm:items-start flex-row sm:flex-col sm:max-w-[288px] md:max-w-max md:ml-14 lg:ml-[104px]">
                 <p className="text-body2 md:text-h5">
                   Стань амбассадором или партнёром бренда — рассказывай
                   о 2HAPPY, вдохновляй других и формируй стильное сообщество

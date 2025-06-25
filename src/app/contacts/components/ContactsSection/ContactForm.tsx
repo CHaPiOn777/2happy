@@ -14,31 +14,10 @@ import { Textarea } from "@/shared/components/UI/Textarea";
 import { cn } from "@/shared/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ComponentPropsWithoutRef } from "react";
-import { z } from "zod";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/shared/components/UI/Checkbox";
-
-export const contactFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Имя должно содержать не менее 2 символов" })
-    .max(50, { message: "Имя слишком длинное" }),
-  email: z.string().email({ message: "Введите корректный email" }),
-  subject: z
-    .string()
-    .min(3, { message: "Тема сообщения должна содержать не менее 3 символов" })
-    .max(150, { message: "Тема слишком длинная" }),
-  message: z
-    .string()
-    .min(10, { message: "Сообщение должно содержать не менее 10 символов" })
-    .max(280, { message: "Сообщение слишком длинное" }),
-  agreement: z.boolean().refine((value) => value === true, {
-    message: "Вы должны принять политику конфиденциальности",
-  }),
-});
-
-export type ContactFormInput = z.infer<typeof contactFormSchema>;
+import { ContactFormInput, contactFormSchema } from "@/shared/api/contactsApi";
 
 const ContactsForm = ({
   onSubmit,
@@ -48,14 +27,14 @@ const ContactsForm = ({
 }: {
   onSubmit: (data: ContactFormInput) => void;
   isPending: boolean;
-} & ComponentPropsWithoutRef<"form">) => {
+} & Omit<ComponentPropsWithoutRef<"form">, "onSubmit">) => {
   const form = useForm<ContactFormInput>({
     resolver: zodResolver(contactFormSchema),
     mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
-      subject: "",
+      title: "",
       message: "",
       agreement: false,
     },
@@ -65,12 +44,12 @@ const ContactsForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("space-y-12", className)}
+        className={cn("space-y-8 sm:space-y-12", className)}
         {...props}
       >
         <div className="space-y-4">
-          <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-x-6">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -100,7 +79,7 @@ const ContactsForm = ({
 
             <FormField
               control={form.control}
-              name="subject"
+              name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>

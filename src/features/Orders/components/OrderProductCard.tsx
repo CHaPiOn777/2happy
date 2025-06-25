@@ -17,8 +17,8 @@ const OrderProductCard = ({ product }: { product: OrderProductItem }) => {
           alt=""
         />
         <div className="flex flex-col gap-4">
-          <OrderProductDialog orderItem={product}>
-            <h5 className="text-h5">{product.name}</h5>
+          <OrderProductDialog orderProduct={product}>
+            <h5 className="text-h5 cursor-pointer">{product.name}</h5>
           </OrderProductDialog>
           <div className="flex gap-4 text-gray-middle">
             <span>Артикул:</span>

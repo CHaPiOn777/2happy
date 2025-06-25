@@ -10,17 +10,19 @@ const CartSimilarProducts = () => {
 
   const cartProductIds = cart?.items.map((item) => item.parent_id);
 
-  const { data, isPending } = useQuery(
-    getRelatedProductsQueryOptions({
+  const { data, isPending } = useQuery({
+    ...getRelatedProductsQueryOptions({
       product_ids: cartProductIds,
       per_page: 20,
-    })
-  );
+    }),
+    enabled: !!cartProductIds?.length,
+  });
   return (
     <ProductsScrollableSection
       title="Похожие товары /"
       data={data}
       isLoading={isPending}
+      disabled={!cartProductIds?.length}
     />
   );
 };

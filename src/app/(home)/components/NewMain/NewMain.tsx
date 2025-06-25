@@ -17,7 +17,7 @@ const NewMain = () => {
       >
         <Image
           fill
-          className="object-cover object-[65%_50%] xs:object-[58%_50%] sm:object-[50%_50%]"
+          className="object-cover object-[65%_50%]"
           quality={90}
           src="/images/Home/Main/main.jpg"
           alt="main-image"

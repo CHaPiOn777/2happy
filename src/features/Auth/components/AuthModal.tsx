@@ -59,16 +59,16 @@ const AuthModal = ({
       </DialogTrigger>
       <DialogContent
         hideClose
-        className="px-4 xs:px-6 sm:px-8 gap-10"
+        className="px-4 pr-0 xs:pr-4 xs:px-6 sm:px-8 gap-10 max-h-[90vh] overflow-hidden"
         closeClassName="top-10 right-8"
       >
-        <DialogHeader className="justify-between flex-row items-end">
+        <DialogHeader className="pr-4 xs:pr-0 justify-between flex-row items-end">
           <DialogTitle>Войдите или создайте аккаунт</DialogTitle>
           <DialogClose>
             <CloseIcon />
           </DialogClose>
         </DialogHeader>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 overflow-y-auto pr-4 xs:pr-0">
           <div className="flex flex-col gap-4">
             <Tabs defaultValue={defaultTab}>
               <TabsList borderClass="bg-light-disabled">
@@ -82,7 +82,10 @@ const AuthModal = ({
               <TabsContent className="w-full mt-8 ring-0" value="login">
                 <LoginForm onSuccess={handleOnSuccess} />
               </TabsContent>
-              <TabsContent className="w-full mt-8 ring-0" value="register">
+              <TabsContent
+                className="w-full mt-8 ring-0 overflow-y-auto"
+                value="register"
+              >
                 <RegisterForm onSuccess={handleOnSuccess} />
               </TabsContent>
             </Tabs>

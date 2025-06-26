@@ -48,7 +48,12 @@ const MobileCategoriesList = ({
           ))}
         </ul>
       </ScrollArea>
-      <Button variant="tertiary" className="px-2" asChild>
+      <Button
+        variant="tertiary"
+        className="px-2"
+        onClick={handleCloseSheet}
+        asChild
+      >
         <Link href={paths.catalog.getHref()}>
           Смотреть все <ArrowUpRightIcon />
         </Link>

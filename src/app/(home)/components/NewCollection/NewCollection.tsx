@@ -30,6 +30,7 @@ const NewCollection = async () => {
       <Section>
         <Container className="flex-col gap-8 sm:gap-12 lg:gap-16 mb-12 sm:mb-section mt-24 sm:mt-section">
           <AnimatedInView
+            id="home-new-title"
             as="h2"
             fallbackClassName="opacity-0"
             viewport={{ once: true, amount: "all" }}
@@ -55,6 +56,7 @@ const NewCollection = async () => {
             Новая коллекция / 25
           </AnimatedInView>
           <AnimatedInView
+            id="home-new-slider"
             as="div"
             viewport={{ once: true, amount: 0.4 }}
             fallbackClassName="opacity-0"
@@ -74,6 +76,7 @@ const NewCollection = async () => {
 
           <AnimatedInView
             as="div"
+            id="home-new-list"
             viewport={{ once: true, amount: 0.4 }}
             fallbackClassName="opacity-0"
             animations={{
@@ -92,6 +95,7 @@ const NewCollection = async () => {
 
           <AnimatedInView
             as="div"
+            id="home-new-button"
             viewport={{ once: true, amount: 0.4 }}
             animations={{
               default: {

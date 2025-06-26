@@ -4,6 +4,7 @@ import Image from "next/image";
 import MainButton from "./components/MainButton";
 
 import * as motion from "motion/react-client";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewMain = () => {
   return (
@@ -25,7 +26,10 @@ const NewMain = () => {
         />
       </motion.div>
       <Container className="gap-6 items-center h-full">
-        <motion.div
+        <AnimatedInView
+          as="div"
+          id="home-main-title"
+          fallbackClassName="opacity-0"
           transition={{ duration: 1, type: "spring" }}
           initial={{ x: -1000 }}
           animate={{
@@ -45,7 +49,7 @@ const NewMain = () => {
               <MainButton className="hidden sm:flex" />
             </div>
           </div>
-        </motion.div>
+        </AnimatedInView>
         <MainButton className="absolute -bottom-14 left-0 flex sm:hidden" />
       </Container>
     </Section>

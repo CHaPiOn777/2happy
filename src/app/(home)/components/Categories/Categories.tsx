@@ -9,7 +9,6 @@ import Link from "next/link";
 import { CATEGORIES } from "./consts";
 import CategoryLink from "@/features/Categories/components/CategoryLink";
 
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const Categories = () => {
@@ -17,7 +16,9 @@ const Categories = () => {
     <Section className="border-b-[1px] border-b-main">
       <Container className="flex-col md:flex-row justify-between gap-8 md:gap-20 lg:gap-[176px] my-section">
         <div className="flex flex-col gap-8 md:gap-0 justify-between w-full lg:basis-[392px]">
-          <motion.h2
+          <AnimatedInView
+            as={"div"}
+            id="home-categories-title"
             initial={{ opacity: 0, y: -150 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -25,8 +26,10 @@ const Categories = () => {
             className="text-h2 sm:mt-12 lg:mt-0"
           >
             Категории <br className="hidden sm:block" /> /
-          </motion.h2>
-          <motion.div
+          </AnimatedInView>
+          <AnimatedInView
+            as="div"
+            id="home-categories-images"
             initial={{ opacity: 0, y: 150 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,11 +60,12 @@ const Categories = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </AnimatedInView>
         </div>
 
         <AnimatedInView
           as="div"
+          id="home-categories-list"
           animations={{
             lg: {
               initial: { opacity: 0, x: 100 },

@@ -5,7 +5,7 @@ import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import { cn } from "@/shared/utils";
 
-import * as motion from "motion/react-client";
+import AnimatedInView from "../../Motion/AnimatedInView";
 
 const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
   return (
@@ -13,7 +13,9 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
       className={cn("relative", variant === "black" ? "bg-main" : "bg-white")}
     >
       <Container className="flex-col gap-10 my-section">
-        <motion.h2
+        <AnimatedInView
+          as="h2"
+          id="instagram-title"
           initial={{ opacity: 0, y: -150 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -24,8 +26,10 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
           )}
         >
           #2happy <br />/
-        </motion.h2>
-        <motion.div
+        </AnimatedInView>
+        <AnimatedInView
+          as="div"
+          id="instagram-cards"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -84,7 +88,7 @@ const Instagram = ({ variant = "black" }: { variant?: "black" | "white" }) => {
               Мы в Instagram <ArrowUpRightIcon />
             </a>
           </Button>
-        </motion.div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

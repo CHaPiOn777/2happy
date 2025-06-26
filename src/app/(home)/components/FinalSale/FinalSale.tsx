@@ -42,6 +42,7 @@ const FinalSale = async () => {
           </Suspense>
 
           <AnimatedInView
+            id="home-sale-header"
             as="div"
             viewport={{ once: true, amount: "all" }}
             animations={{

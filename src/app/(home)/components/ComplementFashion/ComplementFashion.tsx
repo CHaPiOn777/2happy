@@ -29,6 +29,7 @@ const ComplementFashion = () => {
           </div>
 
           <AnimatedInView
+            id="home-fashion-card-1"
             as="div"
             viewport={{ once: true, amount: 0.4 }}
             animations={{
@@ -48,6 +49,7 @@ const ComplementFashion = () => {
           </AnimatedInView>
 
           <AnimatedInView
+            id="home-fashion-card-2"
             as="div"
             viewport={{ once: true, amount: 0.2 }}
             animations={{
@@ -67,6 +69,7 @@ const ComplementFashion = () => {
           </AnimatedInView>
 
           <AnimatedInView
+            id="home-fashion-card-3"
             as="div"
             viewport={{ once: true, amount: "all" }}
             animations={{
@@ -102,6 +105,7 @@ const ComplementFashion = () => {
           </div>
         </div>
         <AnimatedInView
+          id="home-fashion-button"
           as="div"
           viewport={{ once: true, amount: 0.4 }}
           animations={{

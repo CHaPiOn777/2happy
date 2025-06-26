@@ -39,6 +39,7 @@ const Collections = () => {
     <Section className="my-12 sm:my-section">
       <Container className="flex-col gap-8 sm:gap-12 lg:gap-16">
         <AnimatedInView
+          id="home-collections-title"
           as="h2"
           viewport={{ once: true, amount: "all" }}
           animations={{
@@ -59,6 +60,7 @@ const Collections = () => {
         </AnimatedInView>
 
         <AnimatedInView
+          id="home-collections-list"
           as="div"
           viewport={{ once: true, amount: 0.3 }}
           animations={{

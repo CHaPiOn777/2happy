@@ -4,6 +4,7 @@ import CloseIcon from "@/shared/components/icons/CloseIcon";
 import { useFiltersStore } from "../../store/filtersStore";
 import { Separator } from "@/shared/components/UI/Separator";
 import { usePaginationStore } from "../../store/paginationStore";
+import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 
 const FilterChip = ({
   text,
@@ -44,28 +45,30 @@ const FiltersList = () => {
   return (
     <div className="flex flex-col gap-4">
       <Separator />
-      <div className="flex gap-2">
-        {sizes.map((item) => (
-          <FilterChip
-            key={item.id}
-            text={item.name}
-            onClick={() => deleteSize(item.id)}
-          />
-        ))}
-        {colors.map((item) => (
-          <FilterChip
-            key={item.id}
-            text={item.name}
-            onClick={() => deleteColor(item.id)}
-          />
-        ))}
-        <button
-          className="text-button-xs p-2 transition-colors rounded-xs hover:bg-gray"
-          onClick={handleClear}
-        >
-          Удалить все
-        </button>
-      </div>
+      <ScrollArea orientation="horizontal" scrollClassName="hidden">
+        <div className="flex gap-2">
+          {sizes.map((item) => (
+            <FilterChip
+              key={item.id}
+              text={item.name}
+              onClick={() => deleteSize(item.id)}
+            />
+          ))}
+          {colors.map((item) => (
+            <FilterChip
+              key={item.id}
+              text={item.name}
+              onClick={() => deleteColor(item.id)}
+            />
+          ))}
+          <button
+            className="text-button-xs p-2 transition-colors rounded-xs hover:bg-gray text-nowrap"
+            onClick={handleClear}
+          >
+            Удалить все
+          </button>
+        </div>
+      </ScrollArea>
     </div>
   );
 };

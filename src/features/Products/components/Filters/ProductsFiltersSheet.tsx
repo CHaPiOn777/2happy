@@ -16,7 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/components/UI/Sheet";
-import { ReactNode, useRef } from "react";
+import { ReactNode, useRef, useState } from "react";
 import PriceRangeFilter from "./PriceRangeFilter";
 import CheckboxListFilter from "./CheckboxListFilter";
 import {
@@ -29,6 +29,7 @@ import { sortSizes } from "../../utils/sortSizes";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
+  const [open, setOpen] = useState(false);
   const {
     priceRange,
     colors,
@@ -72,6 +73,8 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
       setColors(colorsRef.current);
     }
     if (sizesRef.current) setSizes(sizesRef.current);
+
+    setOpen(false);
   };
 
   const handleClear = () => {
@@ -82,9 +85,11 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
     clearFilters();
 
     priceRangeRef.current = undefined;
+
+    setOpen(false);
   };
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
       <SheetTrigger>{trigger}</SheetTrigger>
       <SheetContent
         side="left"

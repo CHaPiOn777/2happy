@@ -49,7 +49,7 @@ const CategoriesWithTag = ({
     return (
       <div
         className={cn(
-          "sticky top-[80px] z-behind-header w-full bg-white transition-all duration-500",
+          "sticky top-[56px] sm:top-[80px] z-behind-header w-full bg-white transition-all duration-500",
           show ? "translate-y-0" : "-translate-y-[150px]"
         )}
       >

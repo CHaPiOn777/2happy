@@ -1,6 +1,5 @@
 "use client";
 
-// import { motion, MotionProps } from "framer-motion";
 import {
   ElementType,
   HTMLAttributes,
@@ -49,6 +48,7 @@ function useCurrentBreakpoint(): GlobalMediaKeys | "default" {
 const AnimatedInView = forwardRef(
   <T extends ElementType = "div">(
     {
+      id,
       as,
       className,
       fallbackClassName,
@@ -67,12 +67,10 @@ const AnimatedInView = forwardRef(
 
     const currentBreakpoint = useCurrentBreakpoint();
 
-    // Отрисовываем только на клиенте, чтобы избежать ошибки гидрации
     const [isClient, setIsClient] = useState(false);
     useEffect(() => setIsClient(true), []);
 
     if (!isClient) {
-      // Можно вернуть null или базовую версию без motion
       return createElement(
         Tag,
         { className: cn(className, fallbackClassName), ...rest },
@@ -83,6 +81,8 @@ const AnimatedInView = forwardRef(
     const variant: MotionProps =
       animations?.[currentBreakpoint] || animations?.default || {};
 
+    const isAnimated = sessionStorage.getItem(id ?? "undefined");
+
     const MotionTag = motion.create(Tag);
 
     return createElement(
@@ -90,11 +90,13 @@ const AnimatedInView = forwardRef(
       {
         ref,
         className: clsx(className),
-        initial: variant.initial ?? initial,
-        animate: variant.animate ?? animate,
-        whileInView: variant.whileInView ?? whileInView,
+        initial: !isAnimated ? variant.initial ?? initial : false,
+        animate: !isAnimated ? variant.animate ?? animate : false,
+        whileInView: !isAnimated ? variant.whileInView ?? whileInView : false,
         viewport: variant.viewport ?? viewport,
         transition: variant.transition ?? transition,
+        onAnimationComplete: () =>
+          sessionStorage.setItem(id ?? "undefined", "completed"),
         ...rest,
       },
       children

@@ -22,6 +22,7 @@ const Bestsellers = () => {
       />
       <Container className="flex-col gap-8 sm:gap-12 my-12 sm:my-16 md:my-20 lg:my-24">
         <AnimatedInView
+          id="bestseller-h2"
           as="h2"
           viewport={{ once: true, amount: "all" }}
           animations={{
@@ -55,6 +56,7 @@ const Bestsellers = () => {
         </AnimatedInView>
         <div className="grid grid-cols-2 grid-rows-[158px_80px] xs:grid-rows-[216px_104px] sm:grid-rows-[334px_170px] md:grid-cols-[304px_400px] md:grid-rows-[224px_288px] lg:grid-cols-[392px_495px] lg:grid-rows-[320px_345px] gap-x-2 xs:gap-x-6">
           <AnimatedInView
+            id="bestseller-item-card-1"
             as="div"
             viewport={{ once: true, amount: 0.3 }}
             animations={{
@@ -75,6 +77,7 @@ const Bestsellers = () => {
           </AnimatedInView>
           <div>
             <AnimatedInView
+              id="bestseller-title-mobile"
               as="h2"
               viewport={{ once: true, amount: "all" }}
               animations={{
@@ -96,6 +99,7 @@ const Bestsellers = () => {
           </div>
 
           <AnimatedInView
+            id="bestseller-item-card-2"
             as="div"
             viewport={{ once: true, amount: 0.4 }}
             animations={{
@@ -127,6 +131,7 @@ const Bestsellers = () => {
         </div>
 
         <AnimatedInView
+          id="bestseller-button"
           as="div"
           viewport={{ once: true, amount: 0.4 }}
           animations={{

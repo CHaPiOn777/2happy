@@ -20,8 +20,8 @@ const HelpSection = () => {
         </div>
         <div className="w-full ">
           <div className="flex justify-between gap-[40px]">
-            <div className="flex flex-col gap-10 lg:gap-14 mt-12 xs:mt-0 sm:mt-[100px] md:mt-[176px] mb-4 xs:mb-20 sm:mb-[104px] ml-0 md:ml-16 xl:ml-36 z-10">
-              <h3 className="text-h2 sm:text-h3 mb-[130px] xs:mb-0 xs:pt-12 sm:pt-0">
+            <div className="flex flex-col gap-10 lg:gap-14 mt-8 xs:mt-12 xs:mt-0 sm:mt-[100px] md:mt-[176px] mb-8 xs:mb-20 sm:mb-[104px] ml-0 md:ml-16 xl:ml-36 z-10">
+              <h3 className="text-h2 sm:text-h3 mb-[100px] xs:mb-0 xs:pt-12 sm:pt-0">
                 Нужна помощь?
               </h3>
               <p className="text-body2 sm:text-h5 max-w-[192px] xs:max-w-full sm:ml-12 md:ml-28 xl:ml-44">

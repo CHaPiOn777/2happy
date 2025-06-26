@@ -24,15 +24,9 @@ export const repeatOrder = (
     if (!orderItem) continue;
 
     if (product.stock_status === "outofstock") {
-      notify({
-        message: `Товара ${product.name} (Цвет: ${color}; Размер: ${size}) нет в наличии`,
-      });
       break;
     }
     if (product.stock_quantity && orderItem.quantity > product.stock_quantity) {
-      notify({
-        message: `Товара ${product.name} (Цвет: ${color}; Размер: ${size}) нет в таком количестве`,
-      });
       break;
     }
 

@@ -1,4 +1,4 @@
-import { OrderCardLoader } from "@/features/Orders/components/OrderCard";
+import { OrderCardLoader } from "@/features/Orders/components/OrderCard/OrderCard";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 
 const OrdersTabLoader = () => {

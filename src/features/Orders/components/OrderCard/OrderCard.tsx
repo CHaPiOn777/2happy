@@ -8,31 +8,22 @@ import {
 import { Button } from "@/shared/components/UI/Button";
 import { Separator } from "@/shared/components/UI/Separator";
 import Link from "next/link";
-import OrderProductCard from "./OrderProductCard";
-import { OrderResponse } from "../types";
+import OrderProductCard from "../OrderProductCard";
+import { OrderResponse } from "../../types";
 import { differenceInDays, format } from "date-fns";
 import { Skeleton } from "@/shared/components/UI/Skeleton";
-import { useMutation } from "@tanstack/react-query";
-import { getProductVariationsList } from "@/features/Products/api/productsApi";
-import { repeatOrder } from "../utils/repeatOrder";
-import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
-import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
-import RefundButton from "./RefundButton";
+import RefundButton from "../RefundButton";
 import { HELP_TABS } from "@/features/User/utils/isValidHelpTab";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
 import { useState } from "react";
-import SuccessRefundDialog from "./SuccessRefundDialog";
+import SuccessRefundDialog from "../Dialogs/SuccessRefundDialog";
 import Image from "next/image";
+import RepeatOrderButton from "./RepeatOrderButton";
 
 const OrderCard = ({ order }: { order: OrderResponse }) => {
-  const router = useRouter();
-  const orderIds = order.line_items.map((item) => item.variation_id);
-
   const [successRefund, setSuccessRefund] = useState<boolean>(false);
-
-  const { setCheckoutItems } = useCheckoutStore();
 
   const mobileImages = order.line_items.slice(0, 2).map((item) => item.image);
 
@@ -46,19 +37,6 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
       default:
         break;
     }
-  };
-
-  const { mutate: getVariations, isPending } = useMutation({
-    mutationFn: () => getProductVariationsList({ ids: orderIds }),
-    onSuccess: (orderProducts) => {
-      const checkoutItems = repeatOrder(order, orderProducts ?? []);
-      setCheckoutItems(checkoutItems);
-      router.push(paths.checkout.getHref());
-    },
-  });
-
-  const handleRepeatOrder = () => {
-    getVariations();
   };
 
   return (
@@ -105,14 +83,7 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
           <div className="grid grid-cols-1 grid-flow-row md:grid-cols-3 lg:grid-cols-[minmax(360px,512px),minmax(220px,312px),minmax(220px,312px)] gap-6 md:gap-4 md:gap-y-12">
             <div className="flex flex-col gap-14 md:max-w-[488px] w-full">
               <div className="w-full hidden lg:flex flex-col gap-6">
-                <Button
-                  className="w-full"
-                  onClick={handleRepeatOrder}
-                  disabled={isPending}
-                >
-                  {isPending && <LoaderIcon className="animate-spin" />}
-                  Повторить заказ
-                </Button>
+                <RepeatOrderButton order={order} />
                 <RefundButton
                   order={order}
                   disabled={!!getReturnDisabled()}
@@ -215,15 +186,7 @@ const OrderCard = ({ order }: { order: OrderResponse }) => {
               </div>
             </div>
             <div className="w-full flex flex-col-reverse md:flex-row lg:hidden md:col-span-3 gap-4">
-              <Button
-                className="w-full"
-                onClick={handleRepeatOrder}
-                size="medium"
-                disabled={isPending}
-              >
-                {isPending && <LoaderIcon className="animate-spin" />}
-                Повторить заказ
-              </Button>
+              <RepeatOrderButton order={order} />
               <RefundButton
                 order={order}
                 disabled={!!getReturnDisabled()}

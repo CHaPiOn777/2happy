@@ -35,14 +35,14 @@ const ReviewsSection = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-aboutReviewsLg lg:grid-cols-aboutReviews auto-rows-[248px] grid-flow-row md:grid-rows-aboutReviewsLg lg:grid-rows-aboutReviews justify-end gap-6 lg:ml-20">
+        <div className="grid grid-cols-1 md:grid-cols-aboutReviewsLg lg:grid-cols-aboutReviews grid-rows-[248px,248px,248px] md:grid-rows-aboutReviewsLg lg:grid-rows-aboutReviews justify-end gap-6 lg:ml-20">
           <StyledReviewCard
             review={reviews.items[0]}
             className="lg:row-start-2 lg:row-end-4 md:min-h-auto"
           />
           <Button
             asChild
-            className="row-end-5 justify-self-end self-end hidden lg:inline-flex"
+            className="w-full md:w-auto row-end-5 lg:row-end-5 md:col-start-3 lg:col-start-auto justify-self-end self-end"
           >
             <Link href={paths.about.reviews.getHref()}>
               Смотреть все отзывы <ArrowUpRightIcon />

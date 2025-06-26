@@ -10,7 +10,7 @@ const HelpSection = () => {
   return (
     <Section className="mb-section">
       <Container>
-        <div className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[152px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6">
+        <div className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[140px] sm:bottom-[270px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6">
           <ImageWithLoader
             className="-scale-x-100 rounded-xs"
             src="/images/Account/contact-us.jpg"
@@ -32,7 +32,7 @@ const HelpSection = () => {
           </div>
           <div className="flex flex-col gap-10 py-6 px-4 sm:pt-12 sm:pb-8 sm:py-12 lg:py-10 sm:px-6 lg:px-20 bg-black text-white">
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
-            <ul className="flex md:grid grid-cols-2 gap-6 lg:flex justify-between">
+            <ul className="flex sm:grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 lg:flex justify-between">
               <li>
                 <a
                   href="tel:+77021657378"
@@ -43,7 +43,7 @@ const HelpSection = () => {
                   <div className="border border-white rounded-xs">
                     <PhoneIcon className="fill-white" />
                   </div>
-                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                  <span className="custom-underline after:bg-white hidden sm:inline-block">
                     +7-702-165-73-78
                   </span>
                 </a>
@@ -58,7 +58,7 @@ const HelpSection = () => {
                   <div className="border border-white rounded-xs">
                     <MailIcon className="fill-white" />
                   </div>
-                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                  <span className="custom-underline after:bg-white hidden sm:inline-block">
                     2happy.almaty@gmail.com
                   </span>
                 </a>
@@ -73,7 +73,7 @@ const HelpSection = () => {
                   <div className="border border-white rounded-xs">
                     <WhatsAppIcon className="fill-white" />
                   </div>
-                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                  <span className="custom-underline after:bg-white hidden sm:inline-block">
                     Whats App
                   </span>
                 </a>
@@ -88,7 +88,7 @@ const HelpSection = () => {
                   <div className="border border-white rounded-xs">
                     <InstagramIcon className="fill-white" />
                   </div>
-                  <span className="custom-underline after:bg-white hidden md:inline-block">
+                  <span className="custom-underline after:bg-white hidden sm:inline-block">
                     @2HAPPY_KZ
                   </span>
                 </a>

@@ -1,5 +1,5 @@
 import { Accordion } from "@/shared/components/UI/Accordion";
-import OrderCard, { OrderCardLoader } from "../OrderCard";
+import OrderCard, { OrderCardLoader } from "../OrderCard/OrderCard";
 import OrdersNotFound from "./OrdersNotFound";
 import OrdersListSelect from "./OrdersListSelect";
 import { useInfiniteQuery } from "@tanstack/react-query";

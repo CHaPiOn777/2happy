@@ -41,7 +41,7 @@ const ThankfulSection = () => {
             <div className="md:w-[400px] shrink-0 hidden md:block" />
           </div>
           <div className="w-full">
-            <ul className="flex flex-col md:flex-row md:grid grid-cols-2 gap-4 lg:gap-0 lg:flex justify-items-center lg:justify-between">
+            <ul className="flex flex-col md:flex-row sm:grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-0 lg:flex lg:justify-between">
               <li className="flex items-center gap-4">
                 <div className="flex items-center justify-center w-8 h-8 border border-white rounded-xs">
                   <PhoneIcon className="fill-white" />

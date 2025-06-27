@@ -73,15 +73,18 @@ const AnimatedInView = forwardRef(
     if (!isClient) {
       return createElement(
         Tag,
-        { className: cn(className, fallbackClassName), ...rest },
+        {
+          className: cn(className, fallbackClassName),
+          ...rest,
+        },
         children
       );
     }
 
+    const isAnimated = sessionStorage.getItem(id ?? "undefined");
+
     const variant: MotionProps =
       animations?.[currentBreakpoint] || animations?.default || {};
-
-    const isAnimated = sessionStorage.getItem(id ?? "undefined");
 
     const MotionTag = motion.create(Tag);
 
@@ -95,8 +98,8 @@ const AnimatedInView = forwardRef(
         whileInView: !isAnimated ? variant.whileInView ?? whileInView : false,
         viewport: variant.viewport ?? viewport,
         transition: variant.transition ?? transition,
-        onAnimationComplete: () =>
-          sessionStorage.setItem(id ?? "undefined", "completed"),
+        // onAnimationComplete: () =>
+        //   sessionStorage.setItem(id ?? "undefined", "completed"),
         ...rest,
       },
       children

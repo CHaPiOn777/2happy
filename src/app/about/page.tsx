@@ -12,6 +12,7 @@ import { getQueryClient } from "@/shared/api/queryClient";
 import { getCommentsListQueryOptions } from "@/features/Reviews/api/reviewsApi";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Instagram from "@/shared/components/Layout/Instagram/Instagram";
+import { Suspense } from "react";
 
 const AboutPage = async () => {
   const queryClient = getQueryClient();
@@ -27,7 +28,9 @@ const AboutPage = async () => {
       <HistorySection />
       <ProductsSection />
       <StatisticSection />
-      <ReviewsSection />
+      <Suspense fallback="">
+        <ReviewsSection />
+      </Suspense>
       <Instagram />
       <PartnersSection />
       <WhatsAppButton />

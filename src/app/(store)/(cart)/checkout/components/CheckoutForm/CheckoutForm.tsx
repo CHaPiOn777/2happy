@@ -3,7 +3,7 @@
 import { Button } from "@/shared/components/UI/Button";
 import CheckoutUnauthorizedForm from "./CheckoutUnauthorizedForm";
 import CheckoutFormPayment from "./CheckoutFormPayment";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EditIcon from "@/shared/components/icons/EditIcon";
 import CheckoutFormAddress from "./CheckoutFormAddress";
 import AuthModal from "@/features/Auth/components/AuthModal";
@@ -29,7 +29,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
 
   const { data: user } = useUser();
 
-  const { checkoutItems, isEditable } = useCheckoutStore();
+  const { checkoutItems, isEditable, setIsEditable } = useCheckoutStore();
 
   const [contacts, setContacts] = useState<CheckoutFormInput | null>(null);
   const [payment, setPayment] = useState<string>("");
@@ -38,8 +38,9 @@ const CheckoutForm = ({ className }: { className?: string }) => {
   const { mutate: createOrder, isPending: isCreateOrderPending } =
     useCreateOrder({
       onSuccess: (data) => {
-        router.replace(paths.successCheckout.getHref(data.id));
         if (isEditable) deleteCart();
+        router.replace(paths.home.getHref());
+        window.open(data.robokassa_payment_url, "_blank");
       },
     });
   const { mutate: createAddress } = useCreateUserAddress({});
@@ -128,12 +129,18 @@ const CheckoutForm = ({ className }: { className?: string }) => {
           country: contacts?.country,
         },
         line_items: line_items,
-        set_paid: true,
+        set_paid: false,
         payment_method: "robokassa",
         payment_method_title: "Банковская карта (Robokassa)",
       },
     });
   };
+
+  useEffect(() => {
+    return () => {
+      setIsEditable(true);
+    };
+  }, []);
 
   return (
     <div className={cn("flex flex-col gap-12", className)}>

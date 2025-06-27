@@ -37,6 +37,7 @@ export type OrderResponse = {
   date_completed_gmt: string | null;
   cart_hash: string;
   meta_data: MetaData[];
+  robokassa_payment_url: string;
   line_items: OrderProductItem[];
   tax_lines: TaxLine[];
   shipping_lines: ShippingLine[];

@@ -1,25 +1,51 @@
-import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
 import CheckIcon from "@/shared/components/icons/CheckIcon";
-import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
-import LoyalButton from "./LoyalSection/LoyalButton";
+import LoyalButton from "./LoyalButton";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const LoyalSection = () => {
   return (
     <Section>
       <Container className="my-section flex-col gap-16">
         <div className="space-y-8">
-          <h2 className="text-h2">
+          <AnimatedInView
+            as="h2"
+            id="partners-loyal-title"
+            className="text-h2"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+          >
             Программа лояльности <br /> для стилистов /
-          </h2>
-          <p className="text-h5 md:text-h4 w-full text-left md:text-end pl-[104px] md:pl-0 md:pr-[100px]">
+          </AnimatedInView>
+          <AnimatedInView
+            as="p"
+            id="partners-loyal-desc"
+            className="text-h5 md:text-h4 w-full text-left md:text-end pl-[104px] md:pl-0 md:pr-[100px]"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+          >
             Работайте с клиентами и получайте вознаграждение за покупки
-          </p>
+          </AnimatedInView>
         </div>
         <div className="flex flex-col md:flex-row gap-6 lg:gap-16">
-          <div className="flex flex-col gap-6 w-full max-w-[384px] lg:max-w-[496px]">
+          <AnimatedInView
+            as="div"
+            id="partners-loyal-left"
+            className="flex flex-col gap-6 w-full max-w-[384px] lg:max-w-[496px]"
+            initial={{ opacity: 0, y: -50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+          >
             <p className="hidden lg:block">
               Мы рады предложить стилистам возможность принять участие
               в партнёрской программе 2НАРРУ, в рамках которой вы сможете
@@ -34,8 +60,17 @@ const LoyalSection = () => {
                 alt="loyal-1"
               />
             </div>
-          </div>
-          <div className="flex flex-col gap-8 md:gap-12 lg:gap-20 justify-end w-full">
+          </AnimatedInView>
+          <AnimatedInView
+            as="div"
+            id="partners-loyal-left"
+            className="flex flex-col gap-8 md:gap-12 lg:gap-20 justify-end w-full"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+          >
             <p className="block lg:hidden">
               Мы рады предложить стилистам возможность принять участие
               в партнёрской программе 2НАРРУ, в рамках которой вы сможете
@@ -78,7 +113,7 @@ const LoyalSection = () => {
               </ul>
             </div>
             <LoyalButton />
-          </div>
+          </AnimatedInView>
         </div>
       </Container>
     </Section>

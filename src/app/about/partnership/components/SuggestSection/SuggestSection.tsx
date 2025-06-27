@@ -8,13 +8,35 @@ import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
 import BecomePartnerButton from "./BecomePartnerButton";
 import { ScrollArea } from "@/shared/components/UI/ScrollArea";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const SuggestSection = () => {
   return (
     <Section>
       <Container className="flex-col gap-8 sm:gap-12 md:gap-16 my-section mt-28 sm:mt-section md:my-[96px] lg:my-section">
-        <h2 className="text-h2">Что мы предлагаем / </h2>
-        <div className="flex flex-col gap-4 md:gap-6">
+        <AnimatedInView
+          as="div"
+          id="partners-suggest-title"
+          className="text-h2"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 1 }}
+          transition={{ duration: 0.6 }}
+          fallbackClassName="opacity-0"
+        >
+          Что мы предлагаем /
+        </AnimatedInView>
+
+        <AnimatedInView
+          as="div"
+          id="partners-suggest-cards"
+          className="flex flex-col gap-4 md:gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          fallbackClassName="opacity-0"
+        >
           <div className="grid grid-cols-[2.8fr_1.2fr_2fr] sm:grid-cols-[1fr_1fr] md:grid-cols-partnersSuggestFirstLg lg:grid-cols-partnersSuggestFirst grid-rows-[282px_136px_176px] sm:grid-rows-[176px_176px_minmax(176px,auto)_minmax(176px,auto)] md:grid-rows-[176px_176px_176px] lg:grid-rows-[176px_176px] gap-4 md:gap-6">
             <div className="relative sm:row-span-2">
               <Image
@@ -176,7 +198,7 @@ const SuggestSection = () => {
             </div>
             <BecomePartnerButton className="col-start-1 col-end-4  sm:col-start-3 sm:col-end-auto lg:col-start-auto row-start-5 sm:row-start-auto" />
           </div>
-        </div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

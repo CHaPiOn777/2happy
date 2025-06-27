@@ -13,10 +13,10 @@ module.exports = {
     },
     extend: {
       screens: {
-        xs: "360px",
-        sm: "480px",
-        md: "768px",
-        lg: "1024px",
+        xs: "361px",
+        sm: "481px",
+        md: "769px",
+        lg: "1025px",
         xl: "1280px",
         "2xl": "1536px",
       },

@@ -4,6 +4,7 @@ import { paths } from "@/config/paths";
 import { getCommentsListQueryOptions } from "@/features/Reviews/api/reviewsApi";
 import StyledReviewCard from "@/features/Reviews/components/StyledReviewCard";
 import ArrowUpRightIcon from "@/shared/components/icons/Arrows/ArrowUpRightIcon";
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 import { Button } from "@/shared/components/UI/Button";
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
@@ -12,16 +13,38 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ReviewsSection = () => {
-  const { data: reviews } = useSuspenseQuery(
+  const { data: reviews, isPending } = useSuspenseQuery(
     getCommentsListQueryOptions({ per_page: 3 })
   );
+
+  if (isPending) return null;
 
   return (
     <Section>
       <Container className="flex-col gap-12 lg:gap-0 my-section">
         <div className="w-full space-y-8 lg:translate-y-16">
-          <h2 className="text-h2">Ваши отзывы /</h2>
-          <div className="md:ml-20 flex justify-between md:justify-normal gap-4">
+          <AnimatedInView
+            as="h2"
+            id="about-reviews-title"
+            className="text-h2 uppercase"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+            viewport={{ once: true }}
+          >
+            Ваши отзывы /
+          </AnimatedInView>
+          <AnimatedInView
+            as="div"
+            id="about-reviews-desc"
+            className="md:ml-20 flex justify-between md:justify-normal gap-4"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            fallbackClassName="opacity-0"
+            viewport={{ once: true }}
+          >
             <Image
               width={39}
               height={48}
@@ -33,9 +56,18 @@ const ReviewsSection = () => {
               — это часть нашей истории, которую мы <br />
               создаём вместе с вами
             </p>
-          </div>
+          </AnimatedInView>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-aboutReviewsLg lg:grid-cols-aboutReviews grid-rows-[248px,248px,248px] md:grid-rows-aboutReviewsLg lg:grid-rows-aboutReviews justify-end gap-6 lg:ml-20">
+        <AnimatedInView
+          as="div"
+          id="about-reviews-desc"
+          className="grid grid-cols-1 md:grid-cols-aboutReviewsLg lg:grid-cols-aboutReviews grid-rows-[248px,248px,248px] md:grid-rows-aboutReviewsLg lg:grid-rows-aboutReviews justify-end gap-6 lg:ml-20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          fallbackClassName="opacity-0"
+          viewport={{ once: true }}
+        >
           <StyledReviewCard
             review={reviews.items[0]}
             className="lg:row-start-2 lg:row-end-4 md:min-h-auto"
@@ -70,7 +102,7 @@ const ReviewsSection = () => {
               alt="2happy-logo"
             />
           </div>
-        </div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

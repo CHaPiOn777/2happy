@@ -3,17 +3,19 @@ import Section from "@/shared/components/UI/Section";
 import Image from "next/image";
 import MainButton from "./components/MainButton";
 
-import * as motion from "motion/react-client";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 
 const NewMain = () => {
   return (
     <Section className="h-[584px] md:h-[480px] xl:h-[865px] lg:h-[760px] mb-10 md:mb-0">
-      <motion.div
+      <AnimatedInView
+        as="div"
+        id="home-main-bg"
         viewport={{ once: true }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
+        fallbackClassName="opacity-0"
         className="absolute w-full h-full border-b border-main"
       >
         <Image
@@ -24,7 +26,7 @@ const NewMain = () => {
           alt="main-image"
           priority
         />
-      </motion.div>
+      </AnimatedInView>
       <Container className="gap-6 items-center h-full">
         <AnimatedInView
           as="div"

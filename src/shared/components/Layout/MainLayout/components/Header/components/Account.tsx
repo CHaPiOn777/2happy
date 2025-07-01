@@ -33,7 +33,7 @@ const Account = () => {
     );
   }
   return (
-    <AuthModal disabled={!!isFetching}>
+    <AuthModal triggerProps={{ disabled: !!isFetching }}>
       <UserIcon
         data-tooltip-id="auth"
         data-tooltip-content="Войти"

@@ -6,12 +6,10 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/shared/components/UI/Form";
 import { Input } from "@/shared/components/UI/Input";
 import Link from "next/link";
-import { Checkbox } from "@/shared/components/UI/Checkbox";
 import Notification from "@/shared/components/UI/Notification";
 import { useLoginForm } from "../hooks/useLoginForm";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
@@ -45,22 +43,7 @@ const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
             showClose
           />
         )}
-        <div className="flex justify-between">
-          <FormField
-            control={loginForm.control}
-            name="remember"
-            render={({ field }) => (
-              <FormItem className="flex-row items-center">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel className="mt-0">Запомнить</FormLabel>
-              </FormItem>
-            )}
-          />
+        <div className="flex justify-end">
           <Link
             href="/forgot-password"
             className="link-hover text-darkGrey text-button-xs"

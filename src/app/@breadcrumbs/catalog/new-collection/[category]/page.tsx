@@ -12,6 +12,7 @@ import {
 import { paths } from "@/config/paths";
 import { useSearchParams } from "next/navigation";
 import { useCategory } from "@/features/Categories/api/categoriesApi";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const NewCollectionCategoryBreadcrumbs = () => {
   const searchParams = useSearchParams();
@@ -22,10 +23,21 @@ const NewCollectionCategoryBreadcrumbs = () => {
   const { data: parentCategory, isFetching } = useCategory(Number(parentId));
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white xs:inline-block hidden"
+            href={paths.home.getHref()}
+          >
+            Главная
+          </BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white inline-block xs:hidden"
+            href={paths.home.getHref()}
+          >
+            <HomeIcon className="!size-6" />
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

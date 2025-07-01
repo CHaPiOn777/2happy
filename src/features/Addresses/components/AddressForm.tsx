@@ -38,7 +38,6 @@ const AddressForm = ({
       city: "",
       phone: "",
       isDefaultShipping: false,
-      isDefaultBilling: false,
     },
   });
 
@@ -46,10 +45,10 @@ const AddressForm = ({
     <Form {...addressForm}>
       <form
         onSubmit={addressForm.handleSubmit(onSubmit)}
-        className="space-y-10"
+        className="space-y-10 h-full overflow-y-auto"
       >
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-6">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
             <FormField
               control={addressForm.control}
               name="firstName"
@@ -196,24 +195,6 @@ const AddressForm = ({
                   </FormControl>
                   <FormLabel className="text-gray-dark text-button-xs mt-0">
                     Адрес доставки по умолчанию
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={addressForm.control}
-              name="isDefaultBilling"
-              render={({ field }) => (
-                <FormItem className="flex-row items-center">
-                  <FormControl>
-                    <Checkbox
-                      className="size-6"
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="text-gray-dark text-button-xs mt-0">
-                    Адрес для выставления счетов по умолчанию
                   </FormLabel>
                 </FormItem>
               )}

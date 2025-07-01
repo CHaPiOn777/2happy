@@ -9,6 +9,7 @@ export const twMergeConf = extendTailwindMerge<"text", "bg">({
         "text-h2",
         "text-h2Akira",
         "text-h3",
+        "text-h3Akira",
         "text-h4",
         "text-h5",
         "text-body1",

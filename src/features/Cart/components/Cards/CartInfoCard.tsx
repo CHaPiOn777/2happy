@@ -15,16 +15,16 @@ const CartInfoCard = ({ cartItem }: { cartItem: CartItemResponse }) => {
     currencySymbol,
   } = getCartItemInfo(cartItem);
   return (
-    <article className="flex flex-col gap-4 w-full pb-6 border-b border-b-gray last:border-b-0 last:pb-0 text-title-em">
+    <article className="flex flex-col gap-4 w-full pb-6 border-b border-b-gray lg:last:border-b-0 lg:last:pb-0 text-title-em">
       <div className="flex gap-4">
         <ImageWithLoader
-          wrapperClassName="w-[5.33em] h-[8em] shrink-0"
+          wrapperClassName="w-[64px] lg:w-[86px] h-[96px] lg:h-[128px] shrink-0"
           src={image.src}
           alt={image.alt}
         />
-        <div className="flex flex-col justify-between">
-          <h5 className="max-w-[230px]">{name}</h5>
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-col justify-between my-2 lg:my-0">
+          <h5 className="max-w-[230px] text-title lg:text-body2">{name}</h5>
+          <div className="flex flex-col gap-2 text-title lg:text-body2">
             <div className="flex items-center gap-4">
               <span>Размер</span>
               <Separator className="h-4/6" orientation="vertical" />
@@ -38,7 +38,7 @@ const CartInfoCard = ({ cartItem }: { cartItem: CartItemResponse }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between text-title lg:text-body2">
         <div className="flex flex-col gap-2">
           <span>Цена</span>
           <span className="text-gray-middle">

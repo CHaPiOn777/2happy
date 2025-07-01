@@ -16,7 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/components/UI/Sheet";
-import { ReactNode, useRef } from "react";
+import { ReactNode, useRef, useState } from "react";
 import PriceRangeFilter from "./PriceRangeFilter";
 import CheckboxListFilter from "./CheckboxListFilter";
 import {
@@ -26,8 +26,10 @@ import {
 } from "../../store/filtersStore";
 import { useProductsColors, useProductsSizes } from "../../api/filtersApi";
 import { sortSizes } from "../../utils/sortSizes";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
+  const [open, setOpen] = useState(false);
   const {
     priceRange,
     colors,
@@ -38,6 +40,8 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
     clearFilters,
   } = useFiltersStore();
   const { data: sizesData } = useProductsSizes();
+
+  const isTablet = useMediaCustom("lg");
 
   const sizesValue = sortSizes<{ id: number; name: string }>(
     sizesData?.items.map((item) => ({
@@ -69,6 +73,8 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
       setColors(colorsRef.current);
     }
     if (sizesRef.current) setSizes(sizesRef.current);
+
+    setOpen(false);
   };
 
   const handleClear = () => {
@@ -79,13 +85,15 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
     clearFilters();
 
     priceRangeRef.current = undefined;
+
+    setOpen(false);
   };
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
       <SheetTrigger>{trigger}</SheetTrigger>
       <SheetContent
         side="left"
-        className="w-full flex flex-col px-6 py-10 max-w-[496px] z-over-header"
+        className="w-full flex flex-col px-6 pr-4 py-10 max-w-[496px] z-over-header"
         overlayClassName="z-over-header"
       >
         <SheetHeader>
@@ -97,7 +105,7 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
             <CloseIcon />
           </SheetClose>
         </SheetHeader>
-        <div className="h-full overflow-x-hidden overflow-y-auto">
+        <div className="h-full overflow-x-hidden overflow-y-auto pr-2">
           <Accordion type="multiple" className="w-full flex flex-col">
             <CheckboxListFilter
               name="Цвет"
@@ -130,16 +138,20 @@ const ProductsFiltersSheet = ({ trigger }: { trigger: ReactNode }) => {
             </AccordionItem>
           </Accordion>
         </div>
-        <SheetFooter className="flex">
+        <SheetFooter className="flex-col gap-2 sm:gap-0 sm:flex-row">
           <Button
             className="w-full"
             variant="secondary"
-            size="large"
+            size={isTablet ? "medium" : "large"}
             onClick={handleClear}
           >
             Очистить
           </Button>
-          <Button className="w-full" size="large" onClick={handleSubmit}>
+          <Button
+            className="w-full"
+            size={isTablet ? "medium" : "large"}
+            onClick={handleSubmit}
+          >
             Применить
           </Button>
         </SheetFooter>

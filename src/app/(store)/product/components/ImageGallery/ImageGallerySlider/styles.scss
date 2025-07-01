@@ -1,9 +1,19 @@
+@use "media.scss" as *;
+
 .gallery-slider {
   &.swiper {
     width: 100%;
-    max-width: 512px;
+    max-height: 87vh;
     height: 100%;
 
     padding-bottom: 54px;
+
+    @media (max-width: $media-md) {
+      padding-bottom: 36px;
+    }
+
+    @media (max-width: $media-sm) {
+      padding-bottom: 22px;
+    }
   }
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import { useLogout, useUser } from "@/shared/api/authApi";
+import { useUser } from "@/shared/api/authApi";
 import { paths } from "@/config/paths";
 import AuthModal from "@/features/Auth/components/AuthModal";
 import Link from "next/link";
-import { HELP_TABS } from "@/features/User/utils/isValidHelpTab";
 import { ACCOUNT_TABS } from "@/features/User/utils/isValidTab";
+import { useLogout } from "@/features/Auth/hooks/useLogout";
 
 const AccountList = () => {
   const user = useUser();

@@ -8,13 +8,25 @@ import {
   BreadcrumbSeparator,
 } from "@/shared/components/UI/Breadcrumb";
 import { paths } from "@/config/paths";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const FinalSaleBreadcrumbs = () => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white xs:inline-block hidden"
+            href={paths.home.getHref()}
+          >
+            Главная
+          </BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white inline-block xs:hidden"
+            href={paths.home.getHref()}
+          >
+            <HomeIcon className="!size-6" />
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

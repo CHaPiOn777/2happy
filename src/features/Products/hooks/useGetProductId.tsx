@@ -1,3 +1,5 @@
+"use client";
+
 import { useParams } from "next/navigation";
 
 export const parseProductId = (input: string): { slug: string; id: number } => {
@@ -8,8 +10,16 @@ export const parseProductId = (input: string): { slug: string; id: number } => {
   return { slug, id: Number(id) };
 };
 
-export const useGetProductId = () => {
-  const { productId } = useParams<{ productId: string }>();
+export const useGetProductId = (name: string) => {
+  const params = useParams();
 
-  return parseProductId(productId);
+  const raw = params[name];
+
+  if (typeof raw !== "string") {
+    throw new Error(
+      `Ожидался string в параметре "${name}", но получено: ${typeof raw}`
+    );
+  }
+
+  return parseProductId(raw);
 };

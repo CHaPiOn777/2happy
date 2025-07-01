@@ -27,7 +27,7 @@ export const mainLinks: { title: string; href: string; disabled?: boolean }[] =
     },
     {
       title: "Коллекции",
-      href: "/collections",
+      href: paths.catalog.collections.getHref("Готовые образы"),
     },
     {
       title: "Final Sale",
@@ -35,7 +35,7 @@ export const mainLinks: { title: string; href: string; disabled?: boolean }[] =
     },
     {
       title: "О нас",
-      href: "/about",
+      href: paths.about.getHref(),
     },
   ];
 

@@ -55,19 +55,19 @@ const CartMediumCard = ({
   return (
     <article
       className={cn(
-        "w-full flex gap-6 h-[248px] pb-8 border-b border-gray last:border-b-0",
+        "w-full flex gap-4 sm:gap-6 h-[144px] lg:h-[248px] pb-4 lg:pb-8 border-b border-gray last:border-b-0",
         isPending && "opacity-50 pointer-events-none",
         className
       )}
       {...props}
     >
       <ImageWithLoader
-        wrapperClassName="w-[148px] shrink-0"
+        wrapperClassName="w-[92px] h-[128px] lg:h-auto lg:w-[148px] shrink-0"
         src={image.src}
         alt={image.alt}
       />
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 lg:gap-6 w-full">
+        <div className="flex flex-col gap-2 lg:gap-4">
           <Link
             href={paths.product.getHref(parentId, name, {
               color: variation.color,
@@ -75,9 +75,9 @@ const CartMediumCard = ({
             })}
             onClick={onClick}
           >
-            <h5 className="text-h5">{name}</h5>
+            <h5 className="text-button-xs lg:text-h5">{name}</h5>
           </Link>
-          <div className="text-h5 flex gap-2">
+          <div className="text-description lg:text-h5 flex items-center gap-2">
             <span className={cn(isOnSale && "line-through text-gray-middle")}>
               {regularPrice} {currencySymbol}
             </span>
@@ -92,40 +92,44 @@ const CartMediumCard = ({
               </>
             )}
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-2 text-description lg:text-body2">
+            <div className="flex items-center gap-2 lg:gap-4">
               <span>Размер</span>
               <Separator className="h-4/6" orientation="vertical" />
-              <span className="text-gray-middle text-body2">{size}</span>
+              <span className="text-gray-middle">{size}</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 lg:gap-4">
               <span>Цвет</span>
               <Separator className="h-4/6" orientation="vertical" />
-              <span className="text-gray-middle text-description">{color}</span>
+              <span className="text-gray-middle">{color}</span>
             </div>
           </div>
         </div>
-        <div className="flex gap-4">
-          <div className="flex gap-2">
-            <IconButton
-              className="border border-black"
-              variant="secondary"
-              size="extraSmall"
-              disabled={isDecreaseDisabled(cartItem)}
-              onClick={() => handleDecreaseQuantity(cartItem)}
-            >
-              <MinusIcon />
-            </IconButton>
-            <div className="text-body2 py-1 px-8 bg-gray-light">{quantity}</div>
-            <IconButton
-              className="border border-black "
-              variant="secondary"
-              size="extraSmall"
-              disabled={isIncreaseDisabled(cartItem)}
-              onClick={() => handleIncreaseQuantity(cartItem)}
-            >
-              <PlusIcon />
-            </IconButton>
+        <div className="w-full flex  gap-4">
+          <div className="flex justify-between lg:justify-normal gap-2 w-full">
+            <div className="flex gap-2">
+              <IconButton
+                className="border border-black"
+                variant="secondary"
+                size="extraSmall"
+                disabled={isDecreaseDisabled(cartItem)}
+                onClick={() => handleDecreaseQuantity(cartItem)}
+              >
+                <MinusIcon />
+              </IconButton>
+              <div className="text-body2 py-1 px-4 sm:px-8 bg-gray-light">
+                {quantity}
+              </div>
+              <IconButton
+                className="border border-black "
+                variant="secondary"
+                size="extraSmall"
+                disabled={isIncreaseDisabled(cartItem)}
+                onClick={() => handleIncreaseQuantity(cartItem)}
+              >
+                <PlusIcon />
+              </IconButton>
+            </div>
             <button
               data-tooltip-id="cart-delete"
               data-tooltip-content="Удалить товар"

@@ -1,7 +1,6 @@
 import Container from "@/shared/components/UI/Container";
 import CheckoutForm from "./components/CheckoutForm/CheckoutForm";
 import CheckoutSide from "./components/CheckoutSide";
-import { Suspense } from "react";
 
 const CheckoutPage = () => {
   return (
@@ -9,11 +8,9 @@ const CheckoutPage = () => {
       <div className="flex flex-col gap-8">
         <h1 className="text-h2">Оформление заказа /</h1>
       </div>
-      <div className="grid grid-cols-[1fr_288px] gap-x-12">
-        <CheckoutForm />
-        <Suspense fallback={"...Загрузка"}>
-          <CheckoutSide />
-        </Suspense>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_288px] gap-12">
+        <CheckoutForm className="col-span-1" />
+        <CheckoutSide />
       </div>
     </Container>
   );

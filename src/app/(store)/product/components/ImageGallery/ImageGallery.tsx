@@ -11,6 +11,7 @@ import {
 import { ReactNode, useState } from "react";
 import ImageGallerySlider from "./ImageGallerySlider/ImageGallerySlider";
 import { Image } from "@/shared/types/api";
+import CloseWideIcon from "@/shared/components/icons/CloseWideIcon";
 
 const ImageGallery = ({
   children,
@@ -23,16 +24,23 @@ const ImageGallery = ({
 }) => {
   const [openWide, setOpenWide] = useState(false);
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) setOpenWide(false);
+      }}
+    >
       <DialogTrigger className="w-full h-full">{children}</DialogTrigger>
-      <DialogContent className="w-screen max-w-screen h-screen" hideClose>
-        <Container className="relative flex-col h-full">
+      <DialogContent
+        className="w-screen max-w-screen h-screen p-0 py-8"
+        hideClose
+      >
+        <Container className="relative flex-col gap-4 h-full">
           <DialogTitle className="sr-only">
             Галлерея изображений товара
           </DialogTitle>
           <div className="w-full flex gap-4 justify-end">
             <button onClick={() => setOpenWide((prev) => !prev)}>
-              <OpenWideIcon className="hover:fill-gray" />
+              {openWide ? <CloseWideIcon /> : <OpenWideIcon />}
             </button>
             <DialogClose>
               <CloseIcon className="hover:fill-gray" />

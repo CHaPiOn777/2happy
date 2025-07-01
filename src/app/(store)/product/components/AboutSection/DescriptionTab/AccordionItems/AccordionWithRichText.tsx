@@ -15,7 +15,9 @@ const AccordionWithRichText = ({
   value: string;
   meta: ProductMeta;
 }) => {
-  const rawHTML = meta.find((item) => item.key === value)?.value;
+  let rawHTML = meta.find((item) => item.key === value)?.value || "";
+
+  rawHTML = rawHTML.replace(/(?:\r\n|\r|\n)/g, "<br />");
 
   const { safeHTML, parse } = sanitizeHtml(rawHTML);
 

@@ -8,6 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  TSheetTrigger,
 } from "@/shared/components/UI/Sheet";
 import { ReactNode, useState } from "react";
 import CartSheetEmpty from "./CartSheetEmpty";
@@ -16,26 +17,27 @@ import { useCart } from "../../../api/cartQueries";
 import { getWordForm } from "@/shared/utils/getWordForm";
 import CartSheetLoader from "./CartSheetLoader";
 
-const CartSheet = ({ children }: { children: ReactNode }) => {
+const CartSheet = ({
+  children,
+  triggerProps,
+}: {
+  children: ReactNode;
+  triggerProps?: TSheetTrigger;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { data, isLoading } = useCart();
 
   return (
     <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
-      <SheetTrigger className="relative">
+      <SheetTrigger className="relative" {...triggerProps}>
         {children}
-        {data?.items_count ? (
-          <span className="absolute size-4 -top-1 -right-1 bg-red rounded-full text-white text-[12px]">
-            {data?.items_count}
-          </span>
-        ) : null}
       </SheetTrigger>
       <SheetContent
-        className="w-full h-full flex flex-col z-over-header max-w-[680px] p-10 pt-14"
+        className="w-full h-full flex flex-col z-over-header max-w-[480px] lg:max-w-[680px] px-4 xs:px-6 sm:px-8 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14"
         overlayClassName="z-over-header"
       >
-        <SheetHeader className="flex flex-col gap-4 mb-4">
+        <SheetHeader className="flex flex-col gap-2 lg:gap-4 mb-2 lg:mb-4">
           <SheetTitle>Корзина</SheetTitle>
           {data?.items_count ? (
             <SheetDescription>
@@ -47,7 +49,7 @@ const CartSheet = ({ children }: { children: ReactNode }) => {
               })}
             </SheetDescription>
           ) : null}
-          <SheetClose className="top-6 right-10" />
+          <SheetClose className="top-4 right-6 sm:top-6 sm:right-10" />
         </SheetHeader>
 
         {isLoading && <CartSheetLoader />}

@@ -5,6 +5,7 @@ import GoogleIcon from "@/shared/components/icons/Social/GoogleIcon";
 import { Button } from "@/shared/components/UI/Button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -19,24 +20,30 @@ import {
 import { ComponentPropsWithoutRef, ReactNode, useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import CloseIcon from "@/shared/components/icons/CloseIcon";
 import GoogleLoginButton from "./GoogleLoginButton";
 
 const AuthModal = ({
   children,
   defaultTab = "login",
-  disabled,
   buttonSlot,
   triggerProps,
+  onSuccess,
 }: {
   children: ReactNode;
-  disabled?: boolean;
   defaultTab?: "login" | "register";
   buttonSlot?: ReactNode;
   triggerProps?: ComponentPropsWithoutRef<typeof DialogTrigger>;
+  onSuccess?: () => void;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const closeDialog = () => setOpen(false);
+  const handleOnSuccess = () => {
+    setOpen(false);
+
+    onSuccess?.();
+  };
+
   return (
     <Dialog
       open={open}
@@ -51,11 +58,18 @@ const AuthModal = ({
       >
         {children}
       </DialogTrigger>
-      <DialogContent className="px-8 gap-10" closeClassName="top-10 right-8">
-        <DialogHeader>
+      <DialogContent
+        hideClose
+        className="px-4 pr-0 xs:pr-4 xs:px-6 sm:px-8 gap-10 max-h-[90vh] overflow-hidden"
+        closeClassName="top-10 right-8"
+      >
+        <DialogHeader className="pr-4 xs:pr-0 justify-between flex-row items-end">
           <DialogTitle>Войдите или создайте аккаунт</DialogTitle>
+          <DialogClose>
+            <CloseIcon />
+          </DialogClose>
         </DialogHeader>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 overflow-y-auto pr-4 xs:pr-0">
           <div className="flex flex-col gap-4">
             <Tabs defaultValue={defaultTab}>
               <TabsList borderClass="bg-light-disabled">
@@ -67,10 +81,13 @@ const AuthModal = ({
                 </TabsTrigger>
               </TabsList>
               <TabsContent className="w-full mt-8 ring-0" value="login">
-                <LoginForm onSuccess={closeDialog} />
+                <LoginForm onSuccess={handleOnSuccess} />
               </TabsContent>
-              <TabsContent className="w-full mt-8 ring-0" value="register">
-                <RegisterForm onSuccess={closeDialog} />
+              <TabsContent
+                className="w-full mt-8 ring-0 overflow-y-auto"
+                value="register"
+              >
+                <RegisterForm onSuccess={handleOnSuccess} />
               </TabsContent>
             </Tabs>
             {buttonSlot}

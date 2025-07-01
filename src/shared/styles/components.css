@@ -39,7 +39,7 @@
   }
 
   .richtext-content {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 whitespace-pre-line;
     ul {
       @apply list-disc pl-5;
     }
@@ -51,5 +51,9 @@
     br {
       @apply block mb-2;
     }
+  }
+
+  .custom-underline {
+    @apply relative after:absolute after:left-0 after:-bottom-[2px] after:w-full after:h-[1px] after:bg-main;
   }
 }

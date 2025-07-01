@@ -3,7 +3,6 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useIsMobile from "@/shared/hooks/useIsMobile";
 
 export type ToastTypes = "success" | "error" | "info" | "warning" | "default";
 export type ToastPositions =
@@ -19,8 +18,7 @@ export default function ToastProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const isMobile = useIsMobile();
-  const defaultPosition: ToastPositions = isMobile ? "top-center" : "top-right";
+  const defaultPosition: ToastPositions = "top-right";
 
   return (
     <>

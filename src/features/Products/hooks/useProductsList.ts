@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useCatalogStore } from "../store/catalogStore";
-import { getInfiniteProductsQueryOptions } from "../api/productsApi";
+import { getProductsInfiniteQueryOptions } from "../api/productsApi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useFiltersStore } from "../store/filtersStore";
 
@@ -22,10 +22,11 @@ export const useProductsList = ({
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    ...getInfiniteProductsQueryOptions({
+    ...getProductsInfiniteQueryOptions({
       per_page: 12,
       category,
       tag,
+      exclude_type: "grouped",
       color: colors.map((item) => item.id),
       size: sizes.map((item) => item.id),
       min_price: priceRange?.min,
@@ -39,22 +40,6 @@ export const useProductsList = ({
       totalItems: result.pages[0].totalItems,
     }),
   });
-
-  // const { data, isPending, isPlaceholderData } = useQuery({
-  //   ...getProductsQueryOptions({
-  //     page,
-  //     per_page,
-  //     category,
-  //     tag,
-  //     color: colors.map((item) => item.id),
-  //     size: sizes.map((item) => item.id),
-  //     min_price: priceRange?.min,
-  //     max_price: priceRange?.max,
-  //     order: sort.type,
-  //     orderby: sort.field,
-  //   }),
-  //   placeholderData: (previousData) => previousData,
-  // });
 
   useEffect(() => {
     if (data) {

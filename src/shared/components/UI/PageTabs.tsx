@@ -12,7 +12,7 @@ const PageTabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
-  <div className="w-full bg-light-disabled border-b border-gray-middle h-16">
+  <div className="w-full bg-light-disabled border-b border-gray-middle h-12 sm:h-16">
     <Container className="h-full">
       <TabsPrimitive.List
         ref={ref}
@@ -38,7 +38,7 @@ const PageTabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center flex-1 justify-center whitespace-nowrap h-full text-body1 text-gray-middle odd:border-r odd:border-l border-gray-middle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-gray-dark data-[state=active]:bg-gray-light data-[state=active]:text-main",
+      "inline-flex items-center flex-1 justify-center px-3 min-w-[184px] whitespace-nowrap h-full text-body1 text-gray-middle odd:border-r odd:border-l border-gray-middle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-gray-dark data-[state=active]:bg-gray-light data-[state=active]:text-main",
       className
     )}
     {...props}
@@ -53,12 +53,12 @@ const PageTabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-8 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       className
     )}
     {...props}
   >
-    <Container>{children}</Container>
+    {children}
   </TabsPrimitive.Content>
 ));
 PageTabsContent.displayName = TabsPrimitive.Content.displayName;

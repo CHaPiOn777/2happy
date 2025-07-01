@@ -15,8 +15,10 @@ const Breadcrumbs = ({
   return (
     <>
       <div className={cn("border-b border-main", className)} {...props}>
-        <Container className="flex justify-between">
-          <Breadcrumb className="my-6">{children}</Breadcrumb>
+        <Container className="flex justify-between h-full">
+          <Breadcrumb className="flex my-4 lg:my-6 items-center">
+            {children}
+          </Breadcrumb>
           {rightSlot}
         </Container>
       </div>

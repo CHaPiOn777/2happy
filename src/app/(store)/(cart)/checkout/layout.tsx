@@ -1,17 +1,24 @@
 "use client";
 
-import { useCheckoutStore } from "@/features/Cart/store/checkoutStore";
+import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect } from "react";
+import CheckoutSimilarProducts from "./components/CheckoutSimilarProducts";
 
 const CheckoutLayout = ({ children }: { children: ReactNode }) => {
-  // const { token } = useCheckoutStore();
-  // const router = useRouter();
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!token) router.back();
-  // }, []);
-  return children;
+  const { checkoutItems } = useCheckoutStore();
+
+  useEffect(() => {
+    if (!checkoutItems.length) router.replace("/");
+  }, []);
+  return (
+    <>
+      {children}
+      <CheckoutSimilarProducts />
+    </>
+  );
 };
 
 export default CheckoutLayout;

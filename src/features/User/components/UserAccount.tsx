@@ -6,9 +6,10 @@ import UserIcon from "@/shared/components/icons/UserIcon";
 import StyledTooltip from "@/shared/components/UI/StyledTooltip";
 import AuthModal from "@/features/Auth/components/AuthModal";
 
-import { useLogout, useUser } from "@/shared/api/authApi";
+import { useUser } from "@/shared/api/authApi";
+import { useLogout } from "../../Auth/hooks/useLogout";
 import { paths } from "@/config/paths";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +21,13 @@ import {
 import { useDelayedState } from "@/shared/hooks/useDelayedState";
 import { ACCOUNT_TABS } from "../utils/isValidTab";
 
-const UserAccount = () => {
+const UserAccount = ({
+  authTrigger,
+  defaultTrigger,
+}: {
+  authTrigger: ReactNode;
+  defaultTrigger: ReactNode;
+}) => {
   const { data, isFetching } = useUser();
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -50,12 +57,7 @@ const UserAccount = () => {
         onMouseLeave={onMouseLeave}
       >
         <DropdownMenu open={open} onOpenChange={(open) => setFastState(open)}>
-          <DropdownMenuTrigger>
-            <Link className="relative" href={paths.account.getHref()}>
-              <UserIcon className="hover:fill-main transition-colors" />
-              <span className="absolute top-0 right-0 w-1 h-1 rounded-full bg-red" />
-            </Link>
-          </DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild>{authTrigger}</DropdownMenuTrigger>
           <DropdownMenuContent
             className="min-w-[272px]"
             align="end"
@@ -90,14 +92,8 @@ const UserAccount = () => {
     );
   }
   return (
-    <AuthModal disabled={!!isFetching}>
-      <UserIcon
-        data-tooltip-id="auth"
-        data-tooltip-content="Войти"
-        className="hover:fill-main transition-colors"
-      />
-
-      <StyledTooltip id="auth" />
+    <AuthModal triggerProps={{ disabled: !!isFetching, asChild: true }}>
+      {defaultTrigger}
     </AuthModal>
   );
 };

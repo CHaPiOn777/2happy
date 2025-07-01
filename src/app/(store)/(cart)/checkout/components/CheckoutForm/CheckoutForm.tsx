@@ -3,7 +3,7 @@
 import { Button } from "@/shared/components/UI/Button";
 import CheckoutUnauthorizedForm from "./CheckoutUnauthorizedForm";
 import CheckoutFormPayment from "./CheckoutFormPayment";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EditIcon from "@/shared/components/icons/EditIcon";
 import CheckoutFormAddress from "./CheckoutFormAddress";
 import AuthModal from "@/features/Auth/components/AuthModal";
@@ -13,21 +13,23 @@ import CheckoutAuthorizedForm from "./CheckoutAuthorizedForm";
 import { useUser } from "@/shared/api/authApi";
 import CheckoutFormWithAddress from "./CheckoutFormWithAddress";
 import { CheckoutFormInput } from "./types";
-import { useCart } from "@/features/Cart/api/cartQueries";
 import { useCreateOrder } from "@/features/Orders/api/ordersApi";
 import { useCreateUserAddress } from "@/features/Addresses/api/addressApi";
 import { useDeleteCart } from "@/features/Cart/api/cartMutations";
 import { useRouter } from "next/navigation";
 import { paths } from "@/config/paths";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
+import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
+import { cn } from "@/shared/utils";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ className }: { className?: string }) => {
   const [step, setStep] = useState<"contacts" | "payment">("contacts");
 
   const router = useRouter();
 
   const { data: user } = useUser();
-  const { data: cart } = useCart();
+
+  const { checkoutItems, isEditable, setIsEditable } = useCheckoutStore();
 
   const [contacts, setContacts] = useState<CheckoutFormInput | null>(null);
   const [payment, setPayment] = useState<string>("");
@@ -36,8 +38,9 @@ const CheckoutForm = () => {
   const { mutate: createOrder, isPending: isCreateOrderPending } =
     useCreateOrder({
       onSuccess: (data) => {
-        router.replace(paths.successCheckout.getHref(data.id));
-        deleteCart();
+        if (isEditable) deleteCart();
+        router.replace(paths.home.getHref());
+        window.open(data.robokassa_payment_url, "_blank");
       },
     });
   const { mutate: createAddress } = useCreateUserAddress({});
@@ -83,8 +86,8 @@ const CheckoutForm = () => {
   const handleSubmit = () => {
     if (!contacts) return;
 
-    const cartItems =
-      cart?.items.map((item) => ({
+    const line_items =
+      checkoutItems?.map((item) => ({
         product_id: item.id,
         quantity: item.quantity,
       })) ?? [];
@@ -125,16 +128,22 @@ const CheckoutForm = () => {
           postcode: contacts?.postalCode,
           country: contacts?.country,
         },
-        line_items: cartItems,
-        set_paid: true,
+        line_items: line_items,
+        set_paid: false,
         payment_method: "robokassa",
         payment_method_title: "Банковская карта (Robokassa)",
       },
     });
   };
 
+  useEffect(() => {
+    return () => {
+      setIsEditable(true);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col gap-12">
+    <div className={cn("flex flex-col gap-12", className)}>
       <AuthorizedView condition={false}>
         {step === "contacts" && (
           <div className="flex flex-col gap-4">
@@ -147,7 +156,7 @@ const CheckoutForm = () => {
           </div>
         )}
       </AuthorizedView>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-6 sm:gap-10">
         <div className="flex items-center justify-between gap-2 py-4 px-5 bg-light-disabled border border-gray rounded-xs">
           <h5 className="text-h5">1. Контактные данные</h5>
           {step != "contacts" && (
@@ -198,7 +207,7 @@ const CheckoutForm = () => {
           <CheckoutFormAddress address={contacts} />
         )}
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6 sm:gap-10">
           <div className="py-4 px-5 bg-light-disabled border border-gray rounded-xs">
             <h5 className="text-h5">2. Оплата</h5>
           </div>

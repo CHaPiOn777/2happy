@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Image from "next/image";
@@ -16,24 +16,43 @@ import ImageGallery from "../../ImageGallery/ImageGallery";
 import { getProductChip } from "@/features/Products/utils/getProductChip";
 import { Image as ImageType } from "@/shared/types/api";
 import { Chip } from "@/shared/components/UI/Chip";
+import { cn } from "@/shared/utils";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./styles.scss";
+import { Progress } from "@/shared/components/UI/Progress";
 
-const ProductSlider = ({ id, images }: { id: number; images: ImageType[] }) => {
+const ProductSlider = ({
+  id,
+  images,
+  className,
+}: {
+  id: number;
+  images: ImageType[];
+  className?: string;
+}) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const { data } = useSuspenseQuery(getProductByIdQueryOptions(id));
 
-  const chip = getProductChip(data);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const totalSlides = images.length;
 
+  const progressValue = (activeIndex / totalSlides) * 100;
+
+  const chip = getProductChip(data);
   return (
-    <div className="product-slider relative h-[624px] flex gap-6 flex-1 basis-[51%] overflow-hidden">
+    <div
+      className={cn(
+        "product-slider relative h-[624px] flex flex-col sm:flex-row gap-4 sm:gap-6 flex-1 basis-[51%] overflow-hidden",
+        className
+      )}
+    >
       {chip && (
         <Chip
-          className="absolute right-4 top-4 z-10"
+          className="absolute left-4 sm:right-4 sm:left-auto top-4 z-10"
           variant={chip.type}
           size="small"
         >
@@ -77,18 +96,42 @@ const ProductSlider = ({ id, images }: { id: number; images: ImageType[] }) => {
       </Swiper>
 
       <Swiper
-        allowTouchMove={false}
+        direction="horizontal"
+        touchStartPreventDefault={false}
+        touchMoveStopPropagation={false}
+        touchAngle={45}
+        passiveListeners={true}
+        threshold={5}
         thumbs={{ swiper: thumbsSwiper }}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
         modules={[Thumbs]}
+        spaceBetween={24}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            allowTouchMove: true,
+          },
+          480: { slidesPerView: 2, allowTouchMove: true, spaceBetween: 16 },
+          768: { slidesPerView: 2, allowTouchMove: true },
+          1024: { slidesPerView: 1, allowTouchMove: false },
+        }}
       >
         {images.map((image, index) => (
           <SwiperSlide key={image.id}>
             <ImageGallery images={images} initialSlide={index}>
-              <ImageWithZoom src={image.src} alt={image.alt} />
+              <ImageWithZoom
+                isDefaultTouchDevice={false}
+                src={image.src}
+                alt={image.alt}
+              />
             </ImageGallery>
           </SwiperSlide>
         ))}
       </Swiper>
+      <Progress
+        className="w-full block sm:hidden h-[2px]"
+        value={progressValue}
+      />
     </div>
   );
 };

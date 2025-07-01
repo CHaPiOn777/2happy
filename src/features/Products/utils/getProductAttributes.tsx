@@ -1,4 +1,4 @@
-import { ProductAttribute } from "../types";
+import { ProductAttribute } from "@/shared/types/api";
 
 export const getProductAttributes = (attributes: ProductAttribute[]) => {
   const colors =

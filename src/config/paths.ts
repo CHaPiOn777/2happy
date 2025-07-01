@@ -25,6 +25,20 @@ export const paths = {
       },
     },
 
+    collections: {
+      getHref: (name?: string) => {
+        const query = buildQuery({ name });
+        return `${paths.catalog.getHref()}/collections${query}`;
+      },
+
+      category: {
+        getHref: (id: number, slug: string, name: string, subTo?: number) => {
+          const query = buildQuery({ name, subTo });
+          return `${paths.catalog.collections.getHref()}/${slug}_${id}${query}`;
+        },
+      },
+    },
+
     new_collection: {
       getHref: (name?: string) => {
         const query = buildQuery({ name });
@@ -48,6 +62,10 @@ export const paths = {
     },
   },
 
+  favorite: {
+    getHref: () => "/favorite",
+  },
+
   product: {
     getHref: (id: number, slug: string, params?: Record<string, unknown>) => {
       const decodedSlug = decodeURIComponent(slug);
@@ -57,8 +75,39 @@ export const paths = {
     },
   },
 
+  collection: {
+    getHref: (id: number, slug: string, params?: Record<string, unknown>) => {
+      const decodedSlug = decodeURIComponent(slug);
+      const productUrl = `/collection/${encodeURIComponent(decodedSlug)}_${id}`;
+
+      return createURLWithParams(productUrl, params);
+    },
+  },
+
   cart: {
     getHref: () => "/cart",
+  },
+
+  contacts: {
+    getHref: () => "/contacts",
+  },
+
+  offert: {
+    getHref: () => "/offert",
+  },
+
+  policy: {
+    getHref: () => "/policy",
+  },
+
+  about: {
+    getHref: () => "/about",
+    partnership: {
+      getHref: () => `${paths.about.getHref()}/partnership`,
+    },
+    reviews: {
+      getHref: () => `${paths.about.getHref()}/reviews`,
+    },
   },
 
   checkout: {
@@ -86,7 +135,6 @@ export const paths = {
   },
 
   search: {
-    getHref: (searchPath: string) =>
-      `/search${buildQuery({ name: searchPath })}`,
+    getHref: (search: string) => `/search${buildQuery({ search })}`,
   },
 } as const;

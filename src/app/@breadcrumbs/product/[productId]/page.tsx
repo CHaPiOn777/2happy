@@ -14,6 +14,7 @@ import { getProductByIdQueryOptions } from "@/features/Products/api/productsApi"
 import { useParams } from "next/navigation";
 import React, { Fragment } from "react";
 import { sortCategories } from "@/features/Products/utils/sortCategories";
+import HomeIcon from "@/shared/components/icons/HomeIcon";
 
 const ProductBreadcrumbs = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -23,14 +24,25 @@ const ProductBreadcrumbs = () => {
   const sortedBreadcrumbs = sortCategories(data?.categories);
 
   return (
-    <Breadcrumbs>
+    <Breadcrumbs className="bg-main">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.home.getHref()}>Главная</BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white xs:inline-block hidden"
+            href={paths.home.getHref()}
+          >
+            Главная
+          </BreadcrumbLink>
+          <BreadcrumbLink
+            className="text-white inline-block xs:hidden"
+            href={paths.home.getHref()}
+          >
+            <HomeIcon className="!size-6" />
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={paths.catalog.getHref()}>
+          <BreadcrumbLink className="text-white" href={paths.catalog.getHref()}>
             Каталог
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -49,6 +61,7 @@ const ProductBreadcrumbs = () => {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink
+                    className="text-white"
                     href={paths.catalog.category.getHref(
                       item.id,
                       item.slug,

@@ -103,7 +103,7 @@ const HelpDialog = ({
           <div className="flex justify-between">
             <a
               className="inline-flex items-center gap-4"
-              href="tel:77015557060"
+              href="tel:77021657378"
             >
               <IconButton
                 size="extraSmall"
@@ -112,7 +112,7 @@ const HelpDialog = ({
               >
                 <PhoneIcon className="!size-6" />
               </IconButton>
-              <span className="link-hover">+7–701–555–70–60</span>
+              <span className="link-hover">+7-702-165-73-78</span>
             </a>
 
             <a

@@ -1,40 +1,82 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/shared/components/UI/Avatar";
-import Rating from "@/shared/components/UI/Rating";
+import QuoteIcon from "@/shared/components/icons/QuoteIcon";
+import Image from "next/image";
+import { WPComment } from "../types";
+import { format } from "date-fns";
+import { cn, sanitizeHtml } from "@/shared/utils";
+import { Skeleton } from "@/shared/components/UI/Skeleton";
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }: { review: WPComment }) => {
+  const date = new Date(review.date);
+  const formatted = format(date, "dd/MM/yy");
+
+  const { safeHTML, parse } = sanitizeHtml(review.content.rendered);
   return (
-    <article className="flex flex-col gap-6 pb-6 border-b border-gray">
-      <div className="w-full flex justify-between items-end">
-        <div className="flex gap-4">
-          <Avatar>
-            <AvatarImage src="/images/Comments/comment-1.png" />
-            {/* Здесь будут инициалы пользователя */}
-            <AvatarFallback>НГ</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col gap-2">
-            <span className="text-button-xs">Наталья Г.</span>
-            <Rating rating={4} readOnly />
-          </div>
+    <article
+      className={cn(
+        "flex flex-col gap-6 py-6 border-t border-gray",
+        review.meta.images.length === 0 && "pb-0"
+      )}
+    >
+      <QuoteIcon />
+      <div className="flex justify-between items-end">
+        <div className="space-y-2">
+          <div className="text-body1 capitalize">{review.author_name}</div>
+          {!review.meta.city && !review.meta.country ? (
+            <div className="text-description text-gray-middle">
+              Город не указан
+            </div>
+          ) : (
+            <div className="text-description text-gray-middle">
+              {review.meta.country}, {review.meta.city}
+            </div>
+          )}
         </div>
-        <span className="text-body2 text-gray-middle">26/03/05</span>
+        <span className="text-gray-middle">{formatted}</span>
       </div>
-      <div className="flex flex-col gap-4">
-        <h5 className="text-h5">Красивое платье</h5>
-        <p className="text-body2 text-gray-middle">
-          Это платье — просто находка для тех, кто любит стильные
-          и нестандартные образы! Удобный худи отлично сидит, ткань мягкая
-          и приятная к телу. Лёгкая фатиновая юбка придаёт образу воздушность
-          и делает его по‑настоящему эффектным. Можно носить как с кроссовками
-          для повседневного стиля, так и с каблуками для вечернего выхода.
-          Качество на высоте, доставка быстрая. Очень довольна покупкой!
-        </p>
+      <div className="space-y-4">
+        <div className="text-gray-dark">{safeHTML && parse(safeHTML)}</div>
+        {/* <div className=" flex gap-4">
+          {review.meta.images.map((item, index) => (
+            <div key={index} className="relative w-[104px] h-[156px]">
+              <Image
+                fill
+                className="object-cover"
+                src={item.src}
+                alt="review-1"
+              />
+            </div>
+          ))}
+        </div> */}
       </div>
     </article>
   );
 };
 
 export default ReviewCard;
+
+export const ReviewCardLoader = () => {
+  return (
+    <article className={"flex flex-col gap-6 py-6 border-t border-gray"}>
+      <QuoteIcon />
+      <div className="flex justify-between items-end">
+        <div className="space-y-2">
+          <Skeleton className="w-[180px] h-[18px]" />
+          <Skeleton className="w-[120px] h-[14px]" />
+        </div>
+        <Skeleton className="w-[100px] h-[14px]" />
+      </div>
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Skeleton className="w-full h-[14px]" />
+          <Skeleton className="w-full h-[14px]" />
+          <Skeleton className="w-full h-[14px]" />
+        </div>
+        <div className=" flex gap-4">
+          <Skeleton className="w-[104px] h-[156px]" />
+          <Skeleton className="w-[104px] h-[156px]" />
+          <Skeleton className="w-[104px] h-[156px]" />
+        </div>
+      </div>
+    </article>
+  );
+};

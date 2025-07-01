@@ -1,5 +1,5 @@
 import Container from "@/shared/components/UI/Container";
-import CatalogHeader from "../../(store)/components/CatalogHeader";
+import CatalogHeader from "../components/MainCatalog/CatalogHeader";
 
 export const metadata = {
   title: "2HAPPY",
@@ -16,10 +16,10 @@ const StoreLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <Container className="my-section flex-col gap-16">
+    <div className="my-section flex flex-col gap-6 sm:gap-12 md:gap-16">
       <CatalogHeader defaultName="Женская одежда и аксессуары" />
       {children}
-    </Container>
+    </div>
   );
 };
 

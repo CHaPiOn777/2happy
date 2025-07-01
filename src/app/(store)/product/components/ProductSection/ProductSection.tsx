@@ -16,27 +16,37 @@ const ProductSection = () => {
   const params = useSearchParams();
   const setSearchParams = useQueryParams();
 
-  const { id } = useGetProductId();
+  const { id } = useGetProductId("productId");
 
   const { images, setImages } = useProductStore();
 
   return (
-    <div className="border-b border-main">
-      <Container className="my-section flex gap-12">
+    <div className="lg:border-b lg:border-main">
+      <Container className="mt-12 sm:mt-20 lg:my-section flex flex-col lg:flex-row gap-12">
         <Suspense fallback={<ProductSliderLoader />}>
-          <ProductSlider id={id} images={images} />
+          <ProductSlider
+            className="basis-auto h-[584px] lg:basis-[51%] lg:h-[624px]"
+            id={id}
+            images={images}
+          />
         </Suspense>
-        <Suspense fallback={<ProductInfoLoader />}>
+        <Suspense
+          fallback={<ProductInfoLoader className="flex-1 basis-[49%]" />}
+        >
           <ProductInfo
             id={id}
+            classNames={{
+              wrapper: "flex-1 basis-[49%]",
+            }}
             defaultColor={params.get("color")}
             defaultSize={params.get("size")}
             handleChange={({ type, value }) => {
               setSearchParams({ [type]: value });
             }}
             setImages={setImages}
-            renderButtons={(variation, disabled) => (
+            renderButtons={(product, variation, disabled) => (
               <ProductSectionButtons
+                product={product}
                 variation={variation}
                 disabled={disabled}
               />

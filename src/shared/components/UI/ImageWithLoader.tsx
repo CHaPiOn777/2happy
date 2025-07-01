@@ -2,15 +2,21 @@
 
 import { cn } from "@/shared/utils/cn";
 import Image, { ImageProps } from "next/image";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const ImageWithLoader = ({
   wrapperClassName,
   className,
+  textClassName,
   src,
   alt,
+  ref,
   ...props
-}: { wrapperClassName?: string } & ImageProps) => {
+}: {
+  wrapperClassName?: string;
+  textClassName?: string;
+  ref?: RefObject<HTMLImageElement | null>;
+} & ImageProps) => {
   const [imageSrc, setImageSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,10 +36,15 @@ const ImageWithLoader = ({
           isLoading && "opacity-100"
         )}
       >
-        <span className="animate-pulse font-akira text-3xl">2HAPPY</span>
+        <span
+          className={cn("animate-pulse font-akira text-3xl", textClassName)}
+        >
+          2HAPPY
+        </span>
       </div>
       <Image
         fill
+        ref={ref}
         src={imageSrc}
         sizes="100%"
         className={cn("object-cover object-top", className)}

@@ -1,10 +1,9 @@
 "use client";
 
-import HeartIcon from "@/shared/components/icons/HeartIcon";
 import Link from "next/link";
 import { ProductServer } from "../../types";
 import { Chip } from "@/shared/components/UI/Chip";
-import { MouseEvent } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
 import ColorSquare from "../Colors/ColorSquare";
 import { paths } from "@/config/paths";
@@ -15,8 +14,17 @@ import { getProductByIdQueryOptions } from "../../api/productsApi";
 
 import { Skeleton } from "@/shared/components/UI/Skeleton";
 import { cn } from "@/shared/utils/cn";
+import ProductFavoriteButton from "./ProductFavoriteButton";
 
-const ProductServerCard = ({ product }: { product: ProductServer }) => {
+const ProductServerCard = ({
+  product,
+  className,
+  showAttributes = true,
+  ...props
+}: {
+  product: ProductServer;
+  showAttributes?: boolean;
+} & ComponentPropsWithoutRef<"article">) => {
   const queryClient = useQueryClient();
   const [_, setRecentProducts] = useLocalStorage<number[]>(
     "recentProducts",
@@ -35,12 +43,11 @@ const ProductServerCard = ({ product }: { product: ProductServer }) => {
     ]);
   };
 
-  const handleFavoriteClick = (e: MouseEvent<SVGSVGElement>) => {
-    e.preventDefault();
-  };
-
   return (
-    <article className="group/product w-full h-full">
+    <article
+      className={cn("group/product w-full h-full pb-4 md:pb-0", className)}
+      {...props}
+    >
       <Link
         onClick={handleLinkClick}
         href={paths.product.getHref(product.id, product.name)}
@@ -49,18 +56,14 @@ const ProductServerCard = ({ product }: { product: ProductServer }) => {
         <div className="relative h-full">
           {chip && (
             <Chip
-              className="absolute top-4 left-4 z-10"
+              className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10"
               variant={chip.type}
               size="small"
             >
               {chip.text}
             </Chip>
           )}
-          <HeartIcon
-            role="button"
-            onClick={handleFavoriteClick}
-            className="absolute top-4 right-4 z-50 opacity-0 group-hover/product:opacity-100 hover:fill-main"
-          />
+          <ProductFavoriteButton product={product} />
           {image && (
             <ImageWithLoader
               src={image.src}
@@ -70,23 +73,70 @@ const ProductServerCard = ({ product }: { product: ProductServer }) => {
           )}
         </div>
         <div>
-          <h5 className="text-h5 mb-2 h-[48px] line-clamp-2">{product.name}</h5>
-          <div className="w-full relative h-6">
-            <div className="absolute w-full flex items-center justify-between gap-2 opacity-0 group-hover/product:opacity-100 transition-opacity">
-              <div className="flex gap-2">
-                {colors.map((color: string) => (
-                  <ColorSquare key={color} color={color} />
-                ))}
+          <h5 className="text-h5 mb-2 h-[44px] sm:h-[48px] line-clamp-2">
+            {product.name}
+          </h5>
+          <div className="flex flex-col-reverse gap-2 w-full lg:hidden">
+            {showAttributes && (
+              <div className="w-full flex justify-between items-center gap-2">
+                <div className="flex gap-2">
+                  {colors.map((color: string) => (
+                    <ColorSquare key={color} color={color} />
+                  ))}
+                </div>
+                <div className="flex gap-2 text-gray-middle">
+                  {sizes.map((size: string) => (
+                    <span
+                      key={size}
+                      className="text-description whitespace-nowrap"
+                    >
+                      {size}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="flex gap-2 text-gray-middle">
-                {sizes.map((size: string) => (
-                  <span key={size} className="text-body2">
-                    {size}
+            )}
+
+            <div
+              className={cn(
+                "flex w-full gap-2",
+                showAttributes && "lg:justify-end"
+              )}
+            >
+              {product.on_sale ? (
+                <>
+                  <span className={"text-gray-middle line-through"}>
+                    {product.regular_price} &#8376;
                   </span>
-                ))}
-              </div>
+                  <span className="text-red">{product.sale_price} &#8376;</span>
+                </>
+              ) : (
+                <span className="text-gray-dark">{product.price} &#8376;</span>
+              )}
             </div>
-            <div className="absolute flex w-full gap-2 opacity-100 group-hover/product:opacity-0 transition-opacity">
+          </div>
+          <div className="w-full relative h-6 hidden lg:block">
+            {showAttributes && (
+              <div className="absolute w-full flex items-center justify-between gap-2 opacity-0 group-hover/product:opacity-100 transition-opacity">
+                <div className="flex gap-2">
+                  {colors.map((color: string) => (
+                    <ColorSquare key={color} color={color} />
+                  ))}
+                </div>
+                <div className="flex gap-2 text-gray-middle">
+                  {sizes.map((size: string) => (
+                    <span key={size} className="text-body2">
+                      {size}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div
+              className={`absolute flex w-full gap-2 opacity-100 transition-opacity ${
+                showAttributes && "group-hover/product:opacity-0"
+              }`}
+            >
               {product.on_sale ? (
                 <>
                   <span className={"text-gray-middle line-through"}>

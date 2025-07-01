@@ -37,6 +37,7 @@ export type OrderResponse = {
   date_completed_gmt: string | null;
   cart_hash: string;
   meta_data: MetaData[];
+  robokassa_payment_url: string;
   line_items: OrderProductItem[];
   tax_lines: TaxLine[];
   shipping_lines: ShippingLine[];
@@ -71,6 +72,13 @@ export type CreateOrderPayload = {
   payment_method: string;
   payment_method_title: string;
   set_paid: boolean;
+};
+
+export type RefundOrderPayload = {
+  amount: string;
+  reason: string;
+  api_refund: boolean;
+  line_items: { id: number; quantity: number }[];
 };
 
 type MetaData = {

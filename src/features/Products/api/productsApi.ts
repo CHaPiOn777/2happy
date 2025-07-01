@@ -8,11 +8,14 @@ import { env } from "@/config/env";
 import { createURLWithParams } from "@/shared/utils/createURLWithParams";
 import { ProductServer, ProductVariation } from "../types";
 import { WooResponse } from "@/shared/types/api";
+import { requestQueue } from "@/shared/api/requestQueue";
 
 export type getProductsListParameters = {
   page?: number;
   per_page?: number;
   category?: number;
+  type?: string;
+  exclude_type?: string;
   tag?: number;
   min_price?: number;
   max_price?: number;
@@ -21,6 +24,7 @@ export type getProductsListParameters = {
   color?: number[];
   size?: number[];
   include?: number[];
+  search?: string;
 };
 
 const getProductsListURL = `${env.WOOCOMMERCE_API}/products`;
@@ -34,12 +38,16 @@ export const getProductsList = async (
     params
   );
 
-  const response = await formattedApiInstance.get<
-    unknown,
-    WooResponse<ProductServer[]>
-  >(getProductsListURLWithParams, {
-    signal,
-  });
+  const response = await requestQueue.addRequest<WooResponse<ProductServer[]>>(
+    () =>
+      formattedApiInstance.get<unknown, WooResponse<ProductServer[]>>(
+        getProductsListURLWithParams,
+        {
+          signal,
+        }
+      ),
+    "high"
+  );
 
   return response;
 };
@@ -58,7 +66,14 @@ const productsQueryKey = (params: getProductsListParameters) => {
   return queryKey;
 };
 
-export const getInfiniteProductsQueryOptions = (
+export const getProductsQueryOptions = (params: getProductsListParameters) => {
+  return queryOptions({
+    queryKey: productsQueryKey(params),
+    queryFn: (meta) => getProductsList({ ...params }, { signal: meta.signal }),
+  });
+};
+
+export const getProductsInfiniteQueryOptions = (
   params: getProductsListParameters
 ) => {
   return infiniteQueryOptions<
@@ -86,13 +101,6 @@ export const getInfiniteProductsQueryOptions = (
   });
 };
 
-export const getProductsQueryOptions = (params: getProductsListParameters) => {
-  return queryOptions({
-    queryKey: productsQueryKey(params),
-    queryFn: (meta) => getProductsList({ ...params }, { signal: meta.signal }),
-  });
-};
-
 const getProductByIdURL = `${env.WOOCOMMERCE_API}/products/{id}`;
 
 export const getProductById = async (
@@ -103,11 +111,15 @@ export const getProductById = async (
     signal: AbortSignal;
   }
 ): Promise<ProductServer> => {
-  const response = await formattedApiInstance.get<unknown, ProductServer>(
-    getProductByIdURL.replace("{id}", `${id}`),
-    {
-      signal,
-    }
+  const response = await requestQueue.addRequest(
+    () =>
+      formattedApiInstance.get<unknown, ProductServer>(
+        getProductByIdURL.replace("{id}", `${id}`),
+        {
+          signal,
+        }
+      ),
+    "high"
   );
 
   return response;
@@ -133,12 +145,16 @@ const getProductVariations = async (
     signal: AbortSignal;
   }
 ): Promise<WooResponse<ProductVariation[]>> => {
-  const response = await formattedApiInstance.get<
-    unknown,
-    WooResponse<ProductVariation[]>
-  >(getProductVariationsURL.replace("{id}", `${id}`), {
-    signal,
-  });
+  const response = await requestQueue.addRequest(
+    () =>
+      formattedApiInstance.get<unknown, WooResponse<ProductVariation[]>>(
+        getProductVariationsURL.replace("{id}", `${id}`),
+        {
+          signal,
+        }
+      ),
+    "high"
+  );
 
   return response;
 };
@@ -150,6 +166,40 @@ export const getProductVariationsQueryOptions = (id: number) => {
     queryKey: productVariationsQueryKey(id),
     queryFn: (meta) => getProductVariations(id, { signal: meta.signal }),
     enabled: !!id,
+  });
+};
+
+type getProductVariationsListParams = {
+  ids: number[];
+};
+
+const getProductVariationsListURL = `${env.CUSTOM_API}/variations`;
+
+export const getProductVariationsList = async (
+  params: getProductVariationsListParams
+): Promise<ProductVariation[]> => {
+  const getProductVariationsListURLWithParams = createURLWithParams(
+    getProductVariationsListURL,
+    params
+  );
+
+  const response = await formattedApiInstance.get<unknown, ProductVariation[]>(
+    getProductVariationsListURLWithParams
+  );
+
+  return response;
+};
+
+const productVariationsListQueryKey = ({
+  ids,
+}: getProductVariationsListParams) => ["variations", ...ids];
+
+export const getProductVariationsListQueryOptions = (
+  params: getProductVariationsListParams
+) => {
+  return queryOptions({
+    queryKey: productVariationsListQueryKey(params),
+    queryFn: (meta) => getProductVariationsList(params),
   });
 };
 
@@ -189,5 +239,44 @@ export const getRelatedProductsQueryOptions = (
   return queryOptions({
     queryKey: relatedProductsQueryKey(params),
     queryFn: (meta) => getRelatedProducts(params, { signal: meta.signal }),
+  });
+};
+
+type getHasPurchasedParameters = {
+  product_id?: number;
+};
+
+const getHasPurchasedURL = `${env.CUSTOM_API}/has-purchased`;
+
+const getHasPurchased = async (
+  params: getHasPurchasedParameters,
+  { signal }: { signal: AbortSignal }
+): Promise<{ hasPurchased: boolean }> => {
+  const getHasPurchasedURLWithParams = createURLWithParams(
+    getHasPurchasedURL,
+    params
+  );
+
+  const response = await formattedApiInstance.get<
+    unknown,
+    { hasPurchased: boolean }
+  >(getHasPurchasedURLWithParams, {
+    signal,
+  });
+
+  return response;
+};
+
+const hasPurchasedQueryKey = ({ product_id }: getHasPurchasedParameters) => [
+  "has_purchased",
+  `${product_id}`,
+];
+
+export const getHasPurchasedQueryOptions = (
+  params: getHasPurchasedParameters
+) => {
+  return queryOptions({
+    queryKey: hasPurchasedQueryKey(params),
+    queryFn: (meta) => getHasPurchased(params, { signal: meta.signal }),
   });
 };

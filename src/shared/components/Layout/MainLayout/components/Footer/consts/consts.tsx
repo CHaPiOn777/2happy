@@ -1,3 +1,5 @@
+import { paths } from "@/config/paths";
+import { HELP_TABS } from "@/features/User/utils/isValidHelpTab";
 import FacebookIcon from "@/shared/components/icons/Social/FacebookIcon";
 import InstagramRoundedIcon from "@/shared/components/icons/Social/InstagramRoundedIcon";
 import TwitterIcon from "@/shared/components/icons/Social/TwitterIcon";
@@ -18,73 +20,57 @@ export const socialIcons: { href: string; element: ReactNode }[] = [
     element: <TwitterIcon />,
   },
   {
-    href: "/",
+    href: "https://www.instagram.com/2happy_kz/",
     element: <InstagramRoundedIcon />,
   },
 ];
 
-export const clientsLinks: IFooterLink[] = [
+export const helpLinks: IFooterLink[] = [
   {
-    href: "/",
-    text: "Ваши заказы",
+    href: paths.help.getHref({ tab: HELP_TABS.DELIVERY }),
+    text: "Доставка и оплата",
   },
   {
-    href: "/",
-    text: "Отложенные",
+    href: paths.help.getHref({ tab: HELP_TABS.REFUNDS }),
+    text: "Условия возврата и обмена",
   },
   {
-    href: "/",
-    text: "Программа лояльности",
-  },
-  {
-    href: "/",
-    text: "Оплата и доставка",
-  },
-  {
-    href: "/",
-    text: "Условия возврата / обмена",
-  },
-  {
-    href: "/",
-    text: "Сертификат / Подарочная карта",
-  },
-  {
-    href: "/",
+    href: paths.help.getHref({ tab: HELP_TABS.KASPI }),
     text: "Рассрочка от KASPI RED",
   },
 ];
 
 export const storeLinks: IFooterLink[] = [
   {
-    href: "/",
+    href: paths.contacts.getHref(),
     text: "Обратная связь",
   },
   {
-    href: "/",
+    href: paths.about.getHref(),
     text: "О нас",
   },
   {
-    href: "/",
+    href: paths.about.reviews.getHref(),
     text: "Отзывы",
   },
   {
-    href: "/",
+    href: paths.about.partnership.getHref(),
     text: "Партнёрам",
   },
   {
-    href: "/",
+    href: paths.offert.getHref(),
     text: "Публичная оферта",
   },
   {
-    href: "/",
+    href: paths.policy.getHref(),
     text: "Политика конфиденциальности",
   },
 ];
 
 export const mainBlocks: { title: string; links: IFooterLink[] }[] = [
   {
-    title: "Для клиентов",
-    links: clientsLinks,
+    title: "Помощь",
+    links: helpLinks,
   },
   {
     title: "Магазин",

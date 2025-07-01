@@ -12,7 +12,10 @@ const Container = ({
 }) => {
   return (
     <div
-      className={cn(`relative w-full flex max-w-[1224px] mx-auto `, className)}
+      className={cn(
+        `relative w-full flex max-w-[1280px] mx-auto px-4 md:px-6`,
+        className
+      )}
     >
       {children}
     </div>

@@ -1,6 +1,7 @@
 import { sortCategories } from "@/features/Products/utils/sortCategories";
 import { CartItemResponse } from "../types";
 import { getPriceWithMinors } from "./getPriceWithMinors";
+import { decodeHtmlEntities } from "@/shared/utils/decodeHtmlEl";
 
 export const getCartItemInfo = (cartItem: CartItemResponse) => {
   const size =
@@ -33,9 +34,10 @@ export const getCartItemInfo = (cartItem: CartItemResponse) => {
 
   return {
     key: cartItem.key,
+    id: cartItem.id,
     parentId: cartItem.parent_id,
     image: cartItem.images[0],
-    name: cartItem.name,
+    name: decodeHtmlEntities(cartItem.name),
     size,
     color,
     quantity,

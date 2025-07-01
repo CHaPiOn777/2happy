@@ -6,10 +6,15 @@ export const getVariation = (
   size: string
 ) => {
   return (
-    variations.find(
-      (item) =>
-        item.attributes[0].option === color &&
-        item.attributes[1].option === size
-    ) ?? null
+    variations.find((item) => {
+      const variationColor = item.attributes.find(
+        (item) => item.slug === "pa_color"
+      )?.option;
+      const variationSize = item.attributes.find(
+        (item) => item.slug === "pa_size"
+      )?.option;
+
+      return variationColor === color && variationSize === size;
+    }) ?? null
   );
 };

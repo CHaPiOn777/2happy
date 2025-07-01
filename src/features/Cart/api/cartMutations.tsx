@@ -65,6 +65,64 @@ export const useAddToCart = ({
   });
 };
 
+export type AddManyToCartItem = {
+  id: number;
+  quantity: number;
+  variation_id: number;
+};
+
+export type AddManyToCartBody = {
+  items: AddManyToCartItem[];
+};
+
+const addManyToCartURL = `${env.CUSTOM_API}/bulk-add`;
+
+const addManyToCart = ({
+  body,
+  nonce,
+}: {
+  body: AddManyToCartBody;
+  nonce: string | undefined;
+}): Promise<AxiosResponse<CartResponse>> => {
+  return defaultApiInstance.post<unknown, AxiosResponse<CartResponse>>(
+    addManyToCartURL,
+    body,
+    {
+      headers: {
+        Nonce: nonce,
+      },
+    }
+  );
+};
+
+export const useAddManyToCart = ({
+  onSuccess,
+  onError,
+  onMutate,
+}: {
+  onMutate?: (body: AddManyToCartBody) => void;
+  onSuccess?: (data: CartResponse) => void;
+  onError?: (error: Error) => void;
+}) => {
+  const queryClient = useQueryClient();
+
+  const nonce = Cookies.get("nonce");
+
+  return useMutation({
+    mutationFn: (body: AddManyToCartBody) => addManyToCart({ body, nonce }),
+    onMutate,
+    onSuccess: (res) => {
+      const oldNonce = Cookies.get("nonce");
+      const newNonce = res.headers["nonce"];
+
+      if (newNonce != oldNonce) Cookies.set("nonce", newNonce);
+      queryClient.invalidateQueries(getCartQueryOptions());
+      onSuccess?.(res.data);
+    },
+    onError,
+  });
+};
+
 export type DeleteFromCartParams = {
   key: string;
 };
@@ -280,7 +338,7 @@ export const useDeleteCart = ({
       const newNonce = res.headers["nonce"];
 
       if (newNonce != oldNonce) Cookies.set("nonce", newNonce);
-      queryClient.removeQueries(getCartQueryOptions());
+      queryClient.invalidateQueries(getCartQueryOptions());
       onSuccess?.(res.data);
     },
     onError,

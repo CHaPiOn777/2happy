@@ -13,31 +13,80 @@ module.exports = {
     },
     extend: {
       screens: {
-        sm: "320px",
-        md: "640px",
-        lg: "960px",
+        xs: "361px",
+        sm: "481px",
+        md: "769px",
+        lg: "1025px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      padding: {
+        "safe-top": "env(safe-area-inset-top)",
       },
       gridTemplateColumns: {
         cartCard: "minmax(60px, 120px) 152px minmax(60px, 120px) 80px",
         addition:
-          "minmax(296px, 496px) minmax(286px, 150px) minmax(286px, 150px)",
+          "80px minmax(280px, 496px) minmax(180px, 286px) minmax(180px, 286px)",
+        "addition-lg": "minmax(250px, 392px) 80px minmax(270px,440px)",
+        "addition-md": "minmax(100px, 276px) 40px minmax(170px,340px)",
+        "collections-lg":
+          "minmax(200px, 288px) minmax(200px, 280px) minmax(250px, 344px)",
+        "collections-md":
+          "minmax(100px, 288px) minmax(40px, 80px) minmax(140px, 288px)",
+        "instagram-lg":
+          "minmax(240px, 336px) minmax(190px, 288px) minmax(190px, 288px)",
+        "instagram-md":
+          "minmax(150px, 240px) minmax(130px, 240px) 30px minmax(50px, 160px)",
+        aboutProducts:
+          "minmax(320px, 392px) 80px minmax(200px, 288px) minmax(130px, 184px) minmax(130px, 184px)",
+        aboutProductsLg:
+          "minmax(120px, 212px) minmax(120px, 184px) 80px minmax(270px, 416px)",
+        aboutProductsMd: "2fr 1fr 2fr",
+        aboutHistory: "minmax(400px,728px) minmax(200px,472px)",
+        aboutReviews:
+          "minmax(300px, 424px) minmax(300px, 424px) minmax(100px, 128px)",
+        aboutReviewsLg: "minmax(300px, 424px) 72px minmax(300px, 424px)",
+        partnersChoose:
+          "minmax(250px, 348px) minmax(20px, 132px) minmax(130px, 216px) minmax(20px, 132px) minmax(250px, 348px)",
+        partnersChooseLg:
+          "minmax(250px, 296px) 0px minmax(130px, 296px) 0px minmax(250px, 296px)",
+        partnersSuggestFirst:
+          "minmax(220px, 288px) minmax(220px, 288px) minmax(50px, 128px) minmax(200px, 264px) minmax(120px, 184px)",
+        partnersSuggestFirstLg:
+          "minmax(200px, 288px) minmax(100px, 188px) minmax(200px, 288px) minmax(80px, 136px)",
+        partnersSuggestSecond:
+          "minmax(220px, 296px) minmax(50px, 128px) minmax(212px, 280px) minmax(300px, 448px)",
       },
       gridTemplateRows: {
         addition: "408px 232px",
+        "addition-lg": "repeat(2, 640px)",
+        "addition-md": "480px 376px",
+        "addition-sm": "312px 280px",
+        "addition-xs": "232px 216px",
+        "collections-lg": "272px 174px 226px 40px",
+        "collections-md": "440px 136px 272px 304px",
+        "collections-sm": "288px 64px 200px 152px",
+        "instagram-lg": "288px 288px 312px",
+        "instagram-md": "168px 240px 288px",
+        aboutProducts: "264px 104px 280px",
+        aboutProductsLg: "640px 264px 94px",
+        aboutProductsMd: "120px 264px 48px 264px 120px",
+        aboutReviews: "repeat(4, 120px)",
+        aboutReviewsLg: "repeat(2, 272px)",
+        aboutWeMd: "352px minmax(128px, 180px) 400px",
       },
       cursor: {
         default: "url('/icons/system/cursor-arrow.svg') 2 2, default",
         pointer: "url('/icons/system/cursor-pointer.svg') 2 2, default",
       },
-      margin: {
-        section: "136px",
-      },
       zIndex: {
         "behind-header": "50",
         "behind-header-2": "60",
         header: "100",
+        110: "110",
+        120: "120",
+        130: "130",
+        140: "140",
         "over-header": "150",
       },
       boxShadow: {
@@ -45,6 +94,8 @@ module.exports = {
         around: "0px 0px 70px -30px rgba(0, 0, 0, 1)",
         feature:
           " 0px -2px 10px 0px rgba(255, 255, 255, 0.3) inset, 0px 20px 30px 0px rgba(48, 48, 48, 0.25)",
+        value: "0px 0px 20px -6px rgba(17, 17, 18, 0.2)",
+        choose: "inset 0 0 120px rgba(255, 255, 255, 0.2)",
         "elevation-1": "0px 4px 4px 0px rgba(17, 17, 18, 0.2)",
         "elevation-2": "0px 4px 8px 0px rgba(37, 40, 43, 0.2)",
         "elevation-3": "0px 8px 16px 0px rgba(17, 17, 18, 0.2)",
@@ -55,8 +106,19 @@ module.exports = {
       },
       blur: {
         xs: "2px",
+        lg: "16px",
       },
       backgroundImage: {
+        "image-gradient":
+          "linear-gradient(92.02deg, rgba(252, 252, 255, 0) 63.25%, #FCFCFF 94.58%),linear-gradient(57.59deg, rgba(252, 252, 255, 0) 65.98%, #FCFCFF 81.8%);",
+        "cookie-gradient":
+          "linear-gradient(360deg, #111112 0%, rgba(17, 17, 18, 0.5) 210.44%)",
+        "choose-gradient":
+          "linear-gradient(180deg, rgba(17, 17, 18, 0) 0%, #111112 72.14%)",
+        "partnership-banner":
+          "linear-gradient(250.2deg, rgba(252, 252, 255, 0) 61.39%, #FCFCFF 70.12%),linear-gradient(179.99deg, rgba(252, 252, 255, 0) 76.85%, #FCFCFF 122.87%);",
+        banner:
+          "linear-gradient(0deg, rgba(17, 17, 18, 0.6), rgba(17, 17, 18, 0.6)),linear-gradient(180deg, rgba(17, 17, 18, 0) 0%, #111112 100%);",
         "radial-gradient":
           "radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%)",
         "gradient-4":
@@ -73,6 +135,8 @@ module.exports = {
           "linear-gradient(90deg, rgba(243, 243, 244, 0) 32.98%, #E4E7EB 100%)",
         "checkout-login-suggest-gradient":
           "linear-gradient(180deg, rgba(17, 17, 18, 0.3) 0%, rgba(17, 17, 18, 0.6) 100%)",
+        "about-main-gradient":
+          "linear-gradient(180.38deg, rgba(0, 0, 0, 0) 1.92%, #000000 98.38%);",
       },
       fontFamily: {
         sans: ["var(--font-lato)"],
@@ -278,6 +342,10 @@ module.exports = {
             fontSize: "48px",
             lineHeight: "56px",
           },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "32px",
+            lineHeight: "40px",
+          },
         },
 
         ".text-h1-table": {
@@ -293,12 +361,30 @@ module.exports = {
           fontWeight: "700",
           fontSize: "96px",
           lineHeight: "104px",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "62px",
+            lineHeight: "62px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "40px",
+            lineHeight: "48px",
+          },
         },
         ".text-h2": {
           fontSize: "48px",
           lineHeight: "56px",
           fontWeight: "700",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "32px",
+            lineHeight: "40px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "24px",
+            lineHeight: "32px",
+          },
         },
         ".text-h2Akira": {
           fontFamily: "var(--font-akira)",
@@ -311,18 +397,65 @@ module.exports = {
           lineHeight: "40px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "24px",
+            lineHeight: "32px",
+          },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "18px",
+            lineHeight: "28px",
+          },
+        },
+        ".text-h3Akira": {
+          fontFamily: "var(--font-akira)",
+          fontWeight: "800",
+          fontSize: "112px",
+          lineHeight: "120px",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "72px",
+            lineHeight: "72px",
+          },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "40px",
+            lineHeight: "48px",
+          },
         },
         ".text-h4": {
           fontSize: "24px",
           lineHeight: "32px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.lg")})`]: {
+            fontSize: "20px",
+            lineHeight: "28px",
+          },
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "16px",
+            lineHeight: "24px",
+          },
         },
         ".text-h5": {
           fontSize: "16px",
           lineHeight: "24px",
           fontWeight: "600",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "14px",
+            lineHeight: "24px",
+          },
+        },
+        ".text-h5-italic": {
+          fontSize: "18px",
+          fontStyle: "italic",
+          lineHeight: "24px",
+          fontWeight: "600",
         },
 
         // Text/Body
@@ -331,6 +464,11 @@ module.exports = {
           fontSize: "16px",
           lineHeight: "24px",
           textTransform: "uppercase",
+
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            fontSize: "14px",
+            lineHeight: "24px",
+          },
         },
         ".text-body2": {
           fontSize: "16px",
@@ -460,9 +598,56 @@ module.exports = {
 
         // Other
 
+        ".my-section": {
+          marginTop: "136px",
+          marginBottom: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginTop: "96px",
+            marginBottom: "96px",
+          },
+          [`@media (max-width: ${theme("screens.md")})`]: {
+            marginTop: "64px",
+            marginBottom: "64px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginTop: "48px",
+            marginBottom: "48px",
+          },
+        },
+
+        ".mt-section": {
+          marginTop: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginTop: "96px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginTop: "48px",
+          },
+        },
+
+        ".mb-section": {
+          marginBottom: "136px",
+
+          [`@media (max-width: ${theme("screens.xl")})`]: {
+            marginBottom: "96px",
+          },
+          [`@media (max-width: ${theme("screens.sm")})`]: {
+            marginBottom: "48px",
+          },
+        },
+
         ".header-hover": {
           borderBottom: 0,
           boxShadow: "none",
+        },
+
+        ".gradient-border": {
+          border: "1px solid",
+          borderImageSource:
+            "linear-gradient(225deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2))",
+          borderImageSlice: "1",
         },
 
         ".icon-glass-hover": {

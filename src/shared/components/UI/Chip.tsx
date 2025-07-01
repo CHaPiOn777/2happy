@@ -1,6 +1,6 @@
 import { cn } from "@/shared/utils/cn";
 import { cva, VariantProps } from "class-variance-authority";
-import { forwardRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 const chipVariants = cva(`flex rounded-xs text-white whitespace-nowrap w-min`, {
   variants: {
@@ -15,7 +15,7 @@ const chipVariants = cva(`flex rounded-xs text-white whitespace-nowrap w-min`, {
     size: {
       normal: "text-button-small p-2",
       medium: "text-button-xs p-3",
-      small: "text-button-xs py-1 px-2",
+      small: "text-description md:text-button-xs md:py-1 px-2",
     },
   },
   defaultVariants: {
@@ -30,7 +30,7 @@ export type ChipVariant = NonNullable<
 export type ChipSize = NonNullable<VariantProps<typeof chipVariants>["size"]>;
 
 export interface ChipProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
+  extends ComponentPropsWithoutRef<"span">,
     VariantProps<typeof chipVariants> {}
 
 const Chip = forwardRef<HTMLButtonElement, ChipProps>(

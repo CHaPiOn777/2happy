@@ -1,4 +1,12 @@
-import { Image, Links, ProductCategory, StockStatus } from "@/shared/types/api";
+import {
+  Image,
+  Links,
+  ProductAttribute,
+  ProductCategory,
+  ProductTag,
+  ProductVariationAttribute,
+  StockStatus,
+} from "@/shared/types/api";
 
 export interface Product {
   id: string;
@@ -20,31 +28,6 @@ export interface Product {
   isNew?: boolean;
   isBestseller?: boolean;
 }
-
-export type ProductAttribute = {
-  id: number;
-  name: string;
-  slug: string;
-  position: number;
-  visible: boolean;
-  variation: boolean;
-  options: string[];
-};
-
-export type ProductTags = "new" | "bestseller" | "final-sale";
-
-export type ProductTagEntity = {
-  id: number;
-  slug: ProductTags;
-  name: string;
-};
-
-type ProductVariationAttribute = {
-  id: number;
-  name: string;
-  slug: string;
-  option: string;
-};
 
 type MetaProductFeatures = {
   id: number;
@@ -74,6 +57,18 @@ type Dimensions = {
   length: string;
   width: string;
   height: string;
+};
+
+export type ProductDefaultVariation = {
+  id: number;
+  sale_price: string;
+  regular_price: string;
+  price: string;
+  on_sale: boolean;
+  attributes: ProductVariationAttribute[];
+  stock_status: StockStatus;
+  stock_quantity: number;
+  image: Image;
 };
 
 export type ProductVariation = {
@@ -158,14 +153,15 @@ export type ProductServer = {
   parent_id: number;
   purchase_note: string;
   categories: ProductCategory[];
-  tags: ProductTagEntity[];
+  tags: ProductTag[];
   images: Image[];
   attributes: ProductAttribute[];
   default_attributes: unknown[];
   variations: unknown[];
-  grouped_products: unknown[];
+  grouped_products: number[];
   menu_order: number;
   meta_data: ProductMeta;
+  defaultVariation: ProductDefaultVariation | null;
   _links: Links;
 };
 

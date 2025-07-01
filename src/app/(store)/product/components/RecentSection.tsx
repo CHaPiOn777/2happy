@@ -7,13 +7,15 @@ import ProductsScrollableSection from "@/features/Products/components/ProductsSc
 import { useGetProductId } from "@/features/Products/hooks/useGetProductId";
 
 const RecentSection = () => {
-  const { id: productId } = useGetProductId();
+  const { id: productId } = useGetProductId("productId");
   const [recentProducts, _] = useLocalStorage<number[]>("recentProducts", []);
 
   const filteredRecentProducts = recentProducts.filter((id) => id != productId);
 
   const { data, isFetching } = useQuery({
-    ...getProductsQueryOptions({ include: filteredRecentProducts }),
+    ...getProductsQueryOptions({
+      include: filteredRecentProducts,
+    }),
     enabled: !!filteredRecentProducts.length,
   });
   return (

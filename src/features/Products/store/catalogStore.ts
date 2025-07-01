@@ -1,9 +1,5 @@
+import { TSort } from "@/shared/types/other";
 import { create } from "zustand";
-
-export type TSort = {
-  type: string;
-  field: string;
-};
 
 type TCatalogStore = {
   gridType: "big" | "small";

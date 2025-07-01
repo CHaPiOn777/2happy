@@ -2,8 +2,14 @@ import { env } from "@/config/env";
 import { formattedApiInstance } from "@/shared/api/formattedApiInstance";
 import { WooResponse } from "@/shared/types/api";
 import { createURLWithParams } from "@/shared/utils";
-import { CreateOrderPayload, OrderResponse } from "../types";
 import {
+  CreateOrderPayload,
+  OrderResponse,
+  RefundOrderPayload,
+} from "../types";
+import {
+  InfiniteData,
+  infiniteQueryOptions,
   QueryOptions,
   queryOptions,
   useMutation,
@@ -58,6 +64,34 @@ export const getOrdersQueryOptions = (params: getOrdersListParameters) => {
   });
 };
 
+export const getOrdersInfiniteQueryOptions = (
+  params: getOrdersListParameters
+) => {
+  return infiniteQueryOptions<
+    WooResponse<OrderResponse[]>,
+    Error,
+    InfiniteData<WooResponse<OrderResponse[]>, number>,
+    readonly unknown[],
+    number
+  >({
+    queryKey: ordersQueryKey(params),
+    queryFn: (meta) =>
+      getOrdersList(
+        { page: meta.pageParam, ...params },
+        { signal: meta.signal }
+      ),
+    initialPageParam: 1,
+    getNextPageParam: (_, res, prevPage) => {
+      const newPage = prevPage + 1;
+      const totalPages = res[0].totalPages;
+
+      const hasNextPage = Number(totalPages) >= newPage;
+
+      return hasNextPage ? newPage : null;
+    },
+  });
+};
+
 const getOrderURL = `${env.WOOCOMMERCE_API}/orders/{id}`;
 
 export const getOrder = async (
@@ -87,10 +121,7 @@ export const getOrderQueryOptions = (id: number) => {
   });
 };
 
-export const useGetOrder = ({
-  id,
-  ...options
-}: { id: number } & QueryOptions) => {
+export const useGetOrder = ({ id }: { id: number } & QueryOptions) => {
   return useQuery({ ...getOrderQueryOptions(id) });
 };
 
@@ -118,6 +149,69 @@ export const useCreateOrder = ({
     onSuccess: (res, variables, context) => {
       queryClient.invalidateQueries(getOrdersQueryOptions({}));
       onSuccess?.(res, variables, context);
+    },
+    onError: (err, variables, context) => {
+      onError?.(err, variables, context);
+    },
+    ...options,
+  });
+};
+
+const createOrderRefundURL = `${env.WOOCOMMERCE_API}/orders/{id}/refunds`;
+
+export const createRefundOrder = async ({
+  id,
+  data,
+}: {
+  id: number;
+  data: RefundOrderPayload;
+}): Promise<OrderResponse> => {
+  return formattedApiInstance.post<unknown, OrderResponse>(
+    createOrderRefundURL.replace("{id}", `${id}`),
+    data
+  );
+};
+
+export const useCreateRefundOrder = ({
+  onSuccess,
+  onError,
+  ...options
+}: UseMutationOptions<
+  OrderResponse,
+  unknown,
+  { data: RefundOrderPayload },
+  unknown
+>) => {
+  const queryClient = getQueryClient();
+  return useMutation({
+    mutationFn: createRefundOrder,
+    onSuccess: (res, variables, context) => {
+      const orderId = variables.id;
+
+      onSuccess?.(res, variables, context);
+
+      queryClient.setQueriesData<
+        InfiniteData<WooResponse<OrderResponse[]>> | undefined
+      >(
+        { queryKey: getOrdersQueryOptions({}).queryKey },
+        (oldData: InfiniteData<WooResponse<OrderResponse[]>> | undefined) => {
+          if (!oldData) return oldData;
+
+          const newData: InfiniteData<WooResponse<OrderResponse[]>> = {
+            ...oldData,
+            pages: oldData.pages.map((page) => ({
+              ...page,
+              items: page.items.map((order) =>
+                order.id === orderId
+                  ? { ...order, status: "refunded" }
+                  : { ...order }
+              ),
+            })),
+          };
+
+          return newData;
+        }
+      );
     },
     onError: (err, variables, context) => {
       onError?.(err, variables, context);

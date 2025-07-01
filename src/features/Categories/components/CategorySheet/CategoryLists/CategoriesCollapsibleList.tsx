@@ -31,7 +31,7 @@ const CategoriesCollapsibleList = ({
 
   return (
     <div className="flex flex-col flex-[0,1,auto] overflow-hidden">
-      <ScrollArea className="pb-[2px]">
+      <ScrollArea className="pb-[2px]" orientation="vertical">
         <ul className="space-y-2">
           {mainList.map((category) => (
             <li key={category.id}>

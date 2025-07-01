@@ -1,4 +1,5 @@
 import {
+  MutationOptions,
   queryOptions,
   useMutation,
   useQuery,
@@ -10,16 +11,17 @@ import { z } from "zod";
 import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
-import { getQueryClient } from "./queryClient";
-import { useRouter } from "next/navigation";
-import { paths } from "@/config/paths";
+import { getFavoriteQueryOptions } from "@/features/Favorite/api/favoriteQueries";
+import { requestQueue } from "./requestQueue";
 import { env } from "@/config/env";
+import { AxiosError } from "axios";
 
 export const getUserURL = "/wp/v2/users/me";
 
 export const getUser = async (): Promise<UserData> => {
-  const response = await formattedApiInstance.get<unknown, UserData>(
-    getUserURL
+  const response = await requestQueue.addRequest(
+    () => formattedApiInstance.get<unknown, UserData>(getUserURL),
+    "medium"
   );
 
   return response;
@@ -57,6 +59,7 @@ export const useLogin = ({
     onSuccess: ({ token }) => {
       Cookies.set("access_token", token, { expires: 5 });
       setAccessToken(token);
+      queryClient.invalidateQueries(getFavoriteQueryOptions());
       queryClient.invalidateQueries(getUserQueryOptions());
       queryClient.invalidateQueries(getCartQueryOptions());
       onSuccess?.();
@@ -140,24 +143,6 @@ const registerUser = (data: RegisterInput): Promise<AuthResponse> => {
   return formattedApiInstance.post("/custom/v1/register", data);
 };
 
-export const useLogout = () => {
-  const queryClient = getQueryClient();
-  const { clearUserToken } = useAuthStore();
-
-  const router = useRouter();
-
-  const handleLogout = () => {
-    Cookies.remove("access_token");
-    clearUserToken();
-    queryClient.invalidateQueries(getCartQueryOptions());
-    queryClient.removeQueries(getUserQueryOptions());
-
-    router.push(paths.home.getHref());
-  };
-
-  return { handleLogout };
-};
-
 export const useGetToken = () => {
   const { data: user } = useUser();
 
@@ -186,21 +171,30 @@ const googleLoginUser = (accessToken: string): Promise<GoogleAuthResponse> => {
 export const useGoogleLogin = ({
   onSuccess,
   onError,
-}: {
-  onSuccess?: () => void;
-  onError?: (error: Error) => void;
-}) => {
+  ...props
+}: MutationOptions<
+  GoogleAuthResponse,
+  AxiosError<{ code: string; message: string }>,
+  string
+>) => {
   const queryClient = useQueryClient();
   const setAccessToken = useAuthStore((state) => state.setUserToken);
-  return useMutation({
+  return useMutation<
+    GoogleAuthResponse,
+    AxiosError<{ code: string; message: string }>,
+    string
+  >({
     mutationFn: googleLoginUser,
-    onSuccess: ({ token }) => {
-      Cookies.set("access_token", token, { expires: 5 });
-      setAccessToken(token);
+    onSuccess: (data, variables, context) => {
+      Cookies.set("access_token", data.token, { expires: 5 });
+      setAccessToken(data.token);
       queryClient.invalidateQueries(getUserQueryOptions());
       queryClient.invalidateQueries(getCartQueryOptions());
-      onSuccess?.();
+      onSuccess?.(data, variables, context);
     },
-    onError: onError,
+    onError: (err, variables, context) => {
+      onError?.(err, variables, context);
+    },
+    ...props,
   });
 };

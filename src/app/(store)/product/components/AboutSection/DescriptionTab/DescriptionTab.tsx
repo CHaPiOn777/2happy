@@ -13,11 +13,11 @@ import AccordionAboutItem from "./AccordionItems/AccordionAboutItem";
 import AccordionWithRichText from "./AccordionItems/AccordionWithRichText";
 
 const DescriptionTab = () => {
-  const { id } = useGetProductId();
+  const { id } = useGetProductId("productId");
   const { data } = useSuspenseQuery(getProductByIdQueryOptions(id));
   return (
-    <div className="flex h-full">
-      <div className="basis-[600px]">
+    <div className="flex flex-col lg:gap-0 gap-8 lg:flex-row h-full">
+      <div className="lg:basis-[600px]">
         <div className="mb-8">
           <div className="flex gap-2 text-gray-middle mb-4">
             <span>Артикул:</span>
@@ -49,8 +49,8 @@ const DescriptionTab = () => {
         </Accordion>
       </div>
       <ImageWithLoader
-        wrapperClassName="flex-1 top-[-68px] bg-white"
-        className="pl-12"
+        wrapperClassName="w-[304px] h-[400px] ml-auto lg:w-auto lg:h-auto lg:flex-1 lg:top-[-68px] bg-white hidden sm:block"
+        className="lg:pl-12"
         src="/images/Home/Main/slider-1.jpg"
         alt="desc-image"
       />

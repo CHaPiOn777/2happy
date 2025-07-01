@@ -49,6 +49,7 @@ export const responseErrorInterceptor = (error: AxiosError) => {
   if (error.message === "canceled") return;
 
   if (error.response) {
+    console.error("URL - ", error.config?.baseURL);
     console.error(
       'Ответ сервера - "Ошибка":',
       error.response.status,

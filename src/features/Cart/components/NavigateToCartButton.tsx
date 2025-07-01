@@ -3,17 +3,27 @@ import { Button, ButtonProps } from "@/shared/components/UI/Button";
 import { useNavigateCheckout } from "../hooks/useNavigateCheckout";
 import { useUser } from "@/shared/api/authApi";
 import Link from "next/link";
+import { CartResponse } from "../types";
+import { useRouter } from "next/navigation";
+import { cn } from "@/shared/utils";
 
 const NavigateToCartButton = ({
+  className,
+  cartData,
   buttonProps,
 }: {
+  className?: string;
+  cartData: CartResponse;
   buttonProps?: ButtonProps & { text?: string };
 }) => {
   const { data: user } = useUser();
 
+  const router = useRouter();
+
   const buttonDisabled = buttonProps?.disabled;
 
   const { link, handleClick } = useNavigateCheckout({
+    cartData,
     disabled: buttonDisabled,
   });
 
@@ -23,7 +33,7 @@ const NavigateToCartButton = ({
         <Link
           onClick={handleClick}
           href={link}
-          className={`${buttonDisabled && "pointer-events-none"}`}
+          className={cn(buttonDisabled && "pointer-events-none", className)}
         >
           <Button
             variant="primary"
@@ -37,7 +47,15 @@ const NavigateToCartButton = ({
         </Link>
       ) : (
         <AuthModal
-          triggerProps={{ asChild: true, disabled: !!user || buttonDisabled }}
+          triggerProps={{
+            asChild: true,
+            disabled: !!user || buttonDisabled,
+            className,
+          }}
+          onSuccess={() => {
+            handleClick();
+            router.push(link);
+          }}
           buttonSlot={
             <Button
               className="w-full"

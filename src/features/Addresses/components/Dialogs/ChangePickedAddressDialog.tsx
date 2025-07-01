@@ -53,8 +53,8 @@ const ChangePickedAddressDialog = ({
   return (
     <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[1224px] w-full flex flex-col gap-10 p-20">
-        <div className="flex flex-col gap-6">
+      <DialogContent className="w-full h-full max-w-full md:max-w-[720px] md:max-h-[90vh] lg:max-w-[1224px] w-full flex flex-col justify-between gap-10 !pb-8 !pt-16 md:pb-20 md:pt-20 px-4 sm:px-8 md:px-14 lg:px-20">
+        <div className="flex flex-col h-full overflow-hidden gap-6">
           <DialogHeader className="sr-only">
             <DialogTitle className="sr-only">
               Выберите адрес доставки
@@ -66,11 +66,11 @@ const ChangePickedAddressDialog = ({
           <div className="rounded-xs border border-main bg-gray-light py-4 px-5">
             <h4 className="text-h5">Адресная книга</h4>
           </div>
-          <p className="ml-5 text-body2 text-gray-middle">
+          <p className="md:ml-5 text-body2 text-gray-middle">
             Выберите адрес доставки или добавьте новый
           </p>
-          <ScrollArea className="h-[370px] pr-2">
-            <div>
+          <ScrollArea className="md:h-[370px] pr-2">
+            <div className="flex flex-col gap-6">
               <AddressRadioGroup
                 defaultValue={`${defaultAddress.id}`}
                 onValueChange={(value) => {
@@ -86,11 +86,19 @@ const ChangePickedAddressDialog = ({
                     key={address.id}
                     id={`${address.id}`}
                     value={`${address.id}`}
-                    onClick={() => console.log(address)}
+                    leftSlot={
+                      <h5 className="text-body1 max-w-[180px] w-full">
+                        {address.firstName} {address.lastName}
+                      </h5>
+                    }
                     rightSlot={
-                      <div className="flex gap-4">
+                      <div className="flex gap-4 flex-col w-full md:w-max lg:flex-row">
                         <UpdateAddressDialog title="Адрес" address={address}>
-                          <Button variant="secondary" size="small">
+                          <Button
+                            className="w-full md:w-max"
+                            variant="secondary"
+                            size="small"
+                          >
                             Редактировать
                           </Button>
                         </UpdateAddressDialog>
@@ -102,20 +110,21 @@ const ChangePickedAddressDialog = ({
                           onApply={() => {
                             mutate({ id: address.id, user_id: user?.id ?? 0 });
                           }}
-                          isLoading={isPending}
+                          isPending={isPending}
                         >
-                          <Button disabled={isPending} size={"small"}>
+                          <Button
+                            className="w-full lg:w-min"
+                            disabled={isPending}
+                            size={"small"}
+                          >
                             Удалить
                           </Button>
                         </DeleteAddressDialog>
                       </div>
                     }
                   >
-                    <div className="flex items-center gap-6">
-                      <h5 className="text-body1 max-w-[180px] w-full">
-                        {address.firstName} {address.lastName}
-                      </h5>
-                      <div className="flex flex-col gap-2">
+                    <div className="flex items-start lg:items-center gap-6 flex-col lg:flex-row">
+                      <div className="flex flex-col gap-2 text-gray-dark">
                         <span>{address.address}</span>
                         <span>{address.country}</span>
                         <span>{address.city}</span>
@@ -128,9 +137,9 @@ const ChangePickedAddressDialog = ({
             </div>
           </ScrollArea>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-auto">
             <AddAddressDialog title="Адрес">
-              <Button variant="secondary">
+              <Button className="w-full md:w-max" variant="secondary">
                 Добавить новый адрес <PlusIcon />
               </Button>
             </AddAddressDialog>

@@ -1,7 +1,11 @@
 import { env } from "@/config/env";
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "src/shared/styles")],
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -17,26 +21,32 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
-    const rewrites = [
+    return [
       {
         source: "/api/auth/:path*",
-        destination: "/api/auth/:path*", // оставить внутри Next.js
+        destination: "/api/auth/:path*", // handled by Next.js (NextAuth)
       },
-    ];
-
-    const fallback = [
       {
         source: "/api/:path*",
-        destination: `${env.API_URL}/:path*`,
+        destination: `${env.API_URL}/:path*`, // proxy to external API
       },
     ];
-
-    return {
-      beforeFiles: rewrites,
-      afterFiles: [],
-      fallback: fallback,
-    };
   },
+
+  // async rewrites() {
+  //   const rewrites = [
+  //     {
+  //       source: "/api/:path*",
+  //       destination: `${env.API_URL}/:path*`,
+  //     },
+  //   ];
+
+  //   return {
+  //     beforeFiles: rewrites,
+  //     afterFiles: [],
+  //     fallback: [],
+  //   };
+  // },
 };
 
 export default nextConfig;

@@ -1,5 +1,5 @@
 import FiltersList from "@/features/Products/components/Filters/FiltersList";
-import Catalog from "../../../(store)/components/Catalog";
+import Catalog from "../../components/MainCatalog/Catalog";
 import { tagIds } from "@/features/Categories/consts/consts";
 
 const BestsellersPage = () => {

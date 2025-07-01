@@ -3,6 +3,10 @@ export type TCategories =
   | "new"
   | "bestsellers"
   | "accessories"
+  | "collections"
+  | "specialEvening"
+  | "sportCollection"
+  | "everyDayCollection"
   | "clothes"
   | "outerwear"
   | "dresses"
@@ -17,6 +21,10 @@ export type TTags = "new" | "final_sale" | "bestsellers";
 export const categoryIds: Record<TCategories, number> = {
   final_sale: 22,
   new: 17,
+  collections: 72,
+  specialEvening: 73,
+  everyDayCollection: 75,
+  sportCollection: 74,
   bestsellers: 21,
   accessories: 19,
   clothes: 18,
@@ -31,11 +39,34 @@ export const categoryIds: Record<TCategories, number> = {
 
 export const categorySlugs: Record<TCategories, string> = {
   final_sale: "final-sale",
+  collections: "collections",
+  specialEvening: "special-evening",
+  sportCollection: "sport-collection",
+  everyDayCollection: "every-day-collection",
   new: "new",
   bestsellers: "bestsellers",
   accessories: "accessories",
   clothes: "clothes",
   outerwear: "outerwear",
+  dresses: "dresses",
+  costumes: "costumes",
+  trousers: "trousers",
+  shirts: "shirts",
+  sweatshirtsAndBomberJackets: "sweatshirts-bomber-jackets",
+  skirts: "skirts",
+};
+
+export const categoryNames: Record<TCategories, string> = {
+  final_sale: "Final sale",
+  collections: "Коллекции",
+  specialEvening: "special-evening",
+  sportCollection: "sport-collection",
+  everyDayCollection: "every-day-collection",
+  new: "Новинки",
+  bestsellers: "Бестселлеры",
+  accessories: "Аксессуары",
+  clothes: "Одежда",
+  outerwear: "Верхняя одежда",
   dresses: "dresses",
   costumes: "costumes",
   trousers: "trousers",

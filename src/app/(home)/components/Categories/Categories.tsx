@@ -9,40 +9,79 @@ import Link from "next/link";
 import { CATEGORIES } from "./consts";
 import CategoryLink from "@/features/Categories/components/CategoryLink";
 
+import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+
 const Categories = () => {
   return (
     <Section className="border-b-[1px] border-b-main">
-      <Container className="justify-between gap-6 my-section">
-        <div className="flex flex-col justify-between basis-[392px]">
-          <h2 className="text-h2">
-            Категории <br /> /
-          </h2>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-4 grid-rows-[28px,128px]">
+      <Container className="flex-col md:flex-row justify-between gap-8 md:gap-20 lg:gap-[176px] my-section">
+        <div className="flex flex-col gap-8 md:gap-0 justify-between w-full lg:basis-[392px]">
+          <AnimatedInView
+            as={"div"}
+            id="home-categories-title"
+            initial={{ opacity: 0, y: -150 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "tween" }}
+            className="text-h2 sm:mt-12 lg:mt-0"
+          >
+            Категории <br className="hidden sm:block" /> /
+          </AnimatedInView>
+          <AnimatedInView
+            as="div"
+            id="home-categories-images"
+            initial={{ opacity: 0, y: 150 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "tween" }}
+            className="flex flex-col items-end md:items-start gap-4"
+          >
             <Link
               href={paths.catalog.getHref()}
-              className="link-hover col-span-2 text-button-medium"
+              className="link-hover col-start-2 md:col-span-2 text-button-small sm:text-button-medium"
             >
               Смотреть все <ArrowRightIcon />
             </Link>
-            <div className="relative">
-              <Image
-                fill
-                src="/images/Home/Categories/category-1.jpg"
-                className="object-cover object-top"
-                alt="category-image"
-              />
+            <div className="flex gap-2 xs:gap-6">
+              <div className="relative w-[136px] h-[96px] sm:w-[152px] sm:h-[100px] lg:w-[184px] lg:h-[128px]">
+                <Image
+                  fill
+                  src="/images/Home/Categories/category-1.jpg"
+                  className="object-cover object-top"
+                  alt="category-image"
+                />
+              </div>
+              <div className="relative w-[136px] h-[96px] sm:w-[152px] sm:h-[100px] lg:w-[184px] lg:h-[128px]">
+                <Image
+                  fill
+                  className="object-cover object-center"
+                  src="/images/2happy-logo-black.jpg"
+                  alt="category-image"
+                />
+              </div>
             </div>
-            <div className="relative">
-              <Image
-                fill
-                className="object-cover object-center"
-                src="/images/2happy-logo-black.jpg"
-                alt="category-image"
-              />
-            </div>
-          </div>
+          </AnimatedInView>
         </div>
-        <div className="basis-[600px] flex flex-col">
+
+        <AnimatedInView
+          as="div"
+          id="home-categories-list"
+          animations={{
+            lg: {
+              initial: { opacity: 0, x: 100 },
+              whileInView: { opacity: 1, x: 0 },
+              transition: { duration: 0.6, type: "tween" },
+              viewport: { once: true, amount: 0.3 },
+            },
+            default: {
+              initial: { opacity: 0, x: 100 },
+              whileInView: { opacity: 1, x: 0 },
+              transition: { duration: 0.6, type: "tween" },
+              viewport: { once: true, amount: 0.5 },
+            },
+          }}
+          className="w-full lg:basis-[600px] flex flex-col"
+        >
           {CATEGORIES.map((category) => (
             <Button
               key={category.name}
@@ -60,7 +99,7 @@ const Categories = () => {
               </CategoryLink>
             </Button>
           ))}
-        </div>
+        </AnimatedInView>
       </Container>
     </Section>
   );

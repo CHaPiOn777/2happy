@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import GoogleColoredIcon from "@/shared/components/icons/Social/GoogleColoredIcon";
 import { paths } from "@/config/paths";
+import { notify } from "@/shared/lib/notify";
 
 const CompleteAuth = () => {
   const session = useSession();
@@ -16,11 +17,16 @@ const CompleteAuth = () => {
 
   const { mutate: googleLogin } = useGoogleLogin({
     onSuccess: () => {},
+    onError: (err) => {
+      notify({ message: err.response?.data.message || "", variant: "error" });
+      Cookies.remove("access_token");
+    },
+    onSettled: () => {
+      router.replace(paths.home.getHref());
+    },
   });
 
   useEffect(() => {
-    if (Cookies.get("access_token") || !session.data?.accessToken)
-      router.replace(paths.home.getHref());
     if (session.data?.accessToken && !Cookies.get("access_token"))
       googleLogin(session?.data?.accessToken);
   }, [session]);

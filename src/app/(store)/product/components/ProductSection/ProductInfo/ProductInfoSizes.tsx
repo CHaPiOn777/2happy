@@ -23,8 +23,11 @@ const ProductInfoSizes = ({
   const sizesAreLoaded = !isLoading && sizes?.length;
   const hasNoSizes = !isLoading && sizes?.length === 0;
 
-  const isItemAvailable = (item: VariationEntity) =>
-    item.disabled || (availableSizes && !availableSizes.includes(item.name));
+  const isItemAvailable = (item: VariationEntity) => {
+    return (
+      item.disabled || (availableSizes && !availableSizes.includes(item.name))
+    );
+  };
   return (
     <div className="flex flex-col gap-4">
       <div className="w-full flex justify-between mt-4 sm:mt-0">

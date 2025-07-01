@@ -97,6 +97,7 @@ const CartDefaultCard = ({
       <div className="grid md:grid-cols-[minmax(200px,520px)_1fr] gap-x-12">
         <div className="flex gap-4 sm:gap-6">
           <ImageWithLoader
+            textClassName="text-sm"
             wrapperClassName="w-[96px] h-[144px] sm:w-[126px] sm:h-[180px] md:w-[146px] md:h-[216px] lg:w-[120px] lg:h-[176px] shrink-0"
             src={image.src}
             alt={image.alt}

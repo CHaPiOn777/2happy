@@ -8,6 +8,8 @@ import { ProductServer } from "../types";
 import { cn } from "@/shared/utils";
 import { Fragment, ReactNode } from "react";
 
+import * as motion from "motion/react-client";
+
 const defaultRenderCard = (product: ProductServer) => (
   <ProductServerCard product={product} />
 );
@@ -37,7 +39,15 @@ const ProductsScrollableSection = ({
           className
         )}
       >
-        <h2 className="text-h2">{title}</h2>
+        <motion.h2
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-h2"
+        >
+          {title}
+        </motion.h2>
         <ScrollArea orientation="horizontal" type="always">
           <div className="grid grid-flow-col auto-cols-[calc(100vw-32px)] xs:auto-cols-[216px] md:auto-cols-[288px] grid-rows-[472px] md:grid-rows-[552px] gap-4 sm:gap-6 mb-6">
             {isLoading && (
@@ -49,7 +59,15 @@ const ProductsScrollableSection = ({
               </>
             )}
             {data?.map((product) => (
-              <Fragment key={product.id}>{renderCard(product)}</Fragment>
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                {renderCard(product)}
+              </motion.div>
             ))}
           </div>
           <ScrollBar orientation="horizontal" />

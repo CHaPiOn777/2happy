@@ -28,12 +28,14 @@ const AuthModal = ({
   defaultTab = "login",
   buttonSlot,
   triggerProps,
+  callbackUrl,
   onSuccess,
 }: {
   children: ReactNode;
   defaultTab?: "login" | "register";
   buttonSlot?: ReactNode;
   triggerProps?: ComponentPropsWithoutRef<typeof DialogTrigger>;
+  callbackUrl?: string;
   onSuccess?: () => void;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -60,7 +62,7 @@ const AuthModal = ({
       </DialogTrigger>
       <DialogContent
         hideClose
-        className="px-4 pr-0 xs:pr-4 xs:px-6 sm:px-8 gap-10 max-h-[90vh] overflow-hidden"
+        className="px-4 pr-0 xs:pr-4 xs:px-6 sm:px-8 gap-10 max-h-[95vh] overflow-hidden"
         closeClassName="top-10 right-8"
       >
         <DialogHeader className="pr-4 xs:pr-0 justify-between flex-row items-end">
@@ -97,11 +99,11 @@ const AuthModal = ({
             Или
           </span>
           <div className="flex flex-col gap-4">
-            <GoogleLoginButton />
-            <Button variant="secondary" size="normal" className="w-full">
+            <GoogleLoginButton callbackUrl={callbackUrl} />
+            {/* <Button variant="secondary" size="normal" className="w-full">
               <AppleIcon />
               Войти через Apple
-            </Button>
+            </Button> */}
           </div>
         </div>
       </DialogContent>

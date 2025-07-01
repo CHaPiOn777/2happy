@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CartResponse } from "../types";
 import { useRouter } from "next/navigation";
 import { cn } from "@/shared/utils";
+import { paths } from "@/config/paths";
 
 const NavigateToCartButton = ({
   className,
@@ -69,6 +70,7 @@ const NavigateToCartButton = ({
               </Link>
             </Button>
           }
+          callbackUrl={paths.checkout.getHref()}
         >
           <Button
             variant="primary"

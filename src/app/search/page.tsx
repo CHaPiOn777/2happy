@@ -1,6 +1,4 @@
 import { getQueryClient } from "@/shared/api/queryClient";
-import Notifications from "./components/Notifications/Notifications";
-import NotFound from "./components/NotFound/NotFound";
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Result from "./components/Result/Result";

@@ -30,7 +30,6 @@ const RadioGroupButton = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, children, disabled, ...props }, ref) => {
-  console.log(props.value, disabled);
   return (
     <IconButton asChild size="small" variant="secondary">
       <RadioGroupPrimitive.Item

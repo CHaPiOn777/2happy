@@ -21,8 +21,6 @@ const getAttributesById = async (
     signal,
   });
 
-  console.log(response);
-
   return response;
 };
 

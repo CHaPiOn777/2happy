@@ -21,6 +21,7 @@ import { ComponentPropsWithoutRef, ReactNode, useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import CloseIcon from "@/shared/components/icons/CloseIcon";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 const AuthModal = ({
   children,
@@ -96,10 +97,7 @@ const AuthModal = ({
             Или
           </span>
           <div className="flex flex-col gap-4">
-            <Button variant="secondary" size="normal" className="w-full">
-              <GoogleIcon />
-              Войти через Google
-            </Button>
+            <GoogleLoginButton />
             <Button variant="secondary" size="normal" className="w-full">
               <AppleIcon />
               Войти через Apple

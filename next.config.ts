@@ -21,19 +21,32 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
-    const rewrites = [
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: "/api/auth/:path*", // handled by Next.js (NextAuth)
+      },
       {
         source: "/api/:path*",
-        destination: `${env.API_URL}/:path*`,
+        destination: `${env.API_URL}/:path*`, // proxy to external API
       },
     ];
-
-    return {
-      beforeFiles: rewrites,
-      afterFiles: [],
-      fallback: [],
-    };
   },
+
+  // async rewrites() {
+  //   const rewrites = [
+  //     {
+  //       source: "/api/:path*",
+  //       destination: `${env.API_URL}/:path*`,
+  //     },
+  //   ];
+
+  //   return {
+  //     beforeFiles: rewrites,
+  //     afterFiles: [],
+  //     fallback: [],
+  //   };
+  // },
 };
 
 export default nextConfig;

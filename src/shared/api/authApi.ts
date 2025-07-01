@@ -1,17 +1,20 @@
 import {
+  MutationOptions,
   queryOptions,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { formattedApiInstance } from "./formattedApiInstance";
-import { AuthResponse, UserData } from "@/shared/types/api";
+import { AuthResponse, GoogleAuthResponse, UserData } from "@/shared/types/api";
 import { z } from "zod";
 import { useAuthStore } from "@/shared/store/authStore";
 import Cookies from "js-cookie";
 import { getCartQueryOptions } from "@/features/Cart/api/cartQueries";
 import { getFavoriteQueryOptions } from "@/features/Favorite/api/favoriteQueries";
 import { requestQueue } from "./requestQueue";
+import { env } from "@/config/env";
+import { AxiosError } from "axios";
 
 export const getUserURL = "/wp/v2/users/me";
 
@@ -151,4 +154,47 @@ export const useGetToken = () => {
   };
 
   return getToken;
+};
+
+const googleLoginUserURL = `${env.CUSTOM_API}/google-login`;
+
+const googleLoginUser = (accessToken: string): Promise<GoogleAuthResponse> => {
+  return formattedApiInstance.post<
+    unknown,
+    GoogleAuthResponse,
+    { access_token: string }
+  >(googleLoginUserURL, {
+    access_token: accessToken,
+  });
+};
+
+export const useGoogleLogin = ({
+  onSuccess,
+  onError,
+  ...props
+}: MutationOptions<
+  GoogleAuthResponse,
+  AxiosError<{ code: string; message: string }>,
+  string
+>) => {
+  const queryClient = useQueryClient();
+  const setAccessToken = useAuthStore((state) => state.setUserToken);
+  return useMutation<
+    GoogleAuthResponse,
+    AxiosError<{ code: string; message: string }>,
+    string
+  >({
+    mutationFn: googleLoginUser,
+    onSuccess: (data, variables, context) => {
+      Cookies.set("access_token", data.token, { expires: 5 });
+      setAccessToken(data.token);
+      queryClient.invalidateQueries(getUserQueryOptions());
+      queryClient.invalidateQueries(getCartQueryOptions());
+      onSuccess?.(data, variables, context);
+    },
+    onError: (err, variables, context) => {
+      onError?.(err, variables, context);
+    },
+    ...props,
+  });
 };

@@ -9,8 +9,6 @@ import { useHasMounted } from "@/shared/hooks/useHasMounted";
 import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { motion } from "motion/react";
-
 const FinalSaleList = () => {
   const isMedium = useMediaCustom("md");
 

@@ -17,6 +17,8 @@ import { useUser } from "@/shared/api/authApi";
 import { useLogout } from "@/features/Auth/hooks/useLogout";
 import HomeIcon from "@/shared/components/icons/HomeIcon";
 
+import { motion } from "motion/react";
+
 const AccountBreadcrumbs = () => {
   const { data } = useUser();
 
@@ -53,9 +55,15 @@ const AccountBreadcrumbs = () => {
       </Breadcrumbs>
       <Container>
         <div className="w-full flex items-center justify-between mt-8 mb-8 md:mt-6 md:mb-12">
-          <h2 className="text-h3 text-white">
-            Личный кабинет, {data?.name.split(" ")[0]}{" "}
-          </h2>
+          <motion.h2
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 1 }}
+            className="text-h3 text-white"
+          >
+            Личный кабинет {data?.name && `, ${data?.name.split(" ")[0]}`}{" "}
+          </motion.h2>
           <Button
             className="text-white"
             variant="tertiary"

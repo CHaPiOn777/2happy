@@ -1,21 +1,48 @@
 import UserChangePasswordForm from "@/features/User/components/UserChangePasswordForm";
 import UserUpdateForm from "@/features/User/components/UserUpdateForm";
-import Container from "@/shared/components/UI/Container";
+
+import * as motion from "motion/react-client";
 
 const ProfileTab = () => {
   return (
     <div className="w-full block">
       <div className="flex flex-col gap-8 md:gap-12 mb-section">
-        <div className="border border-main bg-gray-light py-4 px-5">
+        <motion.div
+          initial={{ y: -50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 1 }}
+          className="border border-main bg-gray-light py-4 px-5"
+        >
           <h4 className="text-h5">Личные данные</h4>
-        </div>
-        <UserUpdateForm />
+        </motion.div>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <UserUpdateForm />
+        </motion.div>
       </div>
       <div className="flex flex-col gap-8 md:gap-12 mt-section">
-        <div className="border border-main bg-gray-light py-4 px-5">
+        <motion.div
+          initial={{ y: -50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 1 }}
+          className="border border-main bg-gray-light py-4 px-5"
+        >
           <h4 className="text-h5">Изменить пароль</h4>
-        </div>
-        <UserChangePasswordForm />
+        </motion.div>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <UserChangePasswordForm />
+        </motion.div>
       </div>
     </div>
   );

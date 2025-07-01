@@ -20,6 +20,7 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     height: number;
   } | null>(null);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
@@ -33,7 +34,7 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
     const img = new window.Image();
     img.src = src;
     img.onload = () => {
-      console.log("изображение загрузилось");
+      setIsLoading(false);
       setNaturalSize({ width: img.naturalWidth, height: img.naturalHeight });
     };
   }, [src]);
@@ -144,6 +145,11 @@ const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchCancel}
     >
+      {isLoading && (
+        <div className="flex items-center justify-center absolute w-full h-full bg-white z-50">
+          <h2 className="text-h3Akira animate-pulse">2happy</h2>
+        </div>
+      )}
       {naturalSize && (
         <div
           onMouseDown={handleMouseDown}

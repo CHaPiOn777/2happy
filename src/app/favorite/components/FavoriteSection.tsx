@@ -13,6 +13,8 @@ import FavoriteEmpty from "./FavoriteEmpty";
 import FavoriteSectionButtons from "./FavoriteSectionButtons";
 import FavoriteCardLoader from "@/features/Favorite/components/Cards/FavoriteCard/FavoriteCardLoader";
 
+import { motion } from "motion/react";
+
 const FavoriteSection = () => {
   const { data: favorites, isLoading } = useGetAllFavorite();
 
@@ -24,14 +26,20 @@ const FavoriteSection = () => {
   return (
     <Section className="sm:border-b border-main">
       <Container className="flex-col gap-8 sm:gap-12 lg:gap-16 my-section md:my-20 lg:my-section">
-        <div className="flex flex-col gap-4">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="flex flex-col gap-4"
+        >
           <h2 className="text-h2">Избранное /</h2>
           {!!favoriteCount && (
             <div className="text-gray-middle">
               Всего товаров: {favoriteCount}
             </div>
           )}
-        </div>
+        </motion.div>
         <div className="flex flex-col gap-12">
           {!!favoriteCount && (
             <AuthorizedView condition={false}>

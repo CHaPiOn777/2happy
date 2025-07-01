@@ -1,5 +1,6 @@
 "use client";
 
+import { paths } from "@/config/paths";
 import GoogleLoginButton from "@/features/Auth/components/GoogleLoginButton";
 import { useUser } from "@/shared/api/authApi";
 import AppleIcon from "@/shared/components/icons/Social/AppleIcon";
@@ -95,7 +96,7 @@ const CheckoutUnauthorizedForm = ({
             }}
           />
           <div className="flex flex-col gap-4 max-w-[448px] w-full">
-            <GoogleLoginButton callbackUrl="/checkout" />
+            <GoogleLoginButton callbackUrl={paths.checkout.getHref()} />
             {/* <Button variant="secondary" size="normal" className="w-full">
               <AppleIcon />
               Войти через Apple

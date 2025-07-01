@@ -28,12 +28,14 @@ const AuthModal = ({
   defaultTab = "login",
   buttonSlot,
   triggerProps,
+  callbackUrl,
   onSuccess,
 }: {
   children: ReactNode;
   defaultTab?: "login" | "register";
   buttonSlot?: ReactNode;
   triggerProps?: ComponentPropsWithoutRef<typeof DialogTrigger>;
+  callbackUrl?: string;
   onSuccess?: () => void;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -97,11 +99,11 @@ const AuthModal = ({
             Или
           </span>
           <div className="flex flex-col gap-4">
-            <GoogleLoginButton />
-            <Button variant="secondary" size="normal" className="w-full">
+            <GoogleLoginButton callbackUrl={callbackUrl} />
+            {/* <Button variant="secondary" size="normal" className="w-full">
               <AppleIcon />
               Войти через Apple
-            </Button>
+            </Button> */}
           </div>
         </div>
       </DialogContent>

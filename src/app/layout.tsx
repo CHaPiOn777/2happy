@@ -7,6 +7,7 @@ import { akira, lato } from "../shared/lib/fonts";
 import Providers from "../providers/providers";
 import { MainLayout } from "@/shared/components/Layout/MainLayout/MainLayout";
 import { getSession } from "next-auth/react";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "2HAPPY",
@@ -29,12 +30,14 @@ const RootLayout = async ({
       <body
         className={`${lato.variable} ${akira.variable} font-sans flex flex-col h-full bg-white`}
       >
-        <Providers>
-          <MainLayout>
-            {breadcrumbs}
-            {children}
-          </MainLayout>
-        </Providers>
+        <Suspense fallback="">
+          <Providers>
+            <MainLayout>
+              {breadcrumbs}
+              {children}
+            </MainLayout>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

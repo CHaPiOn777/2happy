@@ -130,7 +130,7 @@ const CheckoutForm = ({ className }: { className?: string }) => {
         },
         line_items: line_items,
         set_paid: false,
-        payment_method: "robokassa",
+        payment_method: payment,
         payment_method_title: "Банковская карта (Robokassa)",
       },
     });

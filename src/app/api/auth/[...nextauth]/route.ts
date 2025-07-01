@@ -67,17 +67,17 @@ const handler = NextAuth({
 
       return false;
     },
-    async redirect({ baseUrl }) {
-      return baseUrl + "/auth/complete";
+    async redirect({ url, baseUrl }) {
+      const match = url.match(/[?&]callback=([^&#]+)/);
+      const callback = match ? decodeURIComponent(match[1]) : null;
+      return baseUrl + `/auth/complete?callback=${callback ?? url}`;
     },
     async jwt({ token, account, user }) {
-      // Добавляем access_token от Google в JWT токен
       if (account) {
         token.accessToken = account.access_token;
         token.customToken = account.id_token;
       }
 
-      console.log(user);
       return token;
     },
     async session({ session, token }) {

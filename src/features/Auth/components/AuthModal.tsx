@@ -22,6 +22,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import CloseIcon from "@/shared/components/icons/CloseIcon";
 import GoogleLoginButton from "./GoogleLoginButton";
+import LoginTab from "./LoginTab";
 
 const AuthModal = ({
   children,
@@ -83,7 +84,7 @@ const AuthModal = ({
                 </TabsTrigger>
               </TabsList>
               <TabsContent className="w-full mt-8 ring-0" value="login">
-                <LoginForm onSuccess={handleOnSuccess} />
+                <LoginTab onSuccess={handleOnSuccess} />
               </TabsContent>
               <TabsContent
                 className="w-full mt-8 ring-0 overflow-y-auto"

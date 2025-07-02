@@ -19,9 +19,11 @@ export const metadata = {
 };
 
 const RootLayout = async ({
+  auth,
   children,
   breadcrumbs,
 }: Readonly<{
+  auth: React.ReactNode;
   children: React.ReactNode;
   breadcrumbs: React.ReactNode;
 }>) => {
@@ -33,6 +35,7 @@ const RootLayout = async ({
         <Suspense fallback="">
           <Providers>
             <MainLayout>
+              {auth}
               {breadcrumbs}
               {children}
             </MainLayout>

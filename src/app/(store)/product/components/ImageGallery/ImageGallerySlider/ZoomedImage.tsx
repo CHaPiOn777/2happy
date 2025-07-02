@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import Image from "next/image";
+import { useMediaCustom } from "@/shared/hooks/useMediaQuery";
 
 const debounce = (fn: () => void, delay: number) => {
   let timeout: NodeJS.Timeout;
@@ -12,7 +13,22 @@ const debounce = (fn: () => void, delay: number) => {
 const ZoomedImage = ({ src, alt }: { src: string; alt: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const zoomFactor = 1; // можно менять динамически или через пропс
+  const isMobile = useMediaCustom("small");
+  const isMedium = useMediaCustom("md");
+
+  const getZoomFactor = () => {
+    switch (true) {
+      case isMobile:
+        return 0.65;
+      case isMedium:
+        return 0.8;
+
+      default:
+        return 1;
+    }
+  };
+
+  const zoomFactor = useMemo(getZoomFactor, [isMobile, isMedium]);
 
   // Сохраняем натуральные размеры изображения
   const [naturalSize, setNaturalSize] = useState<{

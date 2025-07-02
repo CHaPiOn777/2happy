@@ -1,6 +1,3 @@
-"use client";
-
-import { Button } from "@/shared/components/UI/Button";
 import {
   Form,
   FormControl,
@@ -8,28 +5,32 @@ import {
   FormItem,
   FormMessage,
 } from "@/shared/components/UI/Form";
+import { useResetPasswordMailForm } from "../../hooks/useResetPasswordMailForm";
 import { Input } from "@/shared/components/UI/Input";
-import Notification from "@/shared/components/UI/Notification";
-import { useLoginForm } from "../hooks/useLoginForm";
+import { Button } from "@/shared/components/UI/Button";
+import { Dispatch, SetStateAction, useState } from "react";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
-import PasswordInput from "./PasswordInput";
-import { Dispatch, SetStateAction } from "react";
+import ResetPasswordMailDialog from "./ResetPasswordMailDialog";
 
-const LoginForm = ({
+const ResetPasswordMailForm = ({
   setTab,
   onSuccess,
 }: {
   setTab: Dispatch<SetStateAction<"login" | "resetPassword">>;
   onSuccess: () => void;
 }) => {
-  const { loginForm, onSubmit, isPending, error, clearError } = useLoginForm({
-    onSuccess,
-  });
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const { resetPasswordMailForm, onSubmit, isPending } =
+    useResetPasswordMailForm({
+      onSuccess: () => {
+        setOpenDialog(true);
+      },
+    });
   return (
-    <Form {...loginForm}>
+    <Form {...resetPasswordMailForm}>
       <form onSubmit={onSubmit} className="space-y-4">
         <FormField
-          control={loginForm.control}
+          control={resetPasswordMailForm.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -40,22 +41,13 @@ const LoginForm = ({
             </FormItem>
           )}
         />
-        <PasswordInput control={loginForm.control} name="password" />
-        {error && (
-          <Notification
-            variant="error"
-            message={error}
-            closeToast={clearError}
-            showClose
-          />
-        )}
         <div className="flex justify-end">
           <button
             type="button"
-            onClick={() => setTab("resetPassword")}
+            onClick={() => setTab("login")}
             className="link-hover text-darkGrey text-button-xs"
           >
-            Забыли пароль?
+            Войти в аккаунт
           </button>
         </div>
         <Button
@@ -65,11 +57,12 @@ const LoginForm = ({
           type="submit"
         >
           {isPending && <LoaderIcon className="animate-spin" />}
-          Войти
+          Отправить письмо
         </Button>
+        <ResetPasswordMailDialog open={openDialog} setOpen={setOpenDialog} />
       </form>
     </Form>
   );
 };
 
-export default LoginForm;
+export default ResetPasswordMailForm;

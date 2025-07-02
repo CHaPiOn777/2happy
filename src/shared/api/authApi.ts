@@ -69,7 +69,7 @@ export const useLogin = ({
 };
 
 export const loginInputSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email("Неверный email"),
   password: z.string().min(8, "Пароль должен содержать не менее 8 символов"),
   remember: z.boolean().optional(),
 });
@@ -141,6 +141,84 @@ export type RegisterInput = Omit<
 
 const registerUser = (data: RegisterInput): Promise<AuthResponse> => {
   return formattedApiInstance.post("/custom/v1/register", data);
+};
+
+export const resetPasswordMailInputSchema = z.object({
+  email: z.string().email("Неверный email"),
+});
+
+export type ResetPasswordMailInput = z.infer<
+  typeof resetPasswordMailInputSchema
+>;
+
+const sendResetPasswordMailURL = `${env.CUSTOM_API}/request-password-reset`;
+
+export const sendResetPasswordMail = (
+  data: ResetPasswordMailInput
+): Promise<{ success: boolean }> => {
+  return formattedApiInstance.post(sendResetPasswordMailURL, data);
+};
+
+export const useSendResetPasswordMail = ({
+  onSuccess,
+  onError,
+}: MutationOptions<{ success: boolean }, Error, ResetPasswordMailInput>) => {
+  return useMutation({
+    mutationFn: sendResetPasswordMail,
+    onSuccess,
+    onError,
+  });
+};
+
+export const resetPasswordInputSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, "Пароль должен содержать не менее 8 символов")
+      .regex(/[A-Za-z]/, "Пароль должен состоять из латинских букв")
+      .regex(
+        /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/,
+        "Пароль должен содержать хотя бы одну цифру или специальный символ"
+      ),
+    repeatPassword: z.string().min(1, "Заполните поле"),
+  })
+  .superRefine((data, ctx) => {
+    if (data.password !== data.repeatPassword) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Пароли не совпадают",
+        path: ["repeatPassword"],
+      });
+    }
+  });
+
+export type ResetPasswordInput = z.infer<typeof resetPasswordInputSchema>;
+
+export type ResetBodyType = {
+  password: string;
+  key: string;
+  login: string;
+};
+
+const resetPasswordURL = `${env.CUSTOM_API}/reset-password`;
+
+export const resetPassword = (
+  data: ResetBodyType
+): Promise<{ success: boolean }> => {
+  return formattedApiInstance.post(resetPasswordURL, data);
+};
+
+export const useResetPassword = ({
+  onSuccess,
+  onError,
+  ...props
+}: MutationOptions<{ success: boolean }, Error, ResetBodyType>) => {
+  return useMutation({
+    mutationFn: resetPassword,
+    onSuccess,
+    onError,
+    ...props,
+  });
 };
 
 export const useGetToken = () => {

@@ -12,7 +12,19 @@ const buildQuery = (params: Record<string, string | number | undefined>) => {
 
 export const paths = {
   home: {
-    getHref: () => "/",
+    getHref: (params?: Record<string, unknown>) => {
+      const homeUrl = `/`;
+
+      return createURLWithParams(homeUrl, params);
+    },
+  },
+
+  resetPassword: {
+    getHref: (params?: Record<string, unknown>) => {
+      const resetPasswordUrl = `/reset-password`;
+
+      return createURLWithParams(resetPasswordUrl, params);
+    },
   },
 
   catalog: {

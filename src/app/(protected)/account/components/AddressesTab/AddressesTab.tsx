@@ -26,9 +26,15 @@ const AddressesTab = () => {
         <h4 className="text-h5">Адресная книга</h4>
       </motion.div>
       {!addresses.length && (
-        <div className="w-full flex justify-center items-center p-6 bg-main text-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
+          className="w-full flex justify-center items-center p-6 bg-main text-white"
+        >
           В настоящее время нет адресов
-        </div>
+        </motion.div>
       )}
       {addresses.map((address) => (
         <motion.div

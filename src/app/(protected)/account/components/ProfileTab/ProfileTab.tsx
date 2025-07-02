@@ -10,7 +10,7 @@ const ProfileTab = () => {
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, type: "tween" }}
           viewport={{ once: true, amount: 1 }}
           className="border border-main bg-gray-light py-4 px-5"
         >
@@ -19,8 +19,8 @@ const ProfileTab = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, type: "tween" }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           <UserUpdateForm />
         </motion.div>
@@ -29,7 +29,7 @@ const ProfileTab = () => {
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, type: "tween" }}
           viewport={{ once: true, amount: 1 }}
           className="border border-main bg-gray-light py-4 px-5"
         >
@@ -38,8 +38,8 @@ const ProfileTab = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, type: "tween" }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           <UserChangePasswordForm />
         </motion.div>

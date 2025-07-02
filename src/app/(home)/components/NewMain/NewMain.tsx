@@ -4,6 +4,7 @@ import Image from "next/image";
 import MainButton from "./components/MainButton";
 
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
+import Link from "next/link";
 
 const NewMain = () => {
   return (

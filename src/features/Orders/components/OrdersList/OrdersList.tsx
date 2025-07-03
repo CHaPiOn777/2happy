@@ -26,6 +26,7 @@ const OrdersList = () => {
       order,
       customer: user?.id,
       per_page: 10,
+      status: ["completed", "processing", "refunded"],
     }),
     select: (result) => ({
       totalPages: result.pages[0].totalPages,

@@ -28,7 +28,10 @@ const ImageGallerySlider = ({
 }) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const [activeImage, setActiveImage] = useState<Image>(() => images[0]);
+  // Состояние нужно для того, чтобы swiper успел инициализироваться
+  // и react-quick-pinch-zoom мог нормально высчитать размеры изображения
+  const [show, setShow] = useState(false);
+
   const prevRef = (el: HTMLElement | null) => {
     if (el) navigation.current.prevEl = el;
   };
@@ -63,8 +66,10 @@ const ImageGallerySlider = ({
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          onSlideChange={(swiper) => {
-            setActiveImage(images[swiper.activeIndex]);
+          onInit={() => {
+            setTimeout(() => {
+              setShow(true);
+            }, 500);
           }}
           breakpoints={{
             0: {
@@ -77,10 +82,16 @@ const ImageGallerySlider = ({
         >
           {images.map((image) => (
             <SwiperSlide key={image.id}>
-              {openWide ? (
+              {!show && <ImageWithLoader src={image.src} alt={image.alt} />}
+              {show && openWide && (
                 <ZoomedImage src={image.src} alt={image.alt} />
-              ) : (
-                <ImageWithZoom src={image.src} alt={image.alt} />
+              )}
+              {show && !openWide && (
+                <ImageWithZoom
+                  isDefaultTouchDevice={true}
+                  src={image.src}
+                  alt={image.alt}
+                />
               )}
             </SwiperSlide>
           ))}

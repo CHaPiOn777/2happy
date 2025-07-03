@@ -7,7 +7,7 @@ import NewCollection from "./components/NewCollection/NewCollection";
 import NewMain from "./components/NewMain/NewMain";
 import WhatsAppButton from "@/shared/components/Layout/MainLayout/components/WhatsAppButton";
 import Collections from "./components/Collections/Collections";
-import ResetPasswordRedirect from "./components/ResetPasswordRedirect";
+import ResetPasswordRedirect from "./components/ModalRedirect";
 
 export const revalidate = 380;
 

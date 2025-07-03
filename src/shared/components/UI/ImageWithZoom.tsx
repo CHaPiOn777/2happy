@@ -13,15 +13,12 @@ const ImageWithZoom = ({
   ...props
 }: ImageProps & { isDefaultTouchDevice?: boolean }) => {
   const [zoom, setZoom] = useState({ x: "50%", y: "50%", scale: 1 });
-  const isTouchDevice = useRef(false);
+  const isTouchDevice = useRef(
+    isDefaultTouchDevice ??
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0)
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    isTouchDevice.current =
-      isDefaultTouchDevice ??
-      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, [isDefaultTouchDevice]);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (isTouchDevice.current) return;
@@ -58,7 +55,10 @@ const ImageWithZoom = ({
             fill
             src={props.src?.toString()}
             alt={props.alt || ""}
-            className={cn("select-none w-full h-full object-cover", className)}
+            className={cn(
+              "select-none w-full h-full object-cover object-top",
+              className
+            )}
             draggable={false}
             style={{
               transformOrigin: "0 0",

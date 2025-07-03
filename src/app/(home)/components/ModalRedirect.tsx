@@ -4,7 +4,7 @@ import { paths } from "@/config/paths";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-const ResetPasswordRedirect = () => {
+const ModalRedirect = () => {
   const firstRenderRef = useRef<boolean>(true);
 
   const searchParams = useSearchParams();
@@ -18,16 +18,20 @@ const ResetPasswordRedirect = () => {
 
     if (modalParam && modalParam === "reset-password" && firstRenderRef.current)
       router.push(paths.resetPassword.getHref({ key, login }));
+
     if (
       modalParam &&
-      modalParam === "reset-password" &&
-      !firstRenderRef.current
+      modalParam === paths.payDialog.getHref() &&
+      firstRenderRef.current
     )
-      if (firstRenderRef.current) router.push(paths.home.getHref());
+      router.push(paths.payDialog.getHref());
 
-    firstRenderRef.current = false;
+    // if (modalParam && !firstRenderRef.current)
+    //   router.push(paths.home.getHref());
+
+    if (firstRenderRef.current) firstRenderRef.current = false;
   }, [pathname]);
   return null;
 };
 
-export default ResetPasswordRedirect;
+export default ModalRedirect;

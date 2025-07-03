@@ -18,12 +18,25 @@ import {
 } from "@tanstack/react-query";
 import { getQueryClient } from "@/shared/api/queryClient";
 
+type OrderStatus =
+  | "any"
+  | "pending"
+  | "processing"
+  | "on-hold"
+  | "completed"
+  | "completed"
+  | "canceled"
+  | "refunded"
+  | "failed"
+  | "trash";
+
 export type getOrdersListParameters = {
   page?: number;
   per_page?: number;
   order?: string;
   orderby?: string;
   customer?: number;
+  status?: OrderStatus[];
 };
 
 const ordersListURL = `${env.WOOCOMMERCE_API}/orders`;

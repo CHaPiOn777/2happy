@@ -6,7 +6,6 @@ import { akira, lato } from "../shared/lib/fonts";
 
 import Providers from "../providers/providers";
 import { MainLayout } from "@/shared/components/Layout/MainLayout/MainLayout";
-import { getSession } from "next-auth/react";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -20,10 +19,12 @@ export const metadata = {
 
 const RootLayout = async ({
   auth,
+  payment,
   children,
   breadcrumbs,
 }: Readonly<{
   auth: React.ReactNode;
+  payment: React.ReactNode;
   children: React.ReactNode;
   breadcrumbs: React.ReactNode;
 }>) => {
@@ -36,8 +37,9 @@ const RootLayout = async ({
           <Providers>
             <MainLayout>
               {auth}
-              {breadcrumbs}
+              {payment}
               {children}
+              {breadcrumbs}
             </MainLayout>
           </Providers>
         </Suspense>

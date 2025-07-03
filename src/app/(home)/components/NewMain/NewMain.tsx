@@ -5,6 +5,7 @@ import MainButton from "./components/MainButton";
 
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 import Link from "next/link";
+import { paths } from "@/config/paths";
 
 const NewMain = () => {
   return (
@@ -53,6 +54,7 @@ const NewMain = () => {
             </div>
           </div>
         </AnimatedInView>
+
         <MainButton className="absolute -bottom-14 left-0 flex sm:hidden" />
       </Container>
     </Section>

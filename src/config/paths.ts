@@ -27,6 +27,14 @@ export const paths = {
     },
   },
 
+  payDialog: {
+    getHref: (params?: Record<string, unknown>) => {
+      const payDialogUrl = `/pay-dialog`;
+
+      return createURLWithParams(payDialogUrl, params);
+    },
+  },
+
   catalog: {
     getHref: () => "/catalog",
 

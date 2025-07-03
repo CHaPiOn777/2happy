@@ -5,8 +5,10 @@ type TCheckoutStore = {
   checkoutItems: CheckoutItem[];
   currencySymbol: string;
   itemsCount: number;
+  paymentLink: string;
   isEditable: boolean;
   setIsEditable: (value: boolean) => void;
+  setPaymentLink: (paymentLink: string) => void;
   setCheckoutItems: (checkoutItems: CheckoutItem[]) => void;
   clearCheckoutItems: () => void;
 };
@@ -14,10 +16,14 @@ type TCheckoutStore = {
 export const useCheckoutStore = create<TCheckoutStore>((set) => ({
   checkoutItems: [],
   currencySymbol: "₸",
+  paymentLink: "",
   itemsCount: 0,
   isEditable: true,
   setIsEditable: (isEditable) => {
     set({ isEditable });
+  },
+  setPaymentLink: (paymentLink) => {
+    set({ paymentLink });
   },
   setCheckoutItems: (checkoutItems) => {
     const itemsCount = checkoutItems.reduce(

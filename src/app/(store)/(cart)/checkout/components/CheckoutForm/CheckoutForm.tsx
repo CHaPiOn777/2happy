@@ -29,7 +29,8 @@ const CheckoutForm = ({ className }: { className?: string }) => {
 
   const { data: user } = useUser();
 
-  const { checkoutItems, isEditable, setIsEditable } = useCheckoutStore();
+  const { checkoutItems, isEditable, setIsEditable, setPaymentLink } =
+    useCheckoutStore();
 
   const [contacts, setContacts] = useState<CheckoutFormInput | null>(null);
   const [payment, setPayment] = useState<string>("");
@@ -40,6 +41,8 @@ const CheckoutForm = ({ className }: { className?: string }) => {
       onSuccess: (data) => {
         if (isEditable) deleteCart();
         router.replace(paths.home.getHref());
+        setPaymentLink(data.robokassa_payment_url);
+        router.push(paths.home.getHref({ modal: paths.payDialog.getHref() }));
         window.open(data.robokassa_payment_url, "_blank");
       },
     });

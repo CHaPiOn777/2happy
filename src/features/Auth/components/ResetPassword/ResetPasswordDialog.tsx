@@ -31,7 +31,6 @@ const ResetPasswordDialog = () => {
       <DialogContent
         hideClose
         className="px-4 pr-0 xs:pr-4 xs:px-6 sm:px-8 gap-10 max-h-[95vh] overflow-hidden"
-        closeClassName="top-10 right-8"
       >
         <DialogHeader className="pr-4 xs:pr-0 justify-between flex-row items-end">
           <DialogTitle className="text-h5">Восстановление пароля</DialogTitle>

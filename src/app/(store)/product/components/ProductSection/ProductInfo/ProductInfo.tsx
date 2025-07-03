@@ -120,6 +120,8 @@ const ProductInfo = ({
     ? variation?.stock_status === "outofstock"
     : false;
 
+  const isFavoriteDisabled = !sizes || !colors;
+
   return (
     <div
       className={cn("flex flex-col gap-8 justify-between", classNames?.wrapper)}
@@ -147,11 +149,13 @@ const ProductInfo = ({
                 )}
               >
                 {(isFavorite, handleToggle) => (
-                  <button onClick={handleToggle}>
+                  <button onClick={handleToggle} disabled={isFavoriteDisabled}>
                     <HeartIcon
                       className={cn(
                         "inline-flex hover:fill-main",
-                        isFavorite && "fill-main"
+                        isFavorite && "fill-main",
+                        isFavoriteDisabled &&
+                          "opacity-40 hover:fill-transparent"
                       )}
                     />
                   </button>

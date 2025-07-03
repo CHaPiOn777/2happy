@@ -36,10 +36,10 @@ const RootLayout = async ({
         <Suspense fallback="">
           <Providers>
             <MainLayout>
+              {breadcrumbs}
               {auth}
               {payment}
               {children}
-              {breadcrumbs}
             </MainLayout>
           </Providers>
         </Suspense>

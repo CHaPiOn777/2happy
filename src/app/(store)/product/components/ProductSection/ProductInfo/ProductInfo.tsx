@@ -120,7 +120,7 @@ const ProductInfo = ({
     ? variation?.stock_status === "outofstock"
     : false;
 
-  const isFavoriteDisabled = !sizes || !colors;
+  const isFavoriteDisabled = !sizes.length || !colors.length;
 
   return (
     <div
@@ -145,6 +145,7 @@ const ProductInfo = ({
                 variation={variation}
                 className={cn(
                   "absolute sm:relative top-4 right-8 sm:top-0 sm:right-0 z-10 w-10 h-10 bg-white justify-center items-center flex lg:hidden",
+                  isFavoriteDisabled && "bg-gray-light pointer-events-none",
                   classNames?.favoriteButton
                 )}
               >

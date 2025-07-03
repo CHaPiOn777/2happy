@@ -56,14 +56,14 @@ const CreateReviewButton = () => {
         defaultValues={defaultValues}
         onSubmit={onSubmit}
         isPending={isPending}
-        triggerProps={{ disabled: !user, className: "!w-full" }}
+        triggerProps={{ disabled: !user }}
       >
         <div
-          className="w-min"
+          className="w-full md:w-min"
           data-tooltip-id="create-review"
           data-tooltip-content="Авторизуйтесь, чтобы оставить отзыв"
         >
-          <Button size="medium" className="w-full md:w-max" disabled={!user}>
+          <Button size="medium" className="w-full md:w-min" disabled={!user}>
             Написать отзыв
           </Button>
           {!user && <StyledTooltip id="create-review" />}

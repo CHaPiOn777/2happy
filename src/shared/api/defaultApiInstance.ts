@@ -29,6 +29,8 @@ const requestInterceptor: TRequestInterceptor = async (config) => {
 
   const access_token = Cookies.get("access_token");
 
+  console.log(config.url);
+
   const parsedToken = parseJwt(access_token);
 
   if (parsedToken && parsedToken.exp) {

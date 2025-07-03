@@ -25,13 +25,13 @@ const PartnershipBreadcrumbs = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink
-              className="text-white xs:inline-block hidden"
+              className="text-white sm:inline-block hidden"
               href={paths.home.getHref()}
             >
               Главная
             </BreadcrumbLink>
             <BreadcrumbLink
-              className="text-white inline-block xs:hidden"
+              className="text-white inline-block sm:hidden"
               href={paths.home.getHref()}
             >
               <HomeIcon className="!size-6" />

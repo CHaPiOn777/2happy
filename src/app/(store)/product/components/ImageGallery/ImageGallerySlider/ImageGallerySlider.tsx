@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 
 import "./styles.scss";
 import ZoomedImage from "./ZoomedImage";
+import ImageWithZoom from "@/shared/components/UI/ImageWithZoom";
 
 const ImageGallerySlider = ({
   openWide,
@@ -79,7 +80,7 @@ const ImageGallerySlider = ({
               {openWide ? (
                 <ZoomedImage src={image.src} alt={image.alt} />
               ) : (
-                <ImageWithLoader src={image.src} alt={image.alt} />
+                <ImageWithZoom src={image.src} alt={image.alt} />
               )}
             </SwiperSlide>
           ))}

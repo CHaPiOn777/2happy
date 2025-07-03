@@ -2,6 +2,8 @@ import ChevronDownIcon from "@/shared/components/icons/Chevron/ChevronDownIcon";
 import { MenuTabs } from "./MenuSheet/MenuSheetContent";
 import MobileCategoriesList from "./MobileCategoriesList";
 import { isCategory } from "@/features/Categories/utils/isCategory";
+import Link from "next/link";
+import { paths } from "@/config/paths";
 
 const MobileCategories = ({
   tab,
@@ -19,7 +21,9 @@ const MobileCategories = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-h3 py-2">Каталог</h3>
+      <Link href={paths.catalog.getHref()} onClick={handleCloseSheet}>
+        <h3 className="text-h3 py-2">Каталог</h3>
+      </Link>
       <ul>
         <li>
           <button

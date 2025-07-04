@@ -41,7 +41,7 @@ const BuyInstantButton = ({
 
   return (
     <Button
-      className="w-full sm:w-1/2 !bg-white"
+      className="w-full sm:w-1/2"
       variant="secondary"
       onClick={(e) => {
         handleClick();
@@ -49,7 +49,8 @@ const BuyInstantButton = ({
       }}
       {...props}
     >
-      Купить
+      <span>Купить</span>
+      <div className="absolute w-full h-full bg-white -z-10" />
     </Button>
   );
 };

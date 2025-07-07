@@ -4,8 +4,6 @@ import Image from "next/image";
 import MainButton from "./components/MainButton";
 
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
-import Link from "next/link";
-import { paths } from "@/config/paths";
 
 const NewMain = () => {
   return (
@@ -22,7 +20,7 @@ const NewMain = () => {
       >
         <Image
           fill
-          className="object-cover object-[65%_50%]"
+          className="object-cover object-[65%_50%] xs:object-[60%_50%] sm:object-[50%_50%] md:object-[10%_50%] lg:object-[65%_50%]"
           quality={90}
           src="/images/Home/Main/main.jpg"
           alt="main-image"
@@ -43,12 +41,12 @@ const NewMain = () => {
         >
           <h1 className="text-h3Akira mb-4 xs:mb-6 sm:mb-8 lg:mb-10">2HAPPY</h1>
           <div className="flex gap-2 sm:gap-4">
-            <span className="hidden xs:block w-[32px] shrink-0 sm:w-[64px] mt-2 sm:mt-4 h-[1px] sm:h-[2px] bg-main" />
+            <span className="hidden xs:block w-[24px] shrink-0 sm:w-[48px] md:w-[64px] mt-2 sm:mt-4 h-[1px] sm:h-[2px] bg-main" />
             <div className="flex flex-col max-w-[440px] w-full">
               <span className="text-h5 xs:text-h4 mb-10 lg:mb-20">
-                Стильная <br className="block xs:hidden" /> и комфортная{" "}
+                Стильная <br className="block sm:hidden" /> и комфортная{" "}
                 <br className="hidden sm:block" /> одежда{" "}
-                <br className="block xs:hidden" /> на все случаи жизни!
+                <br className="block sm:hidden" /> на все случаи жизни!
               </span>
               <MainButton className="hidden sm:flex" />
             </div>

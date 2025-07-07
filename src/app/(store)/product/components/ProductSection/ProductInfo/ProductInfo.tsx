@@ -122,6 +122,9 @@ const ProductInfo = ({
 
   const isFavoriteDisabled = !sizes.length || !colors.length;
 
+  const isVariationDisabled =
+    isLoadingVariation || !variation || variation.stock_status === "outofstock";
+
   return (
     <div
       className={cn("flex flex-col gap-8 justify-between", classNames?.wrapper)}
@@ -230,7 +233,7 @@ const ProductInfo = ({
         />
       </div>
       {renderButtons
-        ? renderButtons(product, variation, isLoadingVariation || !variation)
+        ? renderButtons(product, variation, isVariationDisabled)
         : null}
     </div>
   );

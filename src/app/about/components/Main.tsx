@@ -44,14 +44,14 @@ const Main = () => {
           <AnimatedInView
             as="div"
             id="about-main-desc"
-            className="flex gap-4 md:gap-8"
+            className="flex gap-2.5 sm:gap-4 md:gap-8"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             fallbackClassName="opacity-0"
           >
-            <span className="w-[40px] md:w-[64px] mt-4 h-[2px] bg-white" />
+            <span className="w-[24px] sm:w-[40px] md:w-[64px] mt-3 sm:mt-4 h-[1px] sm:h-[2px] bg-white" />
             <p className="text-h4 md:text-h3 max-w-[330px] w-full text-white">
               Одежда,
               <br className="block md:hidden" /> которая{" "}

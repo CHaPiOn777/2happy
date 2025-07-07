@@ -17,7 +17,7 @@ const HelpSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
           viewport={{ once: true, amount: 0.6 }}
-          className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[140px] sm:bottom-[270px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6 z-50"
+          className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[140px] sm:bottom-[270px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6 z-10"
         >
           <ImageWithLoader
             className="-scale-x-100 rounded-xs"
@@ -33,7 +33,7 @@ const HelpSection = () => {
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true, amount: 0.7 }}
-              className="flex flex-col gap-10 lg:gap-14 mt-8 xs:mt-12 xs:mt-0 sm:mt-[100px] md:mt-[176px] mb-8 xs:mb-20 sm:mb-[104px] ml-0 md:ml-16 xl:ml-36 z-10"
+              className="flex flex-col gap-10 lg:gap-14 mt-8 xs:mt-12 xs:mt-0 sm:mt-[100px] md:mt-[176px] mb-8 xs:mb-20 sm:mb-[104px] ml-0 md:ml-16 xl:ml-36 z-20"
             >
               <h3 className="text-h2 sm:text-h3 mb-[100px] xs:mb-0 xs:pt-12 sm:pt-0">
                 Нужна помощь?

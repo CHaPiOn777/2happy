@@ -4,11 +4,11 @@ import { useCatalogStore } from "@/features/Products/store/catalogStore";
 import { useFiltersStore } from "@/features/Products/store/filtersStore";
 import Container from "@/shared/components/UI/Container";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 import { motion } from "motion/react";
 
-const CatalogHeader = ({ defaultName }: { defaultName?: string }) => {
+const CatalogHeader = ({ defaultName }: { defaultName?: ReactNode }) => {
   const { clearFilters } = useFiltersStore();
   const { totalItems } = useCatalogStore();
 

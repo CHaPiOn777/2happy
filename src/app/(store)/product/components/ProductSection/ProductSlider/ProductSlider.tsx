@@ -110,6 +110,7 @@ const ProductSlider = ({
           0: {
             slidesPerView: 1,
             allowTouchMove: true,
+            spaceBetween: 0,
           },
           480: { slidesPerView: 2, allowTouchMove: true, spaceBetween: 16 },
           768: { slidesPerView: 2, allowTouchMove: true },

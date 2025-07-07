@@ -31,7 +31,7 @@ const ImageGallery = ({
     >
       <DialogTrigger className="w-full h-full">{children}</DialogTrigger>
       <DialogContent
-        className="w-screen max-w-screen h-screen p-0 py-8"
+        className="w-screen max-w-screen h-[100dvh] p-0 py-8"
         hideClose
       >
         <Container className="relative flex-col gap-4 h-full">

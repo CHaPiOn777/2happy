@@ -62,32 +62,32 @@ const ProductSectionButtons = ({
     if (addedCartItem) setCartItem(addedCartItem);
   };
 
-  if (variation?.stock_status === "outofstock") {
-    return (
-      <div className="flex gap-2">
-        <OutOfStockDialog>
-          <Button variant="secondary" className="w-full" disabled={disabled}>
-            Узнать о поступлении
-          </Button>
-        </OutOfStockDialog>
-        <ToggleFavorite product={product} variation={variation}>
-          {(isFavorite, handleToggle) => (
-            <IconButton
-              className={cn(
-                "[&_svg]:fill-transparent hidden sm:inline-flex",
-                isFavorite && "[&_svg]:fill-white"
-              )}
-              size="normal"
-              onClick={handleToggle}
-              disabled={disabled}
-            >
-              <HeartIcon className="stroke-white" />
-            </IconButton>
-          )}
-        </ToggleFavorite>
-      </div>
-    );
-  }
+  // if (variation?.stock_status === "outofstock") {
+  //   return (
+  //     <div className="flex gap-2">
+  //       <OutOfStockDialog>
+  //         <Button variant="secondary" className="w-full" disabled={disabled}>
+  //           Узнать о поступлении
+  //         </Button>
+  //       </OutOfStockDialog>
+  //       <ToggleFavorite product={product} variation={variation}>
+  //         {(isFavorite, handleToggle) => (
+  //           <IconButton
+  //             className={cn(
+  //               "[&_svg]:fill-transparent hidden sm:inline-flex",
+  //               isFavorite && "[&_svg]:fill-white"
+  //             )}
+  //             size="normal"
+  //             onClick={handleToggle}
+  //             disabled={disabled}
+  //           >
+  //             <HeartIcon className="stroke-white" />
+  //           </IconButton>
+  //         )}
+  //       </ToggleFavorite>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -102,7 +102,11 @@ const ProductSectionButtons = ({
           >
             Добавить в корзину
           </AddToCartButton>
-          <BuyInstantButton name={product?.name} variation={variation} />
+          <BuyInstantButton
+            name={product?.name}
+            variation={variation}
+            disabled={disabled}
+          />
         </div>
         <ToggleFavorite
           product={product}

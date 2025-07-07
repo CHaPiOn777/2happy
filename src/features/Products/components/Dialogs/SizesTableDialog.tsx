@@ -69,7 +69,11 @@ const SizesTableDialog = ({ trigger }: { trigger: ReactNode }) => {
           <DialogTitle className="text-h4">Таблица размеров</DialogTitle>
           <DialogDescription hidden>Таблица размеров</DialogDescription>
         </DialogHeader>
-        <ScrollArea type="auto" orientation="horizontal">
+        <ScrollArea
+          scrollClassName="hidden"
+          type="auto"
+          orientation="horizontal"
+        >
           <Table className="pb-2 md:pb-0">
             <colgroup>
               <col className="min-w-[100px]" />

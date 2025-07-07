@@ -45,7 +45,7 @@ const CartInfoCard = ({ cartItem }: { cartItem: CartItemResponse }) => {
             {price} {currencySymbol}
           </span>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col items-center gap-2">
           <span>Количество</span>
           <span className="text-gray-middle">{quantity}</span>
         </div>

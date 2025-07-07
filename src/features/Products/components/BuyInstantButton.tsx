@@ -41,7 +41,7 @@ const BuyInstantButton = ({
 
   return (
     <Button
-      className="w-full sm:w-1/2"
+      className="w-full sm:w-1/2 transition-colors"
       variant="secondary"
       onClick={(e) => {
         handleClick();

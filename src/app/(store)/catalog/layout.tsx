@@ -17,7 +17,13 @@ const StoreLayout = ({
 }>) => {
   return (
     <div className="my-section flex flex-col gap-6 sm:gap-12 md:gap-16">
-      <CatalogHeader defaultName="Женская одежда и аксессуары" />
+      <CatalogHeader
+        defaultName={
+          <span>
+            Женская одежда <br className="block sm:hidden" /> и аксессуары
+          </span>
+        }
+      />
       {children}
     </div>
   );

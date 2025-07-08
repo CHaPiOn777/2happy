@@ -3,8 +3,8 @@
 import { cn } from "@/shared/utils/cn";
 import { useProductsList } from "../../hooks/useProductsList";
 
-import { ProductCardLoader } from "../Cards/ProductServerCard";
-import ProductServerCard from "../Cards/ProductServerCard";
+import { ProductCardLoader } from "../Cards/ProductCard";
+import ProductCard from "../Cards/ProductCard";
 import { RefObject, useRef } from "react";
 import useObserver from "@/shared/hooks/useObserver";
 
@@ -71,7 +71,7 @@ const ProductsList = ({
         )}
 
         {data?.items.map((product) => (
-          <ProductServerCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
 

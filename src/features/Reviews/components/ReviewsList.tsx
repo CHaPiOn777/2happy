@@ -66,8 +66,9 @@ const ReviewsList = () => {
 
   if (noResults) {
     return (
-      <div className="flex items-center justify-center w-full h-[552px]">
-        <h2 className="text-h2">Ничего не найдено</h2>
+      <div className="flex items-center gap-6 justify-center w-full h-[552px]">
+        <h2 className="text-h2">Здесь пока нет отзывов</h2>
+        <p>Будьте первым, кто оставит отзыв о нашем магазине</p>
       </div>
     );
   }

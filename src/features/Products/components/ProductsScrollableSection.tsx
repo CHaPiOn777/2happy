@@ -1,9 +1,9 @@
 import Container from "@/shared/components/UI/Container";
 import Section from "@/shared/components/UI/Section";
-import ProductServerCard from "./Cards/ProductServerCard";
+import ProductCard from "./Cards/ProductCard";
 
 import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
-import { ProductCardLoader } from "./Cards/ProductServerCard";
+import { ProductCardLoader } from "./Cards/ProductCard";
 import { ProductServer } from "../types";
 import { cn } from "@/shared/utils";
 import { Fragment, ReactNode } from "react";
@@ -11,7 +11,7 @@ import { Fragment, ReactNode } from "react";
 import * as motion from "motion/react-client";
 
 const defaultRenderCard = (product: ProductServer) => (
-  <ProductServerCard product={product} />
+  <ProductCard product={product} />
 );
 
 const ProductsScrollableSection = ({

@@ -1,4 +1,4 @@
-import { ProductCardLoader } from "@/features/Products/components/Cards/ProductServerCard";
+import { ProductCardLoader } from "@/features/Products/components/Cards/ProductCard";
 
 const FinalSaleListLoader = () => {
   return (

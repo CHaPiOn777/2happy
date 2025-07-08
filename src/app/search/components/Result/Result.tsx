@@ -1,9 +1,9 @@
 "use client";
 
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
-import ProductServerCard, {
+import ProductCard, {
   ProductCardLoader,
-} from "@/features/Products/components/Cards/ProductServerCard";
+} from "@/features/Products/components/Cards/ProductCard";
 import Container from "@/shared/components/UI/Container";
 import { useQuery } from "@tanstack/react-query";
 import NotFound from "../NotFound/NotFound";
@@ -15,8 +15,8 @@ const PRODUCT_CARDS: Record<
   "simple" | "variable" | "grouped",
   (product: ProductServer) => JSX.Element
 > = {
-  simple: (product: ProductServer) => <ProductServerCard product={product} />,
-  variable: (product: ProductServer) => <ProductServerCard product={product} />,
+  simple: (product: ProductServer) => <ProductCard product={product} />,
+  variable: (product: ProductServer) => <ProductCard product={product} />,
   grouped: (product: ProductServer) => <CollectionCard product={product} />,
 };
 

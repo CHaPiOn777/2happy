@@ -2,7 +2,7 @@
 
 import { cn } from "@/shared/utils/cn";
 
-import { ProductCardLoader } from "../Cards/ProductServerCard";
+import { ProductCardLoader } from "../Cards/ProductCard";
 import { RefObject, useRef } from "react";
 import useObserver from "@/shared/hooks/useObserver";
 import { useCollectionsList } from "../../hooks/useCollectionsList";

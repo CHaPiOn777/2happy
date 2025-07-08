@@ -13,9 +13,9 @@ import { ReactNode, useState } from "react";
 import { cn } from "@/shared/utils";
 import { useQuery } from "@tanstack/react-query";
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
-import ProductServerCard, {
+import ProductCard, {
   ProductCardLoader,
-} from "@/features/Products/components/Cards/ProductServerCard";
+} from "@/features/Products/components/Cards/ProductCard";
 import { getCategoriesQueryOptions } from "@/features/Categories/api/categoriesApi";
 import CategoryLink from "@/features/Categories/components/CategoryLink";
 import { TCategories } from "@/features/Categories/consts/consts";
@@ -134,7 +134,7 @@ const SearchSheet = ({
                           className="w-full"
                           onClick={() => setOpen(false)}
                         >
-                          <ProductServerCard
+                          <ProductCard
                             product={product}
                             showAttributes={false}
                           />

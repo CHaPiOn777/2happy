@@ -2,7 +2,7 @@
 
 import { tagIds } from "@/features/Categories/consts/consts";
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
-import ProductServerCard from "@/features/Products/components/Cards/ProductServerCard";
+import ProductCard from "@/features/Products/components/Cards/ProductCard";
 import AnimatedInView from "@/shared/components/Motion/AnimatedInView";
 import { ScrollArea, ScrollBar } from "@/shared/components/UI/ScrollArea";
 import { useHasMounted } from "@/shared/hooks/useHasMounted";
@@ -36,7 +36,7 @@ const FinalSaleList = () => {
             viewport={{ once: true }}
             className="w-full h-[504px] md:h-[544px] md:first:hidden lg:first:block"
           >
-            <ProductServerCard product={product} />
+            <ProductCard product={product} />
           </AnimatedInView>
         ))}
       </div>

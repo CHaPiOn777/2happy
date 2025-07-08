@@ -1,6 +1,6 @@
 "use client";
 
-import ProductServerCard from "@/features/Products/components/Cards/ProductServerCard";
+import ProductCard from "@/features/Products/components/Cards/ProductCard";
 import { ProductServer } from "@/features/Products/types";
 import {
   Accordion,
@@ -29,7 +29,7 @@ const ProductSectionRelatedProducts = ({
             <ScrollArea type="auto" orientation="horizontal">
               <div className="grid grid-flow-col auto-cols-[196px] gap-x-6 grid-rows-[376px] mb-6">
                 {products?.map((item) => (
-                  <ProductServerCard
+                  <ProductCard
                     key={item.id}
                     product={item}
                     showAttributes={false}
@@ -48,7 +48,7 @@ const ProductSectionRelatedProducts = ({
       <ul className="grid grid-cols-3 auto-rows-[376px] gap-x-6 gap-y-6">
         {products?.map((product) => (
           <li key={product.id}>
-            <ProductServerCard product={product} />
+            <ProductCard product={product} />
           </li>
         ))}
       </ul>

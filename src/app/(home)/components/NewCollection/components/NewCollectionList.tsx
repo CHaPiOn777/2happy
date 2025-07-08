@@ -2,7 +2,7 @@
 
 import { tagIds } from "@/features/Categories/consts/consts";
 import { getProductsQueryOptions } from "@/features/Products/api/productsApi";
-import ProductServerCard from "@/features/Products/components/Cards/ProductServerCard";
+import ProductCard from "@/features/Products/components/Cards/ProductCard";
 import { ScrollArea } from "@/shared/components/UI/ScrollArea";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SIZES_TW, SLIDES_SIZES } from "../consts";
@@ -27,7 +27,7 @@ const NewCollectionList = () => {
             const size = SLIDES_SIZES[index];
 
             return (
-              <ProductServerCard
+              <ProductCard
                 key={product.id}
                 product={product}
                 showAttributes={false}

@@ -1,5 +1,6 @@
 "use client";
 
+import { paths } from "@/config/paths";
 import { useCheckoutStore } from "@/features/Checkout/store/checkoutStore";
 import CloseIcon from "@/shared/components/icons/CloseIcon";
 import {
@@ -11,13 +12,16 @@ import {
   DialogTitle,
 } from "@/shared/components/UI/Dialog";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const PayDialogPage = () => {
+  const [open, setOpen] = useState(true);
+
   const router = useRouter();
 
   const { paymentLink } = useCheckoutStore();
   return (
-    <Dialog open={true}>
+    <Dialog open={open}>
       <DialogContent hideClose className="gap-4 !py-6 !pb-8">
         <DialogHeader className="pr-4 xs:pr-0 justify-between flex-row items-end">
           <DialogTitle className="text-h4">Заказ создан!</DialogTitle>
@@ -26,7 +30,10 @@ const PayDialogPage = () => {
           </DialogDescription>
           <DialogClose
             className="absolute right-4 top-4"
-            onClick={() => router.back()}
+            onClick={() => {
+              router.replace(paths.home.getHref());
+              setOpen(false);
+            }}
           >
             <CloseIcon />
           </DialogClose>

@@ -12,7 +12,12 @@ const ModalRedirect = () => {
   const pathname = usePathname();
 
   useEffect(() => {
+    console.log(firstRenderRef.current);
     const modalParam = searchParams.get("modal");
+
+    if (modalParam && !firstRenderRef.current)
+      router.push(paths.home.getHref());
+
     const key = searchParams.get("key");
     const login = searchParams.get("login");
 

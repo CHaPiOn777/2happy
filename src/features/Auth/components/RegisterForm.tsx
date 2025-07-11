@@ -16,12 +16,15 @@ import { useRegisterForm } from "../hooks/useRegisterForm";
 import PasswordInput from "./PasswordInput";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { useRegister } from "@/shared/api/authApi";
+import { useSubscribeUserToMail } from "@/shared/api/mailApi";
 
 const RegisterForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const { mutate, isPending } = useRegister({ onSuccess });
+  const { mutate: subscribeToMail } = useSubscribeUserToMail();
 
   const { registerForm, getStatusIcon, onSubmit } = useRegisterForm({
     mutateFn: mutate,
+    registerSubscriber: subscribeToMail,
   });
   return (
     <Form {...registerForm}>

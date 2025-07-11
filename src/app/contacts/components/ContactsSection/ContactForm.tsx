@@ -17,7 +17,7 @@ import { ComponentPropsWithoutRef } from "react";
 import LoaderIcon from "@/shared/components/icons/LoaderIcon";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/shared/components/UI/Checkbox";
-import { ContactFormInput, contactFormSchema } from "@/shared/api/contactsApi";
+import { ContactFormInput, contactFormSchema } from "@/shared/api/mailApi";
 
 const ContactsForm = ({
   onSubmit,

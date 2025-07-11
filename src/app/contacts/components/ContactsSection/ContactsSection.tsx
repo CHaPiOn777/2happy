@@ -13,7 +13,7 @@ import ContactsForm from "./ContactForm";
 import ClockIcon from "@/shared/components/icons/ClockIcon";
 import PinIcon from "@/shared/components/icons/PinIcon";
 import ImageWithLoader from "@/shared/components/UI/ImageWithLoader";
-import { ContactFormInput, useSendEmail } from "@/shared/api/contactsApi";
+import { ContactFormInput, useSendEmail } from "@/shared/api/mailApi";
 import { notify } from "@/shared/lib/notify";
 
 const ContactsSection = () => {

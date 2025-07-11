@@ -3,6 +3,7 @@ import { formattedApiInstance } from "./formattedApiInstance";
 import { z } from "zod";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { defaultApiInstance } from "./defaultApiInstance";
 
 export const contactFormSchema = z.object({
   name: z
@@ -57,3 +58,26 @@ export const useSendEmail = ({
     ...options,
   });
 };
+
+const subscribeToMailURL = `${env.CUSTOM_API}/subscribe-email`;
+
+export type SubscribeEmailType = {
+  email: string;
+  firstName: string;
+  lastName: string;
+};
+
+const subscribeUserToMail = async (body: SubscribeEmailType) => {
+  const response = await defaultApiInstance.post(subscribeToMailURL, body);
+
+  return response.data;
+};
+
+export const useSubscribeUserToMail = () =>
+  useMutation({
+    mutationFn: (body: {
+      email: string;
+      firstName: string;
+      lastName: string;
+    }) => subscribeUserToMail(body),
+  });

@@ -101,10 +101,6 @@ const AuthModal = ({
           </span>
           <div className="flex flex-col gap-4">
             <GoogleLoginButton callbackUrl={callbackUrl} />
-            {/* <Button variant="secondary" size="normal" className="w-full">
-              <AppleIcon />
-              Войти через Apple
-            </Button> */}
           </div>
         </div>
       </DialogContent>

@@ -62,7 +62,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
 
-        <div className="w-full flex justify-between items-end py-12 ">
+        <div className="w-full flex flex-col-reverse sm:flex-row justify-between items-start gap-4 sm:gap-2 sm:items-end py-12 ">
           <span className="text-white text-description">
             © 2018 - 2025 2HAPPY. Все права защищены.
           </span>

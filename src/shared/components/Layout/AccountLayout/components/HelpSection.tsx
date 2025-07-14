@@ -17,7 +17,7 @@ const HelpSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
           viewport={{ once: true, amount: 0.6 }}
-          className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[140px] sm:bottom-[270px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6 z-10"
+          className="w-[128px] h-[216px] xs:w-[200px] xs:h-[264px] sm:w-[300px] sm:h-[380px] md:w-[356px] md:h-[440px] lg:w-[416px] lg:h-[504px] absolute bottom-[200px] xs:bottom-[150px] sm:bottom-[270px] md:bottom-[200px] lg:bottom-24 right-4 md:right-6 z-10"
         >
           <ImageWithLoader
             className="-scale-x-100 rounded-xs"
@@ -49,7 +49,7 @@ const HelpSection = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true, amount: 0.5 }}
-            className="flex flex-col gap-10 py-6 px-4 sm:pt-12 sm:pb-8 sm:py-12 lg:py-10 sm:px-6 lg:px-20 bg-black text-white"
+            className="flex flex-col gap-10 py-6 px-4 pt-12 sm:pb-8 sm:py-12 lg:py-10 sm:px-6 lg:px-20 bg-black text-white"
           >
             <p className="text-h5">ежедневно с 10:00 до 20:00 (время Астаны)</p>
             <ul className="flex sm:grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 lg:flex justify-between">

@@ -70,7 +70,7 @@ const StatisticSection = () => {
           >
             <div className="flex flex-col items-center gap-2">
               <span className="text-h2">100 000 +</span>
-              <span className="text-h4">Клиенток</span>
+              <span className="text-h4">Покупателей</span>
             </div>
             <p className="text-center">
               Нас выбирают женщины <br /> по всему Казахстану и за его пределами

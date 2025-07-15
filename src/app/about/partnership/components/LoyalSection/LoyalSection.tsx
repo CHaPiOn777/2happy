@@ -16,7 +16,7 @@ const LoyalSection = () => {
             className="text-h2"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             fallbackClassName="opacity-0"
           >
@@ -28,7 +28,7 @@ const LoyalSection = () => {
             className="text-h5 md:text-h4 w-full text-left md:text-end pl-[104px] md:pl-0 md:pr-[100px]"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             fallbackClassName="opacity-0"
           >
@@ -67,7 +67,7 @@ const LoyalSection = () => {
             className="flex flex-col gap-8 md:gap-12 lg:gap-20 justify-end w-full"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
             fallbackClassName="opacity-0"
           >

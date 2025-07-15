@@ -11,8 +11,11 @@ const BecomePartnerButton = ({ className }: { className?: string }) => {
     <Button
       className={cn("w-full self-end", className)}
       size={isTablet ? "medium" : "large"}
+      asChild
     >
-      Стать партнёром <ArrowUpRightIcon />
+      <a target="_blank" href="https://wa.me/77021657378">
+        Стать партнером <ArrowUpRightIcon />
+      </a>
     </Button>
   );
 };
